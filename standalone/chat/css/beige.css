@@ -1,0 +1,144 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @copyright (c) Sebastian Tschan
+ * @license GNU Affero General Public License
+ * @link https://blueimp.net/ajax/
+ */
+
+
+@import url('positions.css');
+@import url('borders.css');
+@import url('fonts.css');
+@import url('misc.css');
+@import url('print.css');
+
+
+/*
+ * Colors
+ */
+
+@media screen,projection,handheld {
+	
+	#loginContent {
+		background-color:#F7F5DC;
+		color:#000;
+	}
+	#loginContent h1 {
+		color:#000;
+	}
+	#loginContent a {
+		color:#000;
+	}
+	#loginContent input, #loginContent select {
+		background-color:#FFF;
+		color:#000;
+	}
+	#loginContent #loginFormContainer #loginButton {
+		background-color:#F7F5F1;
+		color:#000;
+	}
+	#loginContent #errorContainer {
+		color:red;
+	}
+	
+	#content {
+		background-color:#F7F5DC;
+		color:#000;
+	}
+	#content h1 {
+		color:#000;
+	}
+	#content a {
+		color:#000;
+	}
+	#content input, #content select, #content textarea {
+		background-color:#FFF;
+		color:#000;
+	}
+	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #bbCodeContainer, #content #colorCodesContainer, #content #emoticonsContainer{
+		border-color:gray;
+		background-color:#FFF;
+	}
+	.statusContainerOn {
+		background-image: url('../img/loading.png');
+	}
+	.statusContainerOff {
+		background-image: url('../img/loading-done.png');
+	}
+	.statusContainerAlert {
+		background-image: url('../img/loading-trouble.png');
+	}
+	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton {
+		background-color:#F7F5F1;
+		color:#000;
+	}
+	#content #colorCodesContainer a {
+		border-color:black;
+	}
+	#content #optionsContainer input {
+	    background-color:transparent;
+	}
+	#content #optionsContainer #helpButton {
+	    background:url('../img/help.png') no-repeat;
+	}
+	#content #optionsContainer #settingsButton {
+	    background:url('../img/settings.png') no-repeat;
+	}
+	#content #optionsContainer #onlineListButton {
+	    background:url('../img/users.png') no-repeat;
+	}
+	#content #optionsContainer #audioButton {
+	    background:url('../img/audio.png') no-repeat;
+	}
+	#content #optionsContainer #audioButton.off {
+	    background:url('../img/audio-off.png') no-repeat;
+	}
+	#content #optionsContainer #autoScrollButton {
+	    background:url('../img/autoscroll.png') no-repeat;
+	}
+	#content #optionsContainer #autoScrollButton.off {
+	    background:url('../img/autoscroll-off.png') no-repeat;
+	}
+	#content .rowEven {
+		background-color:#FFFFF0;
+	}
+	#content .rowOdd {
+		background-color:#F7F5DC;
+	}
+	#content .guest {
+		color:gray;
+	}
+	#content .user {
+		color:#000;
+	}
+	#content .moderator {
+		color:#00AA00;
+	}
+	#content .admin {
+		color:red;
+	}
+	#content .chatBot {
+		color:#FF6600;
+	}
+	#content #chatList .chatBotErrorMessage {
+		color:red;
+	}
+	#content #chatList a {
+		color:#1E90FF;
+	}
+	#content #chatList .delete {
+		background:url('../img/delete.png') no-repeat right;
+	}
+	#content #chatList .deleteSelected {
+		border-color:red;
+	}
+	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
+		background-color:#FFFFF0;
+		color:#000;
+	}
+	#content #settingsContainer #settingsList input.playback {
+	    background:url('../img/playback.png') no-repeat;
+	}
+
+}

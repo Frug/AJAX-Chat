@@ -1,0 +1,253 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @copyright (c) Sebastian Tschan
+ * @license GNU Affero General Public License
+ * @link https://blueimp.net/ajax/
+ */
+
+
+/*
+ * Positioning
+ */
+
+#loginContent {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+#loginContent #loginHeadlineContainer {
+	margin-left:100px;
+	margin-right:100px;
+	margin-top:100px;
+}
+#loginContent #loginFormContainer {
+	margin-left:100px;
+	margin-right:100px;
+}
+#loginContent #loginFormContainer div {
+	margin-bottom:7px;
+}
+#loginContent #loginRegisteredUsers {
+    padding-top:5px;
+}
+#loginContent #errorContainer {
+	margin-left:100px;
+	margin-right:100px;
+}
+#loginContent #copyright {
+	margin-top:20px;
+	margin-left:100px;
+	margin-right:100px;
+}
+
+#content {
+	position:absolute;
+	width:100%;
+	height:100%;
+}
+#content #copyright {
+	position:absolute;
+	right:20px;
+	top:20px;
+}
+#content #headlineContainer {
+	position:absolute;
+	left:20px;
+	top:5px;
+}
+#content #logoutChannelContainer {
+	position:absolute;
+	left:20px;
+	top:50px;
+}
+#content #statusIconContainer {
+	position:absolute;
+	right:20px;
+	top:50px;
+	width: 22px;
+	height: 22px;
+}
+#content #chatList {
+	position:absolute;
+	left:20px;
+	right:230px;
+	top:85px;
+	bottom:150px;
+	overflow:auto;
+}
+#content #inputFieldContainer {
+	position:absolute;
+	left:20px;
+	right:20px;
+	bottom:95px;
+	padding-right:4px;
+}
+#content #submitButtonContainer {
+	position:absolute;
+	right:20px;
+	bottom:60px;
+}
+#content #onlineListContainer {
+	position:absolute;
+	right:20px;
+	top:85px;
+	width:200px;
+	bottom:150px;
+}
+#content #helpContainer {
+	position:absolute;
+	right:20px;
+	top:85px;
+	width:360px;
+	bottom:150px;
+}
+#content #settingsContainer {
+	position:absolute;
+	right:20px;
+	top:85px;
+	width:360px;
+	bottom:150px;
+}
+#content #bbCodeContainer {
+	position:absolute;
+	left:20px;
+	bottom:20px;
+	padding:3px;
+}
+#content #colorCodesContainer {
+	position:absolute;
+	left:20px;
+	bottom:55px;
+	padding:3px;
+	z-index:1;
+}
+#content #emoticonsContainer {
+	position:absolute;
+	left:20px;
+	bottom:57px;
+	padding:3px;
+}
+#content #optionsContainer {
+	position:absolute;
+	right:20px;
+	bottom:20px;
+	padding:3px;
+	padding-right:0px;
+}
+#content #bbCodeContainer input {
+	padding-left:4px;
+	padding-right:4px;
+}
+#content #colorCodesContainer a {
+	display:block;
+	float:left;
+	width:20px;
+	height:20px;
+}
+#content #optionsContainer input {
+    vertical-align:middle;
+}
+#content #optionsContainer input.button {
+    width:22px;
+	height:22px;
+}
+#content #emoticonsContainer a {
+	margin-left:1px;
+	margin-right:1px;
+}
+#content #emoticonsContainer img {
+	vertical-align:middle;
+	margin-bottom:2px;
+}
+#content #headlineContainer h1 {
+	margin-left:auto;
+	margin-top:12px;
+}
+#content #chatList div {
+	padding-left:10px;
+	padding-top:2px;
+	padding-right:10px;
+	padding-bottom:2px;
+}
+#content #chatList img {
+	vertical-align:middle;
+	margin-bottom:2px;
+}
+#content #chatList cite {
+	margin-right:5px;
+}
+#content #chatList .bbCodeImage {
+	vertical-align:top;
+	overflow:auto;
+	margin:5px;
+}
+#content #chatList .delete {
+	display:block;
+	float:right;
+	width:10px;
+	height:10px;
+	margin-top:2px;
+	padding-left:5px;
+}
+#content #inputFieldContainer #inputField {
+	width:100%;
+	height:40px;
+}
+#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
+	height:30px;
+	padding-left:10px;
+	padding-top:4px;
+	padding-right:10px;
+	padding-bottom:4px;
+	margin:0px;
+	text-align:center;
+}
+#content #onlineListContainer #onlineList, #content #helpContainer #helpList, #content #settingsContainer #settingsList {
+	position:absolute;
+	left:0px;
+	right:0px;
+	top:25px;
+	bottom:0px;
+	overflow:auto;
+}
+#content #onlineListContainer #onlineList div {
+	padding-left:10px;
+	padding-top:2px;
+	padding-right:10px;
+	padding-bottom:2px;
+}
+#content #onlineListContainer #onlineList a {
+	display:block;
+}
+#content #onlineListContainer #onlineList ul {
+	margin-left:0px;
+	margin-top:5px;
+	margin-bottom:5px;
+	padding-left:20px;
+}
+#content #helpContainer #helpList td, #content #settingsContainer #settingsList td {
+	padding-left:10px;
+	padding-top:4px;
+	padding-right:10px;
+	padding-bottom:4px;
+	vertical-align:top;
+}
+#content #settingsContainer #settingsList td {
+	vertical-align:middle;
+}
+#content #settingsContainer #settingsList td.setting {
+	width:115px;
+}
+#content #settingsContainer #settingsList input.text {
+	width:100px;
+}
+#content #settingsContainer #settingsList select.left {
+	text-align:right;
+}
+#content #settingsContainer #settingsList input.button {
+    width:22px;
+	height:22px;
+	vertical-align:middle;
+	margin-bottom:2px;
+}
