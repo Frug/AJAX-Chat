@@ -6,14 +6,10 @@
  * @link https://blueimp.net/ajax/
  */
 
-
-
-
 Version 0.1  (06.06.2007):
 -------------------------------
 
 First release.
-
 
 
 Version 0.1.0.1  (10.06.2007):
@@ -21,7 +17,6 @@ Version 0.1.0.1  (10.06.2007):
 
 New features:
 - Added dutch localization - thanks to Nic Mertens
-
 
 
 Version 0.1.0.2  (11.06.2007):
@@ -39,7 +34,6 @@ New features:
 - Added sample phpBB2 integration
 
 
-
 Version 0.1.0.4  (12.06.2007):
 -------------------------------
 
@@ -48,14 +42,12 @@ Bugfixes:
 	This makes the Chat work on servers with php.ini setting "short_open_tag = off"
 
 
-
 Version 0.1.0.5  (23.06.2007):
 -------------------------------
 
 Bugfixes:
 - Channel names and language variables were not HTML-encoded in template output.
 	This could lead to invalid XHTML, e.g. if a channel name contained the ampersand ("&").
-
 
 
 Version 0.1.1  (05.07.2007):
@@ -82,7 +74,6 @@ Bugfixes:
 - Added limits (1-100) to the dice number and sides
 
 
-
 Version 0.1.1.3  (02.08.2007):
 -------------------------------
 
@@ -91,14 +82,12 @@ Bugfixes:
 	dateTime served is now GMT and calculated and formatted on client side through JavaScript
 
 
-
 Version 0.1.1.4  (14.08.2007):
 -------------------------------
 
 Bugfixes:
 - Long hyperlinks are now split while preserving the url information
 - Connection problems don't interrupt the chat update anymore
-
 
 
 Version 0.1.1.5  (14.08.2007):
@@ -193,13 +182,11 @@ Other changes:
 - Changed the database type for the chat messages from TINYTEXT (8 bit - 255 chars) to TEXT (16 bit - 65535 chars).
 
 
-
 Version 0.2.1.4  (24.08.2007):
 -------------------------------
 
 Changes:
 - Users don't get kicked for inactivity anymore. Only a closed browser window will produce a timeout.
-
 
 
 Version 0.2.1.5  (25.08.2007):
@@ -209,7 +196,6 @@ Bugfixes:
 - Fixed client-side encoding when using ISO-8859-1 as content type instead of UTF-8.
 
 
-
 Version 0.3  (26.08.2007):
 -------------------------------
 
@@ -217,7 +203,6 @@ Changes:
 - Changed integration interfaces thereby losing backwards compatibility.
 - Repackaged chat as standalone, phpBB2 and phpBB3 versions.
 - Added simple backend to manage users and channels for standalone version.
-
 
 
 Version 0.3.1  (03.09.2007):
@@ -416,7 +401,6 @@ Changed files:
 - lib/class/CustomAJAXChat.php (phpBB3 version)
 
 
-
 Version 0.5.1.1  (16.10.2007):
 -------------------------------
 
@@ -432,7 +416,6 @@ Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/CustomAJAXChatShoutBox.php (all versions)
 - lib/template/* (all versions)
-
 
 
 Version 0.5.1.2  (16.10.2007):
@@ -452,7 +435,6 @@ Changed files:
 - lib/template/loggedIn.html (all versions)
 
 
-
 Version 0.5.1.3  (17.10.2007):
 -------------------------------
 
@@ -462,7 +444,6 @@ Bugfixes:
 Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/CustomAJAXChat.php (phpBB3 and PunBB versions)
-
 
 
 Version 0.5.1.4  (18.10.2007):
@@ -487,7 +468,6 @@ Changed files:
 - lib/lang/he.php (all versions)
 
 
-
 Version 0.5.1.5  (18.10.2007):
 -------------------------------
 
@@ -498,7 +478,6 @@ New features:
 Changed files:
 - css/MyBB.css (all versions)
 - lib/config.php (all versions)
-
 
 
 Version 0.5.2  (20.10.2007):
@@ -529,7 +508,6 @@ Changed files:
 - lib/template/logs.php (all versions)
 
 
-
 Version 0.5.2.1  (20.10.2007):
 -------------------------------
 
@@ -545,7 +523,6 @@ Changed files:
 - lib/lang/nl.php (all versions)
 
 
-
 Version 0.5.2.2  (23.10.2007):
 -------------------------------
 
@@ -558,7 +535,6 @@ Bugfixes:
 Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/CustomAJAXChat.php (standalone version)
-
 
 
 Version 0.5.3  (05.11.2007):
@@ -579,7 +555,6 @@ Changed files:
 - lib/lang/ru.php (all versions)
 
 
-
 Version 0.5.3.1  (05.11.2007):
 -------------------------------
 
@@ -589,7 +564,6 @@ Bugfixes:
 Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/CustomAJAXChat.php (all versions)
-
 
 
 Version 0.5.4  (06.11.2007):
@@ -605,7 +579,6 @@ Changed files:
 - lib/template/shoutbox.html (all versions)
 
 
-
 Version 0.5.4.1  (07.11.2007):
 -------------------------------
 
@@ -618,8 +591,6 @@ Changed files:
 - css/shoutbox.css (all versions)
 - lib/config.php (all versions)
 - lib/class/AJAXChat.php (all versions)
-
-
 
 
 Version 0.5.5  (09.11.2007):
@@ -644,7 +615,6 @@ Changed files:
 - lib/class/CustomAJAXChatShoutBox.php (all versions)
 - lib/lang/it.php (all versions)
 - lib/template/* (all versions)
-
 
 
 Version 0.5.6  (11.11.2007):
@@ -673,7 +643,6 @@ Changed files:
 - lib/class/CustomAJAXChatShoutBox.php (all versions)
 
 
-
 Version 0.5.6.1  (12.11.2007):
 -------------------------------
 
@@ -684,7 +653,6 @@ Changed files:
 - js/lang/sv.js (all versions - new)
 - lib/lang/sv.php (all versions - new)
 - lib/config.php (all versions)
-
 
 
 Version 0.6  (13.11.2007):
@@ -716,7 +684,6 @@ Notes:
 - It is recommended to recreate the chat tables to avoid conflicts with old IP entries.
 
 
-
 Version 0.6.0.1  (14.11.2007):
 -------------------------------
 
@@ -728,7 +695,6 @@ Other Changes:
 
 Changed files:
 - lib/class/AJAXChat.php (all versions)
-
 
 
 Version 0.6.1  (17.11.2007):
@@ -769,7 +735,6 @@ Changed files:
 - lib/lang/* (all versions)
 
 
-
 Version 0.6.2  (20.11.2007):
 -------------------------------
 
@@ -798,7 +763,6 @@ Changed files:
 - lib/template/* (all versions)
 
 
-
 Version 0.6.2.1  (28.11.2007):
 -------------------------------
 
@@ -813,7 +777,6 @@ Changed files:
 - js/lang/fr.js (all versions - new)
 - lib/lang/fr.php (all versions - new)
 - lib/template/loggedOut.html (all versions except standalone)
-
 
 
 Version 0.6.3  (30.11.2007):
@@ -831,7 +794,6 @@ Changed files:
 - lib/class/CustomAJAXChat.php (all versions except standalone)
 
 
-
 Version 0.6.3.1  (02.12.2007):
 -------------------------------
 
@@ -840,7 +802,6 @@ Bugfixes:
 
 Changed files:
 - css/* (all versions)
-
 
 
 Version 0.7  (11.01.2008):
@@ -907,7 +868,6 @@ Changed files:
 - src/* (all versions - new)
 
 
-
 Version 0.7.0.1  (12.01.2008):
 -------------------------------
 
@@ -921,7 +881,6 @@ Other changes:
 Changed files:
 - js/chat.js (all versions)
 - lib/class/AJAXChat.php (all versions)
-
 
 
 Version 0.7.0.2  (14.01.2008):
@@ -939,7 +898,6 @@ Changed files:
 - js/lang/it.js (all versions)
 - lib/lang/fr.php (all versions)
 - lib/lang/it.php (all versions)
-
 
 
 Version 0.7.1  (15.01.2008):
@@ -965,7 +923,6 @@ Changed files:
 - lib/template/logs.html (all versions)
 
 
-
 Version 0.7.1.1  (16.01.2008):
 -------------------------------
 
@@ -989,7 +946,6 @@ Changed files:
 - lib/template/loggedIn.html (all versions)
 - lib/template/logs.html (all versions)
 - lib/template/shoutbox.html (all versions)
-
 
 
 Version 0.7.2  (18.01.2008):
@@ -1057,7 +1013,6 @@ Changed files:
 - lib/template/shoutbox.html (all versions)
 
 
-
 Version 0.7.4  (29.02.2008):
 -------------------------------
 
@@ -1082,7 +1037,6 @@ Changed files:
 - lib/class/CustomAJAXChat.php (SMF version)
 - lib/lang/el.php (all versions)
 - lib/lang/uk.php (all versions)
-
 
 
 Version 0.8  (05.03.2008):
@@ -1124,7 +1078,6 @@ Changed files:
 - chat.sql
 
 
-
 Version 0.8.1  (09.03.2008):
 -------------------------------
 
@@ -1156,7 +1109,6 @@ Changed files:
 - lib/config.php (all versions)
 
 
-
 Version 0.8.1.1  (10.03.2008):
 -------------------------------
 
@@ -1165,7 +1117,6 @@ Bugfixes:
 
 Changed files:
 - js/chat.js (all versions)
-
 
 
 Version 0.8.1.2  (22.03.2008):
@@ -1285,3 +1236,46 @@ Changed files:
 - lib/lang/gl.php (all versions - new)
 - lib/lang/hu.php (all versions - new)
 - lib/lang/ka.php (all versions - new)
+
+
+Version 0.8.4  (15.02.2012):
+-------------------------------
+Bugfixes: 
+- Fix to remove javascript error message in Chrome when initializing flash bridge.
+
+Changed files:
+- js/FABridge.js (all versions) - thanks to many users for this one.
+
+
+Version 0.8.5  (20.01.2012):
+-------------------------------
+New features:
+- Added Danish localization. - thanks to Allan Rehhoff.
+- Added easier to navigate html readme file.
+- PHPBB3 html readme file now includes proper custom instructions on implementing a shoutbox.
+
+Bugfixes: 
+- Another fix to reintroduce sound in chrome - thanks to jsebean.
+
+
+Version 0.8.5  (20.01.2012):
+-------------------------------
+New features:
+- Added Danish localization. - thanks to Allan Rehhoff.
+- Added easier to navigate html readme file.
+- PHPBB3 html readme file now includes proper custom instructions on implementing a shoutbox.
+
+Bugfixes: 
+- Another fix to reintroduce sound in chrome - thanks to jsebean.
+
+Changed files:
+- readme.html (all versions - new)
+- js/chat.js (all versions)
+- js/lang/dk.js (all versions - new)
+- lib/lang/dk.php (all versions - new)
+- lib/config.php.example (all versions)
+
+Version 0.8.5a  (11.05.2012):
+-------------------------------
+Bugfixes: 
+- Fixed a typo in config.php that would cause chat to crash if used. (all versions)
