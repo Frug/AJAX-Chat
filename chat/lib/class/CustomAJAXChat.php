@@ -5,36 +5,88 @@
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
+ * 
+ * vBulletin integration:
+ * http://www.vbulletin.com/
  */
 
 class CustomAJAXChat extends AJAXChat {
 
+	// Initialize custom configuration settings
+	function initCustomConfig() {
+		global $db;
+		
+		// Use the existing vBulletin database connection:
+		$this->setConfig('dbConnection', 'link', $db->connection_master);
+	}
+
+	// Initialize custom request variables:
+	function initCustomRequestVars() {
+		global $vbulletin;
+
+		// Auto-login vBulletin users:
+		if(!$this->getRequestVar('logout') && $vbulletin->userinfo['userid']) {
+			$this->setRequestVar('login', true);
+		}
+	}
+
+	// Replace custom template tags:
+	function replaceCustomTemplateTags($tag, $tagContent) {
+		global $vbulletin;
+		
+		switch($tag) {
+
+			case 'FORUM_LOGIN_URL':
+				if($vbulletin->userinfo['userid']) {
+					return ($this->getRequestVar('view') == 'logs') ? './?view=logs' : './';
+				} else {
+					return $this->htmlEncode($vbulletin->options['bburl']).'/login.php?do=login';
+				}
+				
+			case 'REDIRECT_URL':
+				if($vbulletin->userinfo['userid']) {
+					return '';
+				} else {
+					return $this->htmlEncode($this->getRequestVar('view') == 'logs' ? $this->getChatURL().'?view=logs' : $this->getChatURL());
+				}
+			
+			default:
+				return null;
+		}
+	}
+
+	// Returns true if the userID of the logged in user is identical to the userID of the authentication system
+	// or the user is authenticated as guest in the chat and the authentication system
+	function revalidateUserID() {
+		global $vbulletin;
+		
+		if($this->getUserRole() === AJAX_CHAT_GUEST && !$vbulletin->userinfo['userid'] || ($this->getUserID() === $vbulletin->userinfo['userid'])) {
+			return true;
+		}
+		return false;
+	}
+
 	// Returns an associative array containing userName, userID and userRole
 	// Returns null if login is invalid
 	function getValidLoginUserData() {
+		global $vbulletin;
 		
-		$customUsers = $this->getCustomUsers();
-		
-		if($this->getRequestVar('password')) {
-			// Check if we have a valid registered user:
+		// Check if we have a valid registered user:
+		if($vbulletin->userinfo['userid']) {
+			$userData = array();
+			$userData['userID'] = $vbulletin->userinfo['userid'];
 
-			$userName = $this->getRequestVar('userName');
-			$userName = $this->convertEncoding($userName, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			$password = $this->getRequestVar('password');
-			$password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			foreach($customUsers as $key=>$value) {
-				if(($value['userName'] == $userName) && ($value['password'] == $password)) {
-					$userData = array();
-					$userData['userID'] = $key;
-					$userData['userName'] = $this->trimUserName($value['userName']);
-					$userData['userRole'] = $value['userRole'];
-					return $userData;
-				}
-			}
+			$userData['userName'] = $this->trimUserName($vbulletin->userinfo['username']);
 			
-			return null;
+			if($vbulletin->userinfo['permissions']['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['cancontrolpanel'])
+				$userData['userRole'] = AJAX_CHAT_ADMIN;
+			elseif($vbulletin->userinfo['permissions']['adminpermissions'] & $vbulletin->bf_ugp_adminpermissions['ismoderator'])
+				$userData['userRole'] = AJAX_CHAT_MODERATOR;
+			else
+				$userData['userRole'] = AJAX_CHAT_USER;
+
+			return $userData;
+			
 		} else {
 			// Guest users:
 			return $this->getGuestUser();
@@ -45,25 +97,24 @@ class CustomAJAXChat extends AJAXChat {
 	// Make sure channel names don't contain any whitespace
 	function &getChannels() {
 		if($this->_channels === null) {
+			global $vbulletin;
+
 			$this->_channels = array();
-			
-			$customUsers = $this->getCustomUsers();
-			
-			// Get the channels, the user has access to:
-			if($this->getUserRole() == AJAX_CHAT_GUEST) {
-				$validChannels = $customUsers[0]['channels'];
-			} else {
-				$validChannels = $customUsers[$this->getUserID()]['channels'];
-			}
-			
-			// Add the valid channels to the channel list (the defaultChannelID is always valid):
-			foreach($this->getAllChannels() as $key=>$value) {
+
+			$allChannels = $this->getAllChannels();
+
+			foreach($allChannels as $key=>$value) {
 				// Check if we have to limit the available channels:
 				if($this->getConfig('limitChannelList') && !in_array($value, $this->getConfig('limitChannelList'))) {
 					continue;
 				}
-				
-				if(in_array($value, $validChannels) || $value == $this->getConfig('defaultChannelID')) {
+
+				// Add the valid channels to the channel list (the defaultChannelID is always valid):
+				if(
+					$value == $this->getConfig('defaultChannelID') ||
+					(($vbulletin->userinfo['forumpermissions']["$value"] & $vbulletin->bf_ugp_forumpermissions['canview']) &&
+					($vbulletin->userinfo['forumpermissions']["$value"] & $vbulletin->bf_ugp_forumpermissions['canviewthreads']))
+				) {
 					$this->_channels[$key] = $value;
 				}
 			}
@@ -75,21 +126,35 @@ class CustomAJAXChat extends AJAXChat {
 	// Make sure channel names don't contain any whitespace
 	function &getAllChannels() {
 		if($this->_allChannels === null) {
-			// Get all existing channels:
-			$customChannels = $this->getCustomChannels();
-			
+			global $db;
+
+			$this->_allChannels = array();
+
+			// Get valid vBulletin forums (skip categories and password-protected forums):
+			$sql = 'SELECT
+							forumid,
+							title
+						FROM
+							'.TABLE_PREFIX.'forum
+						WHERE
+							options & 4
+						AND
+							password=\'\';';
+			$result = $db->query_read_slave($sql);
+
 			$defaultChannelFound = false;
-			
-			foreach($customChannels as $key=>$value) {
-				$forumName = $this->trimChannelName($value);
-				
-				$this->_allChannels[$forumName] = $key;
-				
-				if($key == $this->getConfig('defaultChannelID')) {
+
+			while ($row = $db->fetch_array($result)) {
+				$forumName = $this->trimChannelName($row['title']);
+
+				$this->_allChannels[$forumName] = $row['forumid'];
+
+				if(!$defaultChannelFound && $row['forumid'] == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
 			}
-			
+			$db->free_result($result);
+
 			if(!$defaultChannelFound) {
 				// Add the default channel as first array element to the channel list:
 				$this->_allChannels = array_merge(
@@ -103,18 +168,28 @@ class CustomAJAXChat extends AJAXChat {
 		return $this->_allChannels;
 	}
 
-	function &getCustomUsers() {
-		// List containing the registered chat users:
-		$users = null;
-		require(AJAX_CHAT_PATH.'lib/data/users.php');
-		return $users;
-	}
-	
-	function &getCustomChannels() {
-		// List containing the custom channels:
-		$channels = null;
-		require(AJAX_CHAT_PATH.'lib/data/channels.php');
-		return $channels;
+	// Method to set the style cookie depending on the vBulletin user style
+	function setStyle() {
+		global $style;
+				
+		if(isset($_COOKIE[$this->getConfig('sessionName').'_style']) && in_array($_COOKIE[$this->getConfig('sessionName').'_style'], $this->getConfig('styleAvailable')))
+			return;
+		
+		$styleName = $style['title'];
+		
+		if(!in_array($styleName, $this->getConfig('styleAvailable'))) {
+			$styleName = $this->getConfig('styleDefault');
+		}
+		
+		setcookie(
+			$this->getConfig('sessionName').'_style',
+			$styleName,
+			time()+60*60*24*$this->getConfig('sessionCookieLifeTime'),
+			$this->getConfig('sessionCookiePath'),
+			$this->getConfig('sessionCookieDomain'),
+			$this->getConfig('sessionCookieSecure')
+		);
+		return;
 	}
 
 }

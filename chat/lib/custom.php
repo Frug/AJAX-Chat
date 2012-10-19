@@ -5,7 +5,14 @@
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
+ * 
+ * vBulletin integration:
+ * http://www.vbulletin.com/
  */
 
-// Include custom libraries and initialization code here
+// vBulletin initialization:	
+error_reporting(E_ALL & ~E_NOTICE);
+define('THIS_SCRIPT', 'ajax_chat');
+chdir(AJAX_CHAT_PATH.'../');
+require(AJAX_CHAT_PATH.'../global.php');
 ?>
