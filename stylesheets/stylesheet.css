@@ -52,7 +52,6 @@ body {
   line-height: 1.5; 
   background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.8);
   color: #6d6d6d;
 }
 
@@ -62,36 +61,49 @@ a {
 a:hover {
   color: #c5000c;
 }
-
+b { font-weight: bold; }
 header {
-  padding-top: 35px;
-  padding-bottom: 25px;
+  padding: 25px;
+  background-color: rgba(33,33,33,0.95);
+  border: 2px solid black;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  clear: both;
 }
 
 header h1 {
-  font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif; font-weight: 900;
-  letter-spacing: -1px;
-  font-size: 48px;
-  color: #303030;
-  line-height: 1.2;
+	font-family: 'Trebuchet MS', 'Helvetica Neue', Helvetica, serif; font-weight: 900;
+	letter-spacing: -1px;
+	font-size: 32px;
+	color: #aaa;
+	line-height: 1.2;
+	margin-bottom: 0.4em;
+	text-shadow: 0px 0px 2px rgba(33,33,33,0.95);
 }
 
 header h2 {
-  letter-spacing: -1px;
-  font-size: 24px;
+  font-size: 16px;
+  font-family: 'Lucida Grande','Lucida Sans Unicode',Arial,sans-serif;
   color: #aaa;
   font-weight: normal;
   line-height: 1.3;
+  margin-bottom: 0;
 }
 
 #container {
   background: transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat;
   min-height: 595px;
 }
+#downloads section { 
+	margin: 5px; float: left; padding: 12px; border-radius: 5px; background-color: rgba(161,161,161,0.2); 
+}
+#downloads section h3 { margin: 0; padding: 0; }
 
 .inner {
-  width: 620px;
+  min-width: 660px;
+  max-width: 930px;
   margin: 0 auto;
+  padding: 15px 0;
 }
 
 #container .inner img {
@@ -152,10 +164,10 @@ a.button span {
   height: 23px;
 }
 
-#download-zip span {
+.button-zip span {
   background: transparent url(../images/zip-icon.png) 12px 50% no-repeat;
 }
-#download-tar-gz span {
+.button-tar span {
   background: transparent url(../images/tar-gz-icon.png) 12px 50% no-repeat;
 }
 #view-on-github span {
@@ -253,7 +265,7 @@ h2 {
 
 h3 {
   color: #d5000d;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
   margin-bottom: 8px;
 } 
@@ -309,7 +321,7 @@ dl dt {
 }
 
 footer {
-  background: transparent url('../images/hr.png') 0 0 no-repeat;
+  background: transparent url('../images/hr.png') center top no-repeat;
   margin-top: 40px;
   padding-top: 20px;
   padding-bottom: 30px;
