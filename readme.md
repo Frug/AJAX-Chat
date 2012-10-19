@@ -1,7 +1,7 @@
-AJAX Chat Standalone
+AJAX Chat 0.8.5a for vBulletin
 =========
 
-This is the standalone version of Blueimp's AJAX Chat. If you are looking for a version to integrate with your forum, select a different branch.
+This is the version of Blueimp's AJAX Chat for integration with vBulletin.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
