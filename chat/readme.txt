@@ -1,7 +1,8 @@
 AJAX Chat
 =========
 
-v 0.8.6 standalone
+This is the phpBB3 integration version:
+http://www.phpbb.com/
 
 This is the standalone version running without another web application.
 
@@ -31,76 +32,29 @@ Client-Side:
 Installation
 ============
 
-1.	Configuration settings
-	----------------------
-
-	The primary configuration settings necessary for chat to function must be in the file lib/config.php
-	You will need to create this file. An example config file can be found in lib/config.php.example
-	Duplicate this file and save it as config.php once you have filled out at least the following four fields:
-
-		$config['dbConnection']['host'] = 'your_database_hostname';
-		$config['dbConnection']['user'] = 'your_database_username';
-		$config['dbConnection']['pass'] = 'your_database_password';
-		$config['dbConnection']['name'] = 'your_database_name';
-	
-	In most cases, chat will function with only these fields filled out and you can proceed to step 2. 
-	
-	
-	If your host does not use mysqli you will need to change the connection type field:
-		$config['dbConnection']['type'] = null;
-	If this is set to "null" it defaults to "mysqli" if existing, else to "mysql".
-	
-	
-	You can reference an existing database connection link or object by changing:
-		$config['dbConnection']['link'] = null;
-	If this is set to null, a new database connection is created.
-
-
-2.	Channel settings:
-	-----------------
-	
-	Edit channels in lib/data/channels.php.
-	
-	Each channel must have a unique id (the $channels array index) and a unique name.
-	Whitespace in the channel names will be converted to the underscore "_".
-
-
-3.	User settings:
-	--------------
-
-	Edit users in lib/data/users.php.
-	
-	Each user must have a unique id (the $users array index) and a unique name.
-	The first user in the list (array index 0) is used for the guest user settings.
-	All guest users will have access to the channels set for this user and the user role AJAX_CHAT_GUEST.
-	Registered users can have the user roles AJAX_CHAT_USER, AJAX_CHAT_MODERATOR or AJAX_CHAT_ADMIN.
-	The list of channels a user has access to can be set for each user individually.
-	Whitespace in the user names will be converted to the underscore "_".
-
-
-4.	Upload to the server
+1.	Upload to the server
 	--------------------
 
-	Upload the chat folder to your server somewhere under your document root:
-	e.g. http://example.org/path/to/chat/
+	Upload the chat folder to your server into your phpBB3 forum directory:
+	e.g. http://example.org/phpBB3/chat/
 
 
-5.	Creation of database tables
+2.	Creation of database tables
 	---------------------------
 
 	Execute the provided installation script by visiting the following URL with your browser:
-	http://example.org/path/to/chat/install.php
+	http://example.org/phpBB3/chat/install.php
 	
-	Replace "http://example.org/path/to/chat/" with the real URL to your chat directory.
+	Replace "http://example.org/phpBB3/chat/" with the real URL to your chat directory.
 
 
-6.	Delete the installation script
+3.	Delete the installation script
 	------------------------------
 	
 	Delete the file install.php from the chat directory on your server.
 
 
-Ready! Just place a link to the chat directory on your website. :)
+Ready! Just place a link to the chat directory on your forum. :)
 
 
 Configuration files:
@@ -154,12 +108,12 @@ Adjusting the language settings:
 AJAX Chat comes with two language file directories:
 
 1.	js/lang/
-	--------
+	------------
 	This directory contains the language files used for the chat messages localization.
 	These are JavaScript files with the extension ".js".
 
 2.	lib/lang/
-	---------
+	--------------
 	This directory contains the language files used for the template output.
 	These are PHP files with the extension ".php".
 
@@ -216,21 +170,21 @@ Shoutbox:
 AJAX Chat is also usable as shoutbox - this is a short guide on how to set it up:
 
 
-1.	Shoutbox stylesheet
-	-------------------
+1. Shoutbox stylesheet
+----------------------
 
-	Add the following line to the stylesheet (CSS) of all pages displaying the shoutbox:
+Add the following line to the stylesheet (CSS) of all pages displaying the shoutbox:
 
-	@import url("http://example.org/path/to/chat/css/shoutbox.css");
+@import url("http://example.org/path/to/chat/css/shoutbox.css");
 
-	Replace http://example.org/path/to/chat/ with the URL to the chat.
-	Modify css/shoutbox.css to your liking.
+Replace http://example.org/path/to/chat/ with the URL to the chat.
+Modify css/shoutbox.css to your liking.
 
 
-2.	Shoutbox function
-	-----------------
+2. Shoutbox function
+--------------------
 
-	Add the following function to your PHP code:
+Add the following function to your PHP code:
 
 <?php
 function getShoutBoxContent() {
@@ -261,15 +215,15 @@ function getShoutBoxContent() {
 }
 ?>
 
-	Make sure AJAX_CHAT_URL and AJAX_CHAT_PATH point to the chat directory.
+Make sure AJAX_CHAT_URL and AJAX_CHAT_PATH point to the chat directory.
 
 
-3.	Shoutbox output
-	---------------
+2. Shoutbox output
+------------------
 
-	Display the shoutbox content using the shoutbox function:
+Display the shoutbox content using the shoutbox function:
 
-	<div style="width:200px;"><?php echo getShoutBoxContent(); ?></div>
+<div style="width:200px;"><?php echo getShoutBoxContent(); ?></div>
 
 
 Socket Server:
