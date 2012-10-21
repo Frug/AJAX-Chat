@@ -1289,6 +1289,7 @@ New features:
 - Install.php checks to see if config.php has been created before running (standalone).
 
 Bugfixes: 
+- Improved Brazilian Portuguese translation - thanks to Pedro Innecco (all versions)
 - Fixed misplaced estonian language files. (all versions)
 - Fixed a typo in the localization section of config.php (all versions)
 
@@ -1300,4 +1301,5 @@ Changed files:
 - lib/lang/et.php (all versions - new)
 - lib/lang/th.php (all versions - new)
 - lib/lang/mk.php (all versions - new)
+- lib/lang/bp.php (all versions)
 - lib/config.php[.example] (all versions)
