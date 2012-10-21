@@ -1279,3 +1279,25 @@ Version 0.8.5a  (11.05.2012):
 -------------------------------
 Bugfixes: 
 - Fixed a typo in config.php that would cause chat to crash if used. (all versions)
+
+
+Version 0.8.6 (21.10.2012):
+-------------------------------
+New features:
+- Added Thai localization - thanks to Norrapat Nimmanee.
+- Added Macedonian localization - thanks to the jedi nebojsa.
+- Install.php checks to see if config.php has been created before running (standalone).
+
+Bugfixes: 
+- Fixed misplaced estonian language files. (all versions)
+- Fixed a typo in the localization section of config.php (all versions)
+
+Changed files:
+- install.php (standalone)
+- js/lang/et.js (all versions - new)
+- js/lang/th.js (all versions - new)
+- js/lang/mk.js (all versions - new)
+- lib/lang/et.php (all versions - new)
+- lib/lang/th.php (all versions - new)
+- lib/lang/mk.php (all versions - new)
+- lib/config.php[.example] (all versions)
