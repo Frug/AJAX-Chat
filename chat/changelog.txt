@@ -1286,6 +1286,7 @@ Version 0.8.6 (21.10.2012):
 New features:
 - Added Thai localization - thanks to Norrapat Nimmanee.
 - Added Macedonian localization - thanks to the jedi nebojsa.
+- Added Portuguese (Portugal) localization - thanks to Broas.
 - Install.php checks to see if config.php has been created before running (standalone).
 
 Bugfixes: 
@@ -1298,6 +1299,7 @@ Changed files:
 - js/lang/et.js (all versions - new)
 - js/lang/th.js (all versions - new)
 - js/lang/mk.js (all versions - new)
+- js/lang/pt.js (all versions - new)
 - lib/lang/et.php (all versions - new)
 - lib/lang/th.php (all versions - new)
 - lib/lang/mk.php (all versions - new)
