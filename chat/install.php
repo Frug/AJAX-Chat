@@ -10,6 +10,9 @@
 // Show all errors:
 error_reporting(E_ALL);
 
+// Remember to set up the config file to point to your database:
+file_exists('lib/config.php') or die ('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
+
 // Path to the chat directory:
 define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
 
