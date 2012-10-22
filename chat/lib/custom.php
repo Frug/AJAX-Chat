@@ -5,7 +5,13 @@
  * @copyright (c) Sebastian Tschan
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
+ * 
+ * MyBB integration:
+ * http://www.mybboard.net/
  */
 
-// Include custom libraries and initialization code here
+// MyBB initialization:
+define('IN_MYBB', 1);
+chdir(AJAX_CHAT_PATH.'../');
+require(AJAX_CHAT_PATH.'../global.php');
 ?>
