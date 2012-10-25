@@ -254,7 +254,7 @@ class AJAXChatTemplate {
 		$languageNames = $this->ajaxChat->getConfig('langNames');
 		foreach($this->ajaxChat->getConfig('langAvailable') as $langCode) {
 			$selected = ($langCode == $this->ajaxChat->getLangCode()) ? ' selected="selected"' : '';
-			$languageOptions .= '<option value="'.$this->ajaxChat->htmlEncode($langCode).'"'.$selected.'>'.$this->ajaxChat->htmlEncode($languageNames[$langCode]).'</option>';
+			$languageOptions .= '<option value="'.$this->ajaxChat->htmlEncode($langCode).'"'.$selected.'>'.$languageNames[$langCode].'</option>';
 		}
 		return $languageOptions;
 	}
