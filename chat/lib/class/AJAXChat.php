@@ -121,7 +121,7 @@ class AJAXChat {
 	}
 	
 	function getDataBaseTable($table) {
-		return ($this->db->getName() ? $this->db->getName().'.'.$this->getConfig('dbTableNames',$table) : $this->getConfig('dbTableNames',$table));
+		return ($this->db->getName() ? '`'.$this->db->getName().'`.'.$this->getConfig('dbTableNames',$table) : $this->getConfig('dbTableNames',$table));
 	}
 
 	function initSession() {
