@@ -13,7 +13,7 @@
 
 @media screen,projection,handheld {
 
-	#content #bbCodeContainer input, #content #optionsContainer input.button, #content #settingsContainer #settingsList input.button {
+	#content #bbCodeContainer input, #content #optionsContainer input.button, #content #settingsContainer #settingsList input.button, #content #logoutButton, #content #submitButton {
 		cursor:pointer;
 	}
 	

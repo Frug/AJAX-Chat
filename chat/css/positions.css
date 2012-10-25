@@ -61,6 +61,9 @@
 	left:20px;
 	top:50px;
 }
+#content #logoutChannelContainer select{
+	width: 105px;
+}
 #content #statusIconContainer {
 	position:absolute;
 	right:20px;
