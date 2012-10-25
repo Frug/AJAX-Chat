@@ -1257,17 +1257,6 @@ New features:
 Bugfixes: 
 - Another fix to reintroduce sound in chrome - thanks to jsebean.
 
-
-Version 0.8.5  (20.01.2012):
--------------------------------
-New features:
-- Added Danish localization. - thanks to Allan Rehhoff.
-- Added easier to navigate html readme file.
-- PHPBB3 html readme file now includes proper custom instructions on implementing a shoutbox.
-
-Bugfixes: 
-- Another fix to reintroduce sound in chrome - thanks to jsebean.
-
 Changed files:
 - readme.html (all versions - new)
 - js/chat.js (all versions)
