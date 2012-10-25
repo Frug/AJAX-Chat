@@ -8,7 +8,7 @@
  */
 
 $lang = array();
-$lang['title'] = 'ComicLand jututuba';
+$lang['title'] = 'AJAX Chat';
 $lang['userName'] = 'Kasutajanimi';
 $lang['password'] = 'Parool';
 $lang['login'] = 'Sisene';

@@ -186,6 +186,7 @@ class AJAXChatTemplate {
 		$langCodeParts = explode('-', $this->ajaxChat->getLangCode());
 		switch($langCodeParts[0]) {
 			case 'ar':
+			case 'fa':
 			case 'he':
 				return 'rtl';
 			default:
