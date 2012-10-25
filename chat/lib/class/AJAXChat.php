@@ -67,7 +67,7 @@ class AJAXChat {
 		$this->_requestVars['text']			= isset($_REQUEST['text'])			? $_REQUEST['text']				: null;
 		$this->_requestVars['lastID']		= isset($_REQUEST['lastID'])		? (int)$_REQUEST['lastID']		: 0;
 		$this->_requestVars['login']		= isset($_REQUEST['login'])			? true							: false;
-		$this->_requestVars['logout']		= isset($_REQUEST['logout'])		? true							: false;
+		$this->_requestVars['logout']		= isset($_POST['logout'])			? true							: false;
 		$this->_requestVars['password']		= isset($_REQUEST['password'])		? $_REQUEST['password']			: null;
 		$this->_requestVars['view']			= isset($_REQUEST['view'])			? $_REQUEST['view']				: null;
 		$this->_requestVars['year']			= isset($_REQUEST['year'])			? (int)$_REQUEST['year']		: null;
