@@ -1291,6 +1291,7 @@ New features:
 
 Bugfixes: 
 - Improved Brazilian Portuguese translation - thanks to Pedro Innecco (all versions)
+- Improved Dutch translation - thanks to Dimitri Taghon (all versions)
 - Fixed misplaced estonian language files. (all versions)
 - Fixed a typo in the localization section of config.php (all versions)
 
@@ -1299,9 +1300,11 @@ Changed files:
 - js/lang/et.js (all versions - new)
 - js/lang/th.js (all versions - new)
 - js/lang/mk.js (all versions - new)
+- js/lang/nl.js (all versions)
 - js/lang/pt.js (all versions - new)
 - lib/lang/et.php (all versions - new)
 - lib/lang/th.php (all versions - new)
 - lib/lang/mk.php (all versions - new)
+- lib/lang/nl.php (all versions)
 - lib/lang/bp.php (all versions)
 - lib/config.php[.example] (all versions)
