@@ -1275,11 +1275,13 @@ Version 0.8.6 (21.10.2012):
 New features:
 - Added Thai localization - thanks to Norrapat Nimmanee.
 - Added Macedonian localization - thanks to the jedi nebojsa.
+- Added Farsi localization - thanks to mahmood sajjadi.
 - Added Portuguese (Portugal) localization - thanks to Broas.
 - Install.php checks to see if config.php has been created before running (standalone).
 
 Bugfixes: 
 - Improved Brazilian Portuguese translation - thanks to Pedro Innecco (all versions)
+- Corrected some language codes (all versions)
 - Improved Dutch translation - thanks to Dimitri Taghon (all versions)
 - Fixed misplaced estonian language files. (all versions)
 - Fixed a typo in the localization section of config.php (all versions)
@@ -1290,10 +1292,14 @@ Changed files:
 - js/lang/th.js (all versions - new)
 - js/lang/mk.js (all versions - new)
 - js/lang/nl.js (all versions)
-- js/lang/pt.js (all versions - new)
+- js/lang/fa.js (all versions - new)
+- js/lang/pt-pt.js (all versions - new)
 - lib/lang/et.php (all versions - new)
 - lib/lang/th.php (all versions - new)
 - lib/lang/mk.php (all versions - new)
 - lib/lang/nl.php (all versions)
-- lib/lang/bp.php (all versions)
+- lib/lang/fa.js (all versions - new)
+- lib/lang/pt-br.php (all versions)
+- lib/lang/pt-pt.php (all versions - new)
+- lib/class/AJAXChatTemplate.php (all versions)
 - lib/config.php[.example] (all versions)
