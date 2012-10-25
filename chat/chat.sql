@@ -6,7 +6,9 @@ CREATE TABLE ajax_chat_online (
 	userRole INT(1) NOT NULL,
 	channel INT(11) NOT NULL,
 	dateTime DATETIME NOT NULL,
-	ip VARBINARY(16) NOT NULL
+	ip VARBINARY(16) NOT NULL,
+	PRIMARY KEY (userID),
+	INDEX (userName)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS ajax_chat_messages;
@@ -19,7 +21,9 @@ CREATE TABLE ajax_chat_messages (
 	dateTime DATETIME NOT NULL,
 	ip VARBINARY(16) NOT NULL,
 	text TEXT,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	INDEX message_condition (id, channel, dateTime),
+	INDEX (dateTime)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS ajax_chat_bans;
@@ -27,12 +31,17 @@ CREATE TABLE ajax_chat_bans (
 	userID INT(11) NOT NULL,
 	userName VARCHAR(64) NOT NULL,
 	dateTime DATETIME NOT NULL,
-	ip VARBINARY(16) NOT NULL
+	ip VARBINARY(16) NOT NULL,
+	PRIMARY KEY (userID),
+	INDEX (userName),
+	INDEX (dateTime)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 DROP TABLE IF EXISTS ajax_chat_invitations;
 CREATE TABLE ajax_chat_invitations (
 	userID INT(11) NOT NULL,
 	channel INT(11) NOT NULL,
-	dateTime DATETIME NOT NULL
+	dateTime DATETIME NOT NULL,
+	PRIMARY KEY (userID, channel),
+	INDEX (dateTime)
 ) DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
