@@ -83,8 +83,9 @@ var ajaxChat = {
 	originalDocumentTitle: null,
 	blinkInterval: null,
 	httpRequest: null,
-	retryTimer:null,
-	retryTimerDelay:null,
+	retryTimer: null,
+	retryTimerDelay: null,
+	requestStatus: 'ok',
 	DOMbuffering: null,
 	DOMbuffer: null,
 	DOMbufferRowClass: 'rowOdd',
@@ -255,7 +256,7 @@ var ajaxChat = {
 		this.setSelectedStyle();
 		this.customInitialize();
 		//preload the Alert icon (it can't display if there's no connection unless it's cached!)
-		this.setStatus('Alert');
+		this.setStatus('retrying');
 		if(typeof this.initializeFunction == 'function') {
 			this.initializeFunction();
 		}
@@ -406,14 +407,7 @@ var ajaxChat = {
  			this.DOMbuffer = "";
 		}
 	},
-	
-	setStatus: function(currentStatus) {
-		//Make sure the status container div exists before changing its class.
-		if (document.getElementById('statusIconContainer')) {
-			//currentStatus options are: Off for green, On for orange, and Alert for red.
-			document.getElementById('statusIconContainer').className = 'statusContainer' + currentStatus;
-		}
-	},
+
 
 	startChatUpdate: function() {
 		// Start the chat update and retrieve current user and channel info and set the login channel:
@@ -714,6 +708,34 @@ var ajaxChat = {
 			i++;
 		}
 	},
+
+	setStatus: function(newStatus) {
+		// status options are: ok, retrying, waiting
+		if (this.requestStatus != 'retrying' || newStatus == 'ok') {
+			this.requestStatus = newStatus;
+		}
+		
+		var statusIcon = document.getElementById('statusIconContainer');
+
+		if (statusIcon) {
+			switch (this.requestStatus) {
+				case 'ok':
+					this.setClass(statusIcon, 'statusContainerOff');
+					break;
+				case 'waiting':
+					this.setClass(statusIcon, 'statusContainerOn');
+					break;
+				case 'retrying':
+					this.setClass(statusIcon, 'statusContainerAlert');
+					break;
+			}
+		}
+	},
+	
+	forceNewRequest: function() {
+		ajaxChat.updateChat(null); 
+		ajaxChat.setStatus('retrying');
+	},
 	
 	getHttpRequest: function(identifier) {
 		if(!this.httpRequest[identifier]) {
@@ -735,14 +757,10 @@ var ajaxChat = {
 		}
 		return this.httpRequest[identifier];
 	},
-	
-	forceNewRequest: function() {
-		ajaxChat.updateChat(null); 
-		ajaxChat.setStatus('Alert');
-	},
+
 	
 	makeRequest: function(url, method, data) {
-		ajaxChat.setStatus('On');
+		this.setStatus('waiting');
 		ajaxChat.retryTimer = setTimeout(this.forceNewRequest, this.retryTimerDelay);
 		try {
 			var identifier;
@@ -770,7 +788,7 @@ var ajaxChat = {
 					try {
 						if(data) {
 							ajaxChat.addChatBotMessageToChatList('/error ConnectionTimeout');
-							ajaxChat.setStatus('Alert');
+							ajaxChat.setStatus('retrying');
 							ajaxChat.updateChatlistView();
 						}
 					} catch(e) {
@@ -791,7 +809,7 @@ var ajaxChat = {
 			clearTimeout(this.timer);
 			if(data) {
 				this.addChatBotMessageToChatList('/error ConnectionTimeout');
-				ajaxChat.setStatus('Alert');
+				ajaxChat.setStatus('retrying');
 				this.updateChatlistView();
 			}
 			this.timer = setTimeout('ajaxChat.updateChat(null);', this.timerRate);
@@ -803,16 +821,16 @@ var ajaxChat = {
 			if (this.getHttpRequest(identifier).status == 200) {
 				clearTimeout(ajaxChat.retryTimer);
 				var xmlDoc = this.getHttpRequest(identifier).responseXML;
-				ajaxChat.setStatus('Off');
+				ajaxChat.setStatus('ok');
 			} else {
 				// Connection status 0 can be ignored.
 				if (this.getHttpRequest(identifier).status == 0) {
-					ajaxChat.setStatus('On');
+					this.setStatus('waiting');
 					this.updateChatlistView();
 					return false;
 				} else {
 					this.addChatBotMessageToChatList('/error ConnectionStatus '+this.getHttpRequest(identifier).status);
-					ajaxChat.setStatus('Alert');
+					this.setStatus('retrying');
 					this.updateChatlistView();				
 					return false;
 				}
