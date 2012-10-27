@@ -213,7 +213,8 @@ var ajaxChatConfig = {
 	},
 	
 	
-	// The following configuration options are usually overwritten by server-side values:
+	// Once users have been logged in, the following values are overridden by those in config.php.
+	// You should set these to be the same as the ones in config.php to avoid confusion.
 	
 	// Session identification, used for style and setting cookies:
 	sessionName: 'ajax_chat',

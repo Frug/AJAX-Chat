@@ -147,7 +147,7 @@ var ajaxChat = {
 		this.socketServerChatID		= config['socketServerChatID'];
 		this.DOMbuffering			= false;
 		this.DOMbuffer				= "";
-		this.retryTimerDelay = this.timerRate + (((this.inactiveTimeout*6000) - this.timerRate)/4);
+		this.retryTimerDelay 		= (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
 	},
 
 	initDirectories: function() {
@@ -409,7 +409,7 @@ var ajaxChat = {
 	
 	setStatus: function(currentStatus) {
 		//Make sure the status container div exists before changing its class.
-		if (document.getElementById('statusIconContainer') != null ) {
+		if (document.getElementById('statusIconContainer')) {
 			//currentStatus options are: Off for green, On for orange, and Alert for red.
 			document.getElementById('statusIconContainer').className = 'statusContainer' + currentStatus;
 		}
@@ -736,9 +736,14 @@ var ajaxChat = {
 		return this.httpRequest[identifier];
 	},
 	
+	forceNewRequest: function() {
+		ajaxChat.updateChat(null); 
+		ajaxChat.setStatus('Alert');
+	},
+	
 	makeRequest: function(url, method, data) {
 		ajaxChat.setStatus('On');
-		ajaxChat.retryTimer = setTimeout("ajaxChat.updateChat(null); ajaxChat.setStatus('Alert');", this.retryTimerDelay);
+		ajaxChat.retryTimer = setTimeout(this.forceNewRequest, this.retryTimerDelay);
 		try {
 			var identifier;
 			if(data) {
