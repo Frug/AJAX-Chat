@@ -492,7 +492,7 @@ var ajaxChat = {
 	socketConnectHandler: function(event) {
 		ajaxChat.socketIsConnected = true;
 		// setTimeout is needed to avoid calling the flash interface recursively:
-		setTimeout('ajaxChat.socketRegister()', 0);
+		setTimeout(ajaxChat.socketRegister, 0);
 	},
 
 	socketCloseHandler: function(event) {
@@ -509,14 +509,14 @@ var ajaxChat = {
 
 	socketIOErrorHandler: function(event) {
 		// setTimeout is needed to avoid calling the flash interface recursively (e.g. sound on new messages):
-		setTimeout('ajaxChat.addChatBotMessageToChatList(\'/error SocketIO\')', 0);
-		setTimeout('ajaxChat.updateChatlistView()', 1);
+		setTimeout(function() { ajaxChat.addChatBotMessageToChatList('/error SocketIO'); }, 0);
+		setTimeout(ajaxChat.updateChatlistView, 1);
 	},
 
 	socketSecurityErrorHandler: function(event) {
 		// setTimeout is needed to avoid calling the flash interface recursively (e.g. sound on new messages):
-		setTimeout('ajaxChat.addChatBotMessageToChatList(\'/error SocketSecurity\')', 0);
-		setTimeout('ajaxChat.updateChatlistView()', 1);
+		setTimeout(function() { ajaxChat.addChatBotMessageToChatList('/error SocketSecurity'); }, 0);
+		setTimeout(ajaxChat.updateChatlistView, 1);
 	},
 
 	socketRegister: function() {
@@ -641,8 +641,8 @@ var ajaxChat = {
 
 	soundIOErrorHandler: function(event) {
 		// setTimeout is needed to avoid calling the flash interface recursively (e.g. sound on new messages):
-		setTimeout('ajaxChat.addChatBotMessageToChatList(\'/error SoundIO\')', 0);
-		setTimeout('ajaxChat.updateChatlistView()', 1);
+		setTimeout(function() { ajaxChat.addChatBotMessageToChatList('/error SoundIO'); }, 0);
+		setTimeout(ajaxChat.updateChatlistView, 1);
 	},
 	
 	soundPlayCompleteHandler: function(event) {
@@ -758,10 +758,9 @@ var ajaxChat = {
 		return this.httpRequest[identifier];
 	},
 
-	
 	makeRequest: function(url, method, data) {
 		this.setStatus('waiting');
-		ajaxChat.retryTimer = setTimeout(this.forceNewRequest, this.retryTimerDelay);
+		
 		try {
 			var identifier;
 			if(data) {
@@ -775,6 +774,9 @@ var ajaxChat = {
 			} else {
 				identifier = 0;
 			}
+			//if the response takes longer than retryTimerDelay to give an OK status, abort the connection and start again.
+			this.retryTimer = setTimeout(ajaxChat.forceNewRequest, ajaxChat.retryTimerDelay);
+			
 			this.getHttpRequest(identifier).open(method, url, true);
 			this.getHttpRequest(identifier).onreadystatechange = function() {
 				try {
@@ -795,7 +797,7 @@ var ajaxChat = {
 						//alert(e);
 					}
 					try {				
-						ajaxChat.timer = setTimeout('ajaxChat.updateChat(null);', ajaxChat.timerRate);
+						ajaxChat.timer = setTimeout(function() { ajaxChat.updateChat(null); }, ajaxChat.timerRate);
 					} catch(e) {
 						//alert(e);
 					}
@@ -812,7 +814,7 @@ var ajaxChat = {
 				ajaxChat.setStatus('retrying');
 				this.updateChatlistView();
 			}
-			this.timer = setTimeout('ajaxChat.updateChat(null);', this.timerRate);
+			this.timer = setTimeout(function() { ajaxChat.updateChat(null); }, this.timerRate);
 		}
 	},
 		
@@ -861,10 +863,10 @@ var ajaxChat = {
 				timeout = this.timerRate;
 				if(this.socketServerEnabled && !this.socketReconnectTimer) {
 					// If the socket connection fails try to reconnect once in a minute:
-					this.socketReconnectTimer = setTimeout('ajaxChat.socketConnect();', 60000);
+					this.socketReconnectTimer = setTimeout(ajaxChat.socketConnect, 60000);
 				}
 			}
-			this.timer = setTimeout('ajaxChat.updateChat(null);', timeout);			
+			this.timer = setTimeout(function() {ajaxChat.updateChat(null);}, timeout);			
 		}
 	},
 	
