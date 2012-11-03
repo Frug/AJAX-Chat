@@ -1,6 +1,7 @@
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
+ * @author Philip Nicolcev
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
@@ -9,72 +10,69 @@
  * http://www.mybboard.net/
  */
 
-
-@import url('positions.css');
-@import url('borders.css');
+@import url('global.css');
 @import url('fonts.css');
-@import url('misc.css');
 @import url('print.css');
-
-
-/*
- * Colors
- */
 
 @media screen,projection,handheld {
 	
+	/* Buttons */
+	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
+		background-color:#02619f;
+		color:#fff;
+		font-weight: bold;
+		border: 0px solid #02619f;
+		border-radius: 5px;
+	}
+	#content select, #loginForm select, #loginForm input, #content textarea {
+		color:#333333;
+		border: 1px solid #02619f;
+		border-radius: 5px;
+	}
+
+	/* Status Icon */
+	#content #statusIconContainer {
+		background-image: url('../img/loading-sprite.png'); 
+	}
+	#content .statusContainerOff {
+		background-position: 0px 0px;
+	}
+	#content .statusContainerOn {
+		background-position: 0px -22px;
+	}
+	#content .statusContainerAlert {
+		background-position: 0px -44px;
+	}
 	#loginContent {
 		background-color:#FFF;
 		color:#000;
 	}
 	#loginContent h1 {
-		color:#0F5C8E;
-	}
-	#loginContent a {
-		color:#026CB1;
-	}
-	#loginContent input, #loginContent select {
-		background-color:#EFEFEF;
 		color:#000;
 	}
-	#loginContent #loginFormContainer #loginButton {
-		background-color:#F7F5F1;
+	#loginContent a {
 		color:#000;
 	}
 	#loginContent #errorContainer {
 		color:red;
 	}
-	
 	#content {
 		background-color:#FFF;
 		color:#000;
 	}
 	#content h1 {
-		color:#0F5C8E;
+		color:#000;
 	}
 	#content a {
-		color:#026CB1;
+		color:#000;
 	}
 	#content input, #content select, #content textarea {
-		background-color:#EFEFEF;
+		background-color:#FFF;
 		color:#000;
 	}
-	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #bbCodeContainer, #content #colorCodesContainer, #content #emoticonsContainer {
-		border-color:#0F5C8E;
-		background-color:#EFEFEF;
-	}
-	.statusContainerOn {
-		background-image: url('../img/loading.png');
-	}
-	.statusContainerOff {
-		background-image: url('../img/loading-done.png');
-	}
-	.statusContainerAlert {
-		background-image: url('../img/loading-trouble.png');
-	}
-	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton {
-		background-color:#F7F5F1;
-		color:#000;
+	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content #emoticonsContainer {
+		border-color:#ADADAD;
+		background-color:#E5E5E8;
 	}
 	#content #colorCodesContainer a {
 		border-color:black;
@@ -82,32 +80,9 @@
 	#content #optionsContainer input {
 	    background-color:transparent;
 	}
-	#content #optionsContainer #helpButton {
-	    background:url('../img/help.png') no-repeat;
-	}
-	#content #optionsContainer #settingsButton {
-	    background:url('../img/settings.png') no-repeat;
-	}
-	#content #optionsContainer #onlineListButton {
-	    background:url('../img/users.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton {
-	    background:url('../img/audio.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton.off {
-	    background:url('../img/audio-off.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton {
-	    background:url('../img/autoscroll.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton.off {
-	    background:url('../img/autoscroll-off.png') no-repeat;
-	}
-	#content .rowEven {
+	#content .rowEven, #content .rowOdd {
 		background-color:#EFEFEF;
-	}
-	#content .rowOdd {
-		background-color:#F5F5F5;
+		border-bottom: 1px solid #bdccf7;
 	}
 	#content .guest {
 		color:gray;
@@ -116,32 +91,25 @@
 		color:#000;
 	}
 	#content .moderator {
-		color:#CC00CC;
+		color:#0000FF;
 	}
 	#content .admin {
-		color:#008000;
+		color:#FF0000;
 	}
 	#content .chatBot {
-		color:#026CB1;
+		color:#476C8E;
 	}
 	#content #chatList .chatBotErrorMessage {
 		color:red;
 	}
 	#content #chatList a {
-		color:#026CB1;
-	}
-	#content #chatList .delete {
-		background:url('../img/delete.png') no-repeat right;
+		color:#476C8E;
 	}
 	#content #chatList .deleteSelected {
 		border-color:red;
 	}
 	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
-		background-color:#ADCBE7;
-		color:#000;
+		background-color:#02619f;
+		color:#FFF;
 	}
-	#content #settingsContainer #settingsList input.playback {
-	    background:url('../img/playback.png') no-repeat;
-	}
-
 }

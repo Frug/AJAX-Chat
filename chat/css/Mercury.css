@@ -1,6 +1,7 @@
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
+ * @author Philip Nicolcev
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
@@ -9,20 +10,35 @@
  * http://punbb.org/
  */
 
-
-@import url('positions.css');
-@import url('borders.css');
+@import url('global.css');
 @import url('fonts.css');
-@import url('misc.css');
 @import url('print.css');
 
-
-/*
- * Colors
- */
-
 @media screen,projection,handheld {
-	
+
+	/* Status Icon */
+	#content #statusIconContainer {
+		background-image: url('../img/loading-sprite.png'); 
+	}
+	#content .statusContainerOff {
+		background-position: 0px 0px;
+	}
+	#content .statusContainerOn {
+		background-position: 0px -22px;
+	}
+	#content .statusContainerAlert {
+		background-position: 0px -44px;
+	}
+
+	#content input, #content select, #content textarea { 
+		border: 1px solid #565656; 
+	}
+	#content textarea { 
+		border-color: #383838; 
+	}
+	#content input { 
+		border-radius: 3px; 
+	}
 	#loginContent {
 		background-color:#2A2A2A;
 		color:#D4D4D4;
@@ -35,11 +51,13 @@
 	}
 	#loginContent input, #loginContent select {
 		background-color:#424242;
+		border-color:#565656;
 		color:#D4D4D4;
 	}
 	#loginContent #loginFormContainer #loginButton {
 		background-color:#424242;
 		color:#D4D4D4;
+		border-radius: 3px;
 	}
 	#loginContent #errorContainer {
 		color:red;
@@ -59,52 +77,48 @@
 		background-color:#383838;
 		color:#D4D4D4;
 	}
-	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #bbCodeContainer, #content #colorCodesContainer, #content #emoticonsContainer {
-		border-color:#565656;
+	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content #emoticonsContainer {
+		border: 0;
 		background-color:#383838;
 	}
-	.statusContainerOn {
-		background-image: url('../img/loading.png');
+	#content #colorCodesContainer {
+		padding: 5px; 
+		box-shadow: 2px 2px 4px #000;
+		border-radius: 3px;
 	}
-	.statusContainerOff {
-		background-image: url('../img/loading-done.png');
+	#content #onlineListContainer {
+		background: #383838;
 	}
-	.statusContainerAlert {
-		background-image: url('../img/loading-trouble.png');
+	#content #onlineListContainer #onlineList div { 
+		margin: 0 1px 1px 1px;
+		border-radius: 5px;
+		background: #404040;
+	}
+	#content #onlineListContainer #onlineList ul {
+		margin-top: 1px;
+		list-style: none;
+	}
+	#content #emoticonsContainer { 
+		border-radius: 3px; 
+	}
+	#content #bbCodeContainer { 
+		border: 0; padding-left: 0; 
 	}
 	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton {
 		background-color:#383838;
 		color:#D4D4D4;
 	}
-	#content #colorCodesContainer a {
-		border-color:black;
+	#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover {
+		background-color:#565656;
+	}
+	#content #optionsContainer input.button { 
+		border: 0; 
 	}
 	#content #optionsContainer input {
 	    background-color:transparent;
 	}
-	#content #optionsContainer #helpButton {
-	    background:url('../img/help.png') no-repeat;
-	}
-	#content #optionsContainer #settingsButton {
-	    background:url('../img/settings.png') no-repeat;
-	}
-	#content #optionsContainer #onlineListButton {
-	    background:url('../img/users.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton {
-	    background:url('../img/audio.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton.off {
-	    background:url('../img/audio-off.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton {
-	    background:url('../img/autoscroll.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton.off {
-	    background:url('../img/autoscroll-off.png') no-repeat;
-	}
 	#content .rowEven {
-		background-color:#565656;
+		background-color:#505050;
 	}
 	#content .rowOdd {
 		background-color:#484848;
@@ -130,18 +144,11 @@
 	#content #chatList a {
 		color:#F6B620;
 	}
-	#content #chatList .delete {
-		background:url('../img/delete.png') no-repeat right;
-	}
 	#content #chatList .deleteSelected {
 		border-color:red;
 	}
 	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
-		background-color:#383838;
 		color:#D4D4D4;
+		height: 15px;
 	}
-	#content #settingsContainer #settingsList input.playback {
-	    background:url('../img/playback.png') no-repeat;
-	}
-
 }

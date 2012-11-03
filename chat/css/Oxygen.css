@@ -1,6 +1,7 @@
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
+ * @author Philip Nicolcev
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
@@ -9,20 +10,38 @@
  * http://punbb.org/
  */
 
-
-@import url('positions.css');
-@import url('borders.css');
+@import url('global.css');
 @import url('fonts.css');
-@import url('misc.css');
 @import url('print.css');
 
-
-/*
- * Colors
- */
-
 @media screen,projection,handheld {
+
+	/* Buttons */
+	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
+		background-color:#0066B9;
+		color: #fff;
+		border: 1px solid #0066B9;
+	}
+	#content select, #loginForm select, #loginForm input, #content textarea {
+		color:#333333;
+		border: 1px solid #0066B9;
+	}
 	
+	/* Status Icon */
+	#content #statusIconContainer {
+		background-image: url('../img/loading-sprite.png'); 
+	}
+	#content .statusContainerOff {
+		background-position: 0px 0px;
+	}
+	#content .statusContainerOn {
+		background-position: 0px -22px;
+	}
+	#content .statusContainerAlert {
+		background-position: 0px -44px;
+	}
+	
+	/* Other Theme Elements */
 	#loginContent {
 		background-color:#F1F1F1;
 		color:#333333;
@@ -31,20 +50,15 @@
 		color:#333333;
 	}
 	#loginContent a {
-		color:#005CB1;
+		color:#0066B9;
 	}
 	#loginContent input, #loginContent select {
 		background-color:#FFF;
 		color:#333333;
 	}
-	#loginContent #loginFormContainer #loginButton {
-		background-color:#F7F5F1;
-		color:#333333;
-	}
 	#loginContent #errorContainer {
 		color:red;
 	}
-	
 	#content {
 		background-color:#F1F1F1;
 		color:#333333;
@@ -53,55 +67,17 @@
 		color:#333333;
 	}
 	#content a {
-		color:#005CB1;
+		color:#0066B9;
 	}
-	#content input, #content select, #content textarea {
-		background-color:#FFF;
-		color:#333333;
-	}
-	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #bbCodeContainer, #content #colorCodesContainer, #content #emoticonsContainer {
+	#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content textarea {
 		border-color:#0066B9;
 		background-color:#FFF;
-	}
-	.statusContainerOn {
-		background-image: url('../img/loading.png');
-	}
-	.statusContainerOff {
-		background-image: url('../img/loading-done.png');
-	}
-	.statusContainerAlert {
-		background-image: url('../img/loading-trouble.png');
-	}
-	#content #bbCodeContainer input, #content #logoutButton, #content #submitButton {
-		background-color:#F7F5F1;
-		color:#333333;
 	}
 	#content #colorCodesContainer a {
 		border-color:black;
 	}
 	#content #optionsContainer input {
 	    background-color:transparent;
-	}
-	#content #optionsContainer #helpButton {
-	    background:url('../img/help.png') no-repeat;
-	}
-	#content #optionsContainer #settingsButton {
-	    background:url('../img/settings.png') no-repeat;
-	}
-	#content #optionsContainer #onlineListButton {
-	    background:url('../img/users.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton {
-	    background:url('../img/audio.png') no-repeat;
-	}
-	#content #optionsContainer #audioButton.off {
-	    background:url('../img/audio-off.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton {
-	    background:url('../img/autoscroll.png') no-repeat;
-	}
-	#content #optionsContainer #autoScrollButton.off {
-	    background:url('../img/autoscroll-off.png') no-repeat;
 	}
 	#content .rowEven {
 		background-color:#F1F1F1;
@@ -122,16 +98,13 @@
 		color:red;
 	}
 	#content .chatBot {
-		color:#005CB1;
+		color:#0066B9;
 	}
 	#content #chatList .chatBotErrorMessage {
 		color:red;
 	}
 	#content #chatList a {
-		color:#005CB1;
-	}
-	#content #chatList .delete {
-		background:url('../img/delete.png') no-repeat right;
+		color:#0066B9;
 	}
 	#content #chatList .deleteSelected {
 		border-color:red;
@@ -140,8 +113,4 @@
 		background-color:#0066B9;
 		color:#FFF;
 	}
-	#content #settingsContainer #settingsList input.playback {
-	    background:url('../img/playback.png') no-repeat;
-	}
-
 }

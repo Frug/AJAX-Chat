@@ -6,11 +6,7 @@
  * @link https://blueimp.net/ajax/
  */
 
-
-/*
- * Fonts
- */
-
+/* Fonts */
 #loginContent {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:0.8em;
@@ -32,7 +28,6 @@
 #loginContent #copyright {
 	font-size:0.8em;
 }
-
 #content {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:0.8em;
