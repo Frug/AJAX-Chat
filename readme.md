@@ -5,7 +5,8 @@ This is the standalone version of Blueimp's AJAX Chat. If you are looking for a 
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
-Instead of delivering a complete HTML page only updated data is send in XML format.
+Instead of delivering a complete HTML page only updated data is sent in XML format. 
+
 By using JavaScript the chat page can be updated without having to reload the whole page.
 
 Requirements
@@ -69,7 +70,10 @@ Features
 
 Help
 ====
-Essential documentation is contained in the attached readme files.
+Essential documentation is contained in the attached readme files
+
 For more documentation consult the github wiki: https://github.com/Frug/AJAX-Chat/wiki
+
 For support questions use google groups: https://groups.google.com/forum/#!forum/ajax-chat
+
 To report bugs use github issues: https://github.com/Frug/AJAX-Chat
