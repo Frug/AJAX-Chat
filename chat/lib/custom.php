@@ -5,7 +5,12 @@
  * @copyright (c) Sebastian Tschan
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
+ * 
+ * PunBB integration:
+ * http://punbb.org/
  */
 
-// Include custom libraries and initialization code here
+// PunBB initialization:
+define('PUN_ROOT', AJAX_CHAT_PATH.'../');
+require PUN_ROOT.'include/common.php';
 ?>
