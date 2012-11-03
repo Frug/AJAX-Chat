@@ -5,36 +5,88 @@
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
+ * 
+ * PunBB integration:
+ * http://punbb.org/
  */
 
 class CustomAJAXChat extends AJAXChat {
 
+	// Initialize custom configuration settings
+	function initCustomConfig() {
+		global $db;
+		
+		// Use the existing PunBB database connection:
+		$this->setConfig('dbConnection', 'link', $db->link_id);
+	}
+
+	// Initialize custom request variables:
+	function initCustomRequestVars() {
+		global $pun_user;
+
+		// Auto-login phpBB users:
+		if(!$this->getRequestVar('logout') && !$pun_user['is_guest']) {
+			$this->setRequestVar('login', true);
+		}
+	}
+
+	// Replace custom template tags:
+	function replaceCustomTemplateTags($tag, $tagContent) {
+		global $pun_user,$pun_config;
+
+		switch($tag) {
+
+			case 'FORUM_LOGIN_URL':
+				if(!$pun_user['is_guest']) {
+					return ($this->getRequestVar('view') == 'logs') ? './?view=logs' : './';
+				} else {
+					return $this->htmlEncode($pun_config['o_base_url'].'/login.php?action=in');
+				}
+				
+			case 'REDIRECT_URL':
+				if(!$pun_user['is_guest']) {
+					return '';
+				} else {
+					return $this->htmlEncode($this->getRequestVar('view') == 'logs' ? $this->getChatURL().'?view=logs' : $this->getChatURL());
+				}
+			
+			default:
+				return null;
+		}
+	}
+
+	// Returns true if the userID of the logged in user is identical to the userID of the authentication system
+	// or the user is authenticated as guest in the chat and the authentication system
+	function revalidateUserID() {
+		global $pun_user;
+		
+		if($this->getUserRole() === AJAX_CHAT_GUEST && $pun_user['is_guest'] || ($this->getUserID() === $pun_user['id'])) {
+			return true;
+		}
+		return false;
+	}
+
 	// Returns an associative array containing userName, userID and userRole
 	// Returns null if login is invalid
 	function getValidLoginUserData() {
+		global $pun_user;
 		
-		$customUsers = $this->getCustomUsers();
-		
-		if($this->getRequestVar('password')) {
-			// Check if we have a valid registered user:
-
-			$userName = $this->getRequestVar('userName');
-			$userName = $this->convertEncoding($userName, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			$password = $this->getRequestVar('password');
-			$password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			foreach($customUsers as $key=>$value) {
-				if(($value['userName'] == $userName) && ($value['password'] == $password)) {
-					$userData = array();
-					$userData['userID'] = $key;
-					$userData['userName'] = $this->trimUserName($value['userName']);
-					$userData['userRole'] = $value['userRole'];
-					return $userData;
-				}
-			}
+		// Check if we have a valid registered user:
+		if(!$pun_user['is_guest']) {
+			$userData = array();
+			$userData['userID'] = $pun_user['id'];
 			
-			return null;
+			$userData['userName'] = $this->trimUserName($pun_user['username']);
+			
+			if($pun_user['g_id'] == PUN_ADMIN)
+				$userData['userRole'] = AJAX_CHAT_ADMIN;
+			elseif($pun_user['g_id'] == PUN_MOD)
+				$userData['userRole'] = AJAX_CHAT_MODERATOR;
+			else
+				$userData['userRole'] = AJAX_CHAT_USER;
+
+			return $userData;
+			
 		} else {
 			// Guest users:
 			return $this->getGuestUser();
@@ -45,27 +97,50 @@ class CustomAJAXChat extends AJAXChat {
 	// Make sure channel names don't contain any whitespace
 	function &getChannels() {
 		if($this->_channels === null) {
+			global $db,$pun_user;
+			
 			$this->_channels = array();
 			
-			$customUsers = $this->getCustomUsers();
-			
-			// Get the channels, the user has access to:
-			if($this->getUserRole() == AJAX_CHAT_GUEST) {
-				$validChannels = $customUsers[0]['channels'];
-			} else {
-				$validChannels = $customUsers[$this->getUserID()]['channels'];
-			}
-			
-			// Add the valid channels to the channel list (the defaultChannelID is always valid):
-			foreach($this->getAllChannels() as $key=>$value) {
+			// Get valid PunBB forums:
+			$sql = 'SELECT
+						id,
+						forum_name
+					FROM
+						'.$db->prefix.'forums AS f
+					LEFT JOIN
+						'.$db->prefix.'forum_perms AS fp
+					ON
+						(fp.forum_id=f.id AND fp.group_id=\''.$db->escape($pun_user['g_id']).'\')
+					WHERE
+						(fp.read_forum IS NULL OR fp.read_forum=1);';
+			$result = $db->query($sql);
+
+			$defaultChannelFound = false;
+
+			while ($row = $db->fetch_assoc($result)) {
 				// Check if we have to limit the available channels:
-				if($this->getConfig('limitChannelList') && !in_array($value, $this->getConfig('limitChannelList'))) {
+				if($this->getConfig('limitChannelList') && !in_array($row['id'], $this->getConfig('limitChannelList'))) {
 					continue;
 				}
+
+				$forumName = $this->trimChannelName($row['forum_name']);
 				
-				if(in_array($value, $validChannels) || $value == $this->getConfig('defaultChannelID')) {
-					$this->_channels[$key] = $value;
+				$this->_channels[$forumName] = $row['id'];
+
+				if(!$defaultChannelFound && $row['id'] == $this->getConfig('defaultChannelID')) {
+					$defaultChannelFound = true;
 				}
+			}
+			$db->free_result($result);
+
+			if(!$defaultChannelFound) {
+				// Add the default channel as first array element to the channel list:
+				$this->_channels = array_merge(
+					array(
+						$this->trimChannelName($this->getConfig('defaultChannelName'))=>$this->getConfig('defaultChannelID')
+					),
+					$this->_channels
+				);
 			}
 		}
 		return $this->_channels;
@@ -75,21 +150,31 @@ class CustomAJAXChat extends AJAXChat {
 	// Make sure channel names don't contain any whitespace
 	function &getAllChannels() {
 		if($this->_allChannels === null) {
-			// Get all existing channels:
-			$customChannels = $this->getCustomChannels();
+			global $db,$pun_user;
 			
+			$this->_allChannels = array();
+			
+			// Get all PunBB forums:
+			$sql = 'SELECT
+						id,
+						forum_name
+					FROM
+						'.$db->prefix.'forums;';
+			$result = $db->query($sql);
+
 			$defaultChannelFound = false;
-			
-			foreach($customChannels as $key=>$value) {
-				$forumName = $this->trimChannelName($value);
+
+			while ($row = $db->fetch_assoc($result)) {
+				$forumName = $this->trimChannelName($row['forum_name']);
 				
-				$this->_allChannels[$forumName] = $key;
-				
-				if($key == $this->getConfig('defaultChannelID')) {
+				$this->_allChannels[$forumName] = $row['id'];
+
+				if(!$defaultChannelFound && $row['id'] == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
 			}
-			
+			$db->free_result($result);
+
 			if(!$defaultChannelFound) {
 				// Add the default channel as first array element to the channel list:
 				$this->_allChannels = array_merge(
@@ -103,18 +188,28 @@ class CustomAJAXChat extends AJAXChat {
 		return $this->_allChannels;
 	}
 
-	function &getCustomUsers() {
-		// List containing the registered chat users:
-		$users = null;
-		require(AJAX_CHAT_PATH.'lib/data/users.php');
-		return $users;
-	}
-	
-	function &getCustomChannels() {
-		// List containing the custom channels:
-		$channels = null;
-		require(AJAX_CHAT_PATH.'lib/data/channels.php');
-		return $channels;
+	// Method to set the style cookie depending on the PunBB user style:
+	function setStyle() {
+		global $pun_user;
+		
+		if(isset($_COOKIE[$this->getConfig('sessionName').'_style']) && in_array($_COOKIE[$this->getConfig('sessionName').'_style'], $this->getConfig('styleAvailable')))
+			return;
+		
+		$styleName = $pun_user['style'];
+		
+		if(!in_array($styleName, $this->getConfig('styleAvailable'))) {
+			$styleName = $this->getConfig('styleDefault');
+		}
+		
+		setcookie(
+			$this->getConfig('sessionName').'_style',
+			$styleName,
+			time()+60*60*24*$this->getConfig('sessionCookieLifeTime'),
+			$this->getConfig('sessionCookiePath'),
+			$this->getConfig('sessionCookieDomain'),
+			$this->getConfig('sessionCookieSecure')
+		);
+		return;
 	}
 
 }

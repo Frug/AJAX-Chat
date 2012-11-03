@@ -20,6 +20,28 @@
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
+			function handleLogin() {
+				var loginForm = document.getElementById('loginForm');
+				var userNameField = document.getElementById('userNameField');
+				var passwordField = document.getElementById('passwordField');
+				var channelField = document.getElementById('channelField');
+				var redirectField = document.getElementById('redirectField');
+				if(passwordField.value.length == 0) {
+					loginForm.setAttribute('action', '[LOGIN_URL/]');
+					userNameField.setAttribute('name', 'userName');
+				} else {
+					var channelRequest = 'channelName=' + encodeURIComponent(channelField.value);
+					var regExp = /\?/;
+					if(regExp.test(redirectField.value)) {
+						redirectField.value += '&';
+					} else {
+						redirectField.value += '?';
+					}
+					redirectField.value += channelRequest;
+				}
+				return true;
+			}
+
 			function initializeLoginPage() {
 				document.getElementById('userNameField').focus();
 				if(!ajaxChat.isCookieEnabled()) {
@@ -36,7 +58,7 @@
 			ajaxChatConfig.cookieDomain = '[COOKIE_DOMAIN/]';
 			ajaxChatConfig.cookieSecure = '[COOKIE_SECURE/]';
 
-			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, false);
+			ajaxChat.init(ajaxChatConfig, ajaxChatLang, false, true, false);
 		// ]]>
 	</script>
 </head>
@@ -46,14 +68,14 @@
 		<div id="loginHeadlineContainer">
 			<h1>[LANG]title[/LANG]</h1>
 		</div>
-		<form id="loginForm" action="[LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
+		<form id="loginForm" action="[FORUM_LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return handleLogin();">
 			<div id="loginFormContainer">
-				<input type="hidden" name="login" id="loginField" value="login"/>
-				<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
+				<input type="hidden" name="form_sent" id="formSentField" value="1"/>
+				<input type="hidden" name="redirect_url" id="redirectField" value="[REDIRECT_URL/]"/>
 				<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
-				<input type="text" name="userName" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
+				<input type="text" name="req_username" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
 				<div><label for="passwordField">[LANG]password[/LANG]*:</label><br />
-				<input type="password" name="password" id="passwordField"/></div>
+				<input type="password" name="req_password" id="passwordField"/></div>
 				<div><label for="channelField">[LANG]channel[/LANG]:</label><br />
 				<select name="channelName" id="channelField">[CHANNEL_OPTIONS/]</select></div>
 				<div><label for="languageSelection">[LANG]language[/LANG]:</label><br />
