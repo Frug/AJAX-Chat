@@ -1,24 +1,14 @@
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
- * @link https://blueimp.net/ajax/
- */
-
-
 AJAX Chat
 =========
 
-This is the standalone version running without another web application.
+v 0.8.6 standalone
 
+This is the standalone version running without another web application.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
 Instead of delivering a complete HTML page only updated data is send in XML format.
 By using JavaScript the chat page can be updated without having to reload the whole page.
-
-
 
 
 Requirements
@@ -36,8 +26,6 @@ Client-Side:
 - Enabled JavaScript
 - Enabled Cookies
 - Flash Plugin >= 9 (optional)
-
-
 
 
 Installation
@@ -115,8 +103,6 @@ Installation
 Ready! Just place a link to the chat directory on your website. :)
 
 
-
-
 Configuration files:
 ====================
 
@@ -131,8 +117,6 @@ AJAX Chat is fully customizable and contains two configuration files:
 	This file contains the client side (JavaScript) settings.
 
 Each configuration option is explained with a comment prior to the setting assignment.
-
-
 
 
 Customizing the layout:
@@ -162,8 +146,6 @@ If for some reason you cannot create valid XHTML you can force a HTML content-ty
 Just edit lib/config.php and set the following option:
 
 	$config['contentType'] = 'text/html';
-
-
 
 
 Adjusting the language settings:
@@ -205,8 +187,6 @@ To avoid errors, you should follow these rules:
 	3. Don't remove any "%s" inside the JavaScript language files - these are filled with dynamic data.
 
 
-
-
 Logs:
 =====
 	
@@ -228,8 +208,6 @@ The search filter accepts MySQL style regular expressions:
 To search for IPs, use the following syntax:
 
 	ip=127.0.0.1
-
-
 
 
 Shoutbox:
@@ -292,8 +270,6 @@ function getShoutBoxContent() {
 	Display the shoutbox content using the shoutbox function:
 
 	<div style="width:200px;"><?php echo getShoutBoxContent(); ?></div>
-
-
 
 
 Socket Server:
