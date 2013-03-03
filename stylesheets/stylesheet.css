@@ -108,8 +108,8 @@ header h2 {
   max-width: 100%;
 }
 
-#downloads {
-  margin-bottom: 40px;
+#downloads, #news {
+  margin-bottom: 20px;
 }
 
 a.button {
