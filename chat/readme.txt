@@ -1,6 +1,8 @@
 AJAX Chat
 =========
 
+v 0.8.6 phpBB2
+
 This is the phpBB2 integration version:
 http://www.phpbb.com/
 
