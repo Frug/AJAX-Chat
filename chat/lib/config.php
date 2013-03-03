@@ -20,13 +20,13 @@ $config = array();
 // Database connection values:
 $config['dbConnection'] = array();
 // Database hostname:
-$config['dbConnection']['host'] = 'localhost';
+$config['dbConnection']['host'] = null;
 // Database username:
-$config['dbConnection']['user'] = 'root';
+$config['dbConnection']['user'] = null;
 // Database password:
-$config['dbConnection']['pass'] = '';
+$config['dbConnection']['pass'] = null;
 // Database name:
-$config['dbConnection']['name'] = 'chat';
+$config['dbConnection']['name'] = null;
 // Database type:
 $config['dbConnection']['type'] = null;
 // Database link:
@@ -57,7 +57,7 @@ $config['langNames'] = array(
 // Available styles:
 $config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin');
 // Default style:
-$config['styleDefault'] = 'prosilver';
+$config['styleDefault'] = 'Core';
 
 // The encoding used for the XHTML content:
 $config['contentEncoding'] = 'UTF-8';

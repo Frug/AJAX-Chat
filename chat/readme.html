@@ -58,9 +58,8 @@
 </div>
 
 
-<p style="margin:1.5em">This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br />
-If you want to integrate AJAX Chat with one of the forums we support, go back and choose the right version. <br />
-This version is good for customizing your own integration, or using on its own.</p>
+<p>This is the Simple Machines Forum integration version:<br />
+<a href="http://www.simplemachines.org/">http://www.simplemachines.org/</a></p>
 
 <p class="note" style="margin-right: 30em;">AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br />
   The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br />
@@ -92,87 +91,44 @@ PHP is used to communicate with the database and authenticate users.</p>
 
 <h2 id="installation">Installation</h2>
 <div class="subsection">
-    <p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br /></p>
-    <h3>Before You Begin</h3>
-    <div class="subsection">
-      <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br />
-        If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
-    </div>
-    <h3>Configure Database Settings</h3>
-    <div class="subsection">
-      <p>The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br />
-        <strong>You need to create this file.</strong> <br />
-        An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br />
-        Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:</p>
-      <p>
-	  <code>$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br />
-      $config['dbConnection']['user'] = '<em>your_database_username</em>';<br />
-      $config['dbConnection']['pass'] = '<em>your_database_password</em>';<br />
-      $config['dbConnection']['name'] = '<em>your_database_name</em>';</code>
-	  </p>
-      <p>Sufficed to say you need this information. Talk to your hosting provider if you don't know. </p>
-      <p>In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br />
-      </p>
-      <p class="note">If your host does not use mysqli you will need to change the connection type field:<br />
-        $config['dbConnection']['type'] = null;<br />
-        If this is set to &quot;null&quot; it defaults to &quot;mysqli&quot; if existing, else to &quot;mysql&quot;. In most cases this field can be left as null.<br />
-        <br />
-        You can reference an existing database connection link or object by changing:<br />
-        $config['dbConnection']['link'] = null;<br />
-        If this is set to null, a new database connection is created.</p>
-    </div>
-<h3>Choose Your Channel Settings</h3>
-<div class="subsection">
-  <p>Edit the file <span class="filename">lib/data/channels.php.</span><br />
-    We have provided you with two sample channels, named public and private. You can add your own, or leave it as-is.<br />
-    Channels follow the following format:
-    <br />
-    <code>$channels[<em>channel id</em>] = '<em>channel name</em>';</code>
-    Each channel must have a unique channel id number and a unique name.<br />
-    Whitespace in the channel names will be converted to the underscore &quot;_&quot;.</p>
-</div>
-    <h3>Add Your Users</h3>
-    <div class="subsection">
-      <p> Edit users in <span class="filename">lib/data/users.php</span>.<br />
-        Users follow the following format:
-      </p>
-      <p><code>$users[<em>user id</em>] = array();<br />
-        $users[<em>user id</em>]['userRole'] = <em>AJAX_CHAT_ROLE</em>;<br />
-        $users[<em>user id</em>]['userName'] = '<em>user name</em>';<br />
-        $users[<em>user id</em>]['password'] = '<em>user password</em>';<br />
-        $users[<em>user id</em>]['channels'] = array(<em>allowed channel ids</em>);</code><br />
-        Each user must have a unique user id number and a unique name.<br />
-        The first user in the list (user id 0) is used for the guest user settings. All guest users will have access to the channels set for this user and the user role AJAX_CHAT_GUEST.<br />
-        Registered users can have the user roles AJAX_CHAT_USER, AJAX_CHAT_MODERATOR or AJAX_CHAT_ADMIN. (this is case sensitive, type it exactly)<br />
-        The list of channels a user has access to can be set for each user individually. Channel id's are separated by commas. eg: array(0,1,23); allows channels 0, 1 and 23.<br />
-        Whitespace in the user names will be converted to the underscore &quot;_&quot;.</p>
-    </div>
-    <h3>Upload to Your Server</h3>
-    <div class="subsection">
-      <p>Upload the chat folder to your server somewhere under your document root:<br />
-        e.g. http://example.org/path/to/chat/</p>
-    </div>
-    <h3>Create the Database Tables</h3>
-    <div class="subsection">
-      <p>There are two options available to you to create the database. The first, and usually the easiest option, is to run the installation script included with AJAX Chat. Alternatively, you may use a database tool like PHPMyAdmin to manually create the tables.</p>
-      <ol>
-        <li> To use the installation script, visit the following URL in your browser:<br />
-          <span class="filename">http://example.org/path/to/chat/install.php</span><br /> 
-          Where 
-          &quot;http://example.org/path/to/chat/&quot; is the real URL to your chat directory.</li>
-        <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
-      </ol>
-      <p>Either of these methods will create the tables your database needs to store chat messages and other information.</p>
-    </div>
-    <h3>Delete the Installation Script</h3>
-    <div class="subsection">
-      <p>Delete the file <span class="filename">install.php</span> from the chat directory on your server. You may also delete the file <span class="filename">chat.sql</span>.</p>
-    </div>
-    <h3>Congradulation! You Are Winner!</h3>
-    <div class="subsection">
-      <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br />
-      </span>You are now free to customize chat to further suit your needs.</p>
-    </div>
+	<p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br /></p>
+	<h3>Before You Begin</h3>
+	<div class="subsection">
+	  <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br />
+		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
+	</div>
+	
+	<h3>Upload to Server</h3>
+
+
+	<div class="subsection">
+	  <p>
+		Upload the chat folder to your server into your SMF forum directory:<br />
+		e.g. http://example.org/smf/chat/</p>
+	</div>
+	
+	<h3>Create Database Tables</h3>
+	<div class="subsection">
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	http://example.org/smf/chat/install.php</p>
+	
+	<p>Replace "http://example.org/smf/chat/" with the real URL to your chat directory.</p>
+	</div>
+	
+	<h3>Delete Installation Script</h3>
+	<div class="subsection">
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	http://example.org/smf/chat/install.php</p>
+	
+	<p>Delete the file install.php from the chat directory on your server.</p>
+	</div>
+	
+		
+	<h3>Congradulation! You Are Winner!</h3>
+	<div class="subsection">
+	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br />
+	  </span>You are now free to customize chat to further suit your needs.</p>
+	</div>
 </div>
 
 <h2 id="configuring">Configuring and Customizing</h2>

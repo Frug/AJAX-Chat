@@ -5,7 +5,11 @@
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
+ * 
+ * SMF integration:
+ * http://www.simplemachines.org/
  */
 
-// Include custom libraries and initialization code here
+// SMF initialization:
+require_once(AJAX_CHAT_PATH.'/../SSI.php');
 ?>
