@@ -1,10 +1,10 @@
 AJAX Chat
 =========
 
+v 0.8.6 phpBB3
+
 This is the phpBB3 integration version:
 http://www.phpbb.com/
-
-This is the standalone version running without another web application.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
