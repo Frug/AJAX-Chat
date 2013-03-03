@@ -8,35 +8,29 @@
 
 Version 0.1  (06.06.2007):
 -------------------------------
-
 First release.
 
 
 Version 0.1.0.1  (10.06.2007):
 -------------------------------
-
 New features:
 - Added dutch localization - thanks to Nic Mertens
 
 
 Version 0.1.0.2  (11.06.2007):
 -------------------------------
-
 Bugfixes:
 - Smiley replacement of ";)" could produce invalid XHTML - fixed
 
 
-
 Version 0.1.0.3  (11.06.2007):
 -------------------------------
-
 New features:
 - Added sample phpBB2 integration
 
 
 Version 0.1.0.4  (12.06.2007):
 -------------------------------
-
 Bugfixes:
 - Replaced PHP short tags with long version ( <? => <?php ) in template files
 	This makes the Chat work on servers with php.ini setting "short_open_tag = off"
@@ -44,7 +38,6 @@ Bugfixes:
 
 Version 0.1.0.5  (23.06.2007):
 -------------------------------
-
 Bugfixes:
 - Channel names and language variables were not HTML-encoded in template output.
 	This could lead to invalid XHTML, e.g. if a channel name contained the ampersand ("&").
@@ -52,19 +45,15 @@ Bugfixes:
 
 Version 0.1.1  (05.07.2007):
 -------------------------------
-
 New features:
 - Long words are split on client side to avoid horizontal scrolling.
 - New IRC-style command to roll dice: /roll [number]d[sides]
 
 
-
 Version 0.1.1.1  (12.07.2007):
 -------------------------------
-
 New features:
 - Added spanish localization - thanks to Manu Quintans
-
 
 
 Version 0.1.1.2  (01.08.2007):
@@ -76,7 +65,6 @@ Bugfixes:
 
 Version 0.1.1.3  (02.08.2007):
 -------------------------------
-
 Bugfixes:
 - dateTime had been dependent on local server time.
 	dateTime served is now GMT and calculated and formatted on client side through JavaScript
@@ -84,7 +72,6 @@ Bugfixes:
 
 Version 0.1.1.4  (14.08.2007):
 -------------------------------
-
 Bugfixes:
 - Long hyperlinks are now split while preserving the url information
 - Connection problems don't interrupt the chat update anymore
@@ -92,15 +79,12 @@ Bugfixes:
 
 Version 0.1.1.5  (14.08.2007):
 -------------------------------
-
 Bugfixes:
 - Connection timeout error message now only appears if sending messsage data (POST) fails
 
 
-
 Version 0.2  (16.08.2007):
 -------------------------------
-
 New features:
 - Integrated login page style with main style
 - Added multiple styles (beige, black, grey)
@@ -120,28 +104,22 @@ Other changes:
 - Moved phpBB root path setting from index.php to lib/config.php
 
 
-
 Version 0.2.0.1  (17.08.2007):
 -------------------------------
-
 New features:
 - Easier phpBB integration - forum users are now logged in with their userName and userID automatically.
 	It is not required any more to include userID and userName of registered users in the link to the chat.
 
 
-
 Version 0.2.0.2  (19.08.2007):
 -------------------------------
-
 Bugfixes:
 - Channel selector did not work with Internet Explorer - fixed.
 - Style switcher did not work with Internet Explorer - fixed.
 
 
-
 Version 0.2.1  (21.08.2007):
 -------------------------------
-
 New features:
 - Updated CSS styles - chat messages window now adjusts to the browser window.
 
@@ -154,27 +132,21 @@ Other changes:
 - Rewrote the DataBase code to make it possible to use a given DataBase link identifier.
 
 
-
 Version 0.2.1.1  (24.08.2007):
 -------------------------------
-
 Bugfixes:
 - Internet Explorer 6 can't cope with the updated CSS - added a stylesheet for IE 5-6 to fix this.
 
 
-
 Version 0.2.1.2  (24.08.2007):
 -------------------------------
-
 Bugfixes:
 - Code and variable name changes in index.php and lib/config.php to avoid naming conflicts with global variables.
 - Fixed phpBB integration for usernames containing the ampersand ("&") which phpBB stores as HTML entity ("&amp;").
 
 
-
 Version 0.2.1.3  (24.08.2007):
 -------------------------------
-
 New features:
 - Added the max length variables of userName and messageText to the template output.
 
@@ -184,21 +156,18 @@ Other changes:
 
 Version 0.2.1.4  (24.08.2007):
 -------------------------------
-
 Changes:
 - Users don't get kicked for inactivity anymore. Only a closed browser window will produce a timeout.
 
 
 Version 0.2.1.5  (25.08.2007):
 -------------------------------
-
 Bugfixes:
 - Fixed client-side encoding when using ISO-8859-1 as content type instead of UTF-8.
 
 
 Version 0.3  (26.08.2007):
 -------------------------------
-
 Changes:
 - Changed integration interfaces thereby losing backwards compatibility.
 - Repackaged chat as standalone, phpBB2 and phpBB3 versions.
@@ -207,7 +176,6 @@ Changes:
 
 Version 0.3.1  (03.09.2007):
 -------------------------------
-
 New features:
 - Added chat version for integration with the Simple Machines Forum.
 
@@ -225,10 +193,8 @@ Changed files:
 - lib/class/CustomChat.php (phpBB2, phpBB3)
 
 
-
 Version 0.3.1.1  (05.09.2007):
 -------------------------------
-
 Bugfixes:
 - Fixed handling of channels with apostrophe (') in their names.
 
@@ -236,10 +202,8 @@ Changed files:
 - lib/class/Chat.php (all versions)
 
 
-
 Version 0.3.1.2  (06.09.2007):
 -------------------------------
-
 New features:
 - Added russian localization - thanks to SkyKnight.
 
@@ -249,10 +213,8 @@ Changed files:
 - js/lang/ru.js (all versions)
 
 
-
 Version 0.3.2  (07.09.2007):
 -------------------------------
-
 New features:
 - Added greek localization - thanks to panas.
 
@@ -275,7 +237,6 @@ Changed files:
 
 Version 0.4  (17.09.2007):
 -------------------------------
-
 New features:
 - Added support for BBCode.
 - Added new emoticons.
@@ -308,10 +269,8 @@ Changed files:
 - lib/template/loggedOut.php (all versions)
 
 
-
 Version 0.4.0.1  (17.09.2007):
 -------------------------------
-
 New features:
 - Added finnish localization - thanks to zazu.
 - Added AJAX Chat version for PunBB.
@@ -327,10 +286,8 @@ Changed files:
 - lib/template/loggedOut.php (all versions)
 
 
-
 Version 0.5  (12.10.2007):
 -------------------------------
-
 New features:
 - Realtime monitoring and server-side log viewer replaces log files creation.
 - Invitation system to invite users to the current channel.
@@ -369,10 +326,8 @@ Changed files:
 - all (all versions)
 
 
-
 Version 0.5.0.1  (13.10.2007):
 -------------------------------
-
 Changes:
 - Moved forum integration code out of class files and into lib/custom.php.
 
@@ -382,10 +337,8 @@ Changed files:
 - lib/class/CustomChat.php (all versions except standalone)
 
 
-
 Version 0.5.1  (14.10.2007):
 -------------------------------
-
 New features:
 - Added simple flood control (two new config variables).
 
@@ -403,7 +356,6 @@ Changed files:
 
 Version 0.5.1.1  (16.10.2007):
 -------------------------------
-
 Bugfixes:
 - Non-ASCII characters didn't work in JavaScript links with IE and Opera - fixed.
 
@@ -420,7 +372,6 @@ Changed files:
 
 Version 0.5.1.2  (16.10.2007):
 -------------------------------
-
 Bugfixes:
 - Sometimes it could happen that the same message was added twice on client side - fixed.
 
@@ -437,7 +388,6 @@ Changed files:
 
 Version 0.5.1.3  (17.10.2007):
 -------------------------------
-
 Bugfixes:
 - Some SQL queries used were not compatible with MySQL ANSI and ANSI_QUOTES SQL Modes - fixed.
 
@@ -448,7 +398,6 @@ Changed files:
 
 Version 0.5.1.4  (18.10.2007):
 -------------------------------
-
 Bugfixes:
 - Somehow a bug crept into the invitations code - fixed.
 
@@ -470,7 +419,6 @@ Changed files:
 
 Version 0.5.1.5  (18.10.2007):
 -------------------------------
-
 New features:
 - Added AJAX Chat version for MyBB.
 - Added new style "MyBB".
@@ -482,7 +430,6 @@ Changed files:
 
 Version 0.5.2  (20.10.2007):
 -------------------------------
-
 New features:
 - Added arabic localization - thanks to pepotiger (www.dd4bb.com).
 - Added better support for bidirectional text ("dir" attribute).
@@ -510,7 +457,6 @@ Changed files:
 
 Version 0.5.2.1  (20.10.2007):
 -------------------------------
-
 New features:
 - Updated dutch localization - thanks to Nic Mertens.
 - The dateTime display is now better configurable.
@@ -539,7 +485,6 @@ Changed files:
 
 Version 0.5.3  (05.11.2007):
 -------------------------------
-
 New features:
 - Added possibility to configure if messages are shown which have been sent prior to the user entering the channel.
 - Updated russian localization - thanks to SkyKnight.
@@ -568,7 +513,6 @@ Changed files:
 
 Version 0.5.4  (06.11.2007):
 -------------------------------
-
 New features:
 - Added new JS config variable to enable/disable autofocus on the input field.
 - Added JS methods to add custom initialization and finalization code.
@@ -581,7 +525,6 @@ Changed files:
 
 Version 0.5.4.1  (07.11.2007):
 -------------------------------
-
 Bugfixes:
 - The session is now started automatically if not already started.
 	The useless sessionCreateNew config variable has been removed accordingly.
@@ -595,7 +538,6 @@ Changed files:
 
 Version 0.5.5  (09.11.2007):
 -------------------------------
-
 New features:
 - Updated italian locale - thanks to s8s8.
 
@@ -619,7 +561,6 @@ Changed files:
 
 Version 0.5.6  (11.11.2007):
 -------------------------------
-
 New features:
 - Added romanian locale - thanks to K.Z. (kamikaze666).
 
@@ -645,7 +586,6 @@ Changed files:
 
 Version 0.5.6.1  (12.11.2007):
 -------------------------------
-
 New features:
 - Added swedish locale - thanks to Eric.
 
@@ -657,7 +597,6 @@ Changed files:
 
 Version 0.6  (13.11.2007):
 -------------------------------
-
 New features:
 - Added support for ipv6 (only on PHP5 and not on windows hosts).
 
@@ -686,7 +625,6 @@ Notes:
 
 Version 0.6.0.1  (14.11.2007):
 -------------------------------
-
 Bugfixes:
 - IPs were not escaped properly for storage - fixed.
 
@@ -699,7 +637,6 @@ Changed files:
 
 Version 0.6.1  (17.11.2007):
 -------------------------------
-
 New features:
 - Added slovak locale - thanks to Peter.
 - The own userName and the current channelName are displayed bold when using /who and /list commands.
@@ -737,7 +674,6 @@ Changed files:
 
 Version 0.6.2  (20.11.2007):
 -------------------------------
-
 New features:
 - Added AJAX Chat version for vBulletin.
 - Added new style "vBulletin".
@@ -765,7 +701,6 @@ Changed files:
 
 Version 0.6.2.1  (28.11.2007):
 -------------------------------
-
 New features:
 - Added french locale - thanks to Ettelcar.
 
@@ -781,7 +716,6 @@ Changed files:
 
 Version 0.6.3  (30.11.2007):
 -------------------------------
-
 New features:
 - Chat session is now tied to the forum session for the forum integration versions.
 
@@ -796,7 +730,6 @@ Changed files:
 
 Version 0.6.3.1  (02.12.2007):
 -------------------------------
-
 Bugfixes:
 - IE cannot handle CSS import rules using a media declaration (e.g. "print") - using inline media declaration instead.
 
@@ -806,7 +739,6 @@ Changed files:
 
 Version 0.7  (11.01.2008):
 -------------------------------
-
 New features:
 - Added optional Flash based sound support.
 - Added optional Flash based support to push udates over a socket connection.
@@ -870,7 +802,6 @@ Changed files:
 
 Version 0.7.0.1  (12.01.2008):
 -------------------------------
-
 New features:
 - A click on a username in the chatlist now adds the name to the input field.
 
@@ -885,7 +816,6 @@ Changed files:
 
 Version 0.7.0.2  (14.01.2008):
 -------------------------------
-
 Changes:
 - Updated french and italian localizations - thanks to Massimiliano Tiraboschi.
 
@@ -902,7 +832,6 @@ Changed files:
 
 Version 0.7.1  (15.01.2008):
 -------------------------------
-
 New features:
 - Added the (optional and limited) possibility for registered users to access the logs view.
 - Added serbian localization - thanks to Saša Stojanović.
@@ -925,7 +854,6 @@ Changed files:
 
 Version 0.7.1.1  (16.01.2008):
 -------------------------------
-
 Changes:
 - Reflecting the setting allowUserMessageDelete on client-side.
 - Made the channelID of each message accessible on client-side.
@@ -950,7 +878,6 @@ Changed files:
 
 Version 0.7.2  (18.01.2008):
 -------------------------------
-
 New features:
 - Added the possibility to serve multiple chat installations using the same socket server.
 - Added polish localization - thanks to Tomasz Topa.
@@ -988,7 +915,6 @@ Changed files:
 
 Version 0.7.3  (29.01.2008):
 -------------------------------
-
 New features:
 - Added new client-side config option ajaxChatConfig.startChatOnLoad to delay the chat update.
 - Added possibility to retrieve teaser content without being logged in to the chat view.
@@ -1015,7 +941,6 @@ Changed files:
 
 Version 0.7.4  (29.02.2008):
 -------------------------------
-
 New features:
 - Added an installation script (install.php) to create the database tables.
 	Make sure you delete this file after installation!
@@ -1041,7 +966,6 @@ Changed files:
 
 Version 0.8  (05.03.2008):
 -------------------------------
-
 New features:
 - Improved socket code which allows real streaming of chat messages and greatly improves performance.
 - Moved ignore list code to client-side making it possible to store ignored users using the settings cookie.
@@ -1080,7 +1004,6 @@ Changed files:
 
 Version 0.8.1  (09.03.2008):
 -------------------------------
-
 New features:
 - Added image BBCode support (can be disabled via user settings).
 - Added new client-side settings to enable/disable image and font color BBCode.
@@ -1111,7 +1034,6 @@ Changed files:
 
 Version 0.8.1.1  (10.03.2008):
 -------------------------------
-
 Bugfixes:
 - Fixed an Opera bug related to the display of the deletion link for chat messages.
 
@@ -1121,7 +1043,6 @@ Changed files:
 
 Version 0.8.1.2  (22.03.2008):
 -------------------------------
-
 New features:
 - Added Turkish locale - thanks to Cydonian.
 
@@ -1137,7 +1058,6 @@ Changed files:
 
 Version 0.8.2  (27.02.2009):
 -------------------------------
-
 New features:
 - Added status icon to indicate when chat is waiting for a response from the server (orange) or when chat is idle (green). 
 - Clicking the status icon will force the chat client to retry (workaround for when there is a lost connection).
@@ -1196,7 +1116,6 @@ Changed files:
 
 Version 0.8.3  (26.06.2009):
 -------------------------------
-
 New features:
 - Added Hungarian localization - thanks to Atag and Molnár Tamás.
 - Added Welsh localization - thanks to Alan Davies.
@@ -1303,3 +1222,12 @@ Changed files:
 - lib/lang/pt-pt.php (all versions - new)
 - lib/class/AJAXChatTemplate.php (all versions)
 - lib/config.php[.example] (all versions)
+
+
+Version 0.8.? (?.?.2013)
+-------------------------------
+New features:
+
+Bugfixes:
+
+Changed files:
