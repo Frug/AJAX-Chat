@@ -1,138 +1,49 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>AJAX Chat Readme</title>
-<style type="text/css">
-body,td,th {
-	font: 12px Arial, Helvetica, sans-serif;
-	line-height: 1.5em;
-	color: #000;
-}
-body {
-	margin: 0;
-}
-#wrap { margin: 0 auto; max-width: 1200px; padding: 15px; }
-.subsection {
-	padding: 1em 2em 2em 2em; border: 1px solid #006;
-}
-.subsection .subsection { border: 0; }
-a:link {
-	color: #036;
-	text-decoration: none;
-}
-a:visited {
-	color: #03F;
-	text-decoration: none;
-}
-td {
-	padding: 0.5em;
-}
-.filename {
-	color: #060;
-}
-.note {
-	font-style: italic;
-	background-color: #FFFFa9;
-	margin: 1em;
-	padding: 1.5em 2em;
-	border-radius: 10px;
-}
-a:hover {
-	color: #03F;
-	text-decoration: underline;
-}
-a:active {
-	color: #03F;
-	text-decoration: none;
-	text-align: center;
-}
-h1,h2,h3,h4,h5,h6 {
-	font-weight: bold; margin: 0; line-height: 100%;
-}
-h1 {
-	font-size: 20px;
-	color: #99F;
-	margin: 0px;
-	padding: 0px;
-}
-h2 {
-	font-size: 15px;
-	color: #BDF;
-	background-color: #006;
-	padding: 0.5em;
-	clear: both;
-	margin: 2em 0 0 0;
-	border-radius: 5px 5px 0 0;
-}
-#toc {
-	color: #000;
-	background-color: #EBEBEB;
-	display: block;
-	padding: 2em;
-	float: right;
-	width: 20em;
-	margin: 0 0 1em 1em;
-	border-left-color: #FFF;
-	border-top-color: #FFF;
-	border-right-color: #FFF;
-	border-bottom-color: #FFF;
-	line-height: 170%;
-	border-radius: 5px;
-}
-#toc h2 {
-	background: transparent;
-	margin: 0px;
-	margin-bottom: 5px;
-	padding: 0px;
-	color: #003;
-}
-#toc ol li {
-	margin: 0px;
-	padding: 0px;
-}
-#toc ol {
-	margin: 0px;
-}
-#toc p {
-	margin: 0px;
-	padding: 0px;
-}
-ol li {
-	margin-bottom: 1em;
-}
-h3 {
-	color: #000;
-	background-color: #CCC;
-	padding: 0.5em;
-}
-code {
-	display: block;
-	margin: 1em;
-	background-color: #CCC;
-	padding: 1em;
-}
-table {
-	border: 1px solid #CCC;
-}
-th {
-	background-color: #069;
-	color: #FFF;
-	vertical-align: middle;
-	text-align: left;
-	padding-top: 0.2em;
-	padding-right: 0.2em;
-	padding-bottom: 0.2em;
-	padding-left: 0.5em;
-}
-p { margin: 0.5em 0; }
-</style>
+	<meta charset="utf-8">
+	<title>AJAX Chat Readme</title>
+	
+	<style type="text/css">
+	body,td,th { font-family: Arial, Helvetica, sans-serif; line-height:1.5em; color:#000; font-size: inherit; }
+	body{background:#E7E7E7;margin:0; font-size: 0.8em;}
+	#wrap{max-width:1200px;background:#fff;margin:0.5em auto;padding:1.5em;box-shadow:2px 2px 4px #555;}
+	.subsection{border:1px solid #006;padding:0.8em 1.6em}
+	.subsection .subsection{border:0}
+	a:link{color:#036;text-decoration:none}
+	a:visited{color:#03F;text-decoration:none}
+	td{padding:.5em}
+	.filename{color:#060}
+	.note{font-style:italic;background-color:#FFFFa9;border-radius:10px;padding:1em 1.2em}
+	a:hover{color:#03F;text-decoration:underline}
+	a:active{color:#03F;text-decoration:none;text-align:center}
+	h1,h2,h3,h4,h5,h6{font-weight:400;line-height:100%;margin:0; font-family: Verdana, Geneva, sans-serif;}
+	h1{font-size:1.8em;color:#E3E3FB;margin:-0.7em -0.7em 0.5em -0.7em;padding:0.8em; background: #2F2E8B; font-weight: 700;}
+	h2{font-size:1.3em;color:#FFF;background-color:#2F2E8B;clear:both;border-radius:5px 5px 0 0;margin:2em 0 0;padding:.5em}
+	.version { font-size: 0.6em; font-weight: bold; line-height: 150%; }
+	.version a { color:#e4e4e4; text-decoration: underline;}
+	#toc{color:#000;background-color:#EBEBEB;display:block;float:right;width:20em;line-height:170%;border-radius:5px;border-color:#FFF;margin:0 0 1em 1em;padding:1.2em}
+	#toc h2{background:#333;color:#FFF;margin:-1em -1em 0.5em;padding:0.5em}
+	#toc ol{margin:0}
+	ol li{margin-bottom:1em}
+	h3{color:#000;background-color:#CCC;padding:.5em}
+	code{display:block;background-color:#DDD;margin:1em;padding:1em; font-family: Consolas,"Liberation Mono",Courier,monospace;}
+	table{border:0}
+	th{background-color:#FFF;color:#000;font-weight:bold;vertical-align:middle;text-align:left;padding:.2em; }
+	p{margin:.5em 0}
+	#toc ol li,#toc p{margin:0;padding:0}
+	</style>
 </head>
 
 <body>
 <div id="wrap">
 
-<h1 id="top">AJAX Chat Standalone</h1> 
+<h1 id="top">AJAX Chat
+	<br>
+	<span class="version">
+		v 0.8.6 standalone ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+	</span>
+</h1> 
 
 <div id="toc">
 	<h2>Table of Contents</h2>
@@ -146,10 +57,8 @@ p { margin: 0.5em 0; }
 	<p><a href="#license">License</a></p>
 </div>
 
-<p>v 0.8.5 standalone<br />
-<a href="https://blueimp.net/ajax/">https://blueimp.net/ajax/</a></p>
 
-<p>This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br />
+<p style="margin:1.5em">This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br />
 If you want to integrate AJAX Chat with one of the forums we support, go back and choose the right version. <br />
 This version is good for customizing your own integration, or using on its own.</p>
 
@@ -161,18 +70,22 @@ PHP is used to communicate with the database and authenticate users.</p>
 
 <h2 id="requirements">Requirements</h2>
 <div class="subsection">
-  <table cellpadding="0" cellspacing="0" style="margin: 1em auto; width: 550px;" summary="Requirements for running AJAX Chat.">
+  <table cellpadding="0" cellspacing="0" style="width: 550px;" summary="Requirements for running AJAX Chat.">
     <tr>
       <th width="275" scope="col">Server-Side</th>
       <th width="275" scope="col">Client-Side</th>
     </tr>
     <tr>
-      <td nowrap="nowrap">PHP &gt;= 4<br />
-        MySQL &gt;= 4<br />
-      Ruby &gt;= 1.8 (optional)</td>
-      <td nowrap="nowrap"><p>Enabled JavaScript<br />
-        Enabled Cookies<br />
-      Flash Plugin &gt;= 9 (optional)</td>
+      <td>
+		PHP &gt;= 4<br />
+		MySQL &gt;= 4<br />
+		Ruby &gt;= 1.8 (optional)
+	  </td>
+      <td>
+		Enabled JavaScript<br />
+		Enabled Cookies<br />
+		Flash Plugin &gt;= 9 (optional)
+	  </td>
     </tr>
   </table>
 </div>
@@ -191,10 +104,12 @@ PHP is used to communicate with the database and authenticate users.</p>
         <strong>You need to create this file.</strong> <br />
         An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br />
         Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:</p>
-      <p> <code>$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br />
+      <p>
+	  <code>$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br />
       $config['dbConnection']['user'] = '<em>your_database_username</em>';<br />
       $config['dbConnection']['pass'] = '<em>your_database_password</em>';<br />
-      $config['dbConnection']['name'] = '<em>your_database_name</em>';</code></p>
+      $config['dbConnection']['name'] = '<em>your_database_name</em>';</code>
+	  </p>
       <p>Sufficed to say you need this information. Talk to your hosting provider if you don't know. </p>
       <p>In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br />
       </p>
