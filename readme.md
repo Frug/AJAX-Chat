@@ -1,4 +1,4 @@
-AJAX Chat 0.8.5a for vBulletin
+AJAX Chat 0.8.6 for vBulletin
 =========
 
 This is the version of Blueimp's AJAX Chat for integration with vBulletin.
