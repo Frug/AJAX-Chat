@@ -2,19 +2,12 @@
    v2.0 | 20110126
    License: none (public domain)
 */
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,  figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary, time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -23,99 +16,34 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-}
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}
+body{line-height:1}
+ol,ul{list-style:none}
+blockquote,q{quotes:none}
+blockquote:before,blockquote:after,q:before,q:after{content:none}
+table{border-collapse:collapse;border-spacing:0}
 
 /* LAYOUT STYLES */
-body {
-  font-size: 1em;
-  line-height: 1.5; 
-  background: #e7e7e7 url(../images/body-bg.png) 0 0 repeat;
-  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
-  color: #6d6d6d;
-}
-
-a {
-  color: #d5000d;
-}
-a:hover {
-  color: #c5000c;
-}
-b { font-weight: bold; }
-header {
-  padding: 25px;
-  background-color: #2F2E8B;
-  margin: -15px -15px 15px -15px;
-  clear: both;
-}
-
-header h1 {
-	font-family: 'Trebuchet MS', 'Helvetica Neue', Helvetica, serif; font-weight: 900;
-	letter-spacing: -1px;
-	font-size: 32px;
-	color: #f0f0f0;
-	line-height: 1.2;
-	margin-bottom: 0.4em;
-	text-shadow: 0px 0px 2px rgba(33,33,33,0.95);
-}
-
-header h2 {
-  font-size: 16px;
-  font-family: 'Lucida Grande','Lucida Sans Unicode',Arial,sans-serif;
-  color: #e0e0e0;
-  font-weight: normal;
-  line-height: 1.3;
-  margin-bottom: 0;
-}
-
-#container {
-  background: transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat;
-  min-height: 595px;
-}
-#downloads section { 
-	margin: 4px; float: left; padding: 12px; border-radius: 5px; background-color: rgba(165,165,195,0.2); 
-}
-#downloads section h3 { margin: 0; padding: 0; }
-
-.inner {
-  min-width: 660px;
-  max-width: 930px;
-  margin: 0.5em auto;
-  padding: 1em; background: white;
-}
-
-#container .inner img {
-  max-width: 100%;
-}
-
-#downloads, #news {
-  margin-bottom: 20px;
-}
+body{font-size:1em;line-height:1.5;background:#e7e7e7 url(../images/body-bg.png) 0 0 repeat;font-family:'Helvetica Neue', Helvetica, Arial, serif;color:#6d6d6d}
+a{color:#d5000d}
+a:hover{color:#c5000c}
+b{font-weight:700}
+header{background-color:#2F2E8B;clear:both;margin:-15px -15px 0;padding:25px}
+header h1{font-family:'Trebuchet MS', 'Helvetica Neue', Helvetica, serif;font-weight:900;letter-spacing:-1px;font-size:32px;color:#f0f0f0;line-height:1.2;margin-bottom:.4em;text-shadow:0 0 2px rgba(33,33,33,0.95)}
+header h2{font-size:16px;font-family:'Lucida Grande','Lucida Sans Unicode',Arial,sans-serif;color:#e0e0e0;font-weight:400;line-height:1.3;margin-bottom:0}
+nav {background-color: #bbb; margin: 0 -15px 1.5em -15px; line-height:2em;}
+nav a { color: #000; padding: 0 0.5em; margin: 0 1em; }
+#container{background:transparent url(../images/highlight-bg.jpg) 50% 0 no-repeat;min-height:595px}
+#downloads section{float:left;border-radius:5px;background-color:rgba(165,165,195,0.2);margin:4px;padding:12px}
+#downloads section h3{margin:0;padding:0}
+.inner{min-width:660px;max-width:930px;background:#FFF;margin:.5em auto;padding:1em}
+#container .inner img{max-width:100%}
+#downloads,#news{margin-bottom:20px}
 
 a.button {
-  -moz-border-radius: 30px;
-  -webkit-border-radius: 30px;                     
-  border-radius: 30px;
+  -moz-border-radius: 20px;
+  -webkit-border-radius: 20px;                     
+  border-radius: 20px;
   border-top: solid 1px #cbcbcb;
   border-left: solid 1px #b7b7b7;
   border-right: solid 1px #b7b7b7;
@@ -124,11 +52,11 @@ a.button {
   line-height: 25px;
   font-weight: bold;
   font-size: 15px;
-  padding: 12px 8px 12px 8px;
+  padding: 10px 5px;
   display: block;
   float: left;
   width: 179px;
-  margin-right: 14px;  
+  margin-right: 12px;  
   background: #E7E7E7; /* Old browsers */
   background: -moz-linear-gradient(top,  #E7E7E7 0%, #BABABA 100%); /* FF3.6+ */
   background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E7E7E7), color-stop(100%,#BABABA)); /* Chrome,Safari4+ */
@@ -153,183 +81,47 @@ a.button:hover {
   filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#BABABA', endColorstr='#E7E7E7',GradientType=0 ); /* IE6-9 */
 }
 
-a.button span {
-  padding-left: 50px;
-  display: block;
-  height: 23px;
-}
-
-.button-zip span {
-  background: transparent url(../images/zip-icon.png) 12px 50% no-repeat;
-}
-.button-tar span {
-  background: transparent url(../images/tar-gz-icon.png) 12px 50% no-repeat;
-}
-#view-on-github span {
-  background: transparent url(../images/octocat-icon.png) 12px 50% no-repeat;
-}
-#view-on-github {
-  margin-right: 0; margin-bottom: 1em; float: right; border-color: #FFF;
-}
-
-code, pre {
-  font-family: Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;
-  color: #222;
-  margin-bottom: 30px;
-  font-size: 14px;
-}
-
-code {
-  background-color: #f2f2f2;
-  border: solid 1px #ddd;
-  padding: 0 3px;
-}
-
-pre {
-  padding: 20px;
-  background: #303030;
-  color: #f2f2f2;
-  text-shadow: none;
-  overflow: auto;
-}
-pre code {
-  color: #f2f2f2;
-  background-color: #303030;
-  border: none;
-  padding: 0;
-}
-
-ul, ol, dl {
-  margin-bottom: 20px;
-}
+a.button span{padding-left:50px;display:block;height:23px}
+.button-zip span{background:transparent url(../images/zip-icon.png) 12px 50% no-repeat}
+.button-tar span{background:transparent url(../images/tar-gz-icon.png) 12px 50% no-repeat}
+#view-on-github span{background:transparent url(../images/octocat-icon.png) 12px 50% no-repeat}
+#view-on-github{margin-right:0;margin-bottom:1em;float:right;border-color:#FFF}
+code,pre{font-family:Monaco, "Bitstream Vera Sans Mono", "Lucida Console", Terminal;color:#222;margin-bottom:30px;font-size:14px}
+code{background-color:#f2f2f2;border:solid 1px #ddd;padding:0 3px}
+pre{background:#303030;color:#f2f2f2;text-shadow:none;overflow:auto;padding:20px}
+pre code{color:#f2f2f2;background-color:#303030;border:none;padding:0}
+ul,ol,dl{margin-bottom:20px}
 
 
 /* COMMON STYLES */
 
-hr {
-  height: 1px;
-  line-height: 1px;
-  margin-top: 1em;
-  padding-bottom: 1em;
-  border: none;
-  background: transparent url('../images/hr.png') 50% 0 no-repeat;
-}
-
-strong {
-  font-weight: bold;
-}
-
-em {
-  font-style: italic;
-}
-
-table {
-  width: 100%;
-  border: 1px solid #ebebeb;
-}
-
-th {
-  font-weight: 500;
-}
-
-td {
-  border: 1px solid #ebebeb;
-  text-align: center; 
-  font-weight: 300;
-}
-
-form {
-  background: #f2f2f2;
-  padding: 20px;
-  
-}
+hr{height:1px;line-height:1px;margin-top:1em;padding-bottom:1em;border:none;background:transparent url(../images/hr.png) 50% 0 no-repeat}
+strong{font-weight:700}
+em{font-style:italic}
+table{width:100%;border:1px solid #ebebeb}
+th{font-weight:500}
+td{border:1px solid #ebebeb;text-align:center;font-weight:300}
+form{background:#f2f2f2;padding:20px}
 
 
 /* GENERAL ELEMENT TYPE STYLES */
-
-h1 {
-  font-size: 32px;
-} 
-
-h2 {
-  font-size: 22px;
-  font-weight: bold;
-  color: #303030;
-  margin-bottom: 8px;
-} 
-
-h3 {
-  color: #2F2E8B;
-  font-size: 16px;
-  font-weight: bold;
-  margin-bottom: 5px;
-} 
- 
-h4 {
-  font-size: 16px;
-  color: #303030;
-  font-weight: bold;
-} 
-
-h5 {
-  font-size: 1em;
-  color: #303030;
-} 
-
-h6 {
-  font-size: .8em;
-  color: #303030;
-} 
-
-p {
-  font-weight: 300;
-  margin-bottom: 20px;
-}
- 
-a {
-  text-decoration: none;
-}
-
-p a {
-  font-weight: 400;
-}
-
-blockquote {
-  font-size: 1.6em;
-  border-left: 10px solid #e9e9e9;
-  margin-bottom: 20px;
-  padding: 0 0 0 30px;
-}
-ul { padding-left: 1.5em; }
-ul li {
-  list-style: disc outside;
-  padding-left: 5px;
-}
-
-ol li {
-  list-style: decimal inside;
-  padding-left: 3px;
-}
-
-dl dt {
-  color: #303030;
-}
-
-footer {
-  background: transparent url('../images/hr.png') center top no-repeat;
-  margin-top: 40px;
-  padding-top: 20px;
-  padding-bottom: 30px;
-  font-size: 13px;
-  color: #aaa;
-}
-
-footer a {
-  color: #666;
-}
-footer a:hover {
-  color: #444;
-}
+h1{font-size:32px}
+h2{font-size:22px;font-weight:700;color:#303030;margin-bottom:8px}
+h3{color:#2F2E8B;font-size:16px;font-weight:700;margin-bottom:5px}
+h4{font-size:16px;color:#303030;font-weight:700}
+h5{font-size:1em;color:#303030}
+h6{font-size:.8em;color:#303030}
+p{font-weight:300;margin-bottom:20px}
+a{text-decoration:none}
+p a{font-weight:400}
+blockquote{font-size:1.6em;border-left:10px solid #e9e9e9;margin-bottom:20px;padding:0 0 0 30px}
+ul{padding-left:1.5em}
+ul li{list-style:disc outside;padding-left:5px}
+ol li{list-style:decimal inside;padding-left:3px}
+dl dt{color:#303030}
+footer{background:transparent url(../images/hr.png) center top no-repeat;margin-top:2.5em;padding-top:1.5em;padding-bottom:1.5em;font-size:13px;color:#a0a0a0}
+footer a{color:#666}
+footer a:hover{color:#444}
 
 /* MISC */
 .clearfix:after {
