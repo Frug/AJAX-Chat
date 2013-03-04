@@ -64,7 +64,7 @@ var ajaxChatLang = {
 	unbanUser: 'Отменить бан пользователя %s',
 	joinChannel: ' %s присоединился к каналу',
 	cite: '%s сказал:',
-	urlDialog: 'Пожалуйста введети адрес (URL) Web-страницы:',
+	urlDialog: 'Пожалуйста введите адрес (URL) Web-страницы:',
 	deleteMessage: 'Удалить сообщение',
 	deleteMessageConfirm: 'Вы действительно хотите удалить это сообщение?',
 	errorCookiesRequired: 'Необходимо включить Cookies.',
