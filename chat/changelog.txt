@@ -1229,5 +1229,9 @@ Version 0.8.? (?.?.2013)
 New features:
 
 Bugfixes:
+- Methods called statically are now declared as static to meet php 5.4 strict standards
 
 Changed files:
+- lib/class/AJAXChatFileSystem.php
+- lib/class/AJAXChatEncoding.php
+- lib/class/AJAXChatString.php
