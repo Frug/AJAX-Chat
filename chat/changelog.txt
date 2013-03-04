@@ -1226,12 +1226,21 @@ Changed files:
 
 Version 0.8.? (?.?.2013)
 -------------------------------
+Notice: 
+- Minimum php version is now 5 (was 4).
+- phpbb2 branch discontinued.
+
 New features:
 
 Bugfixes:
-- Methods called statically are now declared as static to meet php 5.4 strict standards
+- Updated Russian localization - thanks to Il'ya A. Lykov.
+- Methods called statically are now declared as static to meet php 5.4 strict standards.
+- Fixed case when messages were not displayed to users on page laod if last message was deleted - thanks to KEMBL KEMBL.
+- Fixed exploit using img tag to pass text request var.
 
 Changed files:
-- lib/class/AJAXChatFileSystem.php
-- lib/class/AJAXChatEncoding.php
-- lib/class/AJAXChatString.php
+- lib/class/AJAXChat.php (all versions)
+- lib/class/AJAXChatFileSystem.php (all versions)
+- lib/class/AJAXChatEncoding.php (all versions)
+- lib/class/AJAXChatString.php (all versions)
+- js/lang/ru.js (all versions)
