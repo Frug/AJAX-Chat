@@ -920,9 +920,9 @@ var ajaxChat = {
 
 	handleOnlineUsers: function(userNodes) {
 		if(userNodes.length) {
-			var index,userID,userName,userRole,
+			var index,userID,userName,userRole,i,
 				onlineUsers = [];
-			for(var i=0; i<userNodes.length; i++) {
+			for(i=0; i<userNodes.length; i++) {
 				userID = userNodes[i].getAttribute('userID');
 				userName = userNodes[i].firstChild ? userNodes[i].firstChild.nodeValue : '';
 				userRole = userNodes[i].getAttribute('userRole');
@@ -944,7 +944,7 @@ var ajaxChat = {
 				}
 			}
 			// Clear the offline users from the online users list:
-			for(var i=0; i<this.usersList.length; i++) {
+			for(i=0; i<this.usersList.length; i++) {
 				if(!this.inArray(onlineUsers, this.usersList[i])) {
 					this.removeUserFromOnlineList(this.usersList[i], i);
 				}
@@ -954,9 +954,9 @@ var ajaxChat = {
 	},
 
 	handleChatMessages: function(messageNodes) {
-		var userNode,userName,textNode,messageText;
+		var userNode,userName,textNode,messageText,i;
 		if(messageNodes.length) {
-			for(var i=0; i<messageNodes.length; i++) {
+			for(i=0; i<messageNodes.length; i++) {
 				this.DOMbuffering = true;
 				userNode = messageNodes[i].getElementsByTagName('username')[0];
 				userName = userNode.firstChild ? userNode.firstChild.nodeValue : '';
@@ -982,7 +982,7 @@ var ajaxChat = {
 	
 	setSelectedChannel: function(channel) {
 		var channelSelected = false,
-			i, option, text;
+			i,option,text;
 		if(this.dom['channelSelection']) {
 			// Replace the entities in the channel name with their character equivalent:
 			channel = this.decodeSpecialChars(channel);
@@ -1026,11 +1026,12 @@ var ajaxChat = {
 	},
 
 	getUserNodeString: function(userID, userName, userRole) {
+		var encodedUserName, str;
 		if(this.userNodeString && userID == this.userID) {
 			return this.userNodeString;
 		} else {
-			var encodedUserName = this.scriptLinkEncode(userName);
-			var str	= '<div id="'
+			encodedUserName = this.scriptLinkEncode(userName);
+			str	= '<div id="'
 					+ this.getUserDocumentID(userID)
 					+ '"><a href="javascript:ajaxChat.toggleUserMenu(\''
 					+ this.getUserMenuDocumentID(userID)
