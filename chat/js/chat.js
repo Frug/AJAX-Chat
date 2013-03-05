@@ -91,9 +91,9 @@ var ajaxChat = {
 	DOMbufferRowClass: 'rowOdd',
 	
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {	
-		this.httpRequest		= new Object();
-		this.usersList			= new Array();
-		this.userNamesList		= new Array();
+		this.httpRequest		= {};
+		this.usersList			= [];
+		this.userNamesList		= [];
 		this.userMenuCounter	= 0;
 		this.lastID				= 0;
 		this.localID			= 0;
@@ -152,20 +152,20 @@ var ajaxChat = {
 	},
 
 	initDirectories: function() {
-		this.dirs = new Object();
+		this.dirs = {};
 		this.dirs['emoticons'] 	= this.baseURL+'img/emoticons/';
 		this.dirs['sounds']		= this.baseURL+'sounds/';
 		this.dirs['flash']		= this.baseURL+'flash/';
 	},
 	
 	initSettings: function() {
+		var cookie = this.readCookie(this.sessionName + '_settings'),
+			i, settingsArray, setting, key, value, number;
 		this.settingsInitiated = true;
-		this.unusedSettings = new Object();
-		var cookie = this.readCookie(this.sessionName + '_settings');
+		this.unusedSettings = {};
 		if(cookie) {
-			var settingsArray = cookie.split('&');
-			var setting,key,value,number;
-			for(var i=0; i<settingsArray.length; i++) {
+			settingsArray = cookie.split('&');
+			for(i=0; i<settingsArray.length; i++) {
 				setting = settingsArray[i].split('=');
 				if(setting.length == 2) {
 					key = setting[0];
@@ -202,8 +202,9 @@ var ajaxChat = {
 	},
 
 	persistSettings: function() {
+		var settingsArray;
 		if(this.settingsInitiated) {
-			var settingsArray = new Array();
+			settingsArray = [];
 			for(var property in this.settings) {
 				if(this.inArray(this.nonPersistentSettings, property)) {
 					if(this.unusedSettings && this.unusedSettings[property]) {
@@ -360,7 +361,7 @@ var ajaxChat = {
 	},
 	
 	initializeDocumentNodes: function() {
-		this.dom = new Object();
+		this.dom = {};
 		for(var key in this.domIDs) {
 			this.dom[key] = document.getElementById(this.domIDs[key]);
 		}
@@ -613,7 +614,7 @@ var ajaxChat = {
 	loadSounds: function() {
 		try {
 			this.setAudioVolume(this.settings['audioVolume']);
-			this.sounds = new Object();
+			this.sounds = {};
 			var sound,urlRequest;
 			for(var key in this.soundFiles) {
 				sound = FABridge.ajaxChat.create('flash.media.Sound');
@@ -919,8 +920,8 @@ var ajaxChat = {
 
 	handleOnlineUsers: function(userNodes) {
 		if(userNodes.length) {
-			var index,userID,userName,userRole;
-			var onlineUsers = new Array();
+			var index,userID,userName,userRole,
+				onlineUsers = [];
 			for(var i=0; i<userNodes.length; i++) {
 				userID = userNodes[i].getAttribute('userID');
 				userName = userNodes[i].firstChild ? userNodes[i].firstChild.nodeValue : '';
@@ -953,8 +954,8 @@ var ajaxChat = {
 	},
 
 	handleChatMessages: function(messageNodes) {
+		var userNode,userName,textNode,messageText;
 		if(messageNodes.length) {
-			var userNode,userName,textNode,messageText;		
 			for(var i=0; i<messageNodes.length; i++) {
 				this.DOMbuffering = true;
 				userNode = messageNodes[i].getElementsByTagName('username')[0];
@@ -980,11 +981,12 @@ var ajaxChat = {
 	},
 	
 	setSelectedChannel: function(channel) {
+		var channelSelected = false,
+			i, option, text;
 		if(this.dom['channelSelection']) {
 			// Replace the entities in the channel name with their character equivalent:
 			channel = this.decodeSpecialChars(channel);
-			var channelSelected = false;
-			for(var i=0; i<this.dom['channelSelection'].options.length; i++) {
+			for(i=0; i<this.dom['channelSelection'].options.length; i++) {
 				if(this.dom['channelSelection'].options[i].value == channel) {
 					this.dom['channelSelection'].options[i].selected = true;
 					channelSelected = true;
@@ -993,8 +995,8 @@ var ajaxChat = {
 			}
 			// The given channel is not in the list, add it:
 			if(!channelSelected) {
-				var option = document.createElement('option');
-				var text = document.createTextNode(channel);
+				option = document.createElement('option');
+				text = document.createTextNode(channel);
 				option.appendChild(text);
 				option.setAttribute('value', channel);
 				option.setAttribute('selected', 'selected');			
@@ -1191,8 +1193,8 @@ var ajaxChat = {
 	},
 
 	clearOnlineUsersList: function() {
-		this.usersList = new Array();
-		this.userNamesList = new Array();
+		this.usersList = [];
+		this.userNamesList = [];
 		if(this.dom['onlineList']) {
 			while(this.dom['onlineList'].hasChildNodes()) {
 				this.dom['onlineList'].removeChild(this.dom['onlineList'].firstChild);
@@ -1756,7 +1758,7 @@ var ajaxChat = {
 			if(ignoredUserNamesString) {
 				this.ignoredUserNames = ignoredUserNamesString.split(' ');
 			} else {
-				this.ignoredUserNames = new Array();
+				this.ignoredUserNames = [];
 			}
 		}
 		return this.ignoredUserNames;
@@ -2322,7 +2324,7 @@ var ajaxChat = {
 		
 	replaceCommandList: function(textParts) {
 		var channels = textParts.slice(1);
-		var listChannels = new Array();
+		var listChannels = [];
 		var channelName;
 		for(var i=0; i<channels.length; i++) {
 			channelName = (channels[i] == this.channelName) ? '<b>'+channels[i]+'</b>' : channels[i];
@@ -2344,7 +2346,7 @@ var ajaxChat = {
 		
 	replaceCommandBans: function(textParts) {
 		var users = textParts.slice(1);
-		var listUsers = new Array();
+		var listUsers = [];
 		for(var i=0; i<users.length; i++) {
 			listUsers.push(
 				'<a href="javascript:ajaxChat.sendMessageWrapper(\'/unban '
