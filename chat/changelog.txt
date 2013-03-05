@@ -1233,7 +1233,7 @@ Notice:
 New features:
 
 Bugfixes:
-- Updated Russian localization - thanks to Il'ya A. Lykov.
+- Updated Russian and Norwegian localizations - thanks to Il'ya A. Lykov.
 - Methods called statically are now declared as static to meet php 5.4 strict standards.
 - Fixed case when messages were not displayed to users on page laod if last message was deleted - thanks to KEMBL KEMBL.
 - Fixed exploit using img tag to pass text request var.
@@ -1244,3 +1244,4 @@ Changed files:
 - lib/class/AJAXChatEncoding.php (all versions)
 - lib/class/AJAXChatString.php (all versions)
 - js/lang/ru.js (all versions)
+- js/lang/no.js (all versions)
