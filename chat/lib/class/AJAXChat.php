@@ -760,7 +760,11 @@ class AJAXChat {
 				case '/nick':				
 					$this->insertParsedMessageNick($textParts);
 					break;
-			
+
+				case '/clear':
+					$this->addInfoMessage('clear', 'command');
+					break;
+
 				// Custom or unknown command:
 				default:
 					if(!$this->parseCustomCommands($text, $textParts)) {				
