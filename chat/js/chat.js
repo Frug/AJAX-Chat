@@ -909,10 +909,11 @@ var ajaxChat = {
 				break;				
 			case 'logout':
 				this.handleLogout(infoData);
-				return;
+				break;
 			case 'socketRegistrationID':
 				this.socketRegistrationID = infoData;
 				this.socketRegister();
+				break;
 			case 'command':
 				this.handleCommand(infoData);
 				break;
