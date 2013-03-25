@@ -2489,7 +2489,9 @@ var ajaxChat = {
 				// Reset the charCounter after newline tags (<br/>):
 				if(i>4 && text.substr(i-5,4) == '<br/')
 					charCounter = 0;
-			} else if(currentChar == '&') {
+			}
+			
+			if(!withinTag && currentChar == '&') {
 				withinEntity = true;
 			} else if(withinEntity && i>0 && text.charAt(i-1) == ';') {
 				withinEntity = false;
