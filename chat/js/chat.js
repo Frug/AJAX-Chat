@@ -89,6 +89,7 @@ var ajaxChat = {
 	DOMbuffering: null,
 	DOMbuffer: null,
 	DOMbufferRowClass: 'rowOdd',
+	flashSounds: null,
 	
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {	
 		this.httpRequest		= {};
@@ -98,6 +99,7 @@ var ajaxChat = {
 		this.lastID				= 0;
 		this.localID			= 0;
 		this.lang				= lang;		
+		this.flashSounds        = true;
 		this.initConfig(config);
 		this.initDirectories();		
 		if(initSettings) {
@@ -299,7 +301,7 @@ var ajaxChat = {
 		if(this.dom['inputField'] && this.settings['autoFocus']) {
 			this.dom['inputField'].focus();
 		}
-		this.loadFlashInterface();
+		this.loadAudioInterface();
 		this.startChatUpdate();
 	},
 
@@ -435,8 +437,21 @@ var ajaxChat = {
 		this.makeRequest(requestUrl,'GET',null);
 	},
 	
-	loadFlashInterface: function() {
-		if(this.dom['flashInterfaceContainer']) {
+	loadAudioInterface: function() {
+		if(this.settings['audioBackend'] < 0) {
+			if(navigator.appVersion.indexOf("MSIE") != -1) {
+				try {
+					flash = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+				} catch(e) {
+					this.flashSounds = false;
+				}
+			} else if((navigator.plugins && !navigator.plugins["Shockwave Flash"]) || (navigator.mimeTypes && !navigator.mimeTypes['application/x-shockwave-flash'])) {
+				this.flashSounds = false;
+			}
+		} else
+			this.flashSounds = !!this.settings['audioBackend'];
+
+		if(this.flashSounds) {
 			this.updateDOM(
 				'flashInterfaceContainer',
 				'<object id="ajaxChatFlashInterface" style="position:absolute; left:-100px;" '
@@ -454,6 +469,8 @@ var ajaxChat = {
 				+'</object>'
 			);
 			FABridge.addInitializationCallback('ajaxChat', this.flashInterfaceLoadCompleteHandler);
+		} else {
+			this.loadSounds();
 		}
 	},
 	
@@ -600,32 +617,62 @@ var ajaxChat = {
 				volume = 1.0;
 			}
 			this.settings['audioVolume'] = volume;
-			try {
-				if(!this.soundTransform) {
-					this.soundTransform = FABridge.ajaxChat.create('flash.media.SoundTransform');					
+			if(this.flashSounds) {
+				try {
+					if(!this.soundTransform) {
+						this.soundTransform = FABridge.ajaxChat.create('flash.media.SoundTransform');					
+					}
+					this.soundTransform.setVolume(volume);
+				} catch(e) {
+					//alert(e);
 				}
-				this.soundTransform.setVolume(volume);
-			} catch(e) {
-				//alert(e);
+			} else {
+				try {
+					for(var key in this.soundFiles)
+						this.sounds[key].volume = volume;
+				} catch(e) {
+					//alert(e);
+				}
 			}
 		}
 	},
 	
 	loadSounds: function() {
-		try {
-			this.setAudioVolume(this.settings['audioVolume']);
-			this.sounds = {};
-			var sound,urlRequest;
-			for(var key in this.soundFiles) {
-				sound = FABridge.ajaxChat.create('flash.media.Sound');
-				sound.addEventListener('complete', this.soundLoadCompleteHandler);
-				sound.addEventListener('ioError', this.soundIOErrorHandler);
-				urlRequest = FABridge.ajaxChat.create('flash.net.URLRequest');
-				urlRequest.setUrl(this.dirs['sounds']+this.soundFiles[key]);
-				sound.load(urlRequest);
+		if(this.flashSounds) {
+			try {
+				this.setAudioVolume(this.settings['audioVolume']);
+				this.sounds = new Object();
+				var sound,urlRequest;
+				for(var key in this.soundFiles) {
+					sound = FABridge.ajaxChat.create('flash.media.Sound');
+					sound.addEventListener('complete', this.soundLoadCompleteHandler);
+					sound.addEventListener('ioError', this.soundIOErrorHandler);
+					urlRequest = FABridge.ajaxChat.create('flash.net.URLRequest');
+					urlRequest.setUrl(this.dirs['sounds']+this.soundFiles[key]);
+					sound.load(urlRequest);
+				}
+			} catch(e) {
+				alert(e);
 			}
-		} catch(e) {
-			alert(e);
+		} else {
+			try {
+				var audio = document.createElement('audio');
+				var mp3 = !!(audio.canPlayType && audio.canPlayType('audio/mpeg;').replace(/no/, ''));
+				var ogg = !!(audio.canPlayType && audio.canPlayType('audio/ogg; codecs="vorbis"').replace(/no/, ''));
+				this.sounds = new Array();
+				if(mp3)
+					format = ".mp3";
+				else if(ogg)
+					format = ".ogg";
+				else
+					format = ".wav";
+				for(var key in this.soundFiles) {
+					this.sounds[key] = new Audio(this.dirs['sounds']+key+format);
+				}
+				this.setAudioVolume(this.settings['audioVolume']);
+			} catch(e) {
+				alert(e);
+			}
 		}
 	},
 	
@@ -652,14 +699,23 @@ var ajaxChat = {
 
 	playSound: function(soundID) {
 		if(this.sounds && this.sounds[soundID]) {
-			try {
-				// play() parameters are
-				// startTime:Number (default = 0),
-				// loops:int (default = 0) and
-				// sndTransform:SoundTransform  (default = null)
-				return this.sounds[soundID].play(0, 0, this.soundTransform);
-			} catch(e) {
-				//alert(e);
+			if(this.flashSounds) {
+				try {
+					// play() parameters are
+					// startTime:Number (default = 0),
+					// loops:int (default = 0) and
+					// sndTransform:SoundTransform  (default = null)
+					return this.sounds[soundID].play(0, 0, this.soundTransform);
+				} catch(e) {
+					//alert(e);
+				}
+			} else {
+				try {
+					this.sounds[soundID].currentTime = 0;
+					return this.sounds[soundID].play();
+				} catch(e) {
+					//alert(e);
+				}
 			}
 		}
 		return null;

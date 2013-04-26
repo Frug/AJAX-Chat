@@ -62,6 +62,12 @@
 				document.getElementById('maxWordLengthSetting').value = ajaxChat.getSetting('maxWordLength');
 				document.getElementById('dateFormatSetting').value = ajaxChat.getSetting('dateFormat');
 				document.getElementById('persistFontColorSetting').checked = ajaxChat.getSetting('persistFontColor');
+				for(var i=0; i<document.getElementById('audioBackendSetting').options.length; i++) {
+					if(document.getElementById('audioBackendSetting').options[i].value == ajaxChat.getSetting('audioBackend')) {
+						document.getElementById('audioBackendSetting').options[i].selected = true;
+						break;
+					}
+				}
 				for(var i=0; i<document.getElementById('audioVolumeSetting').options.length; i++) {
 					if(document.getElementById('audioVolumeSetting').options[i].value == ajaxChat.getSetting('audioVolume')) {
 						document.getElementById('audioVolumeSetting').options[i].selected = true;
@@ -304,6 +310,16 @@
 						<td class="setting"><input type="checkbox" id="persistFontColorSetting" onclick="ajaxChat.setPersistFontColor(this.checked);"/></td>
 					</tr>
 					<tr class="rowOdd">
+						<td><label for="audioBackendSetting">Audio Backend:</label></td>
+						<td class="setting">
+							<select id="audioBackendSetting" onchange="ajaxChat.setSetting('audioBackend', this.options[this.selectedIndex].value);">
+								<option value="-1">Auto</option>
+								<option value="1">Flash</option>
+								<option value="0">HTML5</option>
+							</select>
+						</td>
+					</tr>
+					<tr class="rowEven">
 						<td><label for="audioVolumeSetting">[LANG]settingsAudioVolume[/LANG]</label></td>
 						<td class="setting">
 							<select class="left" id="audioVolumeSetting" onchange="ajaxChat.setAudioVolume(this.options[this.selectedIndex].value);">
@@ -320,51 +336,51 @@
 							</select>
 						</td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="soundReceiveSetting">[LANG]settingsSoundReceive[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundReceiveSetting" onchange="ajaxChat.setSetting('soundReceive', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
 						<td><label for="soundSendSetting">[LANG]settingsSoundSend[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundSendSetting" onchange="ajaxChat.setSetting('soundSend', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="soundEnterSetting">[LANG]settingsSoundEnter[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundEnterSetting" onchange="ajaxChat.setSetting('soundEnter', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
 						<td><label for="soundLeaveSetting">[LANG]settingsSoundLeave[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundLeaveSetting" onchange="ajaxChat.setSetting('soundLeave', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="soundChatBotSetting">[LANG]settingsSoundChatBot[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundChatBotSetting" onchange="ajaxChat.setSetting('soundChatBot', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
 						<td><label for="soundErrorSetting">[LANG]settingsSoundError[/LANG]</label></td>
 						<td class="setting">
 							<select id="soundErrorSetting" onchange="ajaxChat.setSetting('soundError', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
 						</td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="blinkSetting">[LANG]settingsBlink[/LANG]</label></td>
 						<td class="setting"><input type="checkbox" id="blinkSetting" onclick="ajaxChat.setSetting('blink', this.checked);"/></td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
 						<td><label for="blinkIntervalSetting">[LANG]settingsBlinkInterval[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalSetting" onchange="ajaxChat.setSetting('blinkInterval', parseInt(this.value));"/></td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="blinkIntervalNumberSetting">[LANG]settingsBlinkIntervalNumber[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalNumberSetting" onchange="ajaxChat.setSetting('blinkIntervalNumber', parseInt(this.value));"/></td>
 					</tr>

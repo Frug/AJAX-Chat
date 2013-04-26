@@ -87,6 +87,8 @@ var ajaxChatConfig = {
 		
 		// Defines if sounds are played:
 		audio: true,
+		// Defines the audio backend:
+		audioBackend: -1,
 		// Defines the sound volume (0.0 = mute, 1.0 = max):
 		audioVolume: 1.0,
 
