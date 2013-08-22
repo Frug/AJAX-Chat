@@ -25,13 +25,14 @@ require(AJAX_CHAT_PATH.'lib/classes.php');
 class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 
 	function &getDataBaseTableCreationQueries() {
+		$fname   = $this->db->type() == 'postgresql' ? 'chat.pg.sql' : 'chat.sql';
 		$queries = array();
-		$index = 0;
+		$index   = 0;
 		// Retrieve the queries from the SQL file:
-		$lines = file(AJAX_CHAT_PATH.'chat.sql');
+		$lines = file(AJAX_CHAT_PATH.$fname);
 		// Stop if an error occurs:
 		if(!$lines) {
-			echo 'Failed to load queries from file (chat.sql).';
+			echo "Failed to load queries from file ($fname).";
 			die();
 		}
 		foreach($lines as $line) {

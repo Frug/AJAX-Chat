@@ -8,7 +8,7 @@
  */
 
 // Class to perform SQL (MySQL) queries:
-class AJAXChatMySQLQuery {
+class AJAXChatPostgreSQLQuery {
 
 	var $_connectionID;
 	var $_sql = '';
@@ -17,21 +17,21 @@ class AJAXChatMySQLQuery {
 	var $_error = '';
 
 	// Constructor:
-	function AJAXChatMySQLQuery($sql, $connectionID = null) {
+	function AJAXChatPostgreSQLQuery($sql, $connectionID = null) {
 		$this->_sql = trim($sql);
 		$this->_connectionID = $connectionID;
 		if($this->_connectionID) {
-			$this->_result = mysql_query($this->_sql, $this->_connectionID);
+			$this->_result = pg_query($this->_connectionID, $this->_sql);
 			if(!$this->_result) {
-				$this->_errno = mysql_errno($this->_connectionID);
-				$this->_error = mysql_error($this->_connectionID);
+				error_log($this->_sql);
+				$this->_error = pg_last_error($this->_connectionID) . pg_result_error();
 			}
 		} else {
-			$this->_result = mysql_query($this->_sql);
+			$this->_result = pg_query($this->_sql);
 			if(!$this->_result) {
-				$this->_errno = mysql_errno();
-				$this->_error = mysql_error();
-			}	
+				error_log($this->_sql);
+				$this->_error = pg_last_error($this->_connectionID) . pg_result_error();
+			}
 		}
 	}
 
@@ -46,7 +46,6 @@ class AJAXChatMySQLQuery {
 		if($this->error()) {
 			$str  = 'Query: '	 .$this->_sql  ."\n";
 			$str .= 'Error-Report: '	.$this->_error."\n";
-			$str .= 'Error-Code: '.$this->_errno;
 		} else {
 			$str = "No errors.";
 		}
@@ -58,7 +57,7 @@ class AJAXChatMySQLQuery {
 		if($this->error()) {
 			return null;
 		} else {
-			return mysql_fetch_assoc($this->_result);
+			return pg_fetch_assoc($this->_result);
 		}
 	}
 
@@ -67,7 +66,7 @@ class AJAXChatMySQLQuery {
 		if($this->error()) {
 			return null;
 		} else {
-			return mysql_num_rows($this->_result);
+			return pg_num_rows($this->_result);
 		}
 	}
 
@@ -76,14 +75,14 @@ class AJAXChatMySQLQuery {
 		if($this->error()) {
 			return null;
 		} else {
-			return mysql_affected_rows($this->_connectionID);
+			return pg_affected_rows($this->_connectionID);
 		}
 	}
 
 	// Frees the memory:
 	function free() {
-		@mysql_free_result($this->_result);
+		@pg_free_result($this->_result);
 	}
-	
+
 }
 ?>

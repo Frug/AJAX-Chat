@@ -14,10 +14,15 @@ class CustomAJAXChat extends AJAXChat {
 
 	// Initialize custom configuration settings
 	function initCustomConfig() {
-		global $db_name,$db_connection;
+		global $db_name,$db_connection,$db_type;
 		
 		// Use the existing SMF database connection:
 		$this->setConfig('dbConnection', 'link', $db_connection);
+
+		// Check if SMF uses PostgreSQL instead of MySQL
+		if ($db_type == 'postgresql') {
+			$this->setConfig('dbConnection', 'type', 'postgresql');
+		}
 	}
 
 	// Override the database connection method to make sure the SMF database is selected:
@@ -129,7 +134,7 @@ class CustomAJAXChat extends AJAXChat {
 			$this->_channels = array();
 			
 			$sql = 'SELECT
-						ID_BOARD,
+						ID_BOARD AS "ID_BOARD",
 						name
 					FROM
 						'.$db_prefix.'boards AS b
@@ -185,7 +190,7 @@ class CustomAJAXChat extends AJAXChat {
 			$this->_allChannels = array();
 			
 			$sql = 'SELECT
-						ID_BOARD,
+						ID_BOARD AS "ID_BOARD",
 						name
 					FROM
 						'.$db_prefix.'boards;';
