@@ -18,7 +18,7 @@ Requirements
 Server-Side:
 
 - PHP >= 4
-- MySQL >= 4
+- MySQL >= 4 or PostgreSQL >= 8.1
 - Ruby >= 1.8 (optional)
 
 
