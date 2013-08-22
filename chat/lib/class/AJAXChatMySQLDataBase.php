@@ -15,6 +15,10 @@ class AJAXChatDataBaseMySQL {
 	var $_error = '';
 	var $_dbName;
 
+	function type() {
+		return 'mysql';
+	}
+
 	function AJAXChatDataBaseMySQL(&$dbConnectionConfig) {
 		$this->_connectionID = $dbConnectionConfig['link'];
 		$this->_dbName = $dbConnectionConfig['name'];
@@ -86,6 +90,42 @@ class AJAXChatDataBaseMySQL {
 	// Method to retrieve the last inserted ID:
 	function getLastInsertedID() {
 		return mysql_insert_id($this->_connectionID);
+	}
+
+	// Convert IP to binary
+	function ipToStorageFormat($ip) {
+		if(function_exists('inet_pton')) {
+			// ipv4 & ipv6:
+			return @inet_pton($ip);
+		}
+		// Only ipv4:
+		return @pack('N',@ip2long($ip));
+	}
+	
+	function ipFromStorageFormat($ip) {
+		if(function_exists('inet_ntop')) {
+			// ipv4 & ipv6:
+			return @inet_ntop($ip);
+		}
+		// Only ipv4:
+		$unpacked = @unpack('Nlong',$ip);
+		if(isset($unpacked['long'])) {
+			return @long2ip($unpacked['long']);
+		}
+		return null;
+	}
+
+	// SQL date manipulation
+	function dateAddSqlFragment($sql_expr, $amount, $unit) {
+		return "DATE_ADD($sql_expr, interval $amount $unit)";
+	}
+	function unixTimestampSqlFragment($column_name) {
+		return "UNIX_TIMESTAMP($column_name)";
+	}
+
+	// Database table name
+	function getDataBaseTable($table) {	
+		return $this->getName() ? '`'.$this->getName().'`.'.$table : $table;
 	}
 
 }

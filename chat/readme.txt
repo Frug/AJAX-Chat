@@ -17,7 +17,7 @@ Requirements
 Server-Side:
 
 - PHP >= 5
-- MySQL >= 4
+- MySQL >= 4 or PostgreSQL >= 8.1
 - Ruby >= 1.8 (optional)
 
 
@@ -49,6 +49,9 @@ Installation
 	If your host does not use mysqli you will need to change the connection type field:
 		$config['dbConnection']['type'] = null;
 	If this is set to "null" it defaults to "mysqli" if existing, else to "mysql".
+
+	To use PostgreSQL, set the connection type field as follows:
+		$config['dbConnection']['type'] = 'postgresql';
 	
 	
 	You can reference an existing database connection link or object by changing:
