@@ -1224,24 +1224,30 @@ Changed files:
 - lib/config.php[.example] (all versions)
 
 
-Version 0.8.? (?.?.2013)
+Version 0.8.7 (?.?.2013)
 -------------------------------
 Notice: 
 - Minimum php version is now 5 (was 4).
 - phpbb2 branch discontinued.
 
 New features:
+- Added normal Dutch localization (moved existing nl to nl-be) - thanks to Patrick Donker
 
 Bugfixes:
 - Updated Russian and Norwegian localizations - thanks to Il'ya A. Lykov.
 - Methods called statically are now declared as static to meet php 5.4 strict standards.
 - Fixed case when messages were not displayed to users on page laod if last message was deleted - thanks to KEMBL KEMBL.
 - Fixed exploit using img tag to pass text request var.
+- Use array literal notation for javascript arrays
 
 Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/AJAXChatFileSystem.php (all versions)
 - lib/class/AJAXChatEncoding.php (all versions)
 - lib/class/AJAXChatString.php (all versions)
+- lib/lang/nl.php (all versions)
+- lib/lang/nl-be.php (all versions)
 - js/lang/ru.js (all versions)
+- js/lang/nl.js (all versions)
+- js/lang/nl-be.js (all versions)
 - js/lang/no.js (all versions)
