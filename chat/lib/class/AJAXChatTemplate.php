@@ -20,7 +20,7 @@ class AJAXChatTemplate {
 	// Constructor:
 	function AJAXChatTemplate(&$ajaxChat, $templateFile, $contentType=null) {
 		$this->ajaxChat = $ajaxChat;
-		$this->_regExpTemplateTags = '/\[(\w+?)(?:(?:\/)|(?:\](.+?)\[\/\1))\]/se';		
+		$this->_regExpTemplateTags = '/\[(\w+?)(?:(?:\/)|(?:\](.+?)\[\/\1))\]/s';		
 		$this->_templateFile = $templateFile;
 		$this->_contentType = $contentType;
 	}
@@ -52,16 +52,16 @@ class AJAXChatTemplate {
 		}
 
 		// Replace template tags ([TAG/] and [TAG]content[/TAG]) and return parsed template content:
-		$this->_parsedContent = preg_replace($this->_regExpTemplateTags, '$this->replaceTemplateTags(\'$1\', \'$2\')', $this->_parsedContent);
+		$this->_parsedContent = preg_replace_callback($this->_regExpTemplateTags, array($this, 'replaceTemplateTags'), $this->_parsedContent);
 	}
 
-	function replaceTemplateTags($tag, $tagContent) {
-		switch($tag) {
+	function replaceTemplateTags($tagData) {
+		switch($tagData[1]) {
 			case 'AJAX_CHAT_URL':
 				return $this->ajaxChat->htmlEncode($this->ajaxChat->getChatURL());
 
 			case 'LANG':
-				return $this->ajaxChat->htmlEncode($this->ajaxChat->getLang($tagContent));				
+				return $this->ajaxChat->htmlEncode($this->ajaxChat->getLang($tagData[2]));				
 			case 'LANG_CODE':
 				return $this->ajaxChat->getLangCode();
 
@@ -174,7 +174,7 @@ class AJAXChatTemplate {
 					return 'write_allowed';
 			
 			default:
-				return $this->ajaxChat->replaceCustomTemplateTags($tag, $tagContent);
+				return $this->ajaxChat->replaceCustomTemplateTags($tagData[1], $tagData[2]);
 		}
 	}
 
