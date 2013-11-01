@@ -45,6 +45,9 @@
 #ajaxChatContent #ajaxChatCopyright {
 	margin-top:5px;
 }
+#ajaxChatContent #ajaxChatInputFieldContainer.write_forbidden {
+	display:none;
+}
 
 
 /*

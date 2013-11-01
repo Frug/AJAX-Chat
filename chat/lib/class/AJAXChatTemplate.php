@@ -165,6 +165,13 @@ class AJAXChatTemplate {
 				return $this->getLogsDayOptionTags();
 			case 'LOGS_HOUR_OPTIONS':
 				return $this->getLogsHourOptionTags();
+			case 'CLASS_WRITEABLE':
+				$userdata = $this->ajaxChat->getValidLoginUserData();
+				$guestwrite = $this->ajaxChat->getConfig('allowGuestWrite');
+				if ($userdata['userRole'] === AJAX_CHAT_GUEST && $guestwrite === false)
+					return 'write_forbidden';
+				else
+					return 'write_allowed';
 			
 			default:
 				return $this->ajaxChat->replaceCustomTemplateTags($tag, $tagContent);
