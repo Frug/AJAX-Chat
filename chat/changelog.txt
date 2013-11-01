@@ -1240,12 +1240,14 @@ Bugfixes:
 - Fixed case when messages were not displayed to users on page laod if last message was deleted - thanks to KEMBL KEMBL.
 - Fixed exploit using img tag to pass text request var.
 - Use array literal notation for javascript arrays
+- Change preg_replace with /e to preg_replace_callback in AJAXChatTemplate.php - thanks to Jan Kröpke
 
 Changed files:
 - lib/class/AJAXChat.php (all versions)
 - lib/class/AJAXChatFileSystem.php (all versions)
 - lib/class/AJAXChatEncoding.php (all versions)
 - lib/class/AJAXChatString.php (all versions)
+- lib/class/AJAXChatTemplate.php (all versions)
 - lib/lang/nl.php (all versions)
 - lib/lang/nl-be.php (all versions)
 - js/lang/ru.js (all versions)
