@@ -1232,6 +1232,7 @@ Notice:
 
 New features:
 - Added normal Dutch localization (moved existing nl to nl-be) - thanks to Patrick Donker
+- Hide shoutbox input for users without write permissions - thanks to Felix Eckhofer
 
 Bugfixes:
 - Updated Russian and Norwegian localizations - thanks to Il'ya A. Lykov.
