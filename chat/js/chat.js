@@ -167,7 +167,7 @@ var ajaxChat = {
 			settingsArray = cookie.split('&');
 			for(i=0; i<settingsArray.length; i++) {
 				setting = settingsArray[i].split('=');
-				if(setting.length == 2) {
+				if(setting.length === 2) {
 					key = setting[0];
 					value = this.decodeText(setting[1]);
 					switch(value) {
@@ -183,7 +183,7 @@ var ajaxChat = {
 						default:
 							number = parseFloat(value);
 							if(!isNaN(number)) {
-								if(parseInt(number) == number) {
+								if(parseInt(number) === number) {
 									value = parseInt(number);
 								} else {
 									value = number;
@@ -227,7 +227,7 @@ var ajaxChat = {
 	getSetting: function(key) {
 		// Only return null if setting is null or undefined, not if it is false:
 		for(var property in this.settings) {
-			if(property == key) {
+			if(property === key) {
 				return this.settings[key];
 			}
 		}
@@ -258,7 +258,7 @@ var ajaxChat = {
 		this.customInitialize();
 		//preload the Alert icon (it can't display if there's no connection unless it's cached!)
 		this.setStatus('retrying');
-		if(typeof this.initializeFunction == 'function') {
+		if(typeof this.initializeFunction === 'function') {
 			this.initializeFunction();
 		}
 		if(!this.isCookieEnabled()) {
@@ -290,7 +290,7 @@ var ajaxChat = {
 				ajaxChat.startChat();
 				// Reset the onfocus event on first call:
 				ajaxChat.dom['inputField'].onfocus = '';
-			}			
+			};		
 		}
 	},
 	
@@ -312,30 +312,30 @@ var ajaxChat = {
 	setLoadHandler: function() {
 		// Make sure initialize() is called on page load:
   		var onload = window.onload;
-		if(typeof onload != 'function') {
+		if(typeof onload !== 'function') {
 			window.onload = function() {
 				ajaxChat.initialize();
-			}
+			};
 		} else {
 			window.onload = function() {
 				onload();
 				ajaxChat.initialize();
-			}
+			};
 		}		
 	},
 	
 	setUnloadHandler: function() {
 		// Make sure finalize() is called on page unload:
   		var onunload = window.onunload;
-		if(typeof onunload != 'function') {
+		if(typeof onunload !== 'function') {
 			window.onunload = function() {
 				ajaxChat.finalize();
-			}
+			};
 		} else {
 			window.onunload = function() {
 				ajaxChat.finalize();
 				onunload();
-			}
+			};
 		}
 	},
 
@@ -402,7 +402,7 @@ var ajaxChat = {
 					+ ';" title="'
 					+ this.colorCodes[i]
 					+ '"></a>'
-					+ "\n"
+					+ "\n";
 			}
 			this.updateDOM('colorCodesContainer', this.DOMbuffer);
  			this.DOMbuffer = "";
@@ -544,8 +544,8 @@ var ajaxChat = {
 				// DOMParser native implementation (Mozilla, Opera):
 				arguments.callee.parser = new DOMParser();
 			} catch(e) {
-				var customDOMParser = function() {}
-				if(navigator.appName == 'Microsoft Internet Explorer') {
+				var customDOMParser = function() {};
+				if(navigator.appName === 'Microsoft Internet Explorer') {
 					// IE implementation:
 					customDOMParser.prototype.parseFromString = function(str, contentType) {
 						if(!arguments.callee.XMLDOM) {
@@ -553,7 +553,7 @@ var ajaxChat = {
 						}
 						arguments.callee.XMLDOM.loadXML(str);
 						return arguments.callee.XMLDOM;	
-					}
+					};
 				} else {
 					// Safari, Konqueror:
 					customDOMParser.prototype.parseFromString = function(str, contentType) {
@@ -567,7 +567,7 @@ var ajaxChat = {
 						);
 						arguments.callee.httpRequest.send(null);
 						return arguments.callee.httpRequest.responseXML;
-					}
+					};
 				}
 				arguments.callee.parser = new customDOMParser();
 			}
@@ -580,10 +580,10 @@ var ajaxChat = {
 		if(xmlDoc) {
 			this.handleOnlineUsers(xmlDoc.getElementsByTagName('user'));
 			// If the root node has the attribute "mode" set to "1" it is a channel message:
-			if((this.showChannelMessages || xmlDoc.firstChild.getAttribute('mode') != '1') && !this.channelSwitch) {
+			if((this.showChannelMessages || xmlDoc.firstChild.getAttribute('mode') !== '1') && !this.channelSwitch) {
 				var channelID = xmlDoc.firstChild.getAttribute('channelID');
-				if(channelID == this.channelID ||
-					parseInt(channelID) == parseInt(this.userID)+this.privateMessageDiff
+				if(channelID === this.channelID ||
+					parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff
 					) {
 					this.handleChatMessages(xmlDoc.getElementsByTagName('message'));
 				}
@@ -703,7 +703,7 @@ var ajaxChat = {
 		var i = 1;
 		for(var key in this.soundFiles) {
 			selection.options[i] = new Option(key, key);
-			if(key == selectedSound){
+			if(key === selectedSound){
 				selection.options[i].selected = true;
 			}
 			i++;
@@ -712,7 +712,7 @@ var ajaxChat = {
 
 	setStatus: function(newStatus) {
 		// status options are: ok, retrying, waiting
-		if (this.requestStatus != 'retrying' || newStatus == 'ok') {
+		if (this.requestStatus !== 'retrying' || newStatus === 'ok') {
 			this.requestStatus = newStatus;
 		}
 		
@@ -760,10 +760,10 @@ var ajaxChat = {
 	},
 
 	makeRequest: function(url, method, data) {
+		var identifier;
 		this.setStatus('waiting');
 		
 		try {
-			var identifier;
 			if(data) {
 				// Create up to 50 HTTPRequest objects:
 				if(!arguments.callee.identifier || arguments.callee.identifier > 50) {
@@ -804,7 +804,7 @@ var ajaxChat = {
 					}
 				}
 			};
-			if(method == 'POST') {
+			if(method === 'POST') {
 				this.getHttpRequest(identifier).setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 			}
 			this.getHttpRequest(identifier).send(data);
@@ -820,14 +820,15 @@ var ajaxChat = {
 	},
 		
 	handleResponse: function(identifier) {
-		if (this.getHttpRequest(identifier).readyState == 4) {
-			if (this.getHttpRequest(identifier).status == 200) {
+		var xmlDoc;
+		if (this.getHttpRequest(identifier).readyState === 4) {
+			if (this.getHttpRequest(identifier).status === 200) {
 				clearTimeout(ajaxChat.retryTimer);
-				var xmlDoc = this.getHttpRequest(identifier).responseXML;
+				xmlDoc = this.getHttpRequest(identifier).responseXML;
 				ajaxChat.setStatus('ok');
 			} else {
 				// Connection status 0 can be ignored.
-				if (this.getHttpRequest(identifier).status == 0) {
+				if (this.getHttpRequest(identifier).status === 0) {
 					this.setStatus('waiting');
 					this.updateChatlistView();
 					return false;
@@ -934,7 +935,7 @@ var ajaxChat = {
 						userName,
 						userRole
 					);
-				} else if(this.userNamesList[index] != userName) {
+				} else if(this.userNamesList[index] !== userName) {
 					this.removeUserFromOnlineList(userID, index);
 					this.addUserToOnlineList(
 						userID,
@@ -962,7 +963,7 @@ var ajaxChat = {
 				userName = userNode.firstChild ? userNode.firstChild.nodeValue : '';
 				textNode = messageNodes[i].getElementsByTagName('text')[0];
 				messageText = textNode.firstChild ? textNode.firstChild.nodeValue : '';
-				if (i == (messageNodes.length - 1)) {this.DOMbuffering = false;}
+				if (i === (messageNodes.length - 1)) {this.DOMbuffering = false;}
 				this.addMessageToChatList(
 						new Date(messageNodes[i].getAttribute('dateTime')),
 						messageNodes[i].getAttribute('userID'),
@@ -987,7 +988,7 @@ var ajaxChat = {
 			// Replace the entities in the channel name with their character equivalent:
 			channel = this.decodeSpecialChars(channel);
 			for(i=0; i<this.dom['channelSelection'].options.length; i++) {
-				if(this.dom['channelSelection'].options[i].value == channel) {
+				if(this.dom['channelSelection'].options[i].value === channel) {
 					this.dom['channelSelection'].options[i].selected = true;
 					channelSelected = true;
 					break;
@@ -1020,14 +1021,14 @@ var ajaxChat = {
 			this.updateDOM(
 				'onlineList',
 				this.getUserNodeString(userID, userName, userRole),
-				(this.userID == userID)
+				(this.userID === userID)
 			);
 		}
 	},
 
 	getUserNodeString: function(userID, userName, userRole) {
 		var encodedUserName, str;
-		if(this.userNodeString && userID == this.userID) {
+		if(this.userNodeString && userID === this.userID) {
 			return this.userNodeString;
 		} else {
 			encodedUserName = this.scriptLinkEncode(userName);
@@ -1049,12 +1050,12 @@ var ajaxChat = {
 					+ '<ul class="userMenu" id="'
 					+ this.getUserMenuDocumentID(userID)
 					+ '"'
-					+ ((userID == this.userID) ?
+					+ ((userID === this.userID) ?
 						'>'+this.getUserNodeStringItems(encodedUserName, userID, false) :
 						' style="display:none;">')
 					+ '</ul>'
 					+'</div>';
-			if(userID == this.userID) {
+			if(userID === this.userID) {
 				this.userNodeString = str;
 			}
 			return str;	
@@ -1085,7 +1086,7 @@ var ajaxChat = {
 	
 	getUserNodeStringItems: function(encodedUserName, userID, isInline) {
 		var menu;
-		if(encodedUserName != this.encodedUserName) {
+		if(encodedUserName !== this.encodedUserName) {
 			menu 	= '<li><a href="javascript:ajaxChat.insertMessageWrapper(\'/msg '
 					+ encodedUserName
 					+ ' \');">'
@@ -1126,7 +1127,7 @@ var ajaxChat = {
 					+ this.lang['userMenuWhereis']
 					+ '</a></li>';
 			}
-			if(this.userRole == 2 || this.userRole == 3) {
+			if(this.userRole === 2 || this.userRole === 3) {
 				menu	+= '<li><a href="javascript:ajaxChat.insertMessageWrapper(\'/kick '
 						+ encodedUserName
 						+ ' \');">'
@@ -1160,11 +1161,11 @@ var ajaxChat = {
 					+ '<li><a href="javascript:ajaxChat.insertMessageWrapper(\'/nick \');">'
 					+ this.lang['userMenuNick']
 					+ '</a></li>';
-			if(this.userRole == 1 || this.userRole == 2 || this.userRole == 3) {
+			if(this.userRole === 1 || this.userRole === 2 || this.userRole === 3) {
 				menu	+= '<li><a href="javascript:ajaxChat.sendMessageWrapper(\'/join\');">'
 						+ this.lang['userMenuEnterPrivateRoom']
 						+ '</a></li>';
-				if(this.userRole == 2 || this.userRole == 3) {
+				if(this.userRole === 2 || this.userRole === 3) {
 					menu	+= '<li><a href="javascript:ajaxChat.sendMessageWrapper(\'/bans\');">'
 							+ this.lang['userMenuBans']
 							+ '</a></li>';
@@ -1180,7 +1181,7 @@ var ajaxChat = {
 			var node = this.dom['onlineList'].firstChild;			
 			var rowEven = false;
 			while(node) {
-				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'))
+				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'));
 				node = node.nextSibling;
 				rowEven = !rowEven;
 			}
@@ -1204,7 +1205,7 @@ var ajaxChat = {
 	},
 
 	getEncodedChatBotName: function() {
-		if(typeof arguments.callee.encodedChatBotName == 'undefined') {
+		if(typeof arguments.callee.encodedChatBotName === 'undefined') {
 			arguments.callee.encodedChatBotName = this.encodeSpecialChars(this.chatBotName);
 		}
 		return arguments.callee.encodedChatBotName;
@@ -1230,13 +1231,13 @@ var ajaxChat = {
 		if(!this.onNewMessage(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip)) {
 			return;
 		}
-		this.DOMbufferRowClass = this.DOMbufferRowClass == 'rowEven' ? 'rowOdd' : 'rowEven';
+		this.DOMbufferRowClass = this.DOMbufferRowClass === 'rowEven' ? 'rowOdd' : 'rowEven';
 		this.DOMbuffer = this.DOMbuffer + 
 			this.getChatListMessageString(
 				dateObject, userID, userName, userRole, messageID, messageText, channelID, ip
 			);
 		if(!this.DOMbuffering){
- 			this.updateDOM('chatList', this.DOMbuffer)
+ 			this.updateDOM('chatList', this.DOMbuffer);
  			this.DOMbuffer = "";
  		}
 	},
@@ -1245,7 +1246,7 @@ var ajaxChat = {
 		var rowClass = this.DOMbufferRowClass;
 		var userClass = this.getRoleClass(userRole);
 		var colon;
-		if(messageText.indexOf('/action') == 0 || messageText.indexOf('/me') == 0 || messageText.indexOf('/privaction') == 0) {
+		if(messageText.indexOf('/action') === 0 || messageText.indexOf('/me') === 0 || messageText.indexOf('/privaction') === 0) {
 			userClass += ' action';
 			colon = ' ';
 		} else {
@@ -1275,7 +1276,7 @@ var ajaxChat = {
 	},
 	
 	getChatListUserNameTitle: function(userID, userName, userRole, ip) {
-		return (ip != null) ? ' title="IP: ' + ip + '"' : '';		
+		return (ip !== null) ? ' title="IP: ' + ip + '"' : '';		
 	},
 	
 	getMessageDocumentID: function(messageID) {
@@ -1311,16 +1312,16 @@ var ajaxChat = {
 					+ arguments.callee.deleteMessage
 					+ '" href="javascript:ajaxChat.deleteMessage('
 					+ messageID
-					+ ');"> </a>' // Adding a space - without any content Opera messes up the chatlist display
+					+ ');"> </a>'; // Adding a space - without any content Opera messes up the chatlist display
 		}
 		return '';
 	},
 	
 	isAllowedToDeleteMessage: function(messageID, userID, userRole, channelID) {
-		if((((this.userRole == 1 && this.allowUserMessageDelete && (userID == this.userID ||
-			parseInt(channelID) == parseInt(this.userID)+this.privateMessageDiff ||
-			parseInt(channelID) == parseInt(this.userID)+this.privateChannelDiff)) ||
-			this.userRole == 2) && userRole != 3 && userRole != 4) || this.userRole == 3) {
+		if((((this.userRole === 1 && this.allowUserMessageDelete && (userID === this.userID ||
+			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
+			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
+			this.userRole === 2) && userRole !== 3 && userRole !== 4) || this.userRole === 3) {
 			return true;
 		}
 		return false;
@@ -1342,7 +1343,7 @@ var ajaxChat = {
 	},
 
 	parseDeleteMessageCommand: function(messageText) {
-		if(messageText.indexOf('/delete') == 0) {
+		if(messageText.indexOf('/delete') === 0) {
 			var messageID = messageText.substr(8);
 			var messageNode = this.getMessageNode(messageID);
 			if(messageNode) {
@@ -1361,7 +1362,7 @@ var ajaxChat = {
 	},
 	
 	blinkOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
-		if(this.settings['blink'] && this.lastID && !this.channelSwitch && userID != this.userID) {
+		if(this.settings['blink'] && this.lastID && !this.channelSwitch && userID !== this.userID) {
 			clearInterval(this.blinkInterval);
 			this.blinkInterval = setInterval(
 				'ajaxChat.blinkUpdate(\''+this.addSlashes(this.decodeSpecialChars(userName))+'\')',
@@ -1382,7 +1383,7 @@ var ajaxChat = {
 			document.title = this.originalDocumentTitle;
 			arguments.callee.blink = 0;
 		} else {
-			if(arguments.callee.blink % 2 != 0) {
+			if(arguments.callee.blink % 2 !== 0) {
 				document.title = '[@ ] '+blinkStr+' - '+this.originalDocumentTitle;
 			} else {
 				document.title = '[ @] '+blinkStr+' - '+this.originalDocumentTitle;
@@ -1622,7 +1623,7 @@ var ajaxChat = {
 	},
 	
 	handleInputFieldKeyPress: function(event) {
-		if(event.keyCode == 13 && !event.shiftKey) {
+		if(event.keyCode === 13 && !event.shiftKey) {
 			this.sendMessage();
 			try {
 				event.preventDefault();
@@ -1645,7 +1646,7 @@ var ajaxChat = {
 				this.dom['inputField'].value.length	+ '/' + this.messageTextMaxLength,
 				false,
 				true
-			)
+			);
 		}
 	},
 	
@@ -1669,7 +1670,7 @@ var ajaxChat = {
 	},
 	
 	parseInputMessage: function(text) {
-		if(text.charAt(0) == '/') {
+		if(text.charAt(0) === '/') {
 			var textParts = text.split(' ');
 			switch(textParts[0]) {
 				case '/ignore':
@@ -1723,7 +1724,7 @@ var ajaxChat = {
 		if(textParts.length > 1) {
 			var userName = this.encodeSpecialChars(textParts[1]);
 			// Prevent adding the chatBot or current user to the list:
-			if(userName == this.userName || userName == this.getEncodedChatBotName()) {
+			if(userName === this.userName || userName === this.getEncodedChatBotName()) {
 				// Display the list of ignored users instead:
 				return this.parseIgnoreInputCommand(null, new Array('/ignore'));
 			}
@@ -1743,7 +1744,7 @@ var ajaxChat = {
 			this.addChatBotMessageToChatList('/ignoreAdded '+userName);
 			this.setIgnoredUserNames(ignoredUserNames);
 		} else {
-			if(ignoredUserNames.length == 0) {
+			if(ignoredUserNames.length === 0) {
 				this.addChatBotMessageToChatList('/ignoreListEmpty -');
 			} else {
 				this.addChatBotMessageToChatList('/ignoreList '+ignoredUserNames.join(' '));
@@ -1771,7 +1772,7 @@ var ajaxChat = {
 	},
 	
 	ignoreMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
-		if(userID == this.chatBotID && messageText.charAt(0) == '/') {
+		if(userID === this.chatBotID && messageText.charAt(0) === '/') {
 			var textParts = messageText.split(' ');
 			if(textParts.length > 1) {
 				switch(textParts[0]) {
@@ -1817,9 +1818,9 @@ var ajaxChat = {
 		}
 		if(node) {
 			var previousNode = node.previousSibling;
-			var rowEven = (previousNode && this.getClass(previousNode) == 'rowOdd') ? true : false;
+			var rowEven = (previousNode && this.getClass(previousNode) === 'rowOdd') ? true : false;
 			while(node) {
-				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'))
+				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'));
 				node = node.nextSibling;
 				rowEven = !rowEven;
 			}
@@ -1827,7 +1828,7 @@ var ajaxChat = {
 	},
 	
 	getClass: function(node) {
-		if(typeof node.className != 'undefined') {
+		if(typeof node.className !== 'undefined') {
 			return node.className; // IE
 		} else {
 			return node.getAttribute('class');
@@ -1835,7 +1836,7 @@ var ajaxChat = {
 	},
 	
 	setClass: function(node, className) {
-		if(typeof node.className != 'undefined') {
+		if(typeof node.className !== 'undefined') {
 			node.className = className; // IE
 		} else {
 			node.setAttribute('class', className);
@@ -1853,7 +1854,7 @@ var ajaxChat = {
 	getScriptLinkValue: function(value) {
 		// This method returns plainText encoded values from javascript links
 		// The value has to be utf8Decoded for MSIE and Opera:
-		if(typeof arguments.callee.utf8Decode == 'undefined') {
+		if(typeof arguments.callee.utf8Decode === 'undefined') {
 			switch(navigator.appName) {
 				case 'Microsoft Internet Explorer':
 				case 'Opera':
@@ -1918,7 +1919,7 @@ var ajaxChat = {
 	updateButton: function(setting, buttonID) {
 		var node = document.getElementById(buttonID);
 		if(node) {
-			this.setClass(node, (this.getSetting(setting) ? 'button' : 'button off'))
+			this.setClass(node, (this.getSetting(setting) ? 'button' : 'button off'));
 		}
 	},
 	
@@ -1928,7 +1929,7 @@ var ajaxChat = {
 			if(styleDisplay) {
 				node.style.display = styleDisplay;
 			} else {
-				if(node.style.display == 'none') {
+				if(node.style.display === 'none') {
 					node.style.display = (displayInline ? 'inline' : 'block'); 
 				} else {
 					node.style.display = 'none';
@@ -1988,14 +1989,14 @@ var ajaxChat = {
 	insert: function(startTag, endTag) {
 		this.dom['inputField'].focus();
 		// Internet Explorer:
-		if(typeof document.selection != 'undefined') {
+		if(typeof document.selection !== 'undefined') {
 			// Insert the tags:
 			var range = document.selection.createRange();
 			var insText = range.text;
 			range.text = startTag + insText + endTag;
 			// Adjust the cursor position:
 			range = document.selection.createRange();
-			if (insText.length == 0) {
+			if (insText.length === 0) {
 				range.move('character', -endTag.length);
 			} else {
 				range.moveStart('character', startTag.length + insText.length + endTag.length);			
@@ -2003,7 +2004,7 @@ var ajaxChat = {
 			range.select();
 		}
 		// Firefox, etc. (Gecko based browsers):
-		else if(typeof this.dom['inputField'].selectionStart != 'undefined') {
+		else if(typeof this.dom['inputField'].selectionStart !== 'undefined') {
 			// Insert the tags:
 			var start = this.dom['inputField'].selectionStart;
 			var end = this.dom['inputField'].selectionEnd;
@@ -2015,7 +2016,7 @@ var ajaxChat = {
 											+ this.dom['inputField'].value.substr(end);
 			// Adjust the cursor position:
 			var pos;
-			if (insText.length == 0) {
+			if (insText.length === 0) {
 				pos = start + startTag.length;
 			} else {
 				pos = start + startTag.length + insText.length + endTag.length;
@@ -2036,7 +2037,7 @@ var ajaxChat = {
 	replaceText: function(text) {
 		try{
 			text = this.replaceLineBreaks(text);
-			if(text.charAt(0) == '/') {
+			if(text.charAt(0) === '/') {
 				text = this.replaceCommands(text);
 			} else {
 				text = this.replaceBBCode(text);
@@ -2053,7 +2054,7 @@ var ajaxChat = {
 	
 	replaceCommands: function(text) {
 		try {
-			if(text.charAt(0) != '/') {
+			if(text.charAt(0) !== '/') {
 				return text;
 			}
 			var textParts = text.split(' ');				
@@ -2140,7 +2141,7 @@ var ajaxChat = {
 
 	replaceCommandLogout: function(textParts) {
 		var type = '';
-		if(textParts.length == 3)
+		if(textParts.length === 3)
 			type = textParts[2];
 		return	'<span class="chatBotMessage">'
 				+ this.lang['logout' + type].replace(/%s/, textParts[1])
@@ -2328,7 +2329,7 @@ var ajaxChat = {
 		var listChannels = [];
 		var channelName;
 		for(var i=0; i<channels.length; i++) {
-			channelName = (channels[i] == this.channelName) ? '<b>'+channels[i]+'</b>' : channels[i];
+			channelName = (channels[i] === this.channelName) ? '<b>'+channels[i]+'</b>' : channels[i];
 			listChannels.push(
 				'<a href="javascript:ajaxChat.sendMessageWrapper(\'/join '
 				+ this.scriptLinkEncode(channels[i])
@@ -2441,7 +2442,7 @@ var ajaxChat = {
 					+ '" dir="'
 					+ this.baseDirection
 					+ '">'
-					+ ((users[i] == this.userName) ? '<b>'+users[i]+'</b>' : users[i])
+					+ ((users[i] === this.userName) ? '<b>'+users[i]+'</b>' : users[i])
 					+ '</a>'
 					+ '<ul class="inlineUserMenu" id="'
 					+ this.getInlineUserMenuDocumentID(this.userMenuCounter, i)
@@ -2462,7 +2463,7 @@ var ajaxChat = {
 		// Return true if the number of tags doesn't match:
 		if((!openTags && closeTags) ||
 			(openTags && !closeTags) ||
-			(openTags && closeTags && (openTags.length != closeTags.length))) {
+			(openTags && closeTags && (openTags.length !== closeTags.length))) {
 			return true;
 		}
 		return false;
@@ -2479,21 +2480,21 @@ var ajaxChat = {
 			currentChar = text.charAt(i);
 			
 			// Check if we are within a tag or entity:
-			if(currentChar == '<') {
+			if(currentChar === '<') {
 				withinTag = true;
 				// Reset the charCounter after newline tags (<br/>):
-				if(i>5 && text.substr(i-5,4) == '<br/')
+				if(i>5 && text.substr(i-5,4) === '<br/')
 					charCounter = 0;				
-			} else if(withinTag && i>0 && text.charAt(i-1) == '>') {
+			} else if(withinTag && i>0 && text.charAt(i-1) === '>') {
 				withinTag = false;
 				// Reset the charCounter after newline tags (<br/>):
-				if(i>4 && text.substr(i-5,4) == '<br/')
+				if(i>4 && text.substr(i-5,4) === '<br/')
 					charCounter = 0;
 			}
 			
-			if(!withinTag && currentChar == '&') {
+			if(!withinTag && currentChar === '&') {
 				withinEntity = true;
-			} else if(withinEntity && i>0 && text.charAt(i-1) == ';') {
+			} else if(withinEntity && i>0 && text.charAt(i-1) === ';') {
 				withinEntity = false;
 				// We only increase the charCounter once for the whole entiy:
 				charCounter++;
@@ -2501,7 +2502,7 @@ var ajaxChat = {
 				
 			if(!withinTag && !withinEntity) {
 				// Reset the charCounter if we encounter a word boundary:
-				if(currentChar == ' ' || currentChar == '\n' || currentChar == '\t') {
+				if(currentChar === ' ' || currentChar === '\n' || currentChar === '\t') {
 					charCounter = 0;
 				} else {
 					// We are not within a tag or entity, increase the charCounter:
@@ -2522,7 +2523,7 @@ var ajaxChat = {
 	
 	getBreakString: function() {
 		// Returns the character sequence used to wrap long words
-		if(typeof arguments.callee.breakString == 'undefined') {
+		if(typeof arguments.callee.breakString === 'undefined') {
 			arguments.callee.breakString = '&#8203;';
 		}
 		return arguments.callee.breakString;
@@ -2714,7 +2715,7 @@ var ajaxChat = {
 		if(!arguments.callee.regExp) {
 			var regExpStr = '^(.*)(';
 			for(var i=0; i<this.emoticonCodes.length; i++) {
-				if(i!=0)
+				if(i!==0)
 					regExpStr += '|';
 				regExpStr += '(?:' + this.escapeRegExp(this.emoticonCodes[i]) + ')';
 			}
@@ -2781,7 +2782,7 @@ var ajaxChat = {
 	
 	getSelectedStyle: function() {
 		var styleOptions = this.dom['styleSelection'].getElementsByTagName('option');
-		if(this.dom['styleSelection'].selectedIndex == -1) {
+		if(this.dom['styleSelection'].selectedIndex === -1) {
 			return styleOptions[0].value;
 		} else {
 			return styleOptions[this.dom['styleSelection'].selectedIndex].value;
@@ -2789,18 +2790,17 @@ var ajaxChat = {
 	},
 	
 	setActiveStyleSheet: function(title) {
-		var i, a, main;
-		var titleFound = false;
+		var i, a, main, titleFound = false;
 		for(i=0; (a = document.getElementsByTagName('link')[i]); i++) {
-			if(a.getAttribute('rel').indexOf('style') != -1 && a.getAttribute('title')) {
+			if(a.getAttribute('rel').indexOf('style') !== -1 && a.getAttribute('title')) {
 				a.disabled = true;
-				if(a.getAttribute('title') == title) {
+				if(a.getAttribute('title') === title) {
 	                a.disabled = false;
 	                titleFound = true;
 				}
 			}
 		}
-		if(!titleFound && title != null) {
+		if(!titleFound && title !== null) {
 		   this.setActiveStyleSheet(this.getPreferredStyleSheet());
 		}
 	},
@@ -2818,8 +2818,8 @@ var ajaxChat = {
 	getPreferredStyleSheet: function() {
 		var i,a;
 		for(i=0; (a = document.getElementsByTagName('link')[i]); i++) {
-			if(a.getAttribute('rel').indexOf('style') != -1
-				&& a.getAttribute('rel').indexOf('alt') == -1
+			if(a.getAttribute('rel').indexOf('style') !== -1
+				&& a.getAttribute('rel').indexOf('alt') === -1
 				&& a.getAttribute('title')
 				) {
 				return a.getAttribute('title');
@@ -2852,10 +2852,10 @@ var ajaxChat = {
 		var ca = document.cookie.split(';');
 		for(var i=0; i<ca.length; i++) {
 			var c = ca[i];
-			while(c.charAt(0) == ' ') {
+			while(c.charAt(0) === ' ') {
 				c = c.substring(1, c.length);
 			}
-			if(c.indexOf(nameEQ) == 0) {
+			if(c.indexOf(nameEQ) === 0) {
 				return decodeURIComponent(c.substring(nameEQ.length, c.length));
 			}
 		}
@@ -2875,7 +2875,7 @@ var ajaxChat = {
 	},
 	
 	finalize: function() {	
-		if(typeof this.finalizeFunction == 'function') {
+		if(typeof this.finalizeFunction === 'function') {
 			this.finalizeFunction();
 		}
 		// Ensure the socket connection is closed on unload:
@@ -2961,4 +2961,4 @@ var ajaxChat = {
 		return true;
 	}
 
-}
+};
