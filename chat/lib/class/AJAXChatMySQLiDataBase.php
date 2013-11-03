@@ -22,12 +22,12 @@ class AJAXChatDataBaseMySQLi {
 	
 	// Method to connect to the DataBase server:
 	function connect(&$dbConnectionConfig) {
-		$this->_connectionID = new mysqli(
+		@$this->_connectionID = new mysqli(
 			$dbConnectionConfig['host'],
 			$dbConnectionConfig['user'],
 			$dbConnectionConfig['pass']
 		);
-		if(!$this->_connectionID) {
+		if($this->_connectionID->connect_errno) {
 			$this->_errno = mysqli_connect_errno();
 			$this->_error = mysqli_connect_error();
 			return false;

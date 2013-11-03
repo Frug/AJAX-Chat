@@ -1242,6 +1242,7 @@ Bugfixes:
 - Use array literal notation for javascript arrays
 - Change preg_replace with /e to preg_replace_callback in AJAXChatTemplate.php - thanks to Jan Kröpke
 - Fixed browser crashing bug with certain long words - thanks to Clint
+- Properly detect and report mysqli connection errors.
 
 Changed files:
 - lib/class/AJAXChat.php (all versions)
@@ -1249,6 +1250,7 @@ Changed files:
 - lib/class/AJAXChatEncoding.php (all versions)
 - lib/class/AJAXChatString.php (all versions)
 - lib/class/AJAXChatTemplate.php (all versions)
+- lib/class/AJAXChatMySQLiDataBase.php
 - lib/lang/nl.php (all versions)
 - lib/lang/nl-be.php (all versions)
 - js/lang/ru.js (all versions)
