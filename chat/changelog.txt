@@ -1237,7 +1237,7 @@ New features:
 Bugfixes:
 - Updated Russian and Norwegian localizations - thanks to Il'ya A. Lykov.
 - Methods called statically are now declared as static to meet php 5.4 strict standards.
-- Fixed case when messages were not displayed to users on page laod if last message was deleted - thanks to KEMBL KEMBL.
+- Fixed case when messages were not displayed to users on page load if last message was deleted - thanks to KEMBL KEMBL.
 - Fixed exploit using img tag to pass text request var.
 - Use array literal notation for javascript arrays
 - Change preg_replace with /e to preg_replace_callback in AJAXChatTemplate.php - thanks to Jan Kröpke
