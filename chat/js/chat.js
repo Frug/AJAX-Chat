@@ -1670,11 +1670,16 @@ var ajaxChat = {
 	},
 	
 	parseInputMessage: function(text) {
+		var textParts;
 		if(text.charAt(0) === '/') {
-			var textParts = text.split(' ');
+			textParts = text.split(' ');
 			switch(textParts[0]) {
 				case '/ignore':
 					text = this.parseIgnoreInputCommand(text, textParts);
+					break;
+				case '/clear':
+					this.clearChatList();
+					return false;
 					break;
 				default:
 					text = this.parseCustomInputCommand(text, textParts);
@@ -1720,16 +1725,16 @@ var ajaxChat = {
 	},
 	
 	parseIgnoreInputCommand: function(text, textParts) {
-		var ignoredUserNames = this.getIgnoredUserNames();
+		var userName, ignoredUserNames = this.getIgnoredUserNames(), i;
 		if(textParts.length > 1) {
-			var userName = this.encodeSpecialChars(textParts[1]);
+			userName = this.encodeSpecialChars(textParts[1]);
 			// Prevent adding the chatBot or current user to the list:
 			if(userName === this.userName || userName === this.getEncodedChatBotName()) {
 				// Display the list of ignored users instead:
 				return this.parseIgnoreInputCommand(null, new Array('/ignore'));
 			}
 			if(ignoredUserNames.length > 0) {
-				var i = ignoredUserNames.length;
+				i = ignoredUserNames.length;
 				while(i--) {
 					if(ignoredUserNames[i] === userName) {
 						ignoredUserNames.splice(i,1);
@@ -1755,8 +1760,9 @@ var ajaxChat = {
 	},
 
 	getIgnoredUserNames: function() {
+		var ignoredUserNamesString;
 		if(!this.ignoredUserNames) {
-			var ignoredUserNamesString = this.getSetting('ignoredUserNames');
+			ignoredUserNamesString = this.getSetting('ignoredUserNames');
 			if(ignoredUserNamesString) {
 				this.ignoredUserNames = ignoredUserNamesString.split(' ');
 			} else {
@@ -1772,8 +1778,9 @@ var ajaxChat = {
 	},
 	
 	ignoreMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
+		var textParts;
 		if(userID === this.chatBotID && messageText.charAt(0) === '/') {
-			var textParts = messageText.split(' ');
+			textParts = messageText.split(' ');
 			if(textParts.length > 1) {
 				switch(textParts[0]) {
 					case '/invite':
@@ -1791,12 +1798,12 @@ var ajaxChat = {
 	},
 
 	deleteMessage: function(messageID) {
-		var messageNode = this.getMessageNode(messageID);
+		var messageNode = this.getMessageNode(messageID), originalClass, nextSibling;
 		if(messageNode) {
-			var originalClass = this.getClass(messageNode);
+			originalClass = this.getClass(messageNode);
 			this.setClass(messageNode, originalClass+' deleteSelected');
 			if(confirm(this.lang['deleteMessageConfirm'])) {
-				var nextSibling = messageNode.nextSibling;
+				nextSibling = messageNode.nextSibling;
 				try {
 					this.dom['chatList'].removeChild(messageNode);
 					if(nextSibling) {
@@ -1813,12 +1820,13 @@ var ajaxChat = {
 	},
 
 	updateChatListRowClasses: function(node) {
+		var previousNode, rowEven;
 		if(!node) {
 			node = this.dom['chatList'].firstChild;
 		}
 		if(node) {
-			var previousNode = node.previousSibling;
-			var rowEven = (previousNode && this.getClass(previousNode) === 'rowOdd') ? true : false;
+			previousNode = node.previousSibling;
+			rowEven = (previousNode && this.getClass(previousNode) === 'rowOdd') ? true : false;
 			while(node) {
 				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'));
 				node = node.nextSibling;

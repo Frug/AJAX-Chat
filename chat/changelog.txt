@@ -1233,6 +1233,7 @@ Notice:
 New features:
 - Added normal Dutch localization (moved existing nl to nl-be) - thanks to Patrick Donker
 - Hide shoutbox input for users without write permissions - thanks to Felix Eckhofer
+- Added a /clear command to clear the chatlist of all text - thanks to Borislav Manolov
 
 Bugfixes:
 - Updated Russian and Norwegian localizations - thanks to Il'ya A. Lykov.
@@ -1257,3 +1258,4 @@ Changed files:
 - js/lang/nl.js (all versions)
 - js/lang/nl-be.js (all versions)
 - js/lang/no.js (all versions)
+- js/chat.js (all verisons)
