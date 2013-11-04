@@ -910,10 +910,14 @@ var ajaxChat = {
 				break;				
 			case 'logout':
 				this.handleLogout(infoData);
-				return;
+				break;
 			case 'socketRegistrationID':
 				this.socketRegistrationID = infoData;
 				this.socketRegister();
+				break;
+			case 'command':
+				this.handleCommand(infoData);
+				break;
 			default:
 				this.handleCustomInfoMessage(infoType, infoData);
 		}
@@ -1907,6 +1911,13 @@ var ajaxChat = {
 	
 	handleLogout: function(url) {
 		window.location.href = url;
+	},
+
+	handleCommand: function(command) {
+		switch (command) {
+			case 'clear':
+				return this.clearChatList();
+		}
 	},
 
 	toggleSetting: function(setting, buttonID) {
