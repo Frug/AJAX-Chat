@@ -121,7 +121,7 @@ class AJAXChat {
 	}
 	
 	function getDataBaseTable($table) {
-		return ($this->db->getName() ? '`'.$this->db->getName().'`.'.$this->getConfig('dbTableNames',$table) : $this->getConfig('dbTableNames',$table));
+		return $this->db->getDataBaseTable($this->getConfig('dbTableNames',$table));
 	}
 
 	function initSession() {
@@ -591,7 +591,7 @@ class AJAXChat {
 					'.$this->db->makeSafe($this->getUserRole()).',
 					'.$this->db->makeSafe($this->getChannel()).',
 					NOW(),
-					'.$this->db->makeSafe($this->ipToStorageFormat($_SERVER['REMOTE_ADDR'])).'
+					'.$this->db->makeSafe($this->db->ipToStorageFormat($_SERVER['REMOTE_ADDR'])).'
 				);';	
 		
 		// Create a new SQL query:
@@ -631,7 +631,7 @@ class AJAXChat {
 					userName 	= '.$this->db->makeSafe($this->getUserName()).',
 					channel 	= '.$this->db->makeSafe($this->getChannel()).',
 					dateTime 	= NOW(),
-					ip			= '.$this->db->makeSafe($this->ipToStorageFormat($_SERVER['REMOTE_ADDR'])).'
+					ip			= '.$this->db->makeSafe($this->db->ipToStorageFormat($_SERVER['REMOTE_ADDR'])).'
 				WHERE
 					userID = '.$this->db->makeSafe($this->getUserID()).';';
 					
@@ -1508,7 +1508,7 @@ class AJAXChat {
 					'.$this->db->makeSafe($userRole).',
 					'.$this->db->makeSafe($channelID).',
 					NOW(),
-					'.$this->db->makeSafe($this->ipToStorageFormat($ip)).',
+					'.$this->db->makeSafe($this->db->ipToStorageFormat($ip)).',
 					'.$this->db->makeSafe($text).'
 				);';
 
@@ -1662,8 +1662,8 @@ class AJAXChat {
 			$this->_bannedUsersData = array();
 
 			$sql = 'SELECT
-						userID,
-						userName,
+						userID   AS "userID",
+						userName AS "userName",
 						ip
 					FROM
 						'.$this->getDataBaseTable('bans').'
@@ -1680,7 +1680,7 @@ class AJAXChat {
 			}
 			
 			while($row = $result->fetch()) {
-				$row['ip'] = $this->ipFromStorageFormat($row['ip']);
+				$row['ip'] = $this->db->ipFromStorageFormat($row['ip']);
 				array_push($this->_bannedUsersData, $row);
 			}
 			
@@ -1740,8 +1740,8 @@ class AJAXChat {
 				VALUES (
 					'.$this->db->makeSafe($userID).',
 					'.$this->db->makeSafe($userName).',
-					DATE_ADD(NOW(), interval '.$this->db->makeSafe($banMinutes).' MINUTE),
-					'.$this->db->makeSafe($this->ipToStorageFormat($ip)).'
+					'.$this->db->dateAddSqlFragment('NOW()', intval($banMinutes), 'MINUTE').',
+					'.$this->db->makeSafe($this->db->ipToStorageFormat($ip)).'
 				);';	
 		
 		// Create a new SQL query:
@@ -1794,7 +1794,7 @@ class AJAXChat {
 		$sql = 'UPDATE
 					'.$this->getDataBaseTable('online').'
 				SET
-					dateTime = DATE_SUB(NOW(), interval '.(intval($this->getConfig('inactiveTimeout'))+1).' MINUTE)
+					dateTime = '.$this->db->dateAddSqlFragment('NOW()', -(intval($this->getConfig('inactiveTimeout'))+1), 'MINUTE').'
 				WHERE
 					'.$condition.';';
 					
@@ -1812,13 +1812,13 @@ class AJAXChat {
 	
 	function removeInactive() {
 		$sql = 'SELECT
-					userID,
-					userName,
+					userID   AS "userID",
+					userName AS "userName",
 					channel
 				FROM
 					'.$this->getDataBaseTable('online').'
 				WHERE
-					NOW() > DATE_ADD(dateTime, interval '.$this->getConfig('inactiveTimeout').' MINUTE);';
+					NOW() > ' . $this->db->dateAddSqlFragment('dateTime', $this->getConfig('inactiveTimeout'), 'MINUTE') . ';';
 		
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
@@ -1922,7 +1922,7 @@ class AJAXChat {
 						';
 		if($this->getConfig('requestMessagesPriorChannelEnter') ||
 			($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($this->getChannel(), $this->getConfig('requestMessagesPriorChannelEnterList')))) {
-			$condition .= 'NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
+			$condition .= 'NOW() < ' . $this->db->dateAddSqlFragment('dateTime', $this->getConfig('requestMessagesTimeDiff'), 'HOUR');
 		} else {
 			$condition .= 'dateTime >= \''.date('Y-m-d H:i:s', $this->getChannelEnterTimeStamp()).'\'';	
 		}
@@ -2016,11 +2016,11 @@ class AJAXChat {
 		// Get the last messages in descending order (this optimises the LIMIT usage):
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					userID   AS "userID",
+					userName AS "userName",
+					userRole AS "userRole",
+					channel  AS "channelID",
+					'.$this->db->unixTimestampSqlFragment('dateTime').' AS "timeStamp",
 					text
 				FROM
 					'.$this->getDataBaseTable('messages').'
@@ -2079,7 +2079,7 @@ class AJAXChat {
 						';
 		if($this->getConfig('requestMessagesPriorChannelEnter') ||
 			($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($channelID, $this->getConfig('requestMessagesPriorChannelEnterList')))) {
-			$condition .= 'NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
+			$condition .= 'NOW() < ' . $this->db->dateAddSqlFragment('dateTime', $this->getConfig('requestMessagesTimeDiff'), 'HOUR');
 		} else {
 			// Teaser content may not be shown for this channel:
 			$condition .= '0 = 1';	
@@ -2091,11 +2091,11 @@ class AJAXChat {
 		// Get the last messages in descending order (this optimises the LIMIT usage):
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					userID   AS "userID",
+					userName AS "userName",
+					userRole AS "userRole",
+					channel  AS "channelID",
+					'.$this->db->unixTimestampSqlFragment('dateTime').' AS "timeStamp",
 					text
 				FROM
 					'.$this->getDataBaseTable('messages').'
@@ -2237,7 +2237,7 @@ class AJAXChat {
 			if(($this->getUserRole() == AJAX_CHAT_ADMIN || $this->getUserRole() == AJAX_CHAT_MODERATOR) && strpos($this->getRequestVar('search'), 'ip=') === 0) {
 				// Search for messages with the given IP:
 				$ip = substr($this->getRequestVar('search'), 3);
-				$condition .= ' AND (ip = '.$this->db->makeSafe($this->ipToStorageFormat($ip)).')';
+				$condition .= ' AND (ip = '.$this->db->makeSafe($this->db->ipToStorageFormat($ip)).')';
 			} else if(strpos($this->getRequestVar('search'), 'userID=') === 0) {
 				// Search for messages with the given userID:
 				$userID = substr($this->getRequestVar('search'), 7);
@@ -2250,7 +2250,7 @@ class AJAXChat {
 		
 		// If no period or search condition is given, just monitor the last messages on the given channel:
 		if(!isset($periodStart) && !$this->getRequestVar('search')) {
-			$condition .= ' AND NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('logsRequestMessagesTimeDiff').' HOUR)';
+			$condition .= ' AND NOW() < ' . $this->db->dateAddSqlFragment(dateTime, $this->getConfig('logsRequestMessagesTimeDiff'), 'HOUR');
 		}
 
 		return $condition;
@@ -2259,11 +2259,11 @@ class AJAXChat {
 	function getLogsViewMessagesXML() {
 		$sql = 'SELECT
 					id,
-					userID,
-					userName,
-					userRole,
-					channel AS channelID,
-					UNIX_TIMESTAMP(dateTime) AS timeStamp,
+					userID   AS "userID",
+					userName AS "userName",
+					userRole AS "userRole",
+					channel  AS "channelID",
+					'.$this->db->unixTimestampSqlFragment('dateTime').' AS "timeStamp",
 					ip,
 					text
 				FROM
@@ -2292,7 +2292,7 @@ class AJAXChat {
 			$xml .= ' userRole="'.$row['userRole'].'"';
 			$xml .= ' channelID="'.$row['channelID'].'"';
 			if($this->getUserRole() == AJAX_CHAT_ADMIN || $this->getUserRole() == AJAX_CHAT_MODERATOR) {
-				$xml .= ' ip="'.$this->ipFromStorageFormat($row['ip']).'"';					
+				$xml .= ' ip="'.$this->db->ipFromStorageFormat($row['ip']).'"';					
 			}
 			$xml .= '>';
 			$xml .= '<username><![CDATA['.$this->encodeSpecialChars($row['userName']).']]></username>';
@@ -2319,7 +2319,7 @@ class AJAXChat {
 		$sql = 'DELETE FROM
 					'.$this->getDataBaseTable('messages').'
 				WHERE
-					dateTime < DATE_SUB(NOW(), interval '.$this->getConfig('logsPurgeTimeDiff').' DAY);';
+					dateTime < '.$this->db->dateAddSqlFragment('NOW()', - $this->getConfig('logsPurgeTimeDiff'), 'DAY');
 		
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
@@ -2380,11 +2380,11 @@ class AJAXChat {
 			$this->_onlineUsersData = array();
 			
 			$sql = 'SELECT
-						userID,
-						userName,
-						userRole,
+						userID   AS "userID",
+						userName AS "userName",
+						userRole AS "userRole",
 						channel,
-						UNIX_TIMESTAMP(dateTime) AS timeStamp,
+						'.$this->db->unixTimestampSqlFragment('dateTime').' AS "timeStamp",
 						ip
 					FROM
 						'.$this->getDataBaseTable('online').'
@@ -2401,7 +2401,7 @@ class AJAXChat {
 			}
 			
 			while($row = $result->fetch()) {
-				$row['ip'] = $this->ipFromStorageFormat($row['ip']);
+				$row['ip'] = $this->db->ipFromStorageFormat($row['ip']);
 				array_push($this->_onlineUsersData, $row);
 			}
 			
@@ -2565,7 +2565,7 @@ class AJAXChat {
 					WHERE
 						userID='.$this->db->makeSafe($this->getUserID()).'
 						AND
-						DATE_SUB(NOW(), interval 1 DAY) < dateTime;';
+						'.$this->db->dateAddSqlFragment('NOW()', -1, 'DAY').' < dateTime;';
 			
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
@@ -2589,7 +2589,7 @@ class AJAXChat {
 		$sql = 'DELETE FROM
 					'.$this->getDataBaseTable('invitations').'
 				WHERE
-					DATE_SUB(NOW(), interval 1 DAY) > dateTime;';
+					'.$this->db->dateAddSqlFragment('NOW()', -1, 'DAY').' > dateTime;';
 		
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
@@ -2878,28 +2878,6 @@ class AJAXChat {
 		return AJAXChatEncoding::decodeSpecialChars($str);
 	}
 
-	function ipToStorageFormat($ip) {
-		if(function_exists('inet_pton')) {
-			// ipv4 & ipv6:
-			return @inet_pton($ip);
-		}
-		// Only ipv4:
-		return @pack('N',@ip2long($ip));
-	}
-	
-	function ipFromStorageFormat($ip) {
-		if(function_exists('inet_ntop')) {
-			// ipv4 & ipv6:
-			return @inet_ntop($ip);
-		}
-		// Only ipv4:
-		$unpacked = @unpack('Nlong',$ip);
-		if(isset($unpacked['long'])) {
-			return @long2ip($unpacked['long']);
-		}
-		return null;
-	}
-	
 	function getConfig($key, $subkey=null) {
 		if($subkey)
 			return $this->_config[$key][$subkey];

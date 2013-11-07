@@ -78,7 +78,7 @@ PHP is used to communicate with the database and authenticate users.</p>
     <tr>
       <td>
 		PHP &gt;= 5<br />
-		MySQL &gt;= 4<br />
+		MySQL &gt;= 4 or PostgreSQL &gt;= 8.1<br />
 		Ruby &gt;= 1.8 (optional)
 	  </td>
       <td>
@@ -113,9 +113,9 @@ PHP is used to communicate with the database and authenticate users.</p>
       <p>Sufficed to say you need this information. Talk to your hosting provider if you don't know. </p>
       <p>In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br />
       </p>
-      <p class="note">If your host does not use mysqli you will need to change the connection type field:<br />
+      <p class="note">If you wish to use PostgreSQL, or if your host does not support the PHP mysqli library, you will need to change the connection type field:<br />
         $config['dbConnection']['type'] = null;<br />
-        If this is set to &quot;null&quot; it defaults to &quot;mysqli&quot; if existing, else to &quot;mysql&quot;. In most cases this field can be left as null.<br />
+        If this is set to &quot;null&quot; it defaults to &quot;mysqli&quot; if existing, else to &quot;mysql&quot;. In most cases this field can be left as null. To use PostgreSQL, set it to &quot;postgresql&quot;.<br />
         <br />
         You can reference an existing database connection link or object by changing:<br />
         $config['dbConnection']['link'] = null;<br />

@@ -20,6 +20,9 @@ class AJAXChatDataBase {
 			case 'mysql':
 				$this->_db = new AJAXChatDatabaseMySQL($dbConnectionConfig);
 				break;
+			case 'postgresql':
+				$this->_db = new AJAXChatDatabasePostgreSQL($dbConnectionConfig);
+				break;
 			default:
 				// Use MySQLi if available, else MySQL (and check the type of a given database connection object):
 				if(function_exists('mysqli_connect') && (!$dbConnectionConfig['link'] || is_object($dbConnectionConfig['link']))) {
@@ -58,6 +61,32 @@ class AJAXChatDataBase {
 	// Method to prevent SQL injections:
 	function makeSafe($value) {
 		return $this->_db->makeSafe($value);
+	}
+
+	// Convert IP address to storage format
+	function ipToStorageFormat($ip) {
+		return $this->_db->ipToStorageFormat($ip);
+	}
+	function ipFromStorageFormat($ip) {
+		return $this->_db->ipFromStorageFormat($ip);
+	}
+
+	// Get database type
+	function type() {
+		return $this->_db->type();
+	}
+
+	// Date math
+	function dateAddSqlFragment($sqlExpr, $amount, $unit) {
+		return $this->_db->dateAddSqlFragment($sqlExpr, $amount, $unit);
+	}
+	function unixTimestampSqlFragment($column_name) {
+		return $this->_db->unixTimestampSqlFragment($column_name);
+	}
+
+	// Get database table name
+	function getDataBaseTable($name) {
+		return $this->_db->getDataBaseTable($name);
 	}
 
 	// Method to perform SQL queries:

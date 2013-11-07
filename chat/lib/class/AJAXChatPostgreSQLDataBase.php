@@ -8,7 +8,7 @@
  */
 
 // Class to initialize the MySQL DataBase connection:
-class AJAXChatDataBaseMySQLi {
+class AJAXChatDatabasePostgreSQL {
 
 	var $_connectionID;
 	var $_errno = 0;
@@ -16,24 +16,27 @@ class AJAXChatDataBaseMySQLi {
 	var $_dbName;
 
 	function type() {
-		return 'mysqli';
+		return 'postgresql';
 	}
 
-	function AJAXChatDataBaseMySQLi(&$dbConnectionConfig) {
+	function AJAXChatDataBasePostgreSQL(&$dbConnectionConfig) {
 		$this->_connectionID = $dbConnectionConfig['link'];
 		$this->_dbName = $dbConnectionConfig['name'];
 	}
 	
 	// Method to connect to the DataBase server:
 	function connect(&$dbConnectionConfig) {
-		@$this->_connectionID = new mysqli(
-			$dbConnectionConfig['host'],
-			$dbConnectionConfig['user'],
-			$dbConnectionConfig['pass']
-		);
-		if($this->_connectionID->connect_errno) {
-			$this->_errno = mysqli_connect_errno();
-			$this->_error = mysqli_connect_error();
+		$connstring =
+			" host="     . $dbConnectionConfig['host'] .
+			" dbname="   . $dbConnectionConfig['name'] .
+			" user="     . $dbConnectionConfig['user'] .
+ 			" password=" . $dbConnectionConfig['pass'] ;
+
+		$this->_connectionID = @pg_connect($connstring);
+
+		if(!$this->_connectionID) {
+			$this->_errno = null;
+			$this->_error = 'Database connection failed: ' . pg_result_error();
 			return false;
 		}
 		return true;
@@ -41,10 +44,8 @@ class AJAXChatDataBaseMySQLi {
 	
 	// Method to select the DataBase:
 	function select($dbName) {
-		if(!$this->_connectionID->select_db($dbName)) {
-			$this->_errno = $this->_connectionID->errno;
-			$this->_error = $this->_connectionID->error;
-			return false;
+		if($dbName != pg_dbname($this->_connectionID)) {
+			die('Switching databases is not supported.');
 		}
 		$this->_dbName = $dbName;
 		return true;	
@@ -73,12 +74,12 @@ class AJAXChatDataBaseMySQLi {
 	
 	// Method to prevent SQL injections:
 	function makeSafe($value) {
-		return "'".$this->_connectionID->escape_string($value)."'";
+		return "'".pg_escape_string($value)."'";
 	}
-
+	
 	// Method to perform SQL queries:
 	function sqlQuery($sql) {
-		return new AJAXChatMySQLiQuery($sql, $this->_connectionID);
+		return new AJAXChatPostgreSQLQuery($sql, $this->_connectionID);
 	}
 
 	// Method to retrieve the current DataBase name:
@@ -88,43 +89,41 @@ class AJAXChatDataBaseMySQLi {
 
 	// Method to retrieve the last inserted ID:
 	function getLastInsertedID() {
-		return $this->_connectionID->insert_id;
+		// Note: LASTVAL Requires PostgreSQL >= 8.1
+		$sql    = 'SELECT LASTVAL() AS lastval';
+		$result = $this->sqlQuery($sql);
+
+		// Stop if an error occurs:
+		if($result->error()) {
+			echo $result->getError();
+			die();
+		}
+
+		$row = $result->fetch();
+		return $row['lastval'];
 	}
 
-	// Convert IP to binary
+	// IP Address storage format
 	function ipToStorageFormat($ip) {
-		if(function_exists('inet_pton')) {
-			// ipv4 & ipv6:
-			return @inet_pton($ip);
-		}
-		// Only ipv4:
-		return @pack('N',@ip2long($ip));
+		return $ip;
 	}
 	
 	function ipFromStorageFormat($ip) {
-		if(function_exists('inet_ntop')) {
-			// ipv4 & ipv6:
-			return @inet_ntop($ip);
-		}
-		// Only ipv4:
-		$unpacked = @unpack('Nlong',$ip);
-		if(isset($unpacked['long'])) {
-			return @long2ip($unpacked['long']);
-		}
-		return null;
+		return $ip;
 	}
 
 	// SQL date manipulation
 	function dateAddSqlFragment($sql_expr, $amount, $unit) {
-		return "DATE_ADD($sql_expr, interval $amount $unit)";
+		$amount = intval($amount);
+		return "$sql_expr + interval '$amount $unit'";
 	}
 	function unixTimestampSqlFragment($column_name) {
-		return "UNIX_TIMESTAMP($column_name)";
-	}
+		return "extract(epoch from $column_name)";
+	}	
 
 	// Database table name
-	function getDataBaseTable($table) {	
-		return $this->getName() ? '`'.$this->getName().'`.'.$table : $table;
+	function getDataBaseTable($table) {
+		return $table;
 	}
 
 }
