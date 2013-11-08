@@ -3,7 +3,7 @@
  * @author Sebastian Tschan
  * @author Dutch localisation: Patrick Donker
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 

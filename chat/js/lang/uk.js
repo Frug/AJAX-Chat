@@ -3,7 +3,7 @@
  * @author Sebastian Tschan
  * @author Yuriy Smetana (yura@stryi.com.ua, http://joomla.org.ua)
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 

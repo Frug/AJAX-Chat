@@ -4,7 +4,7 @@
  * @author Asmo Soinio
  * @author Saku Laukkanen
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 
