@@ -1924,7 +1924,7 @@ class AJAXChat {
 			($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($this->getChannel(), $this->getConfig('requestMessagesPriorChannelEnterList')))) {
 			$condition .= 'NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
 		} else {
-			$condition .= 'dateTime >= \''.date('Y-m-d H:i:s', $this->getChannelEnterTimeStamp()).'\'';	
+			$condition .= 'dateTime >= FROM_UNIXTIME(' . $this->getChannelEnterTimeStamp() . ')';
 		}
 		return $condition;
 	}
