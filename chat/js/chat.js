@@ -1454,12 +1454,8 @@ var ajaxChat = {
 	},
 
 	encodeSpecialChars: function(text) {
-		if (!arguments.callee.regExp) {
-			arguments.callee.regExp = new RegExp('[&<>\'"]', 'g');
-		}
-		
 		return text.replace(
-			arguments.callee.regExp,
+			/[&<>'"]/g,
 			this.encodeSpecialCharsCallback
 		);
 	},
@@ -1483,12 +1479,10 @@ var ajaxChat = {
 	},
 
 	decodeSpecialChars: function(text) {
-		if (!arguments.callee.regExp) {
-			arguments.callee.regExp = new RegExp('(&amp;)|(&lt;)|(&gt;)|(&#39;)|(&quot;)', 'g');
-		}
+		var regExp = new RegExp('(&amp;)|(&lt;)|(&gt;)|(&#39;)|(&quot;)', 'g');
 		
 		return text.replace(
-			arguments.callee.regExp,
+			regExp,
 			this.decodeSpecialCharsCallback
 		);
 	},
@@ -2460,14 +2454,14 @@ var ajaxChat = {
 		this.userMenuCounter++;
 		return menu;
 	},
-	
+
 	containsUnclosedTags: function(str) {
-		if (!arguments.callee.regExpOpenTags || !arguments.callee.regExpCloseTags) {
-			arguments.callee.regExpOpenTags		= new RegExp('<[^>\\/]+?>', 'gm');
-			arguments.callee.regExpCloseTags	= new RegExp('<\\/[^>]+?>', 'gm');
-		}	
-		var openTags	= str.match(arguments.callee.regExpOpenTags);
-		var closeTags	= str.match(arguments.callee.regExpCloseTags);
+		var openTags, closeTags,
+			regExpOpenTags = /<[^>\/]+?>/gm,
+			regExpCloseTags = /<\/[^>]+?>/gm;
+	
+		openTags	= str.match(regExpOpenTags);
+		closeTags	= str.match(regExpCloseTags);
 		// Return true if the number of tags doesn't match:
 		if((!openTags && closeTags) ||
 			(openTags && !closeTags) ||
@@ -2478,13 +2472,15 @@ var ajaxChat = {
 	},
 		
 	breakLongWords: function(text) {
+		var newText, charCounter, currentChar, withinTag, withinEntity, i;
+	
 		if(!this.settings['wordWrap'])
 			return text;
-		var newText = '';
-		var charCounter = 0;
-		var currentChar, withinTag, withinEntity;
 		
-		for(var i=0; i<text.length; i++) {
+		newText = '';
+		charCounter = 0;
+		
+		for(i=0; i<text.length; i++) {
 			currentChar = text.charAt(i);
 			
 			// Check if we are within a tag or entity:
@@ -2518,7 +2514,7 @@ var ajaxChat = {
 				}
 				if(charCounter > this.settings['maxWordLength']) {
 					// maxWordLength has been reached, break here and reset the charCounter:
-					newText += this.getBreakString();
+					newText += '&#8203;';
 					charCounter = 0;
 				}
 			}		
@@ -2529,37 +2525,14 @@ var ajaxChat = {
 		return newText;
 	},
 	
-	getBreakString: function() {
-		// Returns the character sequence used to wrap long words
-		if(typeof arguments.callee.breakString === 'undefined') {
-			arguments.callee.breakString = '&#8203;';
-		}
-		return arguments.callee.breakString;
-	},
-	
 	replaceBBCode: function(text) {
 		if(!this.settings['bbCode']) {
 			// If BBCode is disabled, just strip the text from BBCode tags:
-			if (!arguments.callee.regExpStripBBCode) {
-				arguments.callee.regExpStripBBCode = new RegExp(
-					'\\[(?:\\/)?(\\w+)(?:=([^<>]*?))?\\]',
-					'gm'
-				);
-			}		
-			return text.replace(
-				arguments.callee.regExpStripBBCode,
-				''
-			);
+			return text.replace(/\[(?:\/)?(\w+)(?:=([^<>]*?))?\]/, '');
 		}
 		// Remove the BBCode tags:
-		if (!arguments.callee.regExp) {
-			arguments.callee.regExp = new RegExp(
-				'\\[(\\w+)(?:=([^<>]*?))?\\](.+?)\\[\\/\\1\\]',
-				'gm'
-			);
-		}		
 		return text.replace(
-			arguments.callee.regExp,
+			/\[(\w+)(?:=([^<>]*?))?\](.+?)\[\/\1\]/gm, 
 			this.replaceBBCodeCallback
 		);
 	},
@@ -2568,11 +2541,11 @@ var ajaxChat = {
 		// Only replace predefined BBCode tags:
 		if(!ajaxChat.inArray(ajaxChat.bbCodeTags, p1)) {
 			return str;
-		}	
+		}
 		// Avoid invalid XHTML (unclosed tags):
 		if(ajaxChat.containsUnclosedTags(p3)) {
 			return str;
-		}			
+		}	
 		switch(p1) {
 			case 'color':
 				return ajaxChat.replaceBBCodeColor(p3, p2);
@@ -2588,7 +2561,7 @@ var ajaxChat = {
 				return ajaxChat.replaceBBCodeUnderline(p3);
 			default:
 				return ajaxChat.replaceCustomBBCode(p1, p2, p3);
-		}	
+		}
 	},
 
 	replaceBBCodeColor: function(content, attribute) {
@@ -2605,18 +2578,16 @@ var ajaxChat = {
 	},
 	
 	replaceBBCodeUrl: function(content, attribute) {
-		var url;
+		var url, regExpUrl;
 		if(attribute)
 			url = attribute.replace(/\s/gm, this.encodeText(' '));
 		else
 			url = this.stripBBCodeTags(content.replace(/\s/gm, this.encodeText(' ')));
-		if (!arguments.callee.regExpUrl) {
-			arguments.callee.regExpUrl = new RegExp(
-				'^(?:(?:http)|(?:https)|(?:ftp)|(?:irc)):\\/\\/',
-				''
-			);
-		}
-		if(!url || !url.match(arguments.callee.regExpUrl))
+		regExpUrl = new RegExp(
+			'^(?:(?:http)|(?:https)|(?:ftp)|(?:irc)):\\/\\/',
+			''
+		);
+		if(!url || !url.match(regExpUrl))
 			return content;
 		return 	'<a href="'
 				+ url
@@ -2626,18 +2597,17 @@ var ajaxChat = {
 	},
 	
 	replaceBBCodeImage: function(url) {
+		var regExpUrl, maxWidth, maxHeight;
 		if(this.settings['bbCodeImages']) {
-			if (!arguments.callee.regExpUrl) {
-				arguments.callee.regExpUrl = new RegExp(
-					this.regExpMediaUrl,
-					''
-				);
-			}
-			if(!url || !url.match(arguments.callee.regExpUrl))
+			regExpUrl = new RegExp(
+				this.regExpMediaUrl,
+				''
+			);
+			if(!url || !url.match(regExpUrl))
 				return url;
 			url = url.replace(/\s/gm, this.encodeText(' '));
-			var maxWidth = this.dom['chatList'].offsetWidth-50;
-			var maxHeight = this.dom['chatList'].offsetHeight-50;
+			maxWidth = this.dom['chatList'].offsetWidth-50;
+			maxHeight = this.dom['chatList'].offsetHeight-50;
 			return	'<a href="'
 					+url
 					+'" onclick="window.open(this.href); return false;">'
@@ -2678,17 +2648,16 @@ var ajaxChat = {
 	},
 	
 	replaceHyperLinks: function(text) {
+		var regExp;
 		if(!this.settings['hyperLinks']) {
 			return text;
 		}
-		if(!arguments.callee.regExp) {
-			arguments.callee.regExp = new RegExp(
-				'(^|\\s|>)((?:(?:http)|(?:https)|(?:ftp)|(?:irc)):\\/\\/[^\\s<>]+)(<\\/a>)?',
-				'gm'
-			);
-		}
+		regExp = new RegExp(
+			'(^|\\s|>)((?:(?:http)|(?:https)|(?:ftp)|(?:irc)):\\/\\/[^\\s<>]+)(<\\/a>)?',
+			'gm'
+		);
 		return text.replace(
-			arguments.callee.regExp,
+			regExp,
 			// Specifying an anonymous function as second parameter:
 			function(str, p1, p2, p3) {
 				// Do not replace URL's inside URL's:
@@ -2706,13 +2675,12 @@ var ajaxChat = {
 	},
 
 	replaceLineBreaks: function(text) {
-		if (!arguments.callee.regExp) {
-			arguments.callee.regExp = new RegExp('\\n',	'g');
-		}
+		var regExp  = new RegExp('\\n',	'g');
+
 		if(!this.settings['lineBreaks']) {
-			return text.replace(arguments.callee.regExp, ' ');
+			return text.replace(regExp, ' ');
 		} else {
-			return text.replace(arguments.callee.regExp, '<br/>');
+			return text.replace(regExp, '<br/>');
 		}
 	},
 
