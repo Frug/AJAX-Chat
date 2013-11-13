@@ -824,6 +824,7 @@ Version 0.8.7 (?.?.2013)
 Notice: 
 - Minimum php version is now 5 (was 4).
 - phpbb2 branch discontinued.
+- License has changed from GNU Affero to a Modified MIT License
 
 New features:
 - Added normal Dutch localization (moved existing nl to nl-be) - thanks to Patrick Donker.
@@ -839,3 +840,4 @@ Bugfixes:
 - Fixed browser crashing bug with certain long words - thanks to Clint.
 - Properly detect and report mysqli connection errors.
 - Fix potential conflict between php and mysql timezones by using mysql's FROM_UNIXTIME(). - thanks to ManOnDaMoon.
+- Normalized sound volumes a bit.
