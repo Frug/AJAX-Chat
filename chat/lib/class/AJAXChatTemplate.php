@@ -213,16 +213,16 @@ class AJAXChatTemplate {
 	function getChannelOptionTags() {
 		$channelOptions = '';
 		$channelSelected = false;
-		foreach($this->ajaxChat->getChannels() as $key=>$value) {
-			if($this->ajaxChat->isLoggedIn()) {
-				$selected = ($value == $this->ajaxChat->getChannel()) ? ' selected="selected"' : '';
+		foreach($this->ajaxChat->getChannels() as $name=>$id) {
+			if($this->ajaxChat->isLoggedIn() && $this->ajaxChat->getChannel()) {
+				$selected = ($id == $this->ajaxChat->getChannel()) ? ' selected="selected"' : '';
 			} else {
-				$selected = ($value == $this->ajaxChat->getConfig('defaultChannelID')) ? ' selected="selected"' : '';
+				$selected = ($id == $this->ajaxChat->getConfig('defaultChannelID')) ? ' selected="selected"' : '';
 			}
 			if($selected) {
 				$channelSelected = true;
 			}
-			$channelOptions .= '<option value="'.$this->ajaxChat->htmlEncode($key).'"'.$selected.'>'.$this->ajaxChat->htmlEncode($key).'</option>';
+			$channelOptions .= '<option value="'.$this->ajaxChat->htmlEncode($name).'"'.$selected.'>'.$this->ajaxChat->htmlEncode($name).'</option>';
 		}
 		if($this->ajaxChat->isLoggedIn() && $this->ajaxChat->isAllowedToCreatePrivateChannel()) {
 			// Add the private channel of the user to the options list:

@@ -58,12 +58,15 @@ class CustomAJAXChat extends AJAXChat {
 			
 			// Add the valid channels to the channel list (the defaultChannelID is always valid):
 			foreach($this->getAllChannels() as $key=>$value) {
+				if ($value == $this->getConfig('defaultChannelID')) {
+					$this->_channels[$key] = $value;
+					continue;
+				}
 				// Check if we have to limit the available channels:
 				if($this->getConfig('limitChannelList') && !in_array($value, $this->getConfig('limitChannelList'))) {
 					continue;
 				}
-				
-				if(in_array($value, $validChannels) || $value == $this->getConfig('defaultChannelID')) {
+				if(in_array($value, $validChannels)) {
 					$this->_channels[$key] = $value;
 				}
 			}
@@ -80,18 +83,17 @@ class CustomAJAXChat extends AJAXChat {
 			
 			$defaultChannelFound = false;
 			
-			foreach($customChannels as $key=>$value) {
-				$forumName = $this->trimChannelName($value);
-				
-				$this->_allChannels[$forumName] = $key;
-				
-				if($key == $this->getConfig('defaultChannelID')) {
+			foreach($customChannels as $name=>$id) {
+				$this->_allChannels[$this->trimChannelName($name)] = $id;
+				if($id == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
 			}
 			
 			if(!$defaultChannelFound) {
-				// Add the default channel as first array element to the channel list:
+				// Add the default channel as first array element to the channel list
+				// First remove it in case it appeard under a different ID
+				unset($this->_allChannels[$this->getConfig('defaultChannelName')]);
 				$this->_allChannels = array_merge(
 					array(
 						$this->trimChannelName($this->getConfig('defaultChannelName'))=>$this->getConfig('defaultChannelID')
@@ -114,7 +116,9 @@ class CustomAJAXChat extends AJAXChat {
 		// List containing the custom channels:
 		$channels = null;
 		require(AJAX_CHAT_PATH.'lib/data/channels.php');
-		return $channels;
+		// Channel array structure should be:
+		// ChannelName => ChannelID
+		return array_flip($channels);
 	}
 
 }
