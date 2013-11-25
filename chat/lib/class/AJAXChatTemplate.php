@@ -61,7 +61,7 @@ class AJAXChatTemplate {
 				return $this->ajaxChat->htmlEncode($this->ajaxChat->getChatURL());
 
 			case 'LANG':
-				return $this->ajaxChat->htmlEncode($this->ajaxChat->getLang($tagData[2]));				
+				return $this->ajaxChat->htmlEncode($this->ajaxChat->getLang((isset($tagData[2]) ? $tagData[2] : null)));				
 			case 'LANG_CODE':
 				return $this->ajaxChat->getLangCode();
 
@@ -174,7 +174,7 @@ class AJAXChatTemplate {
 					return 'write_allowed';
 			
 			default:
-				return $this->ajaxChat->replaceCustomTemplateTags($tagData[1], $tagData[2]);
+				return $this->ajaxChat->replaceCustomTemplateTags($tagData[1], (isset($tagData[2]) ? $tagData[2] : null));
 		}
 	}
 
