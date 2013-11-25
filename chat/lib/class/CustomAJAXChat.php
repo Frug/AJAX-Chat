@@ -112,7 +112,7 @@ class CustomAJAXChat extends AJAXChat {
 		return $users;
 	}
 	
-	function &getCustomChannels() {
+	function getCustomChannels() {
 		// List containing the custom channels:
 		$channels = null;
 		require(AJAX_CHAT_PATH.'lib/data/channels.php');
@@ -122,4 +122,3 @@ class CustomAJAXChat extends AJAXChat {
 	}
 
 }
-?>
