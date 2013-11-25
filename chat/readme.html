@@ -41,7 +41,7 @@
 
 <h1 id="top">AJAX Chat for MyBB
 	<span class="version">
-		v 0.8.6 MyBB ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+		v 0.8.7 MyBB ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
 	</span>
 </h1> 
 
@@ -59,13 +59,13 @@
 </div>
 
 
-<p>This is the version of Blueimp's AJAX Chat desinged to be run with <strong>MyBB</strong>.<br />
+<p style="margin:1.5em">This is the version of Blueimp's AJAX Chat desinged to be run with <strong>MyBB</strong>.<br>
 If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.</p>
 
-<p class="note" style="margin-right: 30em;">
-AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
-The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
-Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+<p class="note" style="margin-right: 30em;">AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
+  The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
+  Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+By using JavaScript the chat page can be updated without having to reload the whole page.<br>
 By using JavaScript the chat page can be updated without having to reload the whole page.<br>
 PHP is used to communicate with the database and authenticate users.
 </p>
@@ -94,10 +94,10 @@ PHP is used to communicate with the database and authenticate users.
 
 <h2 id="installation">Installation</h2>
 <div class="subsection">
-	<p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br /></p>
+	<p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br></p>
 	<h3>Before You Begin</h3>
 	<div class="subsection">
-	  <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br />
+	  <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
 		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
 	</div>
 	
@@ -106,13 +106,13 @@ PHP is used to communicate with the database and authenticate users.
 
 	<div class="subsection">
 	  <p>
-		Upload the chat folder to your server into your mybb forum directory:<br />
+		Upload the chat folder to your server into your mybb forum directory:<br>
 		e.g. http://example.org/mybb/chat/</p>
 	</div>
 	
 	<h3>Create Database Tables</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br>
 	http://example.org/mybb/chat/install.php</p>
 	
 	<p>Replace "http://example.org/mybb/chat/" with the real URL to your chat directory.</p>
@@ -120,7 +120,7 @@ PHP is used to communicate with the database and authenticate users.
 	
 	<h3>Delete Installation Script</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br>
 	http://example.org/mybb/chat/install.php</p>
 	
 	<p>Delete the file install.php from the chat directory on your server.</p>
@@ -129,7 +129,7 @@ PHP is used to communicate with the database and authenticate users.
 		
 	<h3>Congradulation! You Are Winner!</h3>
 	<div class="subsection">
-	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br />
+	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br>
 	  </span>You are now free to customize chat to further suit your needs.</p>
 	</div>
 </div>
@@ -328,6 +328,7 @@ PHP is used to communicate with the database and authenticate users.
   </div>
   <p>&nbsp;</p>
 </div>
+
 
 <h2 id="support">Support</h2>
 <div class="subsection">
