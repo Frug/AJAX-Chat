@@ -1127,7 +1127,7 @@ var ajaxChat = {
 					+ this.lang['userMenuWhereis']
 					+ '</a></li>';
 			}
-			if(this.userRole === 2 || this.userRole === 3) {
+			if(this.userRole === '2' || this.userRole === '3') {
 				menu	+= '<li><a href="javascript:ajaxChat.insertMessageWrapper(\'/kick '
 						+ encodedUserName
 						+ ' \');">'
@@ -1161,11 +1161,11 @@ var ajaxChat = {
 					+ '<li><a href="javascript:ajaxChat.insertMessageWrapper(\'/nick \');">'
 					+ this.lang['userMenuNick']
 					+ '</a></li>';
-			if(this.userRole === 1 || this.userRole === 2 || this.userRole === 3) {
+			if(this.userRole === '1' || this.userRole === '2' || this.userRole === '3') {
 				menu	+= '<li><a href="javascript:ajaxChat.sendMessageWrapper(\'/join\');">'
 						+ this.lang['userMenuEnterPrivateRoom']
 						+ '</a></li>';
-				if(this.userRole === 2 || this.userRole === 3) {
+				if(this.userRole === '2' || this.userRole === '3') {
 					menu	+= '<li><a href="javascript:ajaxChat.sendMessageWrapper(\'/bans\');">'
 							+ this.lang['userMenuBans']
 							+ '</a></li>';
@@ -1318,10 +1318,10 @@ var ajaxChat = {
 	},
 	
 	isAllowedToDeleteMessage: function(messageID, userID, userRole, channelID) {
-		if((((this.userRole === 1 && this.allowUserMessageDelete && (userID === this.userID ||
+		if((((this.userRole === '1' && this.allowUserMessageDelete && (userID === this.userID ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
-			this.userRole === 2) && userRole !== 3 && userRole !== 4) || this.userRole === 3) {
+			this.userRole === '2') && userRole !== '3' && userRole !== '4') || this.userRole === '3') {
 			return true;
 		}
 		return false;
