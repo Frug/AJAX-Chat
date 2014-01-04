@@ -3,7 +3,7 @@
  * @author Sebastian Tschan
  * @author Borislav Manolov
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 
@@ -41,7 +41,7 @@ var ajaxChatLang = {
 	roll: '%s хвърли %s и получи %s.',
 	nick: '%s вече се казва %s.',
 	toggleUserMenu: 'Показване/скриване на потребителското меню за %s',
-	userMenuLogout: 'Излизане',
+	userMenuLogout: 'Изход',
 	userMenuWho: 'Потребители на линия',
 	userMenuList: 'Налични канали',
 	userMenuAction: 'Описване на действие',
@@ -70,8 +70,8 @@ var ajaxChatLang = {
 	errorUserNameNotFound: 'Грешка: Не е намерен потребител %s.',
 	errorMissingText: 'Грешка: Липсва текст на съобщението.',
 	errorMissingUserName: 'Грешка: Липсва потребителско име.',
-	errorInvalidUserName: 'Error: Invalid username.',
-	errorUserNameInUse: 'Error: Username already in use.',
+	errorInvalidUserName: 'Грешка: Невалидно потребителско име.',
+	errorUserNameInUse: 'Грешка: Това потребителско име вече се използва.',
 	errorMissingChannelName: 'Грешка: Липсва име на канал.',
 	errorInvalidChannelName: 'Грешка: Невалидно име на канал: %s',
 	errorPrivateMessageNotAllowed: 'Грешка: Личните съобщения не са позволени.',

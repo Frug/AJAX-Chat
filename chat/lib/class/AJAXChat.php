@@ -3,7 +3,7 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 
@@ -64,7 +64,7 @@ class AJAXChat {
 		$this->_requestVars['userName']		= isset($_REQUEST['userName'])		? $_REQUEST['userName']			: null;
 		$this->_requestVars['channelID']	= isset($_REQUEST['channelID'])		? (int)$_REQUEST['channelID']	: null;
 		$this->_requestVars['channelName']	= isset($_REQUEST['channelName'])	? $_REQUEST['channelName']		: null;
-		$this->_requestVars['text']			= isset($_REQUEST['text'])			? $_REQUEST['text']				: null;
+		$this->_requestVars['text']			= isset($_POST['text'])				? $_POST['text']				: null;
 		$this->_requestVars['lastID']		= isset($_REQUEST['lastID'])		? (int)$_REQUEST['lastID']		: 0;
 		$this->_requestVars['login']		= isset($_REQUEST['login'])			? true							: false;
 		$this->_requestVars['logout']		= isset($_POST['logout'])			? true							: false;
@@ -1924,7 +1924,7 @@ class AJAXChat {
 			($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($this->getChannel(), $this->getConfig('requestMessagesPriorChannelEnterList')))) {
 			$condition .= 'NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
 		} else {
-			$condition .= 'dateTime >= \''.date('Y-m-d H:i:s', $this->getChannelEnterTimeStamp()).'\'';	
+			$condition .= 'dateTime >= FROM_UNIXTIME(' . $this->getChannelEnterTimeStamp() . ')';
 		}
 		return $condition;
 	}

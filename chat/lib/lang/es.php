@@ -4,7 +4,7 @@
  * @author Sebastian Tschan
  * @author - Spanis Translation:  Manu Quintans / KeScI [www.e-nologia.com]
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 

@@ -2,7 +2,7 @@
  * @package AJAX_Chat
  * @author Rosina Ramirez
  * @copyright (c) Rosina Ramirez
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  * 
  */
@@ -135,7 +135,7 @@
 		padding:7px;
 	}
 	#content #colorCodesContainer a{border-radius:10px; box-shadow:0px 0px 3px 1px rgba(255,255,255,0.3); margin:0 5px;border:0;}
-	#content #optionsContainer input.button { border: 0; }
+	#content #optionsContainer input.button { border: 0; padding: 0; margin-right: 5px;}
 	#content #optionsContainer input {
 	    background-color:transparent;
 	}

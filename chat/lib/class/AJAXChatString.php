@@ -3,14 +3,14 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
+ * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
 
 // Class to provide multibyte enabled string methods
 class AJAXChatString {
 
-	function subString($str, $start=0, $length=null, $encoding='UTF-8') {
+	public static function subString($str, $start=0, $length=null, $encoding='UTF-8') {
 		if($length === null) {
 			$length = AJAXChatString::stringLength($str);
 		}		
@@ -23,7 +23,7 @@ class AJAXChatString {
 		}
 	}
 	
-	function stringLength($str, $encoding='UTF-8') {
+	public static function stringLength($str, $encoding='UTF-8') {
 		if(function_exists('mb_strlen')) {
 			return mb_strlen($str, $encoding);
 		} else if(function_exists('iconv_strlen')) {
