@@ -5,10 +5,10 @@
 	<title>AJAX Chat Readme</title>
 	
 	<style type="text/css">
-	body,td,th { font-family: Arial, Helvetica, sans-serif; line-height:1.5em; color:#000; font-size: inherit; }
+	body,td,th { font-family: Arial, Helvetica, sans-serif; line-height:1.6em; color:#000; font-size: inherit; }
 	body{background:#E7E7E7;margin:0; font-size: 0.8em;}
 	#wrap{max-width:1200px;background:#fff;margin:0.5em auto;padding:1.5em;box-shadow:2px 2px 4px #555;}
-	.subsection{border:1px solid #006;padding:0.8em 1.6em}
+	.subsection{border:1px solid #006;padding:0.8em 1.6em; background:#F2F5F9;}
 	.subsection .subsection{border:0}
 	a:link{color:#036;text-decoration:none}
 	a:visited{color:#03F;text-decoration:none}
@@ -20,16 +20,17 @@
 	h1,h2,h3,h4,h5,h6{font-weight:400;line-height:100%;margin:0; font-family: Verdana, Geneva, sans-serif;}
 	h1{font-size:1.8em;color:#E3E3FB;margin:-0.7em -0.7em 0.5em -0.7em;padding:0.8em; background: #2F2E8B; font-weight: 700;}
 	h2{font-size:1.3em;color:#FFF;background-color:#2F2E8B;clear:both;border-radius:5px 5px 0 0;margin:2em 0 0;padding:.5em}
-	.version { font-size: 0.6em; font-weight: bold; line-height: 150%; }
+	h2:target{background-color:#6854E4;}
+	.version { font-size: 0.6em; font-weight: bold; line-height: 150%; display: block; }
 	.version a { color:#e4e4e4; text-decoration: underline;}
 	#toc{color:#000;background-color:#EBEBEB;display:block;float:right;width:20em;line-height:170%;border-radius:5px;border-color:#FFF;margin:0 0 1em 1em;padding:1.2em}
 	#toc h2{background:#333;color:#FFF;margin:-1em -1em 0.5em;padding:0.5em}
 	#toc ol{margin:0}
 	ol li{margin-bottom:1em}
-	h3{color:#000;background-color:#CCC;padding:.5em}
+	h3{color:#000;background-color:#CED2DD;padding:.5em; font-weight: bold;border-radius:5px;}
 	code{display:block;background-color:#DDD;margin:1em;padding:1em; font-family: Consolas,"Liberation Mono",Courier,monospace;}
 	table{border:0}
-	th{background-color:#FFF;color:#000;font-weight:bold;vertical-align:middle;text-align:left;padding:.2em; }
+	th{font-weight:bold;vertical-align:middle;text-align:left;padding:.2em; }
 	p{margin:.5em 0}
 	#toc ol li,#toc p{margin:0;padding:0}
 	</style>
@@ -41,7 +42,7 @@
 <h1 id="top">AJAX Chat for SMF
 	<br>
 	<span class="version">
-		v 0.8.6 smf ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+		v 0.8.7 smf ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
 	</span>
 </h1> 
 
@@ -53,21 +54,22 @@
 	<p><a href="#logs">Logs</a></p>
 	<p><a href="#shoutbox">Shoutbox</a></p>
 	<p><a href="#socket">Socket Server</a></p>
+	<p><a href="#support">Support</a></p>
 	<p><a href="#donate">Donate</a></p>
 	<p><a href="#license">License</a></p>
 </div>
 
 
-<p>
-This is the version of Blueimp's AJAX Chat desinged to be run with <a href="http://www.simplemachines.org/" style="font-weight:bold;">smf</a>.<br>
-If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.<br><br>
-</p>
+<p style="margin:1.5em">This is the version of Blueimp's AJAX Chat desinged to be run with <a href="http://www.simplemachines.org/" style="font-weight:bold;">smf</a>.<br>
+If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.<br><br></p>
 
-<p class="note" style="margin-right: 30em;">AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br />
-  The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br />
-  Instead of delivering a complete HTML page only updated data is sent in XML format.<br />
-By using JavaScript the chat page can be updated without having to reload the whole page.<br />
-PHP is used to communicate with the database and authenticate users.</p>
+<p class="note" style="margin-right: 30em;">
+AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
+The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
+Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+By using JavaScript the chat page can be updated without having to reload the whole page.<br>
+PHP is used to communicate with the database and authenticate users.
+</p>
 
 <h2 id="requirements">Requirements</h2>
 <div class="subsection">
@@ -78,13 +80,13 @@ PHP is used to communicate with the database and authenticate users.</p>
     </tr>
     <tr>
       <td>
-		PHP &gt;= 4<br />
-		MySQL &gt;= 4<br />
+		PHP &gt;= 5<br>
+		MySQL &gt;= 4<br>
 		Ruby &gt;= 1.8 (optional)
 	  </td>
       <td>
-		Enabled JavaScript<br />
-		Enabled Cookies<br />
+		Enabled JavaScript<br>
+		Enabled Cookies<br>
 		Flash Plugin &gt;= 9 (optional)
 	  </td>
     </tr>
@@ -93,10 +95,10 @@ PHP is used to communicate with the database and authenticate users.</p>
 
 <h2 id="installation">Installation</h2>
 <div class="subsection">
-	<p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br /></p>
+	<p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br></p>
 	<h3>Before You Begin</h3>
 	<div class="subsection">
-	  <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br />
+	  <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
 		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
 	</div>
 	
@@ -105,13 +107,13 @@ PHP is used to communicate with the database and authenticate users.</p>
 
 	<div class="subsection">
 	  <p>
-		Upload the chat folder to your server into your SMF forum directory:<br />
+		Upload the chat folder to your server into your SMF forum directory:<br>
 		e.g. http://example.org/smf/chat/</p>
 	</div>
 	
 	<h3>Create Database Tables</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br>
 	http://example.org/smf/chat/install.php</p>
 	
 	<p>Replace "http://example.org/smf/chat/" with the real URL to your chat directory.</p>
@@ -119,7 +121,7 @@ PHP is used to communicate with the database and authenticate users.</p>
 	
 	<h3>Delete Installation Script</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
+	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br>
 	http://example.org/smf/chat/install.php</p>
 	
 	<p>Delete the file install.php from the chat directory on your server.</p>
@@ -128,7 +130,7 @@ PHP is used to communicate with the database and authenticate users.</p>
 		
 	<h3>Congradulation! You Are Winner!</h3>
 	<div class="subsection">
-	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br />
+	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br>
 	  </span>You are now free to customize chat to further suit your needs.</p>
 	</div>
 </div>
@@ -146,22 +148,22 @@ PHP is used to communicate with the database and authenticate users.</p>
   </div>
   <h3>Customizing the Layout </h3>
   <div class="subsection">
-    <p>The layout of AJAX Chat is fully customizable by using CSS (Cascaded Style Sheets).<br />
+    <p>The layout of AJAX Chat is fully customizable by using CSS (Cascaded Style Sheets).<br>
       AJAX Chat comes with a predefined set of styles. To add your own style, do the following:</p>
     <ol>
       <li>Add a new CSS file (e.g. mystyle.css) by copying one of the existing styles from the CSS directory.</li>
       <li>Edit your file (css/mystyle.css) and adjust the CSS settings to your liking.</li>
-      <li>Add the name of your style without file extension to the available styles in lib/config.php:<br />
-        <code>// Available styles:      <br />
-      $config['styleAvailable'] = array('mystyle','beige','black','grey');<br />
-      // Default style:<br />
+      <li>Add the name of your style without file extension to the available styles in lib/config.php:<br>
+        <code>// Available styles:      <br>
+      $config['styleAvailable'] = array('mystyle','beige','black','grey');<br>
+      // Default style:<br>
       $config['styleDefault'] = 'mystyle';</code></li>
     </ol>
     <p>To further customize the layout you can adjust the template files in lib/template/.</p>
-    <p>Make sure you are creating valid XHTML, else you will produce errors in modern browsers.<br />
-      This is due to the page content-type served as &quot;application/xhtml+xml&quot;.<br />
+    <p>Make sure you are creating valid XHTML, else you will produce errors in modern browsers.<br>
+      This is due to the page content-type served as &quot;application/xhtml+xml&quot;.<br>
       Using this content-type improves performance when manipulating the Document Object Model (DOM).</p>
-    <p>If for some reason you cannot create valid XHTML you can force a HTML content-type.<br />
+    <p>If for some reason you cannot create valid XHTML you can force a HTML content-type.<br>
       Just edit lib/config.php and set the following option:</p>
     <p><code>$config['contentType'] = 'text/html';</code></p>
   </div>
@@ -172,15 +174,15 @@ PHP is used to communicate with the database and authenticate users.</p>
       <li><span class="filename">js/lang/</span>: This directory contains the language files used for the chat messages localization. These are JavaScript files with the extension &quot;.js&quot;.</li>
       <li><span class="filename">lib/lang/</span>: This directory contains the language files used for the template output. These are PHP files with the extension &quot;.php&quot;.</li>
     </ol>
-    <p>Many languages are already included with the download and you can customize them by editing these files.<br />
-      For each language, you need a file in both of these directories, with the language code as file name (such as en.js and en.php)..<br />
+    <p>Many languages are already included with the download and you can customize them by editing these files.<br>
+      For each language, you need a file in both of these directories, with the language code as file name (such as en.js and en.php)..<br>
     The language code is used following the ISO 639 standards.</p>
     <p>The files for the english (language code &quot;en&quot;) localization are <span class="filename">js/lang/en.js</span> and <span class="filename">lib/lang/en.php</span>.</p>
     <p>If you create your own localization, you must put the files in the correct folders and then make two changes to config.php:</p>
     <ol>
-      <li>Add the language code (this must match the filename you chose for the language. Remember to use commas correctly to separate multiple language codes): <br />
+      <li>Add the language code (this must match the filename you chose for the language. Remember to use commas correctly to separate multiple language codes): <br>
       <code>$config['langAvailable'] = array('en');      </code></li>
-      <li>Add the language name (this is what users see in the dropdown menu to choose the language): <br />
+      <li>Add the language name (this is what users see in the dropdown menu to choose the language): <br>
       <code>$config['langNames'] = array('en'=&gt;'English');</code></li>
     </ol>
     <p>To avoid errors, you should follow these rules:</p>
@@ -206,14 +208,14 @@ PHP is used to communicate with the database and authenticate users.</p>
 <div class="subsection">
   <h3>Accessing the Logs</h3>
   <div class="subsection">
-    <p>By default, AJAX Chat stores all chat messages in the database.<br />
+    <p>By default, AJAX Chat stores all chat messages in the database.<br>
       To access the logs you have to add the GET parameter view=logs to your chat url (add ?view=logs to the end of the url):</p>
     <p class="note">e.g. http://example.org/path/to/chat/?view=logs</p>
     <p>If you are not already logged in, you have to login as administrator to access the logs.</p>
-    <p>The log view enables you to monitor the latest chat messages on all channels.<br />
-      It is also possible to view the logs of private rooms and private messages.<br />
+    <p>The log view enables you to monitor the latest chat messages on all channels.<br>
+      It is also possible to view the logs of private rooms and private messages.<br>
     You have the option to filter the logs by date, time and search strings.</p>
-    <p class="note">The search filter accepts MySQL style regular expressions as described here: <a href="http://dev.mysql.com/doc/refman/5.1/en/regexp.html">http://dev.mysql.com/doc/refman/5.1/en/regexp.html</a><br />
+    <p class="note">The search filter accepts MySQL style regular expressions as described here: <a href="http://dev.mysql.com/doc/refman/5.1/en/regexp.html">http://dev.mysql.com/doc/refman/5.1/en/regexp.html</a><br>
     You can search for IPs, using the following syntax: ip=127.0.0.1</p>
   </div>
 </div>
@@ -224,39 +226,39 @@ PHP is used to communicate with the database and authenticate users.</p>
   <div class="subsection">
     <p>Add the following line to the stylesheet (CSS) of all pages displaying the shoutbox:</p>
     <p> <code>@import url(&quot;http://example.org/path/to/chat/css/shoutbox.css&quot;);</code></p>
-    <p> Replace http://example.org/path/to/chat/ with the URL to the chat.<br />
+    <p> Replace http://example.org/path/to/chat/ with the URL to the chat.<br>
       Modify css/shoutbox.css to your liking.</p>
   </div>
   <h3>Shoutbox Function</h3>
   <div class="subsection">
     <p>Add the following function to your PHP code:</p>
-    <p><code>&lt;?php<br />
-      function getShoutBoxContent() {<br />
-      // URL to the chat directory:<br />
-      if(!defined('AJAX_CHAT_URL')) {<br />
-      define('AJAX_CHAT_URL', './chat/');<br />
-      }<br />
-      <br />
-      // Path to the chat directory:<br />
-      if(!defined('AJAX_CHAT_PATH')) {<br />
-      define('AJAX_CHAT_PATH', realpath(dirname($_SERVER['SCRIPT_FILENAME']).'/chat').'/');<br />
-      }<br />
-      <br />
-      // Validate the path to the chat:<br />
-      if(@is_file(AJAX_CHAT_PATH.'lib/classes.php')) {<br />
-      <br />
-      // Include Class libraries:<br />
-      require_once(AJAX_CHAT_PATH.'lib/classes.php');<br />
-      <br />
-      // Initialize the shoutbox:<br />
-      $ajaxChat = new CustomAJAXChatShoutBox();<br />
-      <br />
-      // Parse and return the shoutbox template content:<br />
-      return $ajaxChat-&gt;getShoutBoxContent();<br />
-      }<br />
-      <br />
-      return null;<br />
-      }<br />
+    <p><code>&lt;?php<br>
+      function getShoutBoxContent() {<br>
+      // URL to the chat directory:<br>
+      if(!defined('AJAX_CHAT_URL')) {<br>
+      define('AJAX_CHAT_URL', './chat/');<br>
+      }<br>
+      <br>
+      // Path to the chat directory:<br>
+      if(!defined('AJAX_CHAT_PATH')) {<br>
+      define('AJAX_CHAT_PATH', realpath(dirname($_SERVER['SCRIPT_FILENAME']).'/chat').'/');<br>
+      }<br>
+      <br>
+      // Validate the path to the chat:<br>
+      if(@is_file(AJAX_CHAT_PATH.'lib/classes.php')) {<br>
+      <br>
+      // Include Class libraries:<br>
+      require_once(AJAX_CHAT_PATH.'lib/classes.php');<br>
+      <br>
+      // Initialize the shoutbox:<br>
+      $ajaxChat = new CustomAJAXChatShoutBox();<br>
+      <br>
+      // Parse and return the shoutbox template content:<br>
+      return $ajaxChat-&gt;getShoutBoxContent();<br>
+      }<br>
+      <br>
+      return null;<br>
+      }<br>
       ?&gt;</code></p>
     <p> Make sure AJAX_CHAT_URL and AJAX_CHAT_PATH point to the chat directory.</p>
   </div>
@@ -268,72 +270,85 @@ PHP is used to communicate with the database and authenticate users.</p>
 </div>
 <h2 id="socket">Socket Server</h2>
 <div class="subsection">
-  <p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br />
-    This is due to AJAX being a web technology and HTTP being a stateless protocol.<br />
-    Events pushed from server-side need a permanent or long-lasting socket connection between clients and server.<br />
+  <p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br>
+    This is due to AJAX being a web technology and HTTP being a stateless protocol.<br>
+    Events pushed from server-side need a permanent or long-lasting socket connection between clients and server.<br>
   This requires either a custom HTTP server (called &quot;comet&quot;) or another custom socket server.</p>
-  <p>AJAX Chat uses a JavaScript-to-Flash bridge to establish a permanent socket connection from client side.<br />
-    The JavaScript-to-Flash bridge requires a Flash plugin &gt;= 9 installed on the user browser.<br />
+  <p>AJAX Chat uses a JavaScript-to-Flash bridge to establish a permanent socket connection from client side.<br>
+    The JavaScript-to-Flash bridge requires a Flash plugin &gt;= 9 installed on the user browser.<br>
     Clients without this requirement will fall back to pull the server for updates.</p>
   <p class="note">This part of the setup is OPTIONAL and meant for experienced users only.</p>
   <h3>Installation</h3>
   <div class="subsection">
-    <p>The socket server coming with AJAX Chat is implemented in Ruby.<br />
-      You need to be able to run a Ruby script as a service to run the socket server.<br />
+    <p>The socket server coming with AJAX Chat is implemented in Ruby.<br>
+      You need to be able to run a Ruby script as a service to run the socket server.<br>
     To be able to start the service, the script files in the socket/ directory have to be executable:</p>
-    <p> <code>$ chmod +x server<br />
+    <p> <code>$ chmod +x server<br>
       $ chmod +x server.rb</code></p>
-    <p> &quot;server&quot; is a simple bash script to start and stop a service.<br />
-  &quot;server.rb&quot; is the ruby socket server script.<br />
+    <p> &quot;server&quot; is a simple bash script to start and stop a service.<br>
+  &quot;server.rb&quot; is the ruby socket server script.<br>
   &quot;server.conf&quot; is a configuration file - each setting is explained with a comment.</p>
     <p> To start the service, execute the &quot;server&quot; script with the parameter &quot;start&quot;:</p>
     <p> <code>$ ./server start</code></p>
     <p> This will create two additional files:</p>
-    <p> &quot;server.pid&quot; contains the process id of the service.<br />
+    <p> &quot;server.pid&quot; contains the process id of the service.<br>
   &quot;server.log&quot; is filled with the socket server log.</p>
     <p> To monitor the socket server logs, you can use the &quot;tail&quot; command included in most GNU/Linux distributions:</p>
     <p> <code>$ tail -f server.log</code></p>
-    <p> By default only errors and start/stop of the server are logged.<br />
+    <p> By default only errors and start/stop of the server are logged.<br>
       To get more detailed logs configure the log level by editing the configuration file.</p>
     <p> To stop the service, execute the &quot;server&quot; script with the parameter &quot;stop&quot;:</p>
     <p> <code>$ ./server stop</code></p>
     <p> If the socket server is running, you have to enable the following option in lib/config.php:</p>
-    <p> <code>$config['socketServerEnabled'] = true;</code><br />
-      <br />
-      This tells the server-side chat script to broadcast chat messages via the socket server.<br />
+    <p> <code>$config['socketServerEnabled'] = true;</code><br>
+      <br>
+      This tells the server-side chat script to broadcast chat messages via the socket server.<br>
       Chat clients will establish a permanent connection to the socket server to listen for chat messages.</p>
-    <p> By default only local clients (127.0.0.1,::1) may broadcast messages.<br />
-      Clients allowed to broadcast messages may also handle the channel authentication.<br />
+    <p> By default only local clients (127.0.0.1,::1) may broadcast messages.<br>
+      Clients allowed to broadcast messages may also handle the channel authentication.<br>
       If your socket server is running on another host you should set the broadcast_clients option to the chat server IP.</p>
     <p> Using the socket server increases response time while improving server performance at the same time.</p>
   </div>
   <h3>Flash Permissions</h3>
   <div class="subsection">
-    <p>Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed. <br />
-      Now an explicit permission (using xml-syntax) is required for creating socket connections. <br />
-      In the current state, socket server won't work with the newest Flash versions. <br />
+    <p>Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed. <br>
+      Now an explicit permission (using xml-syntax) is required for creating socket connections. <br>
+      In the current state, socket server won't work with the newest Flash versions. <br>
     You will get a &quot;Flash security error&quot; in the browser.</p>
-    <p> A solution is to use a policy-files server which will listen to connections in port 843 in the server. <br />
-      Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server. <br />
-      The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br />
+    <p> A solution is to use a policy-files server which will listen to connections in port 843 in the server. <br>
+      Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server. <br>
+      The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br>
       It works with FF3 and IE7 (not yet tested in other browsers).</p>
     <p> A more detailed explanation can be found here:</p>
-    <p> * <a href="http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/">http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/</a><br />
-      * <a href="http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/">http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/</a><br />
+    <p> * <a href="http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/">http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/</a><br>
+      * <a href="http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/">http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/</a><br>
     </p>
     <p> Official Adobe documentation:</p>
-    <p> * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html</a><br />
+    <p> * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html</a><br>
     * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html</a></p>
   </div>
   <p>&nbsp;</p>
 </div>
+
+<h2 id="support">Support</h2>
+<div class="subsection">
+	<p>
+		<b>Please do not email the devs with support questions.</b><br>
+		For further documentation and some examples, check out our <a href="https://github.com/Frug/AJAX-Chat/wiki">github wiki</a>.<br>
+		For general support questions use <a href="https://groups.google.com/forum/?#!forum/ajax-chat">our google group</a>.<br>
+		For specific bug reports and a list of pending issues view <a href="https://github.com/Frug/AJAX-Chat">our github project</a>.<br>
+	</p>
+</div>
+
 <h2 id="donate">Donate</h2>
 <div class="subsection">Your donations contribute to the growth and development of this project and are always appreciated.</div>
+
 <h2 id="license">License</h2>
 <div class="subsection">
-  <p>Bluimp's AJAX Chat is released under the <a href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.</p>
-  <p>You should also find this license included with your download of this project.</p>
+	<p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
+	<p>You should also find this license included with your download of this project.</p>
 </div>
+
 <p align="center"><a href="#top">back to top</a></p>
 
 </div>
