@@ -55,12 +55,12 @@ $config['langNames'] = array(
 );
 
 // Available styles:
-$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Radium','prosilver','subsilver2','subblack2','subSilver','Core','MyBB','vBulletin');
+$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin');
 // Default style:
 $config['styleDefault'] = 'vBulletin';
 
 // The encoding used for the XHTML content:
-$config['contentEncoding'] = 'ISO-8859-1';
+$config['contentEncoding'] = 'UTF-8';
 // The encoding of the data source, like userNames and channelNames:
 $config['sourceEncoding'] = 'ISO-8859-1';
 // The content-type of the XHTML page (e.g. "text/html", will be set dependent on browser capabilities if set to null):
