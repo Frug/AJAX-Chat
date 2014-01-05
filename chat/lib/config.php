@@ -40,18 +40,22 @@ $config['dbTableNames']['bans']			= 'ajax_chat_bans';
 $config['dbTableNames']['invitations']	= 'ajax_chat_invitations';
 
 // Available languages:
-$config['langAvailable'] = array('ar','bg','bp','ca','cy','cz','de','dk','el','en','es','et','fi','fr','gl','he','hr','hu','in','it','ka','kr','ja','nl','no','pl','ro','ru','sk','sl','sr','sv','tr','uk','zh','zh-tw');
+$config['langAvailable'] = array(
 	'ar','bg','ca','cy','cz','da','de','el','en','es','et','fa','fi','fr','gl','he','hr','hu','in','it','ja','ka','kr','mk','nl','nl-be','no','pl','pt-br','pt-pt','ro','ru','sk','sl','sr','sv','th','tr','uk','zh','zh-tw'
+);
 // Default language:
 $config['langDefault'] = 'en';
-// Language names:
-$config['langNames'] = array('ar'=>'عربي','bg'=>'Български','bp'=>'Português (Brasil)','ca'=>'Català','cy'=>'Cymraeg','cz'=>'Česky','de'=>'Deutsch','dk'=>'Dansk','el'=>'Ελληνικα','en'=>'English','es'=>'Español',
-	'et'=>'Eesti','fi'=>'Suomi','fr'=>'Français','gl'=>'Galego','he'=>'עברית','hr' => 'Hrvatski','hu' => 'Magyar','in'=>'Bahasa Indonesia','it'=>'Italiano','ja'=>'日本語','ka'=>'ქართული','kr'=>'한 글','nl'=>'Nederlands',
-	'no'=>'Norsk','pl'=> 'Polski','ro'=>'România','ru'=>'Русский','sk'=> 'Slovenčina','sl'=>'Slovensko','sr'=>'Srpski','sv'=> 'Svenska','tr'=>'Türkçe','uk'=>'Українська','zh'=>'中文 (简体)','zh-tw'=>'中文 (繁體)');
+// Language names (each languge code in available languages must have a display name assigned here):
+$config['langNames'] = array(
+	'ar'=>'عربي', 'bg'=>'Български', 'ca'=>'Català', 'cy'=>'Cymraeg', 'cz'=>'Česky', 'da'=>'Dansk', 'de'=>'Deutsch', 'el'=>'Ελληνικα', 'en'=>'English',
+	'es'=>'Español', 'et'=>'Eesti', 'fa'=>'فارسی', 'fi'=>'Suomi', 'fr'=>'Français', 'gl'=>'Galego', 'he'=>'עברית', 'hr' => 'Hrvatski', 'hu' => 'Magyar', 'in'=>'Bahasa Indonesia', 'it'=>'Italiano',
 	'ja'=>'日本語','ka'=>'ქართული','kr'=>'한 글','mk'=>'Македонски', 'nl'=>'Nederlands', 'nl-be'=>'Nederlands (België)', 'no'=>'Norsk', 'pl'=> 'Polski', 'pt-br'=>'Português (Brasil)', 'pt-pt'=>'Português (Portugal)', 
-	
+	'ro'=>'România', 'ru'=>'Русский', 'sk'=> 'Slovenčina', 'sl'=>'Slovensko', 'sr'=>'Srpski', 'sv'=> 'Svenska', 'th'=>'&#x0e20;&#x0e32;&#x0e29;&#x0e32;&#x0e44;&#x0e17;&#x0e22;', 
+	'tr'=>'Türkçe', 'uk'=>'Українська', 'zh'=>'中文 (简体)', 'zh-tw'=>'中文 (繁體)'
+);
+
 // Available styles:
-$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Radium','prosilver','subsilver2','subblack2','subSilver','Core','MyBB','vBulletin');
+$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin');
 // Default style:
 $config['styleDefault'] = 'MyBB';
 
