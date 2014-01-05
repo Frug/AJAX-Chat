@@ -60,7 +60,7 @@ $config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sul
 $config['styleDefault'] = 'prosilver';
 
 // The encoding used for the XHTML content:
-$config['contentEncoding'] = 'ISO-8859-1';
+$config['contentEncoding'] = 'UTF-8';
 // The encoding of the data source, like userNames and channelNames:
 $config['sourceEncoding'] = 'ISO-8859-1';
 // The content-type of the XHTML page (e.g. "text/html", will be set dependent on browser capabilities if set to null):
