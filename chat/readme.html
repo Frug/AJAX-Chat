@@ -58,22 +58,21 @@
 	<p><a href="#license">License</a></p>
 </div>
 
-
 <p style="margin:1.5em">This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br>
 If you want to integrate AJAX Chat with one of the forums we support, go back and choose the right version. <br>
 This version is good for customizing your own integration, or using on its own.</p>
 
 <p class="note" style="margin-right: 30em;">
-AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
-The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
-Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
-By using JavaScript the chat page can be updated without having to reload the whole page.<br>
-PHP is used to communicate with the database and authenticate users.
+	AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
+	The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
+	Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+	By using JavaScript the chat page can be updated without having to reload the whole page.<br>
+	PHP is used to communicate with the database and authenticate users.
 </p>
 
 <h2 id="requirements">Requirements</h2>
 <div class="subsection">
-  <table cellpadding="0" cellspacing="0" style="width: 550px;" summary="Requirements for running AJAX Chat.">
+  <table style="width: 550px;" summary="Requirements for running AJAX Chat.">
     <tr>
       <th width="275" scope="col">Server-Side</th>
       <th width="275" scope="col">Client-Side</th>
@@ -98,15 +97,20 @@ PHP is used to communicate with the database and authenticate users.
     <p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br></p>
     <h3>Before You Begin</h3>
     <div class="subsection">
-      <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
-        If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
+		<p>
+			In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. 
+			We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
+			If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
+		</p>
     </div>
+	
     <h3>Configure Database Settings</h3>
     <div class="subsection">
-      <p>The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
-        <strong>You need to create this file.</strong> <br>
-        An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br>
-        Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:</p>
+      <p>
+		The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
+		<strong>You need to create this file.</strong> <br>
+		An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br>
+		Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:</p>
       <p>
 	  <code>$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br>
       $config['dbConnection']['user'] = '<em>your_database_username</em>';<br>
@@ -124,16 +128,18 @@ PHP is used to communicate with the database and authenticate users.
         $config['dbConnection']['link'] = null;<br>
         If this is set to null, a new database connection is created.</p>
     </div>
-<h3>Choose Your Channel Settings</h3>
-<div class="subsection">
-  <p>Edit the file <span class="filename">lib/data/channels.php.</span><br>
-    We have provided you with two sample channels, named public and private. You can add your own, or leave it as-is.<br>
-    Channels follow the following format:
-    <br>
-    <code>$channels[<em>channel id</em>] = '<em>channel name</em>';</code>
-    Each channel must have a unique channel id number and a unique name.<br>
-    Whitespace in the channel names will be converted to the underscore &quot;_&quot;.</p>
-</div>
+	
+	<h3>Choose Your Channel Settings</h3>
+	<div class="subsection">
+	  <p>Edit the file <span class="filename">lib/data/channels.php.</span><br>
+		We have provided you with two sample channels, named public and private. You can add your own, or leave it as-is.<br>
+		Channels follow the following format:
+		<br>
+		<code>$channels[<em>channel id</em>] = '<em>channel name</em>';</code>
+		Each channel must have a unique channel id number and a unique name.<br>
+		Whitespace in the channel names will be converted to the underscore &quot;_&quot;.</p>
+	</div>
+
     <h3>Add Your Users</h3>
     <div class="subsection">
       <p> Edit users in <span class="filename">lib/data/users.php</span>.<br>
@@ -150,6 +156,7 @@ PHP is used to communicate with the database and authenticate users.
         The list of channels a user has access to can be set for each user individually. Channel id's are separated by commas. eg: array(0,1,23); allows channels 0, 1 and 23.<br>
         Whitespace in the user names will be converted to the underscore &quot;_&quot;.</p>
     </div>
+	
     <h3>Upload to Your Server</h3>
     <div class="subsection">
       <p>Upload the chat folder to your server somewhere under your document root:<br>
@@ -167,10 +174,12 @@ PHP is used to communicate with the database and authenticate users.
       </ol>
       <p>Either of these methods will create the tables your database needs to store chat messages and other information.</p>
     </div>
+	
     <h3>Delete the Installation Script</h3>
     <div class="subsection">
       <p>Delete the file <span class="filename">install.php</span> from the chat directory on your server. You may also delete the file <span class="filename">chat.sql</span>.</p>
     </div>
+	
     <h3>Congradulation! You Are Winner!</h3>
     <div class="subsection">
       <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br>
@@ -189,6 +198,7 @@ PHP is used to communicate with the database and authenticate users.
     </ol>
     <p>Both of these files are well commented with information on what the settings mean.</p>
   </div>
+  
   <h3>Customizing the Layout </h3>
   <div class="subsection">
     <p>The layout of AJAX Chat is fully customizable by using CSS (Cascaded Style Sheets).<br>
@@ -210,6 +220,7 @@ PHP is used to communicate with the database and authenticate users.
       Just edit lib/config.php and set the following option:</p>
     <p><code>$config['contentType'] = 'text/html';</code></p>
   </div>
+  
   <h3>Adjusting the Language Settings</h3>
   <div class="subsection">
     <p>AJAX Chat comes with two language file directories:</p>
@@ -240,8 +251,8 @@ PHP is used to communicate with the database and authenticate users.
   <div class="subsection">
     <p>AJAX Chat is designed with numerous hooks and overrides available to improve core functionality without requiring you to edit the core files.
 	With an intermediate understading of PHP and javascript you can modify your chat to suit your needs.</p>
-	<p>Have a look through a few examples available on the sourceforge wiki: 
-	<a href="https://sourceforge.net/apps/mediawiki/ajax-chat/index.php?title=General_Modifications">https://sourceforge.net/apps/mediawiki/ajax-chat/index.php?title=General_Modifications</a>
+	<p>Have a look through a few examples available on the wiki: 
+	<a href="https://github.com/Frug/AJAX-Chat/wiki/General-modifications">https://github.com/Frug/AJAX-Chat/wiki/General-modifications</a>
 	</p>
   </div>
   
@@ -262,9 +273,11 @@ PHP is used to communicate with the database and authenticate users.
     You can search for IPs, using the following syntax: ip=127.0.0.1</p>
   </div>
 </div>
+
 <h2 id="shoutbox">Shoutbox</h2>
 <div class="subsection">
   <p>AJAX Chat is also usable as shoutbox - this is a short guide on how to set it up:</p>
+  
   <h3>Shoutbox Stylesheet</h3>
   <div class="subsection">
     <p>Add the following line to the stylesheet (CSS) of all pages displaying the shoutbox:</p>
@@ -272,6 +285,7 @@ PHP is used to communicate with the database and authenticate users.
     <p> Replace http://example.org/path/to/chat/ with the URL to the chat.<br>
       Modify css/shoutbox.css to your liking.</p>
   </div>
+  
   <h3>Shoutbox Function</h3>
   <div class="subsection">
     <p>Add the following function to your PHP code:</p>
@@ -305,12 +319,14 @@ PHP is used to communicate with the database and authenticate users.
       ?&gt;</code></p>
     <p> Make sure AJAX_CHAT_URL and AJAX_CHAT_PATH point to the chat directory.</p>
   </div>
+  
   <h3>Shoutbox Output</h3>
   <div class="subsection">
     <p>Display the shoutbox content using the shoutbox function:</p>
     <p> <code>&lt;div style=&quot;width:200px;&quot;&gt;&lt;?php echo getShoutBoxContent(); ?&gt;&lt;/div&gt;</code></p>
   </div>
 </div>
+
 <h2 id="socket">Socket Server</h2>
 <div class="subsection">
   <p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br>
@@ -352,16 +368,21 @@ PHP is used to communicate with the database and authenticate users.
       If your socket server is running on another host you should set the broadcast_clients option to the chat server IP.</p>
     <p> Using the socket server increases response time while improving server performance at the same time.</p>
   </div>
+  
   <h3>Flash Permissions</h3>
   <div class="subsection">
-    <p>Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed. <br>
-      Now an explicit permission (using xml-syntax) is required for creating socket connections. <br>
-      In the current state, socket server won't work with the newest Flash versions. <br>
-    You will get a &quot;Flash security error&quot; in the browser.</p>
-    <p> A solution is to use a policy-files server which will listen to connections in port 843 in the server. <br>
-      Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server. <br>
-      The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br>
-      It works with FF3 and IE7 (not yet tested in other browsers).</p>
+    <p>
+		Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed.<br>
+		Now an explicit permission (using xml-syntax) is required for creating socket connections. <br>
+		In the current state, socket server won't work with the newest Flash versions. <br>
+		You will get a &quot;Flash security error&quot; in the browser.
+	</p>
+    <p>
+		A solution is to use a policy-files server which will listen to connections in port 843 in the server.<br>
+		Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server.<br>
+		The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br>
+		It works with FF3 and IE7 (not yet tested in other browsers).
+	</p>
     <p> A more detailed explanation can be found here:</p>
     <p> * <a href="http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/">http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/</a><br>
       * <a href="http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/">http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/</a><br>
@@ -384,12 +405,23 @@ PHP is used to communicate with the database and authenticate users.
 </div>
 
 <h2 id="donate">Donate</h2>
-<div class="subsection">Your donations contribute to the growth and development of this project and are always appreciated.</div>
+<div class="subsection">
+	<p>
+		Your donations contribute to the growth and development of this project and are always appreciated.<br>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="PUMN737V7XKG8">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+		I'm on gittip at <a href="https://www.gittip.com/Frug/">https://www.gittip.com/Frug</a>
+	</p>
+</div>
 
 <h2 id="license">License</h2>
 <div class="subsection">
-  <p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
-  <p>You should also find this license included with your download of this project.</p>
+	<p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
+	<p>You should also find this license included with your download of this project.</p>
 </div>
 
 <p align="center"><a href="#top">back to top</a></p>
