@@ -842,3 +842,4 @@ Bugfixes:
 - Fixed a case where the default channel could be blocked from the limitChannelList config option.
 - Fix potential conflict between php and mysql timezones by using mysql's FROM_UNIXTIME(). - thanks to ManOnDaMoon.
 - Normalized sound volumes a bit.
+- Fixed mybb integration database connection. Connection details should be pulled automatically now.
