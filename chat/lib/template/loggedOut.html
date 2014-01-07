@@ -75,6 +75,7 @@
 		<form id="loginForm" action="[FORUM_LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return handleLogin();">
 			<div id="loginFormContainer">
 				<input type="hidden" name="action" id="actionField" value="do_login"/>
+				<input type="hidden" name="login" id="loginField" value="login"/>
 				<input type="hidden" name="url" id="redirectField" value="[REDIRECT_URL/]"/>
 				<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
 				<input type="text" name="username" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
