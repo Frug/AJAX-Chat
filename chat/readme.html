@@ -7,6 +7,7 @@
 	<style type="text/css">
 	body,td,th { font-family: Arial, Helvetica, sans-serif; line-height:1.6em; color:#000; font-size: inherit; }
 	body{background:#E7E7E7;margin:0; font-size: 0.8em;}
+	pre {font-size: 1.2em}
 	#wrap{max-width:1200px;background:#fff;margin:0.5em auto;padding:1.5em;box-shadow:2px 2px 4px #555;}
 	.subsection{border:1px solid #006;padding:0.8em 1.6em; background:#F2F5F9;}
 	.subsection .subsection{border:0}
@@ -58,21 +59,20 @@
 	<p><a href="#license">License</a></p>
 </div>
 
-
 <p style="margin:1.5em">This is the version of Blueimp's AJAX Chat desinged to be run with <strong>phpBB3</strong>.<br />
 If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.</p>
 
 <p class="note" style="margin-right: 30em;">
-AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
-The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
-Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
-By using JavaScript the chat page can be updated without having to reload the whole page.<br>
-PHP is used to communicate with the database and authenticate users.
+	AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
+	The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
+	Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+	By using JavaScript the chat page can be updated without having to reload the whole page.<br>
+	PHP is used to communicate with the database and authenticate users.
 </p>
 
 <h2 id="requirements">Requirements</h2>
 <div class="subsection">
-  <table cellpadding="0" cellspacing="0" style="width: 550px;" summary="Requirements for running AJAX Chat.">
+  <table style="width: 550px;" summary="Requirements for running AJAX Chat.">
     <tr>
       <th width="275" scope="col">Server-Side</th>
       <th width="275" scope="col">Client-Side</th>
@@ -97,12 +97,19 @@ PHP is used to communicate with the database and authenticate users.
     <p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br></p>
 	<h3>Before You Begin</h3>
 	<div class="subsection">
-      <p>In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. We recommend using Notepad ++ ( <a href="http://notepad-plus.sourceforge.net">http://notepad-plus.sourceforge.net</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
-		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.</p>
+		<p>
+			In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. 
+			We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
+			If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
+		</p>
 	</div>
 	
 	<h3>Upload to Server</h3>
+		The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
+	
+
 	  </p>
+	
 	<div class="subsection">
 	  <p>
 		Upload the chat folder to your server into your phpBB3 forum directory:<br />
@@ -144,6 +151,7 @@ PHP is used to communicate with the database and authenticate users.
     </ol>
     <p>Both of these files are well commented with information on what the settings mean.</p>
   </div>
+  
   <h3>Customizing the Layout </h3>
   <div class="subsection">
     <p>The layout of AJAX Chat is fully customizable by using CSS (Cascaded Style Sheets).<br>
@@ -165,6 +173,7 @@ PHP is used to communicate with the database and authenticate users.
       Just edit lib/config.php and set the following option:</p>
     <p><code>$config['contentType'] = 'text/html';</code></p>
   </div>
+  
   <h3>Adjusting the Language Settings</h3>
   <div class="subsection">
     <p>AJAX Chat comes with two language file directories:</p>
@@ -195,8 +204,8 @@ PHP is used to communicate with the database and authenticate users.
   <div class="subsection">
     <p>AJAX Chat is designed with numerous hooks and overrides available to improve core functionality without requiring you to edit the core files.
 	With an intermediate understading of PHP and javascript you can modify your chat to suit your needs.</p>
-	<p>Have a look through a few examples available on the sourceforge wiki: 
-	<a href="https://sourceforge.net/apps/mediawiki/ajax-chat/index.php?title=General_Modifications">https://sourceforge.net/apps/mediawiki/ajax-chat/index.php?title=General_Modifications</a>
+	<p>Have a look through a few examples available on the wiki: 
+	<a href="https://github.com/Frug/AJAX-Chat/wiki/General-modifications">https://github.com/Frug/AJAX-Chat/wiki/General-modifications</a>
 	</p>
   </div>
   
@@ -225,7 +234,13 @@ PHP is used to communicate with the database and authenticate users.
 
   
   <h3>PHPBB3 Shoutbox Integration</h3>
-  <div class="subsection">
+
+}
+?&gt;
+</pre></code>
+
+
+	<div class="subsection">
     <p><b>In includes/functions.php</b></p>
 	
 	Add:
@@ -298,70 +313,75 @@ function getShoutBoxContent()
 	After
 	<code>&lt;div id="page-footer"&gt;</code>
 	
-  </div>
+	</div>
 </div>
 
 
 <h2 id="socket">Socket Server</h2>
 <div class="subsection">
-  <p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br>
-    This is due to AJAX being a web technology and HTTP being a stateless protocol.<br>
-    Events pushed from server-side need a permanent or long-lasting socket connection between clients and server.<br>
-  This requires either a custom HTTP server (called &quot;comet&quot;) or another custom socket server.</p>
-  <p>AJAX Chat uses a JavaScript-to-Flash bridge to establish a permanent socket connection from client side.<br>
-    The JavaScript-to-Flash bridge requires a Flash plugin &gt;= 9 installed on the user browser.<br>
-    Clients without this requirement will fall back to pull the server for updates.</p>
-  <p class="note">This part of the setup is OPTIONAL and meant for experienced users only.</p>
-  <h3>Installation</h3>
-  <div class="subsection">
-    <p>The socket server coming with AJAX Chat is implemented in Ruby.<br>
-      You need to be able to run a Ruby script as a service to run the socket server.<br>
-    To be able to start the service, the script files in the socket/ directory have to be executable:</p>
-    <p> <code>$ chmod +x server<br>
-      $ chmod +x server.rb</code></p>
-    <p> &quot;server&quot; is a simple bash script to start and stop a service.<br>
-  &quot;server.rb&quot; is the ruby socket server script.<br>
-  &quot;server.conf&quot; is a configuration file - each setting is explained with a comment.</p>
-    <p> To start the service, execute the &quot;server&quot; script with the parameter &quot;start&quot;:</p>
-    <p> <code>$ ./server start</code></p>
-    <p> This will create two additional files:</p>
-    <p> &quot;server.pid&quot; contains the process id of the service.<br>
-  &quot;server.log&quot; is filled with the socket server log.</p>
-    <p> To monitor the socket server logs, you can use the &quot;tail&quot; command included in most GNU/Linux distributions:</p>
-    <p> <code>$ tail -f server.log</code></p>
-    <p> By default only errors and start/stop of the server are logged.<br>
-      To get more detailed logs configure the log level by editing the configuration file.</p>
-    <p> To stop the service, execute the &quot;server&quot; script with the parameter &quot;stop&quot;:</p>
-    <p> <code>$ ./server stop</code></p>
-    <p> If the socket server is running, you have to enable the following option in lib/config.php:</p>
-    <p> <code>$config['socketServerEnabled'] = true;</code><br>
-      <br>
-      This tells the server-side chat script to broadcast chat messages via the socket server.<br>
-      Chat clients will establish a permanent connection to the socket server to listen for chat messages.</p>
-    <p> By default only local clients (127.0.0.1,::1) may broadcast messages.<br>
-      Clients allowed to broadcast messages may also handle the channel authentication.<br>
-      If your socket server is running on another host you should set the broadcast_clients option to the chat server IP.</p>
-    <p> Using the socket server increases response time while improving server performance at the same time.</p>
-  </div>
-  <h3>Flash Permissions</h3>
-  <div class="subsection">
-    <p>Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed. <br>
-      Now an explicit permission (using xml-syntax) is required for creating socket connections. <br>
-      In the current state, socket server won't work with the newest Flash versions. <br>
-    You will get a &quot;Flash security error&quot; in the browser.</p>
-    <p> A solution is to use a policy-files server which will listen to connections in port 843 in the server. <br>
-      Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server. <br>
-      The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br>
-      It works with FF3 and IE7 (not yet tested in other browsers).</p>
-    <p> A more detailed explanation can be found here:</p>
-    <p> * <a href="http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/">http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/</a><br>
-      * <a href="http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/">http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/</a><br>
-    </p>
-    <p> Official Adobe documentation:</p>
-    <p> * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html</a><br>
-    * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html</a></p>
-  </div>
-  <p>&nbsp;</p>
+	<p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br>
+	This is due to AJAX being a web technology and HTTP being a stateless protocol.<br>
+	Events pushed from server-side need a permanent or long-lasting socket connection between clients and server.<br>
+	This requires either a custom HTTP server (called &quot;comet&quot;) or another custom socket server.</p>
+	<p>AJAX Chat uses a JavaScript-to-Flash bridge to establish a permanent socket connection from client side.<br>
+	The JavaScript-to-Flash bridge requires a Flash plugin &gt;= 9 installed on the user browser.<br>
+	Clients without this requirement will fall back to pull the server for updates.</p>
+	<p class="note">This part of the setup is OPTIONAL and meant for experienced users only.</p>
+	<h3>Installation</h3>
+	<div class="subsection">
+	<p>The socket server coming with AJAX Chat is implemented in Ruby.<br>
+	  You need to be able to run a Ruby script as a service to run the socket server.<br>
+	To be able to start the service, the script files in the socket/ directory have to be executable:</p>
+	<p> <code>$ chmod +x server<br>
+	  $ chmod +x server.rb</code></p>
+	<p> &quot;server&quot; is a simple bash script to start and stop a service.<br>
+	&quot;server.rb&quot; is the ruby socket server script.<br>
+	&quot;server.conf&quot; is a configuration file - each setting is explained with a comment.</p>
+	<p> To start the service, execute the &quot;server&quot; script with the parameter &quot;start&quot;:</p>
+	<p> <code>$ ./server start</code></p>
+	<p> This will create two additional files:</p>
+	<p> &quot;server.pid&quot; contains the process id of the service.<br>
+	&quot;server.log&quot; is filled with the socket server log.</p>
+	<p> To monitor the socket server logs, you can use the &quot;tail&quot; command included in most GNU/Linux distributions:</p>
+	<p> <code>$ tail -f server.log</code></p>
+	<p> By default only errors and start/stop of the server are logged.<br>
+	  To get more detailed logs configure the log level by editing the configuration file.</p>
+	<p> To stop the service, execute the &quot;server&quot; script with the parameter &quot;stop&quot;:</p>
+	<p> <code>$ ./server stop</code></p>
+	<p> If the socket server is running, you have to enable the following option in lib/config.php:</p>
+	<p> <code>$config['socketServerEnabled'] = true;</code><br>
+	  <br>
+	  This tells the server-side chat script to broadcast chat messages via the socket server.<br>
+	  Chat clients will establish a permanent connection to the socket server to listen for chat messages.</p>
+	<p> By default only local clients (127.0.0.1,::1) may broadcast messages.<br>
+	  Clients allowed to broadcast messages may also handle the channel authentication.<br>
+	  If your socket server is running on another host you should set the broadcast_clients option to the chat server IP.</p>
+	<p> Using the socket server increases response time while improving server performance at the same time.</p>
+	</div>
+
+	<h3>Flash Permissions</h3>
+	<div class="subsection">
+	<p>
+		Since Flash 9.0.115.0 and all Flash 10 versions, permissions for creating sockets using Flash have changed.<br>
+		Now an explicit permission (using xml-syntax) is required for creating socket connections. <br>
+		In the current state, socket server won't work with the newest Flash versions. <br>
+		You will get a &quot;Flash security error&quot; in the browser.
+	</p>
+	<p>
+		A solution is to use a policy-files server which will listen to connections in port 843 in the server.<br>
+		Each time a client tries to connect to the chat, the Flash client will request the policy authorization to the server.<br>
+		The policy-files server is downloadable from http://ammonlauritzen.com/FlashPolicyService-09b.zip<br>
+		It works with FF3 and IE7 (not yet tested in other browsers).
+	</p>
+	<p> A more detailed explanation can be found here:</p>
+	<p> * <a href="http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/">http://ammonlauritzen.com/blog/2007/12/13/new-flash-security-policies/</a><br>
+	  * <a href="http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/">http://ammonlauritzen.com/blog/2008/04/22/flash-policy-service-daemon/</a><br>
+	</p>
+	<p> Official Adobe documentation:</p>
+	<p> * <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security.html</a><br>
+	* <a href="http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html">http://www.adobe.com/devnet/flashplayer/articles/fplayer9_security_04.html</a></p>
+	</div>
+	<p>&nbsp;</p>
 </div>
 
 <h2 id="support">Support</h2>
@@ -375,12 +395,23 @@ function getShoutBoxContent()
 </div>
 
 <h2 id="donate">Donate</h2>
-<div class="subsection">Your donations contribute to the growth and development of this project and are always appreciated.</div>
+<div class="subsection">
+	<p>
+		Your donations contribute to the growth and development of this project and are always appreciated.<br>
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="PUMN737V7XKG8">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit">
+		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+		I'm on gittip at <a href="https://www.gittip.com/Frug/">https://www.gittip.com/Frug</a>
+	</p>
+</div>
 
 <h2 id="license">License</h2>
 <div class="subsection">
-  <p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
-  <p>You should also find this license included with your download of this project.</p>
+	<p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
+	<p>You should also find this license included with your download of this project.</p>
 </div>
 
 <p align="center"><a href="#top">back to top</a></p>
