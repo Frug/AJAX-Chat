@@ -3,7 +3,7 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
+ * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
  * 
  * SMF integration:
@@ -147,15 +147,13 @@ class CustomAJAXChat extends AJAXChat {
 
 			$defaultChannelFound = false;
 						
-				if ($value == $this->getConfig('defaultChannelID')) {
-					$this->_channels[$key] = $value;
-					continue;
-				}
+			while($row = $result->fetch()) {
 				// Check if we have to limit the available channels:
 				if($this->getConfig('limitChannelList') && !in_array($row['ID_BOARD'], $this->getConfig('limitChannelList'))) {
 					continue;
 				}
-				if(in_array($value, $validChannels)) {
+
+				$forumName = $this->trimChannelName($row['name']);
 				
 				$this->_channels[$forumName] = $row['ID_BOARD'];
 
@@ -203,18 +201,19 @@ class CustomAJAXChat extends AJAXChat {
 
 			$defaultChannelFound = false;
 						
-			foreach($customChannels as $name=>$id) {
-				$this->_allChannels[$this->trimChannelName($name)] = $id;
-				if($id == $this->getConfig('defaultChannelID')) {
+			while($row = $result->fetch()) {
+				$forumName = $this->trimChannelName($row['name']);
+				
+				$this->_allChannels[$forumName] = $row['ID_BOARD'];
+
+				if(!$defaultChannelFound && $row['ID_BOARD'] == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
 			}		
 			$result->free();
 
 			if(!$defaultChannelFound) {
-				// Add the default channel as first array element to the channel list
-				// First remove it in case it appeard under a different ID
-				unset($this->_allChannels[$this->getConfig('defaultChannelName')]);
+				// Add the default channel as first array element to the channel list:
 				$this->_allChannels = array_merge(
 					array(
 						$this->trimChannelName($this->getConfig('defaultChannelName'))=>$this->getConfig('defaultChannelID')
@@ -251,13 +250,13 @@ class CustomAJAXChat extends AJAXChat {
 		    die();
 		}
 		
-	function getCustomChannels() {
+		$row = $result->fetch();
 		$styleName = $row['value'];
 		
 		$result->free();
-		// Channel array structure should be:
-		// ChannelName => ChannelID
-		return array_flip($channels);
+		
+		if(!in_array($styleName, $this->getConfig('styleAvailable'))) {
+			$styleName = $this->getConfig('styleDefault');
 		}
 		
 		setcookie(
