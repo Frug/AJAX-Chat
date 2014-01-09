@@ -103,6 +103,19 @@ This version is good for customizing your own integration, or using on its own.<
 			We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
 			If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
 		</p>
+	
+      <p>
+		The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
+		<strong>You need to create this file.</strong> <br>
+		An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br>
+		Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:</p>
+		<p>
+			In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. 
+			We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
+			If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
+	
+
+		</p>
     </div>
 	
 	<h3>Upload to Server</h3>
