@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = 'Heli sisenemisel ja kanalisse sisenemise sõnumit
 $lang['settingsSoundLeave'] = 'Heli väljumise ja kanalitest lahkumise sõnumitel:';
 $lang['settingsSoundChatBot'] = 'Chatboti sõnumite heli:';
 $lang['settingsSoundError'] = 'Veateate heli:';
+$lang['settingsSoundPrivate'] = 'Privaatsõnum heli:';
 $lang['settingsBlink'] = 'Vilguta akna tiitlit uute sõnumite saabumisel:';
 $lang['settingsBlinkInterval'] = 'Vilgutamise intervall millisekundites:';
 $lang['settingsBlinkIntervalNumber'] = 'Vilksatuste arv intervallis:';
