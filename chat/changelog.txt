@@ -819,12 +819,12 @@ Bugfixes:
 - Fixed a typo in the localization section of config.php (all versions)
 
 
-Version 0.8.7 (?.?.2013)
+Version 0.8.7 (1.10.2014)
 -------------------------------
 Notice: 
 - Minimum php version is now 5 (was 4).
 - phpbb2 branch discontinued.
-- License has changed from GNU Affero to a Modified MIT License
+- License has changed from GNU Affero to a Modified MIT License. See file included in download.
 
 New features:
 - Added normal Dutch localization (moved existing nl to nl-be) - thanks to Patrick Donker.
@@ -843,4 +843,4 @@ Bugfixes:
 - Fix potential conflict between php and mysql timezones by using mysql's FROM_UNIXTIME(). - thanks to ManOnDaMoon.
 - Normalized sound volumes a bit.
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
-- Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions)
+- Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
