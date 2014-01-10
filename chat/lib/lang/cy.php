@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Sain am fewngofnodi a negeseuon myned i sianeli:'
 $lang['settingsSoundLeave'] = 'Sain am allgofnodi a negeseuon gadael sianeli:';
 $lang['settingsSoundChatBot'] = 'Sain am negeseuon sgwrsbot:';
 $lang['settingsSoundError'] = 'Sain am wallnegeseuon:';
+$lang['settingsSoundPrivate'] = 'Sain am negeseuon preifat:';
 $lang['settingsBlink'] = 'Fflachio teitl y ffenestr ar negeseuon newydd:';
 $lang['settingsBlinkInterval'] = 'Cyfwng fflachio mewn milieiliadau:';
 $lang['settingsBlinkIntervalNumber'] = 'Nifer y cyfyngau fflachio:';
