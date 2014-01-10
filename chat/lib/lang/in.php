@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = 'Suara pada saat masuk channel:';
 $lang['settingsSoundLeave'] = 'Suara pada saat keluar Channel:';
 $lang['settingsSoundChatBot'] = 'Suara pada saat ChatBot:';
 $lang['settingsSoundError'] = 'Suara pada saat terdapat kesalahan:';
+$lang['settingsSoundPrivate'] = 'Suara pada saat privasi:';
 $lang['settingsBlink'] = 'Kedipkan Judul Jendela pada saat ada pesan baru:';
 $lang['settingsBlinkInterval'] = 'Blink interval in milliseconds:';
 $lang['settingsBlinkIntervalNumber'] = 'Jumlah interval kedipan:';
