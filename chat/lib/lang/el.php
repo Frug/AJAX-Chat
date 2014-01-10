@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Ήχος για μηνύματα σύνδεσης
 $lang['settingsSoundLeave'] = 'Ήχος για μηνύματα αποχώρισης και αποσύνδεσης:';
 $lang['settingsSoundChatBot'] = 'Ήχος για μηνύματα του chatbot:';
 $lang['settingsSoundError'] = 'Ήχος για μηνύματα λάθους:';
+$lang['settingsSoundPrivate'] = 'Ήχος για προσωπικά μηνύματα:';
 $lang['settingsBlink'] = 'Αναβόσβημα τίτλου σε νέα μηνύματα:';
 $lang['settingsBlinkInterval'] = 'Ρυθμός αναβοσβήματος σε χιλιοστά του δευτερόλεπτου:';
 $lang['settingsBlinkIntervalNumber'] = 'Αριθμός αναβοσβήματος οθόνης:';
