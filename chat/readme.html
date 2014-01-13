@@ -114,21 +114,22 @@ If you want to integrate AJAX Chat with one of the other forums we support, go b
 	
 	<h3>Create Database Tables</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
-	http://example.org/punbb/chat/install.php</p>
-	
-	<p>Replace "http://example.org/punbb/chat/" with the real URL to your chat directory.</p>
-	</div>
+      <p>There are two options available to you to create the database. The first, and usually the easiest option, is to run the installation script included with AJAX Chat. Alternatively, you may use a database tool like PHPMyAdmin to manually create the tables.</p>
+      <ol>
+        <li> To use the installation script, visit the following URL in your browser:<br>
+          <span class="filename">http://example.org/punbb/chat/install.php</span><br>
+          Where
+          &quot;http://example.org/punbb/chat/&quot; is the real URL to your chat directory.</li>
+        <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
+      </ol>
+      <p>Either of these methods will create the tables your database needs to store chat messages and other information.</p>
+    </div>
 	
 	<h3>Delete Installation Script</h3>
 	<div class="subsection">
-	  <p>	Execute the provided installation script by visiting the following URL with your browser:<br />
-	http://example.org/punbb/chat/install.php</p>
-	
-	<p>Delete the file install.php from the chat directory on your server.</p>
+		<p>Delete the file install.php from the chat directory on your server.</p>
 	</div>
 	
-		
 	<h3>Congradulation! You Are Winner!</h3>
 	<div class="subsection">
 	  <p>Yay! You're done! To test your chat, navigate to your chat URL in a browser: <span class="filename">http://example.org/path/to/chat/index.php<br />
