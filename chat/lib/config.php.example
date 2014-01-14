@@ -17,6 +17,9 @@ define('AJAX_CHAT_GUEST',		0);
 // AJAX Chat config parameters:
 $config = array();
 
+// Folder name of the integration version (e.g. 'standalone'):
+$config['integration'] = 'phpbb3';
+
 // Database connection values:
 $config['dbConnection'] = array();
 // Database hostname:
