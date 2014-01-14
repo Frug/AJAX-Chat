@@ -24,7 +24,7 @@ class AJAXChat {
 	var $_onlineUsersData;
 	var $_bannedUsersData;
 	
-	function AJAXChat() {
+	function __construct() {
 		$this->initialize();
 	}
 

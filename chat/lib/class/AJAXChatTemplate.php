@@ -18,7 +18,7 @@ class AJAXChatTemplate {
 	var $_parsedContent;
 
 	// Constructor:
-	function AJAXChatTemplate(&$ajaxChat, $templateFile, $contentType=null) {
+	function __construct(&$ajaxChat, $templateFile, $contentType=null) {
 		$this->ajaxChat = $ajaxChat;
 		$this->_regExpTemplateTags = '/\[(\w+?)(?:(?:\/)|(?:\](.+?)\[\/\1))\]/s';		
 		$this->_templateFile = $templateFile;
