@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Geluid bij login en betreden van chat';
 $lang['settingsSoundLeave'] = 'Geluid bij logout en verlaten chat:';
 $lang['settingsSoundChatBot'] = 'Geluid bij systeenberichten:';
 $lang['settingsSoundError'] = 'Geluid bij foutmeldingen:';
+$lang['settingsSoundPrivate'] = 'Geluid bij priveberichten:';
 $lang['settingsBlink'] = 'Knipper tekst windowtitel bij nieuw bericht:';
 $lang['settingsBlinkInterval'] = 'Knipperinterval in milliseconden:';
 $lang['settingsBlinkIntervalNumber'] = 'Aantal keren knippering van tekst:';
