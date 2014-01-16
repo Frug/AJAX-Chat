@@ -211,7 +211,7 @@ var ajaxChatConfig = {
 		sound_4: 'sound_4.mp3',
 		sound_5: 'sound_5.mp3',
 		sound_6: 'sound_6.mp3',
-		sound_7: 'sound_5.mp3'
+		sound_7: 'sound_1.mp3'
 	},
 	
 	
