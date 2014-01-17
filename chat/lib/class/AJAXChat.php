@@ -24,13 +24,13 @@ class AJAXChat {
 	var $_onlineUsersData;
 	var $_bannedUsersData;
 	
-	function __construct() {
-		$this->initialize();
+	function __construct($config) {
+		$this->initialize($config);
 	}
 
-	function initialize() {
+	function initialize($config) {
 		// Initialize configuration settings:
-		$this->initConfig();
+		$this->initConfig($config);
 
 		// Initialize the DataBase connection:
 		$this->initDataBaseConnection();
@@ -45,16 +45,16 @@ class AJAXChat {
 		$this->handleRequest();
 	}
 
-	function initConfig() {
+	function initConfig($config) {
 		//$config = null;
 		//if (!include(AJAX_CHAT_PATH.'lib/config.php')) {
 		//	echo('<strong>Error:</strong> Could not find a config.php file in "'.AJAX_CHAT_PATH.'"lib/". Check to make sure the file exists.');
 		//	die();
 		//}
 		//$this->_config = &$config;
-		global $config;
 		
 		$this->_config = $config;
+		
 
 		// Initialize custom configuration settings:
 		$this->initCustomConfig();

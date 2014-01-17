@@ -10,13 +10,20 @@
  * http://www.phpbb.com/
  */
 
+define('IN_PHPBB', true);
+$phpbb_root_path = AJAX_CHAT_PATH.'../';
+$phpEx = substr(strrchr(__FILE__, '.'), 1);
+require($phpbb_root_path.'common.'.$phpEx);
+
+// phpBB session management:
+$user->session_begin();
+$auth->acl($user->data);
+
 class CustomAJAXChat extends AJAXChat {
 
 	// Initialize custom configuration settings
 	function initCustomConfig() {
 		global $db;
-		
-		die(var_dump($db));
 		
 		// Use the existing phpBB database connection:
 		$this->setConfig('dbConnection', 'link', $db->db_connect_id);
