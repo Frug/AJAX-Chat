@@ -10,16 +10,22 @@
  * http://www.phpbb.com/
  */
 
+// Set up globals and include files for phpBB3
 define('IN_PHPBB', true);
 $phpbb_root_path = AJAX_CHAT_PATH.'../';
-$phpEx = substr(strrchr(__FILE__, '.'), 1);
-require($phpbb_root_path.'common.'.$phpEx);
-
-// phpBB session management:
-$user->session_begin();
-$auth->acl($user->data);
+$phpEx = 'php';
+require($phpbb_root_path.'common.php');
 
 class CustomAJAXChat extends AJAXChat {
+	
+	public function __construct($config) {
+		global $user, $auth;
+		// phpBB session management:
+		$user->session_begin();
+		$auth->acl($user->data);
+		
+		parent::__construct($config);
+	}
 
 	// Initialize custom configuration settings
 	function initCustomConfig() {
