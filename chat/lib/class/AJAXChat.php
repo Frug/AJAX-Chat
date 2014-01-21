@@ -326,11 +326,11 @@ class AJAXChat {
 	function getTemplateFileName() {
 		switch($this->getView()) {
 			case 'chat':
-				return AJAX_CHAT_PATH.'lib/template/loggedIn.html';
+				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedIn.html';
 			case 'logs':
-				return AJAX_CHAT_PATH.'lib/template/logs.html';
+				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/logs.html';
 			default:
-				return AJAX_CHAT_PATH.'lib/template/loggedOut.html';
+				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedOut.html';
 		}
 	}
 
