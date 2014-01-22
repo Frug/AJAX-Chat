@@ -844,3 +844,13 @@ Bugfixes:
 - Normalized sound volumes a bit.
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
 - Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
+
+Version 0.8.8 (?.?.2014)
+-------------------------------
+Notice:
+- Integration versions are now all included in one download. You can select your integration version by setting the 'integration' 
+  option in config.php.
+- The $config variable was renamed to $AJAXChatConfig in config.php, so you CAN'T use your old config.php file. 
+
+New Features:
+- XenForo integration is now included. - thanks to ManOnDaMoon.
