@@ -18,18 +18,19 @@ define('AJAX_CHAT_GUEST',		0);
 $AJAXChatConfig = array();
 
 // Folder name of the integration version (e.g. 'standalone'):
-$AJAXChatConfig['integration'] = 'phpbb3';
+$AJAXChatConfig['integration'] = 'standalone';
 
 // Database connection values:
+// Note: For most integration versions these values should be left as null
 $AJAXChatConfig['dbConnection'] = array();
-// Database hostname:
-$AJAXChatConfig['dbConnection']['host'] = 'localhost';
-// Database username:
-$AJAXChatConfig['dbConnection']['user'] = 'root';
-// Database password:
-$AJAXChatConfig['dbConnection']['pass'] = '';
-// Database name:
-$AJAXChatConfig['dbConnection']['name'] = 'chat';
+// Database hostname (e.g. 'localhost'):
+$AJAXChatConfig['dbConnection']['host'] = null;
+// Database username (e.g. 'root'):
+$AJAXChatConfig['dbConnection']['user'] = null;
+// Database password (e.g. '' for no password):
+$AJAXChatConfig['dbConnection']['pass'] = null;
+// Database name (e.g. 'chat'):
+$AJAXChatConfig['dbConnection']['name'] = null;
 // Database type:
 $AJAXChatConfig['dbConnection']['type'] = null;
 // Database link:

@@ -1,18 +1,17 @@
-AJAX Chat Standalone
+Blueimp's AJAX Chat
 ====================
 
-This is the standalone version of Blueimp's AJAX Chat. If you are looking for a version to integrate with your forum, select a different branch.
+A PHP, JavaScript and XML chat client written for deployment on most standard web servers.
+Integration options are provided for a few forum systems including phpBB3, MyBB, SMF, punbb/fluxbb and xenforo.
+The included integrations can be used as examples for how to integrate chat with your own forum or framework.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
 Instead of delivering a complete HTML page only updated data is sent in XML format. 
-
 By using JavaScript the chat page can be updated without having to reload the whole page.
 
 Requirements
 ------------
-
-
 
 | *Server-Side*          | *Client-Side*                | 
 | ---------------------- | ---------------------------- |
@@ -58,12 +57,10 @@ Features
 - Optional support to push updates over a Flash based socket connection (increased performance and responsiveness)
 - Survives connection timeouts
 - Easy integration into existing authentication systems
-- Sample phpBB3, MyBB, PunBB, SMF and vBulletin integrations available
-- Separation of layout and code
-- Well commented Source Code
-- Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
+- Sample phpBB3, MyBB, PunBB, SMF and xenforo integrations included
+- Separation of layout and code with well commented source code
+- Developed with security as integral part - built to prevent code injections, SQL injections, cross-site scripting (XSS), session stealing and other attacks
 - Tested successfully with Microsoft Internet Explorer, Mozilla Firefox, Opera and Safari - built to work with all modern browsers :)
-
 
 
 Help
