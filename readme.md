@@ -72,3 +72,8 @@ For more documentation consult the github wiki: https://github.com/Frug/AJAX-Cha
 For support questions use google groups: https://groups.google.com/forum/#!forum/ajax-chat
 
 To report bugs use github issues: https://github.com/Frug/AJAX-Chat
+
+License
+-------
+Blueimp's AJAX Chat is released under a Modified MIT License with an exception that the license does not extend to other projects or components that may be included.
+You can find more details in the license.txt file.
