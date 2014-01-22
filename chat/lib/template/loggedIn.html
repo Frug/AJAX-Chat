@@ -74,6 +74,7 @@
 				ajaxChat.fillSoundSelection('soundLeaveSetting', ajaxChat.getSetting('soundLeave'));
 				ajaxChat.fillSoundSelection('soundChatBotSetting', ajaxChat.getSetting('soundChatBot'));
 				ajaxChat.fillSoundSelection('soundErrorSetting', ajaxChat.getSetting('soundError'));
+				ajaxChat.fillSoundSelection('soundPrivateSetting', ajaxChat.getSetting('soundPrivate'));
 				document.getElementById('blinkSetting').checked = ajaxChat.getSetting('blink');
 				document.getElementById('blinkIntervalSetting').value = ajaxChat.getSetting('blinkInterval');
 				document.getElementById('blinkIntervalNumberSetting').value = ajaxChat.getSetting('blinkIntervalNumber');
@@ -357,14 +358,20 @@
 						</td>
 					</tr>
 					<tr class="rowEven">
+						<td><label for="soundPrivateSetting">[LANG]settingsSoundPrivate[/LANG]</label></td>
+						<td class="setting">
+							<select id="soundPrivateSetting" onchange="ajaxChat.setSetting('soundPrivate', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
+						</td>
+					</tr>
+					<tr class="rowOdd">
 						<td><label for="blinkSetting">[LANG]settingsBlink[/LANG]</label></td>
 						<td class="setting"><input type="checkbox" id="blinkSetting" onclick="ajaxChat.setSetting('blink', this.checked);"/></td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
 						<td><label for="blinkIntervalSetting">[LANG]settingsBlinkInterval[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalSetting" onchange="ajaxChat.setSetting('blinkInterval', parseInt(this.value));"/></td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
 						<td><label for="blinkIntervalNumberSetting">[LANG]settingsBlinkIntervalNumber[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalNumberSetting" onchange="ajaxChat.setSetting('blinkIntervalNumber', parseInt(this.value));"/></td>
 					</tr>

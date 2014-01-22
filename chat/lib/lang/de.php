@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = 'Klang für Logins und das Betreten von Räumen:';
 $lang['settingsSoundLeave'] = 'Klang für Logouts und das Verlassen von Räumen:';
 $lang['settingsSoundChatBot'] = 'Klang für Chatbot Nachrichten:';
 $lang['settingsSoundError'] = 'Klang für Fehlermeldungen:';
+$lang['settingsSoundPrivate'] = 'Klang für private Nachrichten:';
 $lang['settingsBlink'] = 'Blinkender Fenstertitel bei neuen Nachrichten:';
 $lang['settingsBlinkInterval'] = 'Blink-Intervall in Millisekunden:';
 $lang['settingsBlinkIntervalNumber'] = 'Anzahl der Blink-Intervalle:';

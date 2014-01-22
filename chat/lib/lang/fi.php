@@ -106,6 +106,7 @@ $lang['settingsSoundEnter'] = 'Ääni sisäänkirjoittautumiseen ja kanavalle tu
 $lang['settingsSoundLeave'] = 'Ääni poistumiseen keskustelusta ja kanavalta:';
 $lang['settingsSoundChatBot'] = 'Ääni chatbotin viesteille:';
 $lang['settingsSoundError'] = 'Ääni virheilmoituksille:';
+$lang['settingsSoundPrivate'] = 'Ääni varten yksityiset viesteille:';
 $lang['settingsBlink'] = 'Vilkuta ikkunan nimeä uusista viesteistä:';
 $lang['settingsBlinkInterval'] = 'Vilkuttamisen aika millisekunneissa:';
 $lang['settingsBlinkIntervalNumber'] = 'Vilkutuksen viive:';

@@ -106,6 +106,7 @@ $lang['settingsSoundEnter'] = 'Suono per login:';
 $lang['settingsSoundLeave'] = 'Suono per uscita:';
 $lang['settingsSoundChatBot'] = 'Suono per messaggi robot:';
 $lang['settingsSoundError'] = 'Suono per messaggi errore:';
+$lang['settingsSoundPrivate'] = 'Suono per messaggi privati:';
 $lang['settingsBlink'] = 'Lampeggio nuovi messaggi:';
 $lang['settingsBlinkInterval'] = 'Intervallo lampeggio:';
 $lang['settingsBlinkIntervalNumber'] = 'Numero massimo lampeggi:';

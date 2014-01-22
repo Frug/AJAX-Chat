@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Som para login e avisos de entrada em canais:';
 $lang['settingsSoundLeave'] = 'Som para logout e avisos de saida em canais:';
 $lang['settingsSoundChatBot'] = 'Som para mensagens do chatbot:';
 $lang['settingsSoundError'] = 'Som para mensagens de erro:';
+$lang['settingsSoundPrivate'] = 'Som para mensagens do privado:';
 $lang['settingsBlink'] = 'Título da janela do piscamento em mensagens novas:';
 $lang['settingsBlinkInterval'] = 'Intervalo do piscamento nos milissegundos:';
 $lang['settingsBlinkIntervalNumber'] = 'Número de intervalos do piscamento:';

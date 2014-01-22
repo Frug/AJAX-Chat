@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = 'サウンド - ログイン、チャンネル入�
 $lang['settingsSoundLeave'] = 'サウンド - ログアウト、チャンネル退室 :';
 $lang['settingsSoundChatBot'] = 'サウンド - チャットボットメッセージ :';
 $lang['settingsSoundError'] = 'サウンド - エラーメッセージ :';
+$lang['settingsSoundPrivate'] = 'Sound for private messages:';
 $lang['settingsBlink'] = '新着メッセージの到着時にウィンドウタイトルを点滅させる :';
 $lang['settingsBlinkInterval'] = '点滅の間隔（ミリ秒） :';
 $lang['settingsBlinkIntervalNumber'] = '点滅の回数 :';

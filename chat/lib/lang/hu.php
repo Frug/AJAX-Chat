@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = 'Belépés szobaüzenetek hangja:';
 $lang['settingsSoundLeave'] = 'Kilépés szobaüzenetek hangja:';
 $lang['settingsSoundChatBot'] = 'ChatBot üzenetek hangja:';
 $lang['settingsSoundError'] = 'Hibaüzenetek hangja:';
+$lang['settingsSoundPrivate'] = 'Privát üzenetek hangja:';
 $lang['settingsBlink'] = 'Ablak fejléce villogjon új üzenet esetén:';
 $lang['settingsBlinkInterval'] = 'A villogás intervallumának hossza századmásodpercekben:';
 $lang['settingsBlinkIntervalNumber'] = 'Villogási intervallumok száma:';

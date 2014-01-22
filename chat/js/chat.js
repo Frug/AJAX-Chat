@@ -691,7 +691,14 @@ var ajaxChat = {
 					this.playSound(this.settings['soundSend']);
 					break;
 				default:
-					this.playSound(this.settings['soundReceive']);
+					var messageParts = messageText.split(' ', 1);
+					switch(messageParts[0]) {
+						case '/privmsg':
+							this.playSound(this.settings['soundPrivate']);
+		                            		break;
+						default:
+							this.playSound(this.settings['soundReceive']);
+					};
 					break;
 			}
 		}

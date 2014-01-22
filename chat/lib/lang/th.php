@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'เสียงสำหรับเข้าร�
 $lang['settingsSoundLeave'] = 'เสียงสำหรับออกจากระบบและออกจากห้อง:';
 $lang['settingsSoundChatBot'] = 'เสียงสำหรับข้อความจาำกระบบ:';
 $lang['settingsSoundError'] = 'เสียงสำหรับข้อความผิดพลาด:';
+$lang['settingsSoundPrivate'] = 'Sound for private messages:';
 $lang['settingsBlink'] = 'มีสัญญาณ กระพริบบน Title Bar เมื่อมีข้อความใหม่:';
 $lang['settingsBlinkInterval'] = 'Blink interval in milliseconds:';
 $lang['settingsBlinkIntervalNumber'] = 'Number of blink intervals:';
