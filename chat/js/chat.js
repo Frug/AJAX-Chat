@@ -695,10 +695,10 @@ var ajaxChat = {
 					switch(messageParts[0]) {
 						case '/privmsg':
 							this.playSound(this.settings['soundPrivate']);
-		                            		break;
+							break;
 						default:
 							this.playSound(this.settings['soundReceive']);
-					};
+					}
 					break;
 			}
 		}
