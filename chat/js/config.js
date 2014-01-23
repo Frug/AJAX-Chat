@@ -102,6 +102,8 @@ var ajaxChatConfig = {
 		soundChatBot: 'sound_5',
 		// Defines the sound that is played on error messages:
 		soundError: 'sound_6',
+		// Defines the sound that is played when private messages are received:
+		soundPrivate: 'sound_7',
 		
 		// Defines if the document title blinks on new messages:
 		blink: true,
@@ -209,7 +211,8 @@ var ajaxChatConfig = {
 		sound_4: 'sound_4.mp3',
 		sound_5: 'sound_5.mp3',
 		sound_6: 'sound_6.mp3',
-		sound_7: 'sound_1.mp3'
+		sound_7: 'sound_7.mp3',
+		sound_8: 'sound_8.mp3'
 	},
 	
 	
