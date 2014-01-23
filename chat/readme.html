@@ -42,7 +42,7 @@
 
 <h1 id="top">AJAX Chat
 	<span class="version">
-		v 0.8.7 standalone ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+		v 0.8.8 ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
 	</span>
 </h1> 
 
@@ -167,10 +167,13 @@ This version is good for customizing your own integration, or using on its own.<
     <div class="subsection">
       <p>There are two options available to you to create the database. The first, and usually the easiest option, is to run the installation script included with AJAX Chat. Alternatively, you may use a database tool like PHPMyAdmin to manually create the tables.</p>
       <ol>
-        <li> To use the installation script, visit the following URL in your browser:<br>
-          <span class="filename">http://example.org/path/to/chat/install.php</span><br> 
-          Where 
-          &quot;http://example.org/path/to/chat/&quot; is the real URL to your chat directory.</li>
+        <li>
+			To use the installation script, visit the following URL in your browser:<br>
+			<span class="filename">http://example.org/path/to/chat/install.php</span><br> 
+			Where 
+			&quot;http://example.org/path/to/chat/&quot; is the real URL to your chat directory.<br>
+			Be sure to delete the install.php file after you have completed this step!
+		</li>
         <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
       </ol>
       <p>Either of these methods will create the tables your database needs to store chat messages and other information.</p>
