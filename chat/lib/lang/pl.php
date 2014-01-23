@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Dźwięk dla wejść do pokoju:';
 $lang['settingsSoundLeave'] = 'Dźwięk dla wyjść z pokoju:';
 $lang['settingsSoundChatBot'] = 'Dźwięk dla informacji od bota:';
 $lang['settingsSoundError'] = 'Dźwięk dla informacji o błędach:';
+$lang['settingsSoundPrivate'] = 'Dźwięk dla informacji prywatny wiadomości:';
 $lang['settingsBlink'] = 'Miganie okienka przy nadejściu nowej wiadomości:';
 $lang['settingsBlinkInterval'] = 'Odstęp pomiędzy mignięciami (w milisekundach):';
 $lang['settingsBlinkIntervalNumber'] = 'Liczba mignięć:';

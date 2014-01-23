@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Zvok za prijavo in vstop v sobo:';
 $lang['settingsSoundLeave'] = 'Zvok za odjavo in izhod iz sobe:';
 $lang['settingsSoundChatBot'] = 'Zvok za chatbot sporočila:';
 $lang['settingsSoundError'] = 'Zvuk za sporočila o napakah:';
+$lang['settingsSoundPrivate'] = 'Zvok za zasebna sporočila:';
 $lang['settingsBlink'] = 'Trepetanje imena okna za nova sporočila:';
 $lang['settingsBlinkInterval'] = 'Interval trepetanja v milisekundah:';
 $lang['settingsBlinkIntervalNumber'] = 'Število intervalov trepetanja:';

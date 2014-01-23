@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Sonido para mensajes de conexión y entradas al c
 $lang['settingsSoundLeave'] = 'Sonido para mensajes de desconexión y salidas del canal:';
 $lang['settingsSoundChatBot'] = 'Sonido para mensajes del Chatbot:';
 $lang['settingsSoundError'] = 'Sonido para mensajes de error:';
+$lang['settingsSoundPrivate'] = 'Sonido para mensajes privados:';
 $lang['settingsBlink'] = 'Parpadeo del título de la ventana con nuevos mensajes:';
 $lang['settingsBlinkInterval'] = 'Intervalo de parpadeo en milisegundos:';
 $lang['settingsBlinkIntervalNumber'] = 'Número de intervalos de parpadeo:';
