@@ -666,10 +666,11 @@ var ajaxChat = {
 	},
 	
 	playSoundOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
+		var messageParts;
 		if(this.settings['audio'] && this.sounds && this.lastID && !this.channelSwitch) {
+			messageParts = messageText.split(' ', 1);
 			switch(userID) {
 				case this.chatBotID:
-					var messageParts = messageText.split(' ', 1);
 					switch(messageParts[0]) {
 						case '/login':
 						case '/channelEnter':
@@ -688,10 +689,15 @@ var ajaxChat = {
 					}
 					break;
 				case this.userID:
-					this.playSound(this.settings['soundSend']);
+					switch(messageParts[0]) {
+						case '/privmsgto':
+							this.playSound(this.settings['soundPrivate']);
+							break;
+						default:
+							this.playSound(this.settings['soundSend']);
+					}
 					break;
 				default:
-					var messageParts = messageText.split(' ', 1);
 					switch(messageParts[0]) {
 						case '/privmsg':
 							this.playSound(this.settings['soundPrivate']);
