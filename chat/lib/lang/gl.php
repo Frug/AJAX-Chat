@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Son para login :';
 $lang['settingsSoundLeave'] = 'Son para logout :';
 $lang['settingsSoundChatBot'] = 'Son para mensaxes chat:';
 $lang['settingsSoundError'] = 'Son para errores:';
+$lang['settingsSoundPrivate'] = 'Son para mensaxes privadas:';
 $lang['settingsBlink'] = 'Parpadeo en ventá con novas mensaxes:';
 $lang['settingsBlinkInterval'] = 'Intervalo parpadeos (milisegundos):';
 $lang['settingsBlinkIntervalNumber'] = 'Número de parpadeos:';

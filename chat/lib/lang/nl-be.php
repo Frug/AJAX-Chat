@@ -105,6 +105,7 @@ $lang['settingsSoundEnter'] = 'Geluid voor login en chatkemer voor binnenkomende
 $lang['settingsSoundLeave'] = 'Geluid voor logout en verlaat berichten:';
 $lang['settingsSoundChatBot'] = 'Geluid voor berichten van de bot:';
 $lang['settingsSoundError'] = 'Geluid voor errorberichten:';
+$lang['settingsSoundPrivate'] = 'Geluid voor privé berichten:';
 $lang['settingsBlink'] = 'Blink window title on new messages:';
 $lang['settingsBlinkInterval'] = 'Blink interval in milliseconds:';
 $lang['settingsBlinkIntervalNumber'] = 'Number of blink intervals:';

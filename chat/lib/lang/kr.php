@@ -104,6 +104,7 @@ $lang['settingsSoundEnter'] = '로그인, 채널 접속 소리:';
 $lang['settingsSoundLeave'] = '로그아웃, 채널 접속해제 소리:';
 $lang['settingsSoundChatBot'] = '시스템 메시지 소리:';
 $lang['settingsSoundError'] = '오류 소리:';
+$lang['settingsSoundPrivate'] = 'Sound for private messages:';
 $lang['settingsBlink'] = '새로운 메시지 도착 시 타이틀 깜빡임:';
 $lang['settingsBlinkInterval'] = '밀리세컨드 단위 깜빡임 속도:';
 $lang['settingsBlinkIntervalNumber'] = '깜빡임 횟수:';

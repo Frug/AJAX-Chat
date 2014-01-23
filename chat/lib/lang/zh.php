@@ -104,6 +104,7 @@ $lang['settingsSoundSend'] = '声音提示离开信息：';
 $lang['settingsSoundEnter'] = '声音提示登录或进入频道信息：';
 $lang['settingsSoundLeave'] = '声音提示退出或离开频道信息：';
 $lang['settingsSoundChatBot'] = '声音提示机器人信息：';
+$lang['settingsSoundPrivate'] = 'Sound for private messages:';
 $lang['settingsSoundError'] = '声音提示错误信息：';
 $lang['settingsBlink'] = '有新消息时闪烁窗口标题：';
 $lang['settingsBlinkInterval'] = '空闲间隔毫秒数：';
