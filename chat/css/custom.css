@@ -1,0 +1,36 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @author Philip Nicolcev
+ * @copyright (c) Sebastian Tschan
+ * @license Modified MIT License
+ * @link https://blueimp.net/ajax/
+ */
+
+/* Custom CSS - enter css overrides for all styles below */
+/* e.g. suppose you want to hide the logout button and the channel / style / language selectors
+#content #logoutChannelContainer {
+	display:none;
+}
+#content #chatList {
+	top:66px;
+}
+#content #onlineListContainer {
+	top:66px;
+}
+#content #copyright {
+	right:50px;
+	top:18px;
+}
+#content #statusIconContainer {
+	right:12px;
+	top:12px;
+}
+#content #helpContainer {
+	top:66px;
+}
+#content #settingsContainer {
+	top:66px;
+}
+
+ */
