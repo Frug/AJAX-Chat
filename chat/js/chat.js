@@ -150,7 +150,22 @@ var ajaxChat = {
 		this.debug					= config['debug'];
 		this.DOMbuffering			= false;
 		this.DOMbuffer				= "";
+		/**
+		 * The calculation below looks incorrect - inactiveTimeout is in minutes, timerRate is in ms.
 		this.retryTimerDelay 		= (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
+		 * So I think inactiveTimeout should be multiplied by 60000 not 6000.
+		 * With original calc and inactive timeout = the minimum of 2 mins and timerRate of 2s, this would result in
+		 * an ajax retry delay of 4.5secs which is unreasonable on a slow connection.
+		 * With corrected calc and inactive timeout = the minimum of 2 mins and timerRate of 2s, this would result in
+		 * an ajax retry delay of 31.5secs which is about the maximum we should allow.
+		 * With original calc and inactive timeout = 15 mins and timerRate of 2s, this would result in
+		 * an ajax retry delay of 24secs which is reasonable.
+		 * With corrected calc and inactive timeout = 15 mins and timerRate of 2s, this would result in
+		 * an ajax retry delay of 226secs which is 3 mins and is unreasonable.
+		 * Calc looks to allow at least 4 retries before user becomes inactive which seems reasonable.
+		 * However with large inactiveTimeouts, the retry period should be limited.
+		 **/
+		this.retryTimerDelay 		= Math.min(this.inactiveTimeout*15000, 60000);
 	},
 
 	initDirectories: function() {
