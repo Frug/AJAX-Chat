@@ -9,9 +9,6 @@
  * PunBB integration:
  * http://punbb.org/
  */
- 
-define('PUN_ROOT', AJAX_CHAT_PATH.'../');
-require PUN_ROOT.'include/common.php';
 
 class CustomAJAXChat extends AJAXChat {
 

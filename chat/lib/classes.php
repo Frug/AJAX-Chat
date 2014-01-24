@@ -7,6 +7,9 @@
  * @link https://blueimp.net/ajax/
  */
 
+// Load configuration
+require_once(AJAX_CHAT_PATH.'lib/config.php');
+
 // Include Class libraries:
 require(AJAX_CHAT_PATH.'lib/class/AJAXChat.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChatDataBase.php');
@@ -21,6 +24,6 @@ require(AJAX_CHAT_PATH.'lib/class/AJAXChatHTTPHeader.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChatLanguage.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChatTemplate.php');
 require(AJAX_CHAT_PATH.'lib/integration/'.$AJAXChatConfig['integration'].'/CustomAJAXChat.php');
-require(AJAX_CHAT_PATH.'lib/class/CustomAJAXChatShoutBox.php');
-//require(AJAX_CHAT_PATH.'lib/class/CustomAJAXChatInterface.php');
+require(AJAX_CHAT_PATH.'lib/integration/'.$AJAXChatConfig['integration'].'/CustomAJAXChatShoutBox.php');
+require(AJAX_CHAT_PATH.'lib/integration/'.$AJAXChatConfig['integration'].'/CustomAJAXChatInterface.php');
 ?>

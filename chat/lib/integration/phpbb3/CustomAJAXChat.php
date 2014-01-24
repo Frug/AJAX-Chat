@@ -10,12 +10,6 @@
  * http://www.phpbb.com/
  */
 
-// Set up globals and include files for phpBB3
-define('IN_PHPBB', true);
-$phpbb_root_path = AJAX_CHAT_PATH.'../';
-$phpEx = 'php';
-require($phpbb_root_path.'common.php');
-
 class CustomAJAXChat extends AJAXChat {
 	
 	public function __construct($config) {

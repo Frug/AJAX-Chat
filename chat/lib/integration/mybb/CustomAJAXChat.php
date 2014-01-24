@@ -10,10 +10,6 @@
  * http://www.mybboard.net/
  */
  
-define('IN_MYBB', 1);
-chdir(AJAX_CHAT_PATH.'../');
-require(AJAX_CHAT_PATH.'../global.php');
-
 class CustomAJAXChat extends AJAXChat {
 
 	// Initialize custom configuration settings
