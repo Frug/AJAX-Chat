@@ -89,6 +89,7 @@ var ajaxChat = {
 	DOMbuffering: null,
 	DOMbuffer: null,
 	DOMbufferRowClass: 'rowOdd',
+	debug: false,
 
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {
 		this.httpRequest		= {};
@@ -137,7 +138,7 @@ var ajaxChat = {
 		this.chatBotName			= config['chatBotName'];
 		this.chatBotID				= config['chatBotID'];
 		this.allowUserMessageDelete	= config['allowUserMessageDelete'];
-		this.inactiveTimeout		= config['inactiveTimeout'];
+		this.inactiveTimeout		= Math.max(config['inactiveTimeout'],2);
 		this.privateChannelDiff		= config['privateChannelDiff'];
 		this.privateMessageDiff		= config['privateMessageDiff'];
 		this.showChannelMessages	= config['showChannelMessages'];
@@ -146,6 +147,7 @@ var ajaxChat = {
 		this.socketServerHost		= config['socketServerHost'];
 		this.socketServerPort		= config['socketServerPort'];
 		this.socketServerChatID		= config['socketServerChatID'];
+		this.debug					= config['debug'];
 		this.DOMbuffering			= false;
 		this.DOMbuffer				= "";
 		this.retryTimerDelay 		= (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
@@ -256,7 +258,7 @@ var ajaxChat = {
 		this.initializeSettings();
 		this.setSelectedStyle();
 		this.customInitialize();
-		//preload the Alert icon (it can't display if there's no connection unless it's cached!)
+		// preload the Alert icon (it can't display if there's no connection unless it's cached!)
 		this.setStatus('retrying');
 		if(typeof this.initializeFunction === 'function') {
 			this.initializeFunction();
@@ -484,7 +486,7 @@ var ajaxChat = {
 				}
 				this.socket.connect(this.socketServerHost, this.socketServerPort);
 			} catch(e) {
-				//alert(e);
+				this.debugMessage('socketConnect', e);
 			}
 		}
 		clearTimeout(this.socketReconnectTimer);
@@ -534,7 +536,7 @@ var ajaxChat = {
 					+'"/>'
 				);
 			} catch(e) {
-				//alert(e);
+				this.debugMessage('socketRegister', e);
 			}
 		}
 	},
@@ -607,7 +609,7 @@ var ajaxChat = {
 				}
 				this.soundTransform.setVolume(volume);
 			} catch(e) {
-				//alert(e);
+				this.debugMessage('setAudioVolume', e);
 			}
 		}
 	},
@@ -626,7 +628,7 @@ var ajaxChat = {
 				sound.load(urlRequest);
 			}
 		} catch(e) {
-			alert(e);
+			this.debugMessage('loadSounds', e);
 		}
 	},
 
@@ -660,7 +662,7 @@ var ajaxChat = {
 				// sndTransform:SoundTransform  (default = null)
 				return this.sounds[soundID].play(0, 0, this.soundTransform);
 			} catch(e) {
-				//alert(e);
+				this.debugMessage('playSound', e);
 			}
 		}
 		return null;
@@ -801,7 +803,7 @@ var ajaxChat = {
 					try {
 						clearTimeout(ajaxChat.timer);
 					} catch(e) {
-						//alert(e);
+						this.debugMessage('makeRequest::clearTimeout', e);
 					}
 					try {
 						if(data) {
@@ -810,12 +812,12 @@ var ajaxChat = {
 							ajaxChat.updateChatlistView();
 						}
 					} catch(e) {
-						//alert(e);
+						this.debugMessage('makeRequest::logRetry', e);
 					}
 					try {
 						ajaxChat.timer = setTimeout(function() { ajaxChat.updateChat(null); }, ajaxChat.timerRate);
 					} catch(e) {
-						//alert(e);
+						this.debugMessage('makeRequest::setTimeout', e);
 					}
 				}
 			};
@@ -2074,7 +2076,7 @@ var ajaxChat = {
 			text = this.breakLongWords(text);
 			text = this.replaceCustomText(text);
 		} catch(e){
-			//alert(e);
+			this.debugMessage('replaceText', e);
 		}
 		return text;
 	},
@@ -2155,7 +2157,7 @@ var ajaxChat = {
 					return this.replaceCustomCommands(text, textParts);
 			}
 		} catch(e) {
-			//alert(e);
+			this.debugMessage('replaceCommands', e);
 		}
 		return text;
 	},
@@ -2885,7 +2887,7 @@ var ajaxChat = {
 				this.socket.close();
 				this.socket = null;
 			} catch(e) {
-				//alert(e);
+				this.debugMessage('finalize::closeSocket', e);
 			}
 		}
 		this.persistSettings();
@@ -2960,6 +2962,16 @@ var ajaxChat = {
 	// Return true if message is to be added to the chatList, else false
 	customOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
 		return true;
-	}
+	},
+
+	debugMessage: function(msg, e) {
+		msg = 'Ajax chat: ' + msg + ' exception: ';
+		if (this.debug) {
+			console.log(msg, e);
+			if (this.debug == '2') {
+				alert(msg + e);
+			}
+		}
+	},
 
 };
