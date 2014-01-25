@@ -14,8 +14,12 @@ var ajaxChatConfig = {
 	// The channelName of the channel to enter on login (the default channel is used if set to null):
 	loginChannelName: null,
 
-	// The time in ms between update calls to retrieve new chat messages:
+	// The time in ms between update calls to retrieve new chat messages when active:
 	timerRate: 2000,
+	// The time in ms between update calls to retrieve new chat messages when inactive:
+	inactiveRate: 10000,
+	// The time in seconds after last chat send to become inactive:
+	inactivePeriod: 60,
 
 	// The URL to retrieve the XML chat messages (must at least contain one parameter):
 	ajaxURL: './?ajax=true',

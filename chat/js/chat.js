@@ -22,7 +22,11 @@ var ajaxChat = {
 	loginChannelID: null,
 	loginChannelName: null,
 	timerRate: null,
+	inactiveRate: null,
+	inactivePeriod: null,
+	actualRate: null,
 	timer: null,
+	inactivityTimer: null,
 	ajaxURL: null,
 	baseURL: null,
 	regExpMediaUrl: null,
@@ -116,8 +120,18 @@ var ajaxChat = {
 
 	initConfig: function(config) {
 		this.loginChannelID			= config['loginChannelID'];
-		this.loginChannelName		= config['loginChannelName'];
-		this.timerRate				= config['timerRate'];
+		this.loginChannelName			= config['loginChannelName'];
+		this.timerRate = this.actualRate	= config['timerRate'];
+		this.inactiveRate			= config['inactiveRate'];
+		if (!this.inactiveRate) {
+			this.inactiveRate = this.timeRate*5;
+		}
+		this.inactivePeriod			= config['inactivePeriod'];
+		if (!this.inactivePeriod) {
+			this.inactivePeriod = 5*60*1000;
+		} else {
+			this.inactivePeriod = this.inactivePeriod*1000;
+		}
 		this.ajaxURL				= config['ajaxURL'];
 		this.baseURL				= config['baseURL'];
 		this.regExpMediaUrl			= config['regExpMediaUrl'];
@@ -165,7 +179,7 @@ var ajaxChat = {
 		 * Calc looks to allow at least 4 retries before user becomes inactive which seems reasonable.
 		 * However with large inactiveTimeouts, the retry period should be limited.
 		 **/
-		this.retryTimerDelay 		= Math.min(this.inactiveTimeout*15000, 60000);
+		this.retryTimerDelay 		= Math.min(this.inactiveTimeout*60*1000/4, 60000);
 	},
 
 	initDirectories: function() {
@@ -439,6 +453,7 @@ var ajaxChat = {
 		} else if(this.loginChannelName !== null) {
 			params += '&channelName='+this.encodeText(this.loginChannelName);
 		}
+		this.resetInactivityTimer();
 		this.updateChat(params);
 	},
 
@@ -819,10 +834,10 @@ var ajaxChat = {
 							ajaxChat.updateChatlistView();
 						}
 					} catch(e) {
-						this.debugMessage('makeRequest::logRetry', e);
+						this.debugMessage('makeRequest::ConnectionTimeout', e);
 					}
 					try {
-						ajaxChat.timer = setTimeout(function() { ajaxChat.updateChat(null); }, ajaxChat.timerRate);
+						ajaxChat.timer = setTimeout(function() { ajaxChat.updateChat(null); }, ajaxChat.actualRate);
 					} catch(e) {
 						this.debugMessage('makeRequest::setTimeout', e);
 					}
@@ -839,7 +854,7 @@ var ajaxChat = {
 				ajaxChat.setStatus('retrying');
 				this.updateChatlistView();
 			}
-			this.timer = setTimeout(function() { ajaxChat.updateChat(null); }, this.timerRate);
+			this.timer = setTimeout(function() { ajaxChat.updateChat(null); }, this.actualRate);
 		}
 	},
 
@@ -886,7 +901,7 @@ var ajaxChat = {
 			if(this.socketIsConnected) {
 				timeout = this.socketTimerRate;
 			} else {
-				timeout = this.timerRate;
+				timeout = this.actualRate;
 				if(this.socketServerEnabled && !this.socketReconnectTimer) {
 					// If the socket connection fails try to reconnect once in a minute:
 					this.socketReconnectTimer = setTimeout(ajaxChat.socketConnect, 60000);
@@ -1676,6 +1691,7 @@ var ajaxChat = {
 		text = this.parseInputMessage(text);
 		if(text) {
 			clearTimeout(this.timer);
+			this.resetInactivityTimer();
 			var message = 	'lastID='
 							+ this.lastID
 							+ '&text='
@@ -1685,6 +1701,12 @@ var ajaxChat = {
 		this.dom['inputField'].value = '';
 		this.dom['inputField'].focus();
 		this.updateMessageLengthCounter();
+	},
+
+	resetInactivityTimer: function() {
+		clearTimeout(this.inactivityTimer);
+		this.actualRate = this.timerRate;
+		this.inactivityTimer = setTimeout(function() { this.actualRate = this.inactiveRate;}.bind(this), this.inactivePeriod);
 	},
 
 	parseInputMessage: function(text) {
