@@ -67,6 +67,9 @@
 	bottom:150px;
 	overflow:auto;
 }
+#content.logs #chatList {
+	right:20px;
+}
 #content #inputFieldContainer {
 	position:absolute;
 	left:20px;
@@ -259,7 +262,7 @@
 #content img {
 	border:none;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, 
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer,
 #content #colorCodesContainer a, #content textarea {
 	border-width:1px;
 	border-style:solid;
