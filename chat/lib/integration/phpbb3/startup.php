@@ -13,3 +13,7 @@ define('IN_PHPBB', true);
 $phpbb_root_path = AJAX_CHAT_PATH.'../';
 $phpEx = 'php';
 require($phpbb_root_path.'common.php');
+
+// phpBB session management:
+$user->session_begin();
+$auth->acl($user->data);

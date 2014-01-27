@@ -13,11 +13,6 @@
 class CustomAJAXChat extends AJAXChat {
 	
 	public function __construct($config) {
-		global $user, $auth;
-		// phpBB session management:
-		$user->session_begin();
-		$auth->acl($user->data);
-		
 		parent::__construct($config);
 	}
 
