@@ -126,8 +126,8 @@ class CustomAJAXChat extends AJAXChat {
 				}
 			}
 			
-// 			// Setting default channel info from config.
-// 			$this->_channels[$this->getConfig('defaultChannelID')] = $this->getConfig('defaultChannelName');
+// 			// Setting default channel info from config. NB: $key=>$value is $nam=>$id...
+ 			$this->_channels[$this->getConfig('defaultChannelName')] = $this->getConfig('defaultChannelID');
 				
 		}
 		return $this->_channels;
