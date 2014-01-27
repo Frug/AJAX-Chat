@@ -59,9 +59,9 @@ $AJAXChatConfig['langNames'] = array(
 );
 
 // Available styles:
-$AJAXChatConfig['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin');
+$AJAXChatConfig['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin', 'XenForo');
 // Default style:
-$AJAXChatConfig['styleDefault'] = 'prosilver';
+$AJAXChatConfig['styleDefault'] = 'XenForo';
 
 // The encoding used for the XHTML content:
 $AJAXChatConfig['contentEncoding'] = 'UTF-8';
