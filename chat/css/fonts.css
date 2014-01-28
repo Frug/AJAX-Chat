@@ -60,7 +60,6 @@
 }
 #content #chatList span.customUser {
 	font-weight:bold;
-	text-decoration: line-through; /* Remove this after initial testing */
 }
 #content #chatList span.moderator {
 	font-weight:bold;
