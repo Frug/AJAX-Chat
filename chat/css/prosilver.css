@@ -133,6 +133,9 @@
 	#content .user {
 		color:#333333;
 	}
+	#content .customUser {
+		color:#333333;
+	}
 	#content .moderator {
 		color:#00AA00;
 	}
