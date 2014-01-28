@@ -90,6 +90,9 @@
 	#content .user {
 		color:#FFF;
 	}
+	#content .customUser {
+		color:#ffcc33;
+	}
 	#content .moderator {
 		color:#00AA00;
 	}

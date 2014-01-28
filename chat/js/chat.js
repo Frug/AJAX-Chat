@@ -1334,6 +1334,9 @@ var ajaxChat = {
 		if((((this.userRole === '1' && this.allowUserMessageDelete && (userID === this.userID ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
+			(this.userRole === '5' && this.allowUserMessageDelete && (userID == this.userID ||
+			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
+			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
 			this.userRole === '2') && userRole !== '3' && userRole !== '4') || this.userRole === '3') {
 			return true;
 		}
@@ -1624,6 +1627,8 @@ var ajaxChat = {
 				return 'admin';
 			case 4:
 				return 'chatBot';
+			case 5:
+				return 'customUser';
 			default:
 				return 'default';
 		}

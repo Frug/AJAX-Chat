@@ -58,6 +58,9 @@
 #content #chatList span.user {
 	font-weight:bold;
 }
+#content #chatList span.customUser {
+	font-weight:bold;
+}
 #content #chatList span.moderator {
 	font-weight:bold;
 }

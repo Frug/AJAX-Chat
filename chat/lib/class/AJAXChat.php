@@ -358,7 +358,7 @@ class AJAXChat {
 			case 'logs':
 				if($this->isLoggedIn() && ($this->getUserRole() == AJAX_CHAT_ADMIN ||
 					($this->getConfig('logsUserAccess') &&
-					($this->getUserRole() == AJAX_CHAT_MODERATOR || $this->getUserRole() == AJAX_CHAT_USER))
+					($this->getUserRole() == AJAX_CHAT_MODERATOR || $this->getUserRole() == AJAX_CHAT_USER || $this->getUserRole() == AJAX_CHAT_CUSTOM))
 					)) {
 					return true;
 				}
@@ -376,7 +376,7 @@ class AJAXChat {
 			$this->addInfoMessage('errorInvalidUser');
 			return false;
 		}
-
+		
 		// If the chat is closed, only the admin may login:
 		if(!$this->isChatOpen() && $userData['userRole'] != AJAX_CHAT_ADMIN) {
 			$this->addInfoMessage('errorChatClosed');
@@ -389,7 +389,7 @@ class AJAXChat {
 
 		// Check if userID or userName are already listed online:
 		if($this->isUserOnline($userData['userID']) || $this->isUserNameInUse($userData['userName'])) {
-			if($userData['userRole'] == AJAX_CHAT_USER || $userData['userRole'] == AJAX_CHAT_MODERATOR || $userData['userRole'] == AJAX_CHAT_ADMIN) {
+			if($userData['userRole'] == AJAX_CHAT_USER || $userData['userRole'] == AJAX_CHAT_CUSTOM || $userData['userRole'] == AJAX_CHAT_MODERATOR || $userData['userRole'] == AJAX_CHAT_ADMIN) {
 				// Set the registered user inactive and remove the inactive users so the user can be logged in again:
 				$this->setInactive($userData['userID'], $userData['userName']);
 				$this->removeInactive();
@@ -399,8 +399,8 @@ class AJAXChat {
 			}
 		}
 		
-		// Check if user is banned:
-		if($userData['userRole'] != AJAX_CHAT_ADMIN && $this->isUserBanned($userData['userName'], $userData['userID'], $_SERVER['REMOTE_ADDR'])) {
+		// Check if user is banned or in a user group not permitted in chat:
+		if(($userData['userRole'] != AJAX_CHAT_ADMIN && $this->isUserBanned($userData['userName'], $userData['userID'], $_SERVER['REMOTE_ADDR'])) || $userData['userRole'] == AJAX_CHAT_BANNED) {
 			$this->addInfoMessage('errorBanned');
 			return false;
 		}
@@ -1397,7 +1397,7 @@ class AJAXChat {
 									NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_ADMIN).')
 								AND
 									NOT (userRole='.$this->db->makeSafe(AJAX_CHAT_CHATBOT).')';
-			} else if($this->getUserRole() == AJAX_CHAT_USER && $this->getConfig('allowUserMessageDelete')) {
+			} else if($this->getUserRole() == (AJAX_CHAT_USER || AJAX_CHAT_CUSTOM) && $this->getConfig('allowUserMessageDelete')) {
 				$condition = 'AND
 								(
 								userID='.$this->db->makeSafe($this->getUserID()).'
