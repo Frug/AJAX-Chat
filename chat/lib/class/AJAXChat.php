@@ -326,11 +326,23 @@ class AJAXChat {
 	function getTemplateFileName() {
 		switch($this->getView()) {
 			case 'chat':
-				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedIn.html';
+				if (file_exists(AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedIn.html')) {
+					return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedIn.html';
+				} else {
+					return AJAX_CHAT_PATH.'lib/template/loggedIn.html';
+				}
 			case 'logs':
-				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/logs.html';
+				if (file_exists(AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/logs.html')) {
+					return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/logs.html';
+				} else {
+					return AJAX_CHAT_PATH.'lib/template/logs.html';
+				}
 			default:
-				return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedOut.html';
+				if (file_exists(AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedOut.html')) {
+					return AJAX_CHAT_PATH.'lib/integration/'.$this->getConfig('integration').'/template/loggedOut.html';
+				} else {
+					return AJAX_CHAT_PATH.'lib/template/loggedOut.html';
+				}
 		}
 	}
 
