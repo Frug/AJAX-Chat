@@ -16,13 +16,13 @@
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
-		// <![CDATA[			
+		// <![CDATA[
 			function toggleContainer(containerID, hideContainerIDs) {
 				if(hideContainerIDs) {
 					for(var i=0; i<hideContainerIDs.length; i++) {
 						ajaxChat.showHide(hideContainerIDs[i], 'none');	
 					}
-				}		
+				}
 				ajaxChat.showHide(containerID);
 				if(typeof arguments.callee.styleProperty == 'undefined') {
 					if(typeof isIElt7 != 'undefined') {
@@ -36,7 +36,7 @@
 					document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';	
 				} else {
 					document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
-				}				
+				}
 			}
 
 			function initialize() {
@@ -65,6 +65,7 @@
 				ajaxChat.fillSoundSelection('soundLeaveSetting', ajaxChat.getSetting('soundLeave'));
 				ajaxChat.fillSoundSelection('soundChatBotSetting', ajaxChat.getSetting('soundChatBot'));
 				ajaxChat.fillSoundSelection('soundErrorSetting', ajaxChat.getSetting('soundError'));
+				ajaxChat.fillSoundSelection('soundPrivateSetting', ajaxChat.getSetting('soundPrivate'));
 				document.getElementById('blinkSetting').checked = ajaxChat.getSetting('blink');
 				document.getElementById('blinkIntervalSetting').value = ajaxChat.getSetting('blinkInterval');
 				document.getElementById('blinkIntervalNumberSetting').value = ajaxChat.getSetting('blinkIntervalNumber');
@@ -99,7 +100,7 @@
 			ajaxChatConfig.settings.audio = false;
 			ajaxChatConfig.settings.blink = false;
 			ajaxChatConfig.nonPersistentSettings.push('dateFormat','audio','blink');
-			
+
 			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, true, initialize);
 		// ]]>
 	</script>
@@ -107,9 +108,7 @@
 
 <body class="ajax-chat">
 	<div id="content">
-		<div id="headlineContainer">
-			<h1>[LANG]logsTitle[/LANG]</h1>
-		</div>
+		<h1 id="headline">[LANG]logsTitle[/LANG]</h1>
 		<div id="logoutChannelContainer">
 			<input type="button" id="logoutButton" value="[LANG]logout[/LANG]" onclick="ajaxChat.logout();"/>
 			<label for="channelSelection">[LANG]channel[/LANG]:</label>
@@ -238,14 +237,22 @@
 						</td>
 					</tr>
 					<tr class="rowEven">
+						<td><label for="soundPrivateSetting">[LANG]settingsPrivateError[/LANG]</label></td>
+						<td class="setting">
+							<select id="soundPrivateSetting" onchange="ajaxChat.setSetting('soundPrivate', this.options[this.selectedIndex].value);"><option value="">-</option></select><input type="image" src="img/pixel.gif" class="button playback" alt="[LANG]playSelectedSound[/LANG]" title="[LANG]playSelectedSound[/LANG]" onclick="ajaxChat.playSound(this.previousSibling.options[this.previousSibling.selectedIndex].value);"/>
+						</td>
+					</tr>
+					<tr class="rowOdd">
 						<td><label for="blinkSetting">[LANG]settingsBlink[/LANG]</label></td>
 						<td class="setting"><input type="checkbox" id="blinkSetting" onclick="ajaxChat.setSetting('blink', this.checked);"/></td>
 					</tr>
-					<tr class="rowOdd">
+					<tr class="rowEven">
+
 						<td><label for="blinkIntervalSetting">[LANG]settingsBlinkInterval[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalSetting" onchange="ajaxChat.setSetting('blinkInterval', parseInt(this.value));"/></td>
 					</tr>
-					<tr class="rowEven">
+					<tr class="rowOdd">
+
 						<td><label for="blinkIntervalNumberSetting">[LANG]settingsBlinkIntervalNumber[/LANG]</label></td>
 						<td class="setting"><input type="text" class="text" id="blinkIntervalNumberSetting" onchange="ajaxChat.setSetting('blinkIntervalNumber', parseInt(this.value));"/></td>
 					</tr>
@@ -264,5 +271,4 @@
 	</div>
 	<div id="flashInterfaceContainer"></div>
 </body>
-
 </html>
