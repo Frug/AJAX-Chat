@@ -856,3 +856,7 @@ New Features:
 - XenForo integration is now included. - thanks to ManOnDaMoon.
 - Private messages now have their own sound - thanks to marquisite.
 - Added two new sounds - one is extra for your customization pleasure.
+
+Bugfixes:
+- MyBB integration now displays available forums correctly - thanks to Felix Eckhofer (for other MyBB fixes).
+- 
