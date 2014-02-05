@@ -19,7 +19,7 @@ class CustomAJAXChat extends AJAXChat {
 		// Use the existing SMF database connection:
 		$this->setConfig('dbConnection', 'link', $db_connection);
 
-		// SMF has a db prefix so we need to add it to every ajax table
+		// SMF uses a db prefix so we need to add it to every ajax table.
 		$tables = array (
 			'online' => $db_prefix .'ajaxchat_online',
 			'messages' => $db_prefix .'ajaxchat_messages',
@@ -280,4 +280,7 @@ class CustomAJAXChat extends AJAXChat {
 		return;
 	}
 
+	function getDataBaseTable($table) {
+		return $this->getConfig('dbTableNames',$table);
+	}
 }
