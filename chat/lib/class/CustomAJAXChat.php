@@ -14,7 +14,7 @@ class CustomAJAXChat extends AJAXChat {
 
 	// Initialize custom configuration settings
 	function initCustomConfig() {
-		global $db_name,$db_connection;
+		global $db_name,$db_connection,$db_prefix;
 
 		// Use the existing SMF database connection:
 		$this->setConfig('dbConnection', 'link', $db_connection);
