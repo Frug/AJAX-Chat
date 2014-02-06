@@ -21,10 +21,10 @@ class CustomAJAXChat extends AJAXChat {
 
 		// SMF uses a db prefix so we need to add it to every ajax table.
 		$tables = array (
-			'online' => $db_prefix .'ajaxchat_online',
-			'messages' => $db_prefix .'ajaxchat_messages',
-			'bans' => $db_prefix .'ajaxchat_bans',
-			'invitations' => $db_prefix .'ajaxchat_invitations',
+			'online' => $db_prefix .'ajax_chat_online',
+			'messages' => $db_prefix .'ajax_chat_messages',
+			'bans' => $db_prefix .'ajax_chat_bans',
+			'invitations' => $db_prefix .'ajax_chat_invitations',
 		);
 
 		$this->setConfig('dbTableNames', false, $tables);
