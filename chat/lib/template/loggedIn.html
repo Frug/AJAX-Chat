@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[LANG_CODE/]" lang="[LANG_CODE/]" dir="[BASE_DIRECTION/]">
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="[CONTENT_TYPE/]" />
 	<title>[LANG]title[/LANG]</title>
 	[STYLE_SHEETS/]
@@ -10,6 +11,9 @@
 		<link rel="stylesheet" type="text/css" href="css/ie5-6.css"/>
 		<script type="text/javascript">var isIElt7 = true;</script>
 	<![endif]-->
+	<!-- Start Mobile Enhancements -->
+	<link rel="stylesheet" type="text/css" href="css/mobile.css"/>
+	<!-- Start Mobile Enhancements -->
 	<script src="js/chat.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/custom.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
@@ -22,8 +26,12 @@
 					for(var i=0; i<hideContainerIDs.length; i++) {
 						ajaxChat.showHide(hideContainerIDs[i], 'none');	
 					}
-				}		
+				}
 				ajaxChat.showHide(containerID);
+				calculateContainerOffset(containerID);			
+			}
+			
+			function calculateContainerOffset(containerID) {	
 				if(typeof arguments.callee.styleProperty == 'undefined') {
 					if(typeof isIElt7 != 'undefined') {
 						arguments.callee.styleProperty = 'marginRight';
@@ -32,12 +40,33 @@
 					}
 				}
 				var containerWidth = document.getElementById(containerID).offsetWidth;
+				var viewportWidth = document.documentElement.clientWidth;
 				if(containerWidth) {
-					document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';	
+					if(viewportWidth > 720) {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+					} else {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+1)+'px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = (containerWidth+3)+'px';
+					}
 				} else {
-					document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
-				}				
+					if(viewportWidth > 720) {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+					} else {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '3px';
+					}
+				}
 			}
+			
+			/* Start Mobile Enhancements */
+			window.onresize = resize;
+			function resize() {
+				calculateContainerOffset('onlineListContainer'); // Currently only supports onlineListContainer
+				this.updateChatlistView(); // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+			}
+			/* End Mobile Enhancements */
 
 			function initialize() {
 				ajaxChat.updateButton('audio', 'audioButton');
@@ -70,6 +99,13 @@
 				document.getElementById('blinkSetting').checked = ajaxChat.getSetting('blink');
 				document.getElementById('blinkIntervalSetting').value = ajaxChat.getSetting('blinkInterval');
 				document.getElementById('blinkIntervalNumberSetting').value = ajaxChat.getSetting('blinkIntervalNumber');
+				
+				/* Start Mobile Enhancements */
+				var viewportWidth = document.documentElement.clientWidth;
+				if(viewportWidth <= 720) {
+					toggleContainer('onlineListContainer', new Array('settingsContainer','helpContainer'));
+				}
+				/* End Mobile Enhancements */
 			}
 
 			ajaxChatConfig.loginChannelID = parseInt('[LOGIN_CHANNEL_ID/]');

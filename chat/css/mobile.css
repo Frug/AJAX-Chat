@@ -1,0 +1,157 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @author Philip Nicolcev
+ * @copyright (c) Sebastian Tschan
+ * @license Modified MIT License
+ * @link https://blueimp.net/ajax/
+ */
+
+/* Positioning */
+
+@media (max-width: 720px) {
+
+	#content #emoticonsContainer {
+		border-width:1px;
+		border-style:solid;
+		border-color:#999;
+	}
+	#content #headlineContainer { 
+		padding: 0;left: 0;
+	}
+	#content #headlineContainer h1 {
+		margin-left: 2px;
+	}
+	#content #copyright {
+		display: none;
+	}
+	#content #logoutChannelContainer {
+		top: 50px; left: 1px;
+	}
+	#content #logoutChannelContainer label {
+		display: none;
+	}
+	#content #emoticonsContainer {
+		display: none; left: auto; right: 190px; bottom: 85px;
+	}
+	#content #colorCodesContainer {
+		display: none; left: 1px; bottom: 85px;
+	}
+	#content #bbCodeContainer {
+		left: 1px; right: 170px; bottom: 56px;padding: 0;
+	}
+	#content #bbCodeContainer #bbCodeQuote, #content #bbCodeContainer #bbCodeCode, #content #bbCodeContainer #bbCodeURL {
+		display: none;
+	}
+	#content #bbCodeContainer #bbCodeEmoticon {
+		display: inline;
+	}
+	#content #submitButtonContainer {
+		right: 180px; bottom: 56px;padding: 0;text-align: right; z-index:5;
+	}
+	#content #submitButtonContainer #messageLengthCounter {
+		display: none;
+	}
+	#content #optionsContainer {
+		width:20px; right:4px; top:11px; padding:0; text-align:right; z-index:10;
+	}
+	#content #optionsContainer #helpButton, #content #optionsContainer #settingsButton, #content #optionsContainer #audioButton, #content #optionsContainer #autoScrollButton {
+		display: none;
+	}
+	#content #statusIconContainer {
+		top: 9px; right: 190px; display: none;
+	}
+	#content #chatList {
+		left: 1px; right: 180px; bottom: 86px; font-size: 12px;
+	}
+	#content #onlineListContainer {
+		top: 0px; width: 178px; right: 0px; bottom: 0px; border-right: none; border-bottom: none; border-top: none; font-size: 12px; padding: 0;margin: 0;border-radius: 0px;
+	}
+	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
+		height:45px; width: 178px; padding: 1.4em 0 0.6em; margin: 0;
+	}
+	#content #onlineListContainer #onlineList, #content #helpContainer #helpList, #content #settingsContainer #settingsList {
+		top: 43px;
+	}
+	#content #inputFieldContainer #inputField {
+		height: 48px; resize: none;
+	}
+	#content #inputFieldContainer {
+		left: 1px; right: 182px; bottom: 1px; padding: 0px;
+	}
+
+}
+
+
+@media (max-width: 620px) {
+
+	#content #logoutChannelContainer label {
+		display: none;
+	}
+	#content #bbCodeContainer #bbCodeUnderline, #content #bbCodeContainer #bbCodeCode, #content #bbCodeContainer #bbCodeURL, #content #bbCodeContainer #bbCodeIMG {
+		display: none;
+	}
+	#content #logoutChannelContainer #styleSelection {
+		display: none;
+	}
+
+}
+
+
+@media (max-width: 540px) {
+
+	#content #bbCodeContainer #bbCodeColor, #content #bbCodeContainer #bbCodeEmoticon {
+		display: none;
+	}
+	#content #optionsContainer {
+	}
+	#content #logoutChannelContainer #logoutButton {
+		display: none;
+	}
+
+}
+
+
+@media (max-height: 400px) and (max-width: 720px) {
+
+	#content #headlineContainer h1 {
+		margin: 0 0 0 2px; height: 22px;
+	}
+	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
+		height:22px; width: 178px; padding: 0; margin: 0;
+	}
+	#content #optionsContainer {
+		top:1px;
+	}
+	#content #onlineListContainer #onlineList, #content #helpContainer #helpList, #content #settingsContainer #settingsList {
+		top: 22px;
+	}
+	#content #logoutChannelContainer {
+		top: 26px;
+	}
+	#content #chatList {
+		top: 55px;
+	}
+
+}
+
+
+@media (max-height: 240px) and (max-width: 720px) {
+
+	#content #headlineContainer h1 {
+		margin: 0 0 0 2px; height: 22px;
+	}
+	#content #bbCodeContainer {
+		display: none;
+	}
+	#content #submitButtonContainer {
+		display: none;
+	}
+	#content #logoutChannelContainer {
+		display: none;
+	}
+	#content #chatList {
+		top: 22px; left: 0; bottom: 54px; border: none;
+	}
+
+}
