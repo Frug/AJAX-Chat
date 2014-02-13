@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[LANG_CODE/]" lang="[LANG_CODE/]" dir="[BASE_DIRECTION/]">
 
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 	<meta http-equiv="Content-Type" content="[CONTENT_TYPE/]" />
 	<title>[LANG]title[/LANG]</title>
 	[STYLE_SHEETS/]
@@ -42,20 +42,24 @@
 				var containerWidth = document.getElementById(containerID).offsetWidth;
 				var viewportWidth = document.documentElement.clientWidth;
 				if(containerWidth) {
-					if(viewportWidth > 720) {
+					if(viewportWidth > 760) {
 						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('emoticonsContainer').style.display = 'block';
 					} else {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+1)+'px';
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px'; // onlineListContainer floats over the top of chatList
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = (containerWidth+3)+'px';
+						document.getElementById('emoticonsContainer').style.display = 'none';
 					}
 				} else {
-					if(viewportWidth > 720) {
+					if(viewportWidth > 760) {
 						document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('emoticonsContainer').style.display = 'block';
 					} else {
 						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px';
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '3px';
+						document.getElementById('emoticonsContainer').style.display = 'none';
 					}
 				}
 			}
@@ -102,7 +106,7 @@
 				
 				/* Start Mobile Enhancements */
 				var viewportWidth = document.documentElement.clientWidth;
-				if(viewportWidth <= 720) {
+				if(viewportWidth <= 760) {
 					toggleContainer('onlineListContainer', new Array('settingsContainer','helpContainer'));
 				}
 				/* End Mobile Enhancements */

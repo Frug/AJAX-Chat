@@ -9,7 +9,7 @@
 
 /* Positioning */
 
-@media (max-width: 720px) {
+@media (max-width: 760px) {
 
 	#content #emoticonsContainer {
 		border-width:1px;
@@ -108,12 +108,14 @@
 	#content #logoutChannelContainer #logoutButton {
 		display: none;
 	}
-	#content { min-width: 180px; min-height: 180px; }
+	#content {
+		min-width: 180px; min-height: 180px;
+	}
 
 }
 
 
-@media (max-height: 400px) and (max-width: 720px) {
+@media (max-height: 400px) and (max-width: 760px) {
 
 	#content #headlineContainer h1 {
 		margin: 0 0 0 2px; height: 22px;
@@ -137,7 +139,7 @@
 }
 
 
-@media (max-height: 240px) and (max-width: 720px) {
+@media (max-height: 240px) and (max-width: 760px) {
 
 	#content #headlineContainer h1 {
 		margin: 0 0 0 2px; height: 22px;
