@@ -845,18 +845,21 @@ Bugfixes:
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
 - Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
 
-Version 0.8.8 (?.?.2014)
+Version 0.9 (?.?.2014)
 -------------------------------
 Notice:
-- Integration versions are now all included in one download. You can select your integration version by setting the 'integration' 
+- Integration versions are now all included in one download. You MUST select your integration version by setting the 'integration' 
   option in config.php.
-- The $config variable was renamed to $AJAXChatConfig in config.php, so you CAN'T use your old config.php file. 
+- The $config variable was renamed to $AJAXChatConfig in config.php, so you CAN'T use your old config.php file. The order and 
+  names of the options themselves are the same, except for any new ones added.
 
 New Features:
 - XenForo integration is now included. - thanks to ManOnDaMoon.
 - Private messages now have their own sound - thanks to marquisite.
 - Added two new sounds - one is extra for your customization pleasure.
+- Added a custom user group and banned user group for customization and integration - thanks to marquisite.
+
 
 Bugfixes:
 - MyBB integration now displays available forums correctly - thanks to Felix Eckhofer (for other MyBB fixes).
-- 
+- Nesting an [IMG] inside a [URL] tag will now only open the URL instead of also opening the image - thanks to James Almer.
