@@ -11,9 +11,7 @@
 		<link rel="stylesheet" type="text/css" href="css/ie5-6.css"/>
 		<script type="text/javascript">var isIElt7 = true;</script>
 	<![endif]-->
-	<!-- Start Mobile Enhancements -->
 	<link rel="stylesheet" type="text/css" href="css/mobile.css"/>
-	<!-- Start Mobile Enhancements -->
 	<script src="js/chat.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/custom.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
@@ -72,8 +70,10 @@
 			window.onresize = resize;
 			function resize() {
 				calculateContainerOffset('onlineListContainer'); // Currently only supports onlineListContainer
-				//this.updateChatlistView(); // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-				//this.dom['chatList'].scrollHeight; // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+				
+				// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard) [Not currently working]
+				//this.updateChatlistView(); 
+				//this.dom['chatList'].scrollHeight;
 			}
 			/* End Mobile Enhancements */
 
@@ -110,7 +110,7 @@
 				document.getElementById('blinkIntervalNumberSetting').value = ajaxChat.getSetting('blinkIntervalNumber');
 				
 				/* Start Mobile Enhancements */
-				var viewportWidth = document.documentElement.clientWidth;
+				var viewportWidth = window.innerWidth;
 				if(viewportWidth <= 760) {
 					toggleContainer('onlineListContainer', new Array('settingsContainer','helpContainer'));
 				}
