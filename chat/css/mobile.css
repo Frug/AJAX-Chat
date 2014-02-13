@@ -10,7 +10,6 @@
 /* Positioning */
 
 @media (max-width: 760px) {
-
 	#content #emoticonsContainer {
 		border-width:1px;
 		border-style:solid;
@@ -78,13 +77,13 @@
 	}
 	#content #inputFieldContainer {
 		left: 1px; right: 182px; bottom: 1px; padding: 0px;
+	}	
+	#content {
+		min-width: 160px; min-height: 120px;
 	}
-
 }
 
-
 @media (max-width: 620px) {
-
 	#content #logoutChannelContainer label {
 		display: none;
 	}
@@ -94,12 +93,9 @@
 	#content #logoutChannelContainer #styleSelection {
 		display: none;
 	}
-
 }
 
-
 @media (max-width: 540px) {
-
 	#content #bbCodeContainer #bbCodeColor, #content #bbCodeContainer #bbCodeEmoticon {
 		display: none;
 	}
@@ -108,15 +104,9 @@
 	#content #logoutChannelContainer #logoutButton {
 		display: none;
 	}
-	#content {
-		min-width: 180px; min-height: 180px;
-	}
-
 }
 
-
 @media (max-height: 400px) and (max-width: 760px) {
-
 	#content #headlineContainer h1 {
 		margin: 0 0 0 2px; height: 22px;
 	}
@@ -135,12 +125,9 @@
 	#content #chatList {
 		top: 55px;
 	}
-
 }
 
-
 @media (max-height: 240px) and (max-width: 760px) {
-
 	#content #headlineContainer h1 {
 		margin: 0 0 0 2px; height: 22px;
 	}
@@ -156,5 +143,4 @@
 	#content #chatList {
 		top: 22px; left: 0; bottom: 54px; border: none;
 	}
-
 }

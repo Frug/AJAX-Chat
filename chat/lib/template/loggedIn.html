@@ -40,26 +40,30 @@
 					}
 				}
 				var containerWidth = document.getElementById(containerID).offsetWidth;
-				var viewportWidth = document.documentElement.clientWidth;
+				var viewportWidth = window.innerWidth;
 				if(containerWidth) {
-					if(viewportWidth > 760) {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('emoticonsContainer').style.display = 'block';
-					} else {
+					if(viewportWidth <= 760) {
 						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px'; // onlineListContainer floats over the top of chatList
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = (containerWidth+3)+'px';
+						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = (containerWidth+1)+'px';
 						document.getElementById('emoticonsContainer').style.display = 'none';
+					} else {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('emoticonsContainer').style.display = 'block';
 					}
 				} else {
-					if(viewportWidth > 760) {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('emoticonsContainer').style.display = 'block';
-					} else {
+					if(viewportWidth <= 760) {
 						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px';
 						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '3px';
+						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '1px';
 						document.getElementById('emoticonsContainer').style.display = 'none';
+					} else {
+						document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('emoticonsContainer').style.display = 'block';
 					}
 				}
 			}
@@ -68,7 +72,8 @@
 			window.onresize = resize;
 			function resize() {
 				calculateContainerOffset('onlineListContainer'); // Currently only supports onlineListContainer
-				this.updateChatlistView(); // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+				//this.updateChatlistView(); // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+				//this.dom['chatList'].scrollHeight; // Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
 			}
 			/* End Mobile Enhancements */
 
