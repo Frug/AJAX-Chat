@@ -34,6 +34,8 @@ body.ajax-chat {
 }
 #content {
 	position:absolute;
+	min-width: 640px;
+	min-height: 320px;
 	width:100%;
 	height:100%;
 }
