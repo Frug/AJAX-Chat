@@ -143,7 +143,9 @@
 
 <body class="ajax-chat">
 	<div id="content">
-		<h1 id="headline">[LANG]title[/LANG]</h1>
+		<div id="headlineContainer">
+			<h1>[LANG]title[/LANG]</h1>
+		</div>
 		<div id="logoutChannelContainer">
 			<input type="button" id="logoutButton" value="[LANG]logout[/LANG]" onclick="ajaxChat.logout();"/>
 			<label for="channelSelection">[LANG]channel[/LANG]:</label>
@@ -167,14 +169,15 @@
 		</div>
 		<div id="emoticonsContainer" dir="ltr"></div>
 		<div id="bbCodeContainer">
-			<input type="button" value="[LANG]bbCodeLabelBold[/LANG]" title="[LANG]bbCodeTitleBold[/LANG]" onclick="ajaxChat.insertBBCode('b');" style="font-weight:bold;"/>
-			<input type="button" value="[LANG]bbCodeLabelItalic[/LANG]" title="[LANG]bbCodeTitleItalic[/LANG]" onclick="ajaxChat.insertBBCode('i');" style="font-style:italic;"/>
-			<input type="button" value="[LANG]bbCodeLabelUnderline[/LANG]" title="[LANG]bbCodeTitleUnderline[/LANG]" onclick="ajaxChat.insertBBCode('u');" style="text-decoration:underline;"/>
-			<input type="button" value="[LANG]bbCodeLabelQuote[/LANG]" title="[LANG]bbCodeTitleQuote[/LANG]" onclick="ajaxChat.insertBBCode('quote');"/>
-			<input type="button" value="[LANG]bbCodeLabelCode[/LANG]" title="[LANG]bbCodeTitleCode[/LANG]" onclick="ajaxChat.insertBBCode('code');"/>
-			<input type="button" value="[LANG]bbCodeLabelURL[/LANG]" title="[LANG]bbCodeTitleURL[/LANG]" onclick="ajaxChat.insertBBCode('url');"/>
-			<input type="button" value="[LANG]bbCodeLabelImg[/LANG]" title="[LANG]bbCodeTitleImg[/LANG]" onclick="ajaxChat.insertBBCode('img');"/>
-			<input type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="ajaxChat.showHide('colorCodesContainer', null);"/>
+			<input id="bbCodeBold" type="button" value="[LANG]bbCodeLabelBold[/LANG]" title="[LANG]bbCodeTitleBold[/LANG]" onclick="ajaxChat.insertBBCode('b');" style="font-weight:bold;"/>
+			<input id="bbCodeItalic" type="button" value="[LANG]bbCodeLabelItalic[/LANG]" title="[LANG]bbCodeTitleItalic[/LANG]" onclick="ajaxChat.insertBBCode('i');" style="font-style:italic;"/>
+			<input id="bbCodeUnderline" type="button" value="[LANG]bbCodeLabelUnderline[/LANG]" title="[LANG]bbCodeTitleUnderline[/LANG]" onclick="ajaxChat.insertBBCode('u');" style="text-decoration:underline;"/>
+			<input id="bbCodeQuote" type="button" value="[LANG]bbCodeLabelQuote[/LANG]" title="[LANG]bbCodeTitleQuote[/LANG]" onclick="ajaxChat.insertBBCode('quote');"/>
+			<input id="bbCodeCode" type="button" value="[LANG]bbCodeLabelCode[/LANG]" title="[LANG]bbCodeTitleCode[/LANG]" onclick="ajaxChat.insertBBCode('code');"/>
+			<input id="bbCodeURL" type="button" value="[LANG]bbCodeLabelURL[/LANG]" title="[LANG]bbCodeTitleURL[/LANG]" onclick="ajaxChat.insertBBCode('url');"/>
+			<input id="bbCodeIMG" type="button" value="[LANG]bbCodeLabelImg[/LANG]" title="[LANG]bbCodeTitleImg[/LANG]" onclick="ajaxChat.insertBBCode('img');"/>
+			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="ajaxChat.showHide('colorCodesContainer', null);"/>
+			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]" onclick="ajaxChat.showHide('emoticonsContainer', null);"/>
 		</div>
 		<div id="colorCodesContainer" style="display:none;" dir="ltr"></div>
 		<div id="optionsContainer">
