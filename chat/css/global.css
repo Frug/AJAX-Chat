@@ -36,7 +36,7 @@
 #content #copyright {
 	position:absolute;
 	right:20px;
-	top:20px;
+	top:18px;
 }
 #content #headlineContainer {
 	position:absolute;
@@ -71,13 +71,13 @@
 	position:absolute;
 	left:20px;
 	right:20px;
-	bottom:95px;
+	bottom:90px;
 	padding-right:4px;
 }
 #content #submitButtonContainer {
 	position:absolute;
 	right:20px;
-	bottom:60px;
+	bottom:54px;
 }
 #content #onlineListContainer {
 	position:absolute;
@@ -105,6 +105,7 @@
 	left:20px;
 	bottom:20px;
 	padding:3px;
+	padding-left: 0px;
 }
 #content #colorCodesContainer {
 	position:absolute;
@@ -122,7 +123,7 @@
 #content #optionsContainer {
 	position:absolute;
 	right:20px;
-	bottom:20px;
+	bottom:24px;
 	padding:3px;
 	padding-right:0px;
 }
@@ -259,7 +260,7 @@
 #content img {
 	border:none;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, 
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer,
 #content #colorCodesContainer a, #content textarea {
 	border-width:1px;
 	border-style:solid;
