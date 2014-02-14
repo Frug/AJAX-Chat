@@ -89,7 +89,7 @@ var ajaxChat = {
 	DOMbuffering: null,
 	DOMbuffer: null,
 	DOMbufferRowClass: null,
-	debug: false,
+	debug: null,
 	inUrlBBCode: null,
 
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {
@@ -1097,7 +1097,7 @@ var ajaxChat = {
 				),
 				false,
 				true
-			)
+			);
 		}
 		this.showHide(menuID);
 		this.dom['chatList'].scrollTop = this.dom['chatList'].scrollHeight;
@@ -1340,7 +1340,7 @@ var ajaxChat = {
 		if((((this.userRole === '1' && this.allowUserMessageDelete && (userID === this.userID ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
-			(this.userRole === '5' && this.allowUserMessageDelete && (userID == this.userID ||
+			(this.userRole === '5' && this.allowUserMessageDelete && (userID === this.userID ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateMessageDiff ||
 			parseInt(channelID) === parseInt(this.userID)+this.privateChannelDiff)) ||
 			this.userRole === '2') && userRole !== '3' && userRole !== '4') || this.userRole === '3') {
@@ -1586,7 +1586,7 @@ var ajaxChat = {
 	},
 
 	formatDate: function(format, date) {
-		date = (date == null) ? new date() : date;
+		date = (date === null) ? new date() : date;
 
 		return format
 		.replace(/%Y/g, date.getFullYear())
@@ -2798,7 +2798,7 @@ var ajaxChat = {
 	},
 
 	setActiveStyleSheet: function(title) {
-		var i, a, main, titleFound = false;
+		var i, a, titleFound = false;
 		for(i=0; (a = document.getElementsByTagName('link')[i]); i++) {
 			if(a.getAttribute('rel').indexOf('style') !== -1 && a.getAttribute('title')) {
 				a.disabled = true;
@@ -2816,7 +2816,7 @@ var ajaxChat = {
 	getActiveStyleSheet: function() {
 		var i, a;
 		for(i=0; (a = document.getElementsByTagName('link')[i]); i++) {
-			if(a.getAttribute('rel').indexOf('style') != -1 && a.getAttribute('title') && !a.disabled) {
+			if(a.getAttribute('rel').indexOf('style') !== -1 && a.getAttribute('title') && !a.disabled) {
 				return a.getAttribute('title');
 			}
 		}
@@ -2970,13 +2970,13 @@ var ajaxChat = {
 	},
 
 	debugMessage: function(msg, e) {
-		msg = 'Ajax chat: ' + msg + ' exception: ';
 		if (this.debug) {
+			msg = 'Ajax chat: ' + msg + ' exception: ';
 			console.log(msg, e);
-			if (this.debug == '2') {
+			if (this.debug === 2) {
 				alert(msg + e);
 			}
 		}
-	},
+	}
 
 };
