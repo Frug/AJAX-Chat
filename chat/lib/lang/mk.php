@@ -34,6 +34,7 @@ $lang['bbCodeLabelCode'] = 'Код';
 $lang['bbCodeLabelURL'] = 'URL';
 $lang['bbCodeLabelImg'] = 'Image';
 $lang['bbCodeLabelColor'] = 'Боја на фонт';
+$lang['bbCodeLabelEmoticon'] = 'емоции';
 $lang['bbCodeTitleBold'] = 'Задебелен текст: [b]текст[/b]';
 $lang['bbCodeTitleItalic'] = 'Закосен текст: [i]текст[/i]';
 $lang['bbCodeTitleUnderline'] = 'Подцртан текст: [u]текст[/u]';
@@ -42,6 +43,7 @@ $lang['bbCodeTitleCode'] = 'Покажување на код: [code]код[/code
 $lang['bbCodeTitleURL'] = 'URL: [url]http://example.org[/url] или [url=http://example.org]текст[/url]';
 $lang['bbCodeTitleImg'] = 'Insert image: [img]http://example.org/image.jpg[/img]';
 $lang['bbCodeTitleColor'] = 'Боја на заглавие: [color=red]текст[/color]';
+$lang['bbCodeTitleEmoticon'] = 'емоции листа';
 $lang['help'] = 'Помош';
 $lang['helpItemDescJoin'] = 'Присоединување кон канал:';
 $lang['helpItemCodeJoin'] = '/join име_на_канал';

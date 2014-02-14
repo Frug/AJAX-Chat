@@ -34,6 +34,7 @@ $lang['bbCodeLabelCode'] = 'โค๊ด';
 $lang['bbCodeLabelURL'] = 'ลิงค์';
 $lang['bbCodeLabelImg'] = 'ภาพ';
 $lang['bbCodeLabelColor'] = 'สีอักษร';
+$lang['bbCodeLabelEmoticon'] = 'Smilies';
 $lang['bbCodeTitleBold'] = 'อักษรตัวหน้า: [b]ข้อความ[/b]';
 $lang['bbCodeTitleItalic'] = 'อักษรตัวเอียง: [i]ข้อความ[/i]';
 $lang['bbCodeTitleUnderline'] = 'อักษรขีดเส้นใต้: [u]ข้อความ[/u]';
@@ -42,6 +43,7 @@ $lang['bbCodeTitleCode'] = 'แสดงโค๊ด: [code]โค๊ด[/code]'
 $lang['bbCodeTitleURL'] = 'แทรกลิงค์: [url]http://example.org[/url] or [url=http://example.org]ข้อความ[/url]';
 $lang['bbCodeTitleImg'] = 'แทรกภาพ: [img]http://example.org/image.jpg[/img]';
 $lang['bbCodeTitleColor'] = 'ตัวอักษรสี: [color=red]ข้อความ[/color]';
+$lang['bbCodeTitleEmoticon'] = 'Smilies list';
 $lang['help'] = 'ช่วยเหลือ';
 $lang['helpItemDescJoin'] = 'ร่วมห้องแชท:';
 $lang['helpItemCodeJoin'] = '/join ชื่อห้องแชท';

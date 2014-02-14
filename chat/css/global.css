@@ -165,6 +165,7 @@ body.ajax-chat {
 #content #emoticonsContainer a {
 	margin-left:1px;
 	margin-right:1px;
+	z-index:1;
 }
 #content #emoticonsContainer img {
 	vertical-align:middle;
