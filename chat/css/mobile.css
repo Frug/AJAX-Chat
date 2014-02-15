@@ -52,7 +52,7 @@
 		display: none;
 	}
 	#content #optionsContainer {
-		width:20px; right:4px; top:11px; padding:0; text-align:right; z-index:10;
+		width:20px; right:4px; top:11px; bottom:auto; padding:0; text-align:right; z-index:10;
 	}
 	#content #optionsContainer #helpButton, #content #optionsContainer #settingsButton, #content #optionsContainer #audioButton, #content #optionsContainer #autoScrollButton {
 		display: none;
