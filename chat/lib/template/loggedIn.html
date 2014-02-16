@@ -64,14 +64,17 @@
 						document.getElementById('emoticonsContainer').style.display = 'block';
 					}
 				}
+				return containerWidth;
 			}
 			
 			/* Start Mobile Enhancements */
 			window.onresize = resize;
 			function resize() {
-				calculateContainerOffset('onlineListContainer'); // Currently only supports onlineListContainer
+				var offset = calculateContainerOffset('onlineListContainer');
+				if (offset == 0) { var offset = calculateContainerOffset('settingsContainer'); }
+				if (offset == 0) { var offset = calculateContainerOffset('helpContainer'); }
 				
-				// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard) [Not currently working]
+				// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
 				var viewportWidth = window.innerWidth;
 				if(viewportWidth <= 760) {
 					ajaxChat.updateChatlistView();
