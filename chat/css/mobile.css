@@ -63,7 +63,7 @@
 	#content #chatList {
 		left: 1px; right: 180px; bottom: 86px; font-size: 12px;
 	}
-	#content #onlineListContainer {
+	#content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
 		top: 0px; width: 178px; right: 0px; bottom: 0px; border-right: none; border-bottom: none; border-top: none; font-size: 12px; padding: 0;margin: 0;border-radius: 0px;
 	}
 	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
