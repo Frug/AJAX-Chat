@@ -72,8 +72,10 @@
 				calculateContainerOffset('onlineListContainer'); // Currently only supports onlineListContainer
 				
 				// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard) [Not currently working]
-				//this.updateChatlistView(); 
-				//this.dom['chatList'].scrollHeight;
+				var viewportWidth = window.innerWidth;
+				if(viewportWidth <= 760) {
+					ajaxChat.updateChatlistView();
+				}
 			}
 			/* End Mobile Enhancements */
 
