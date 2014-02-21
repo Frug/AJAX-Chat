@@ -34,6 +34,8 @@ body.ajax-chat {
 }
 #content {
 	position:absolute;
+	min-width: 640px;
+	min-height: 320px;
 	width:100%;
 	height:100%;
 }
@@ -42,7 +44,7 @@ body.ajax-chat {
 	right:20px;
 	top:20px;
 }
-#content #headline {
+#content #headlineContainer {
 	position:absolute;
 	left:20px;
 	top:5px;
@@ -110,6 +112,9 @@ body.ajax-chat {
 	bottom:20px;
 	padding:3px;
 }
+#content #bbCodeContainer #bbCodeEmoticon { 
+	display: none;
+}
 #content #colorCodesContainer {
 	position:absolute;
 	left:20px;
@@ -122,6 +127,7 @@ body.ajax-chat {
 	left:20px;
 	bottom:57px;
 	padding:3px;
+	z-index:1;
 }
 #content #optionsContainer {
 	position:absolute;
