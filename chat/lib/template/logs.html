@@ -6,10 +6,6 @@
 	<meta http-equiv="Content-Type" content="[CONTENT_TYPE/]" />
 	<title>[LANG]logsTitle[/LANG]</title>
 	[STYLE_SHEETS/]
-	<!--[if lt IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie5-6.css"/>
-		<script type="text/javascript">var isIElt7 = true;</script>
-	<![endif]-->
 	<script src="js/chat.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/logs.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
@@ -24,18 +20,11 @@
 					}
 				}
 				ajaxChat.showHide(containerID);
-				if(typeof arguments.callee.styleProperty == 'undefined') {
-					if(typeof isIElt7 != 'undefined') {
-						arguments.callee.styleProperty = 'marginRight';
-					} else {
-						arguments.callee.styleProperty = 'right';
-					}
-				}
 				var containerWidth = document.getElementById(containerID).offsetWidth;
 				if(containerWidth) {
-					document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';	
+					document.getElementById('chatList').style.right = (containerWidth+28)+'px';	
 				} else {
-					document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
+					document.getElementById('chatList').style.right = '20px';
 				}
 			}
 

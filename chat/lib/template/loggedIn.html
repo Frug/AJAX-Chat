@@ -7,10 +7,6 @@
 	<meta http-equiv="Content-Type" content="[CONTENT_TYPE/]" />
 	<title>[LANG]title[/LANG]</title>
 	[STYLE_SHEETS/]
-	<!--[if lt IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie5-6.css"/>
-		<script type="text/javascript">var isIElt7 = true;</script>
-	<![endif]-->
 	<link rel="stylesheet" type="text/css" href="css/mobile.css"/>
 	<script src="js/chat.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/custom.js" type="text/javascript" charset="UTF-8"></script>
@@ -29,38 +25,31 @@
 				calculateContainerOffset(containerID);			
 			}
 			
-			function calculateContainerOffset(containerID) {	
-				if(typeof arguments.callee.styleProperty == 'undefined') {
-					if(typeof isIElt7 != 'undefined') {
-						arguments.callee.styleProperty = 'marginRight';
-					} else {
-						arguments.callee.styleProperty = 'right';
-					}
-				}
+			function calculateContainerOffset(containerID) {
 				var containerWidth = document.getElementById(containerID).offsetWidth;
 				var viewportWidth = window.innerWidth;
 				if(containerWidth) {
 					if(viewportWidth <= 760) {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px'; // onlineListContainer floats over the top of chatList
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = (containerWidth+3)+'px';
-						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = (containerWidth+1)+'px';
+						document.getElementById('chatList').style.right = '1px'; // onlineListContainer floats over the top of chatList
+						document.getElementById('inputFieldContainer').style.right = (containerWidth+3)+'px';
+						document.getElementById('submitButtonContainer').style.right = (containerWidth+1)+'px';
 						document.getElementById('emoticonsContainer').style.display = 'none';
 					} else {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('chatList').style.right = (containerWidth+28)+'px';
+						document.getElementById('inputFieldContainer').style.right = '20px';
+						document.getElementById('submitButtonContainer').style.right = '20px';
 						document.getElementById('emoticonsContainer').style.display = 'block';
 					}
 				} else {
 					if(viewportWidth <= 760) {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = '1px';
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '3px';
-						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '1px';
+						document.getElementById('chatList').style.right = '1px';
+						document.getElementById('inputFieldContainer').style.right = '3px';
+						document.getElementById('submitButtonContainer').style.right = '1px';
 						document.getElementById('emoticonsContainer').style.display = 'none';
 					} else {
-						document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('inputFieldContainer').style[arguments.callee.styleProperty] = '20px';
-						document.getElementById('submitButtonContainer').style[arguments.callee.styleProperty] = '20px';
+						document.getElementById('chatList').style.right = '20px';
+						document.getElementById('inputFieldContainer').style.right = '20px';
+						document.getElementById('submitButtonContainer').style.right = '20px';
 						document.getElementById('emoticonsContainer').style.display = 'block';
 					}
 				}
