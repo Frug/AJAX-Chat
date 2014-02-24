@@ -56,20 +56,27 @@
 				return containerWidth;
 			}
 			
-			/* Start Mobile Enhancements */
-			window.onresize = resize;
-			function resize() {
-				var offset = calculateContainerOffset('onlineListContainer');
-				if (offset == 0) { var offset = calculateContainerOffset('settingsContainer'); }
-				if (offset == 0) { var offset = calculateContainerOffset('helpContainer'); }
-				
-				// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-				var viewportWidth = window.innerWidth;
-				if(viewportWidth <= 760) {
-					ajaxChat.updateChatlistView();
+			var debounceWait = false;
+			ajaxChat.addEvent(window, 'resize', function() {
+				if (debounceWait === false) {
+					setTimeout(function() {
+						console.log('bounce');
+						
+						if (calculateContainerOffset('onlineListContainer') === 0) { 
+							calculateContainerOffset('settingsContainer');
+							calculateContainerOffset('helpContainer'); 
+						}
+
+						// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+						if(window.innerWidth <= 700) {
+							ajaxChat.updateChatlistView();
+						}
+						
+						debounceWait = false; 
+					}, 300);
+					debounceWait = true;
 				}
-			}
-			/* End Mobile Enhancements */
+			});
 
 			function initialize() {
 				ajaxChat.updateButton('audio', 'audioButton');

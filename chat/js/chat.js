@@ -316,18 +316,11 @@ var ajaxChat = {
 	},
 
 	setLoadHandler: function() {
+		var self = this;
 		// Make sure initialize() is called on page load:
-  		var onload = window.onload;
-		if(typeof onload !== 'function') {
-			window.onload = function() {
-				ajaxChat.initialize();
-			};
-		} else {
-			window.onload = function() {
-				onload();
-				ajaxChat.initialize();
-			};
-		}
+		this.addEvent(window,'load', function() {
+			self.initialize();
+		});
 	},
 
 	setUnloadHandler: function() {
@@ -1850,6 +1843,18 @@ var ajaxChat = {
 				node = node.nextSibling;
 				rowEven = !rowEven;
 			}
+		}
+	},
+	
+	addEvent: function(elem, type, eventHandle) {
+		if (!elem)
+			return;
+		if ( elem.addEventListener ) {
+			elem.addEventListener( type, eventHandle, false );
+		} else if ( elem.attachEvent ) {
+			elem.attachEvent( "on" + type, eventHandle );
+		} else {
+			elem["on"+type]=eventHandle;
 		}
 	},
 
