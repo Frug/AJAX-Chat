@@ -60,8 +60,6 @@
 			ajaxChat.addEvent(window, 'resize', function() {
 				if (debounceWait === false) {
 					setTimeout(function() {
-						console.log('bounce');
-						
 						if (calculateContainerOffset('onlineListContainer') === 0) { 
 							calculateContainerOffset('settingsContainer');
 							calculateContainerOffset('helpContainer'); 
