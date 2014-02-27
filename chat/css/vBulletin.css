@@ -59,11 +59,9 @@
 		background-color:#E1E1E2;
 		color:#000;
 	}
-	#content #headlineContainer h1 {
+	#content #headline {
 		color:#fff;
-		margin-left: 20px;
-	}
-	#content #headlineContainer { 
+		padding-left: 20px;
 		top: 0;
 		left: 10px;
 		right: 10px;

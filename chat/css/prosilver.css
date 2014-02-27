@@ -54,9 +54,11 @@
 	#loginContent h1 {
 		color:#333333;
 	}
-	#content #headlineContainer h1 { 
+	#content #headline {
+		left: 0px;
+		right: 0px;
+		background: #0c95d9;
 		color: white;
-		margin-left: 20px;
 	}
 	#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 		background-color:#0c95d9;
@@ -92,12 +94,6 @@
 	}
 	#loginContent #errorContainer {
 		color:red;
-	}
-	#content #headlineContainer { 
-		top: 0;
-		left: 0;
-		width: 100%;
-		background: #0c95d9;
 	}
 	#content #copyright, #content #copyright a {
 		color: white;

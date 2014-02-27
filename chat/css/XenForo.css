@@ -6,9 +6,7 @@
  * @link https://blueimp.net/ajax/
  */
 @import url('global.css');
-
 @import url('fonts.css');
-
 @import url('print.css');
 
 @media screen , projection , handheld { /* Main Buttons */
@@ -168,9 +166,8 @@
 	font-size: 12px;
 }
 
-#content #headlineContainer {
-	top: 0;
-	left: 0;
+#content #headline {
+	color: #F7F7FF;
 	width: 100%;
 	background: #176093;
 }
@@ -184,26 +181,8 @@
 	font-size: 0.8em;
 }
 
-#content #headlineContainer h1 {
-	color: #F7F7FF;
-	margin-left: 20px;
-}
-
 #content a {
 	color: #176093;
-}
-
-:hover {
-	
-}
-
-#content #chatList {
-	position: absolute;
-	left: 20px;
-	right: 220px;
-	top: 90px;
-	bottom: 150px;
-	overflow: auto;
 }
 
 #content #chatList,#content #colorCodesContainer {
@@ -215,17 +194,7 @@
 	-khtml-border-radius: 10px;
 }
 
-#content #onlineListContainer {
-	position: absolute;
-	right: 20px;
-	top: 90px;
-	width: 170px;
-	bottom: 150px;
-}
-
-#content #onlineListContainer,#content #helpContainer,#content #settingsContainer, #content #reportContainer
-	{
-	padding: 10px;
+#content #onlineListContainer,#content #helpContainer,#content #settingsContainer, #content #reportContainer {
 	background-color: rgb(240, 247, 252);
 	border: 1px solid #a5cae4;
 	border-radius: 10px;
@@ -310,7 +279,6 @@
 	border-top: 1px solid #f9d9b0;
 	border-bottom: 1px solid #f9bc6d;
 }
-
 
 #content #chatList .report {
 	display:block;
