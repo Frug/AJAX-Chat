@@ -38,6 +38,9 @@
 							// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
 							if(window.innerWidth <= 700) {
 								ajaxChat.updateChatlistView();
+								document.getElementById('emoticonsContainer').style.display = 'none';
+							} else {
+								document.getElementById('emoticonsContainer').style.display = 'block';
 							}
 							debounce = false;
 						}, 300);
