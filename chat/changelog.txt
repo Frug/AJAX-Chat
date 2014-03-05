@@ -859,6 +859,7 @@ New Features:
 - Private messages now have their own sound - thanks to marquisite.
 - Added two new sounds - one is extra for your customization pleasure.
 - Added a custom user group and banned user group for customization and integration - thanks to marquisite.
+- Many display improvements for mobile users.
 
 
 Bugfixes:

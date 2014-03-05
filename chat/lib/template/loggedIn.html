@@ -15,8 +15,20 @@
 	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
+			// window width below this is treated as mobile
+			var mobileWidth = 700;
+		
 			function toggleContainer(containerID, hideContainerIDs) {
 				if(hideContainerIDs) {
+					for(var i=0; i<hideContainerIDs.length; i++) {
+						ajaxChat.showHide(hideContainerIDs[i], 'none');	
+					}
+				}
+				ajaxChat.showHide(containerID);
+			}
+			
+			function toggleMobileContainer(containerID, hideContainerIDs) {
+				if(hideContainerIDs && window.innerWidth <= mobileWidth) {
 					for(var i=0; i<hideContainerIDs.length; i++) {
 						ajaxChat.showHide(hideContainerIDs[i], 'none');	
 					}
@@ -36,7 +48,7 @@
 								cont.style.height = cont.clientHeight;
 							}
 							// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-							if(window.innerWidth <= 700) {
+							if(window.innerWidth <= mobileWidth) {
 								ajaxChat.updateChatlistView();
 								document.getElementById('emoticonsContainer').style.display = 'none';
 							} else {
@@ -51,8 +63,9 @@
 			})( false );
 			
 			function initialize() {
-				if(window.innerWidth <= 700) {
+				if(window.innerWidth <= mobileWidth) {
 					ajaxChat.setSetting('blink', false);
+					ajaxChat.showHide('emoticonsContainer','none');
 					toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);
 				}
 				ajaxChat.addEvent(window, 'resize', renderResize);
@@ -351,8 +364,8 @@
 			<input id="bbCodeCode" type="button" value="[LANG]bbCodeLabelCode[/LANG]" title="[LANG]bbCodeTitleCode[/LANG]" onclick="ajaxChat.insertBBCode('code');"/>
 			<input id="bbCodeURL" type="button" value="[LANG]bbCodeLabelURL[/LANG]" title="[LANG]bbCodeTitleURL[/LANG]" onclick="ajaxChat.insertBBCode('url');"/>
 			<input id="bbCodeIMG" type="button" value="[LANG]bbCodeLabelImg[/LANG]" title="[LANG]bbCodeTitleImg[/LANG]" onclick="ajaxChat.insertBBCode('img');"/>
-			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="ajaxChat.showHide('colorCodesContainer', null);"/>
-			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]" onclick="ajaxChat.showHide('emoticonsContainer', null);"/>
+			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="toggleMobileContainer('colorCodesContainer', ['emoticonsContainer']);"/>
+			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]" onclick="toggleMobileContainer('emoticonsContainer', ['colorCodesContainer']);"/>
 		</div>
 		<div id="colorCodesContainer" style="display:none;" dir="ltr"></div>
 		<div id="optionsContainer">

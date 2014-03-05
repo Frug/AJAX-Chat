@@ -61,7 +61,7 @@ $AJAXChatConfig['langNames'] = array(
 );
 
 // Available styles:
-$AJAXChatConfig['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Pine','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin', 'XenForo');
+$AJAXChatConfig['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Pine','Plum','prosilver','Core','MyBB','vBulletin','XenForo');
 // Default style:
 $AJAXChatConfig['styleDefault'] = 'prosilver';
 
@@ -212,4 +212,3 @@ $AJAXChatConfig['socketServerIP'] = '127.0.0.1';
 $AJAXChatConfig['socketServerPort'] = 1935;
 // This ID can be used to distinguish between different chat installations using the same socket server:
 $AJAXChatConfig['socketServerChatID'] = 0;
-?>

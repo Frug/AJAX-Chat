@@ -13,24 +13,23 @@ body.ajax-chat {
 	margin:0;
 }
 #loginContent {
-	position:absolute;
-	width:100%;
-	height:100%;
+	margin: 0 auto 0;
+	padding-top: 20px;
+	width:250px;
 }
-#loginContent #loginHeadlineContainer {
-	margin: 100px 100px 0 100px;
+#loginContent #loginHeadline {
+	margin:0;
+	line-height:35px;
 }
-#loginContent #loginFormContainer, #loginContent #errorContainer {
-	margin: 0 100px;
-}
-#loginContent #loginFormContainer div {
-	margin-bottom:7px;
+#loginContent #loginForm div {
+	margin:5px 0;
 }
 #loginContent #loginRegisteredUsers {
     padding-top:5px;
 }
 #loginContent #copyright {
-	margin: 20px 100px 0 100px;
+	margin:20px 0 0 0;
+	text-align:right;
 }
 #content {
 	position:absolute;
@@ -56,18 +55,18 @@ body.ajax-chat {
 	top:50px;
 }
 #content #logoutChannelContainer select{
-	width: 105px;
-	height: 22px;
+	width:105px;
+	height:22px;
 }
 #content #statusIconContainer {
 	position:absolute;
 	right:20px;
 	top:50px;
-	width: 22px;
-	height: 22px;
+	width:22px;
+	height:22px;
 }
 #content #chatList {
-	height: 100%;
+	height:100%;
 	overflow:auto;
 }
 #content #mainPanelContainer { 
@@ -111,13 +110,13 @@ body.ajax-chat {
 }
 #content #helpContainer #helpList dt, #content #settingsContainer #settingsList dt {
 	float:left;
-	width:50%;
+	width:55%;
 	padding:0 2% 0 0;
 	margin:0;
 	clear:left;
 }
 #content #helpContainer #helpList dd, #content #settingsContainer #settingsList dd {
-	width:48%;
+	width:43%;
 	float:left;
 	margin:0;
 	padding:0;
@@ -318,7 +317,7 @@ body.ajax-chat {
 	#content #mainPanelContainer { top:65px; left:0px; right:0px; bottom:105px; }
 	#content #onlineListContainer, #content #helpContainer, #content #settingsContainer { border-right-width:0; position:absolute; width:auto; top:0px; right:0px; bottom:0px; left:0px; }
 	#content #chatList { border-left-width: 0; border-right-width: 0; }
-	#content #logoutButton, #loginContent #loginButton { display:block; float:left; margin-right:1px;}
+	#content #logoutButton { display:block; float:left; margin-right:1px;}
 	#content #bbCodeContainer #bbCodeIMG, #content #bbCodeContainer #bbCodeURL { display:none; }
 	#content #bbCodeContainer { padding:0; }
 	#content #emoticonsContainer { bottom:80px; left:5px; }
