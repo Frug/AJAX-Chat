@@ -32,7 +32,6 @@ input, select, textarea, #content #chatList, #content #onlineListContainer, #con
 #content #inputFieldContainer #inputField{
 	box-shadow: inset 1px 1px 5px 1px #000;
 	border:0;
-	height:40px;
 	padding:3px 0.5%;
 	width: 99%;
 }

@@ -11,13 +11,10 @@
 
 /* Main Buttons */
 #content #logoutButton,#content #submitButton,#loginForm #loginButton {
-	font: 12pt Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica,
-		sans-serif;
-	color: White;
+	font: 12pt Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: white;
 	font-weight: bold;
-	background: #e68c17
-		url('../../styles/default/xenforo/gradients/form-button-white-25px.png')
-		repeat-x center -7px;
+	background: #e68c17 url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x center -7px;
 	border: 3px solid White;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -34,8 +31,7 @@
 	background-color: #e68c17;
 	padding: 0 10px 0 10px;
 }
-#content #logoutButton:hover,#content #submitButton:hover,#loginForm #loginButton:hover
-	{
+#content #logoutButton:hover,#content #submitButton:hover,#loginForm #loginButton:hover {
 	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
@@ -48,12 +44,9 @@
 #content #bbCodeContainer input {
 	font-style: normal;
 	font-size: 12px;
-	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica,
-		sans-serif;
+	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	color: rgb(0, 0, 0);
-	background: rgb(220, 220, 235)
-		url('../../styles/default/xenforo/gradients/form-button-white-25px.png')
-		repeat-x top;
+	background: rgb(220, 220, 235) url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x top;
 	padding: 0px 6px;
 	border: 1px solid rgb(221, 221, 235);
 	border-top-color: rgb(255, 255, 255);
@@ -88,8 +81,7 @@
 }
 #content textarea {
 	font-size: 13px;
-	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica,
-		sans-serif;
+	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	color: #000000;
 	background-color: rgb(240, 247, 252);
 	border-width: 1px;
@@ -105,9 +97,7 @@
 	outline: 0;
 }
 #content textarea:focus {
-	background: rgb(255, 255, 240)
-		url('../../styles/default/xenforo/gradients/form-element-focus-25.png')
-		repeat-x;
+	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
 	border-top-color: rgb(150, 150, 150);
 	border-bottom-color: rgb(230, 230, 230);
 }
@@ -117,9 +107,7 @@
 	border: 1px solid #a5cae4;
 }
 #content select:focus,#loginForm select:focus,#loginForm input:focus {
-	background: rgb(255, 255, 240)
-		url('../../styles/default/xenforo/gradients/form-element-focus-25.png')
-		repeat-x;
+	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
 	border-top-color: rgb(150, 150, 150);
 	border-bottom-color: rgb(230, 230, 230);
 }
@@ -143,10 +131,7 @@
 	background-color: #176093;
 	color: #F7F7FF;
 }
-#loginContent h1 {
-	color: #60A0DC;
-}
-#loginContent a {
+#loginContent h1, #loginContent a {
 	color: #60A0DC;
 }
 #loginContent #errorContainer {
@@ -160,7 +145,6 @@
 #content #headline {
 	color:#F7F7FF;
 	background:#176093;
-	position:relative;
 }
 #content h1, #content #copyright, #content #copyright a {
 	color: #F7F7FF;
@@ -202,9 +186,7 @@
 	background-color: transparent;
 }
 #content .rowEven {
-	background: #d7edfc
-		url('../../styles/default/xenforo/gradients/category-23px-light.png')
-		repeat-x top;
+	background: #d7edfc url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
 }
 #content .rowOdd {
 	background-color: #F7F7FF;
@@ -221,14 +203,11 @@
 #content .moderator {
 	color: #00AA00;
 }
-#content .admin {
+#content .admin, #content .chatBotErrorMessage {
 	color: red;
 }
 #content .chatBot {
 	color: #60A0DC;
-}
-#content #chatList .chatBotErrorMessage {
-	color: red;
 }
 #content #chatList a {
 	color: #60A0DC;
@@ -236,17 +215,10 @@
 #content #chatList .deleteSelected {
 	border-color: red;
 }
-#content #onlineListContainer h3,#content #helpContainer h3,#content #settingsContainer h3,#content #reportContainer h3
-	{
+#content #onlineListContainer h3,#content #helpContainer h3,#content #settingsContainer h3,#content #reportContainer h3 {
 	font-size: 11px;
-	height: auto;
-	width: auto;
-	margin: -5px -5px 5px;
-	background: #f9d9b0
-		url('../../styles/default/xenforo/gradients/category-23px-light.png')
-		repeat-x top;
+	background: #f9d9b0 url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
 	color: #6d3f03;
-	border-top: 1px solid #f9d9b0;
 	border-bottom: 1px solid #f9bc6d;
 }
 #content #chatList .report {

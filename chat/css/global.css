@@ -44,6 +44,7 @@ body.ajax-chat {
 #content #headline {
 	position:absolute;
 	left:0px;
+	right:0px;
 	top:0px;
 	padding:0 0 0 20px;
 	line-height:45px;
@@ -296,7 +297,7 @@ body.ajax-chat {
 
 @media (max-width: 700px) {
 	#content #mainPanelContainer { top:65px; left:5px; right:5px; bottom:105px; }
-	#content #headline { left:5px; margin:0; padding:0 0 0 5px; line-height:25px; }
+	#content #headline { margin:0; padding:0 0 0 5px; line-height:25px; }
 	#content #statusIconContainer { top:2px; right:2px; }
 	#content #copyright { top:0px; right:30px; line-height: 25px;}
 	#content #logoutChannelContainer { top:30px; left:5px; }

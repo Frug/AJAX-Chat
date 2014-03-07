@@ -126,4 +126,9 @@
 		background-color:#FFF;
 		border: 1px solid #0B198C;
 	}
+	#content #headline {
+		left:5px;
+		right:5px;
+		padding-left:10px;
+	}
 }
