@@ -183,10 +183,6 @@ body.ajax-chat {
 #content #optionsContainer input {
     vertical-align:middle;
 }
-#content #optionsContainer input.button {
-    width:22px;
-	height:22px;
-}
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginContent #loginButton {
 	padding: 4px 10px;
 }
@@ -224,53 +220,42 @@ body.ajax-chat {
 	margin: 5px 0;
 	padding-left:20px;
 }
-#content #settingsContainer #settingsList td {
-	padding: 4px 10px;
-	vertical-align:top;
-}
-#content #settingsContainer #settingsList td {
-	vertical-align:middle;
-}
-#content #settingsContainer #settingsList td.setting {
-	width:115px;
-}
-#content #settingsContainer #settingsList input.text {
-	width:80px;
-}
 #content #settingsContainer #settingsList select.left {
 	text-align:right;
 }
-#content #settingsContainer #settingsList input.button {
-    width:22px;
-	height:22px;
-	vertical-align:middle;
-	margin-bottom:2px;
-}
 
 /* Buttons */
+#content #optionsContainer input, #content #settingsContainer #settingsList input.button {
+	background: url('../img/buttons-sprite.png') no-repeat;
+	vertical-align:middle;
+	width:22px;
+	height:22px;
+	padding:0;
+}
 #content #optionsContainer #helpButton {
-	background:url('../img/help.png') no-repeat;
+	background-position: -69px -22px;
 }
 #content #optionsContainer #settingsButton {
-	background:url('../img/settings.png') no-repeat;
+	background-position: -92px 0px;
 }
 #content #optionsContainer #onlineListButton {
-	background:url('../img/users.png') no-repeat;
+	background-position: -69px 0px;
 }
 #content #optionsContainer #audioButton {
-	background:url('../img/audio.png') no-repeat 0px 0px;
+	background-position: 0px 0px;
 }
 #content #optionsContainer #audioButton.off {
-	background-position: 0px 100%;
+	background-position: 0px -22px;
 }
 #content #optionsContainer #autoScrollButton {
-	background:url('../img/autoscroll.png') no-repeat 0px 0px;
+	background-position: -23px 0px;
 }
 #content #optionsContainer #autoScrollButton.off {
-	background-position: 0px 100%;
+	background-position: -23px -22px;
 }
 #content #settingsContainer #settingsList input.playback {
-	background:url('../img/playback.png') no-repeat;
+	background:url('../img/buttons-sprite.png') no-repeat -46px -22px;
+	margin-bottom: 3px;
 }
 
 /* Borders */
