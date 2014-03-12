@@ -1642,7 +1642,7 @@ class AJAXChat {
 			return;
 		}
 
-		$banMinutes = $banMinutes ? $banMinutes : $this->getConfig('defaultBanTime');
+		$banMinutes = ($banMinutes !== null) ? $banMinutes : $this->getConfig('defaultBanTime');
 
 		if($banMinutes) {
 			// Ban User for the given time in minutes:
