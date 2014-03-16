@@ -143,7 +143,7 @@ class AJAXChat {
 			// Login if auto-login enabled or a login, userName or shoutbox parameter is given:
 			$this->getConfig('forceAutoLogin') ||
 			$this->getRequestVar('login') ||
-			$this->getRequestVar('userName') ||
+			$this->getRequestVar('password') ||
 			$this->getRequestVar('shoutbox')
 			) {
 			$this->login();
