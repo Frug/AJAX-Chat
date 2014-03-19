@@ -43,15 +43,19 @@
 						popupElement.className = '';
 					}
 					
-					buttonElement.popupFunc = this.toggleButton;
-					buttonElement.linkedPopupID = popupID;
-					
-					ajaxChat.addEvent(buttonElement, 'click', buttonElement.popupFunc );
+					if (!buttonElement.linkedPopupID) { // For IE<9 we need to avoid re-attaching events.
+						buttonElement.linkedPopupID = popupID;
+						ajaxChat.addEvent(buttonElement, 'click', this.toggleButton );
+					}
 				},
 				
-				toggleButton: function() {
-					ajaxChat.setClass(this, this.className === 'button' ? 'button off' : 'button');
-					ajaxChat.showHide(this.linkedPopupID);
+				toggleButton: function(e) {
+					// Workaround for IE<9.
+					// If you don't care about IE8, remove the crud and use "this" to find the target.
+					e = e || window.event;
+					var target = e.target || e.srcElement;
+					ajaxChat.setClass(target, target.className === 'button' ? 'button off' : 'button');
+					ajaxChat.showHide(target.linkedPopupID);
 				},
 				
 				renderResize: function() {
