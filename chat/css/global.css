@@ -52,8 +52,10 @@ body.ajax-chat {
 }
 #content #logoutChannelContainer {
 	position:absolute;
+	z-index:2;
 	left:20px;
 	top:50px;
+	right:50px;
 }
 #content #logoutChannelContainer select{
 	width:105px;
@@ -186,6 +188,11 @@ body.ajax-chat {
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginContent #loginButton {
 	padding: 4px 10px;
 }
+#content #logoutButton {
+	display:block;
+	float:left;
+	margin: 0 5px 5px 0;
+}
 #content #chatList div {
 	padding: 2px 10px;
 }
@@ -225,7 +232,7 @@ body.ajax-chat {
 }
 
 /* Buttons */
-#content #optionsContainer input, #content #settingsContainer #settingsList input.button {
+#content #optionsContainer input, #content #settingsContainer #settingsList input.button, #content #showChannelsButton {
 	background: url('../img/buttons-sprite.png') no-repeat;
 	vertical-align:middle;
 	width:22px;
@@ -254,8 +261,15 @@ body.ajax-chat {
 	background-position: -23px -22px;
 }
 #content #settingsContainer #settingsList input.playback {
-	background:url('../img/buttons-sprite.png') no-repeat -46px -22px;
-	margin-bottom: 3px;
+	background-position: -92px -22px;
+	margin-bottom:3px;
+}
+#content #logoutChannelContainer #showChannelsButton {
+	background-position: -46px 0px;
+	display:none;
+}
+#content #logoutChannelContainer #showChannelsButton.off {
+	background-position: -46px -22px;
 }
 
 /* Borders */
@@ -271,9 +285,6 @@ body.ajax-chat {
 	border-width:1px;
 	border-style:dotted;
 }
-#content #settingsContainer #settingsList table {
-	border-collapse:collapse;
-}
 
 /* Misc */
 #content #bbCodeContainer input, #content #optionsContainer input.button, #content #settingsContainer #settingsList input.button, #content #logoutButton, #content #submitButton, #loginContent #loginButton {
@@ -285,7 +296,7 @@ body.ajax-chat {
 	#content #headline { margin:0; padding:0 0 0 5px; line-height:25px; }
 	#content #statusIconContainer { top:2px; right:2px; }
 	#content #copyright { top:0px; right:30px; line-height: 25px;}
-	#content #logoutChannelContainer { top:30px; left:5px; }
+	#content #logoutChannelContainer { top:30px; left:5px; right:0px; }
 	#content #logoutChannelContainer label { display:none; }
 	#content #emoticonsContainer, #content #submitButtonContainer { display:none; }
 	#content #bbCodeContainer { bottom:45px; left:5px; padding:0; }
@@ -303,10 +314,11 @@ body.ajax-chat {
 	#content #mainPanelContainer { top:65px; left:0px; right:0px; bottom:105px; }
 	#content #onlineListContainer, #content #helpContainer, #content #settingsContainer { border-right-width:0; position:absolute; width:auto; top:0px; right:0px; bottom:0px; left:0px; }
 	#content #chatList { border-left-width: 0; border-right-width: 0; }
-	#content #logoutButton { display:block; float:left; margin-right:1px;}
 	#content #bbCodeContainer #bbCodeIMG, #content #bbCodeContainer #bbCodeURL { display:none; }
 	#content #bbCodeContainer { padding:0; }
 	#content #emoticonsContainer { bottom:80px; left:5px; }
+	#content #logoutChannelInner { display:none; clear:left; padding:5px; text-align:right; }
+	#content #logoutChannelContainer #showChannelsButton { display:block; position:absolute; right:5px; top:5px; }
 }
 
 @media (max-height: 300px) {

@@ -15,31 +15,50 @@
 	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
-			// window width below this is treated as mobile
-			var mobileWidth = 700;
-		
-			function toggleContainer(containerID, hideContainerIDs) {
-				if(hideContainerIDs) {
-					for(var i=0; i<hideContainerIDs.length; i++) {
-						ajaxChat.showHide(hideContainerIDs[i], 'none');	
+			ajaxChat.view = {
+				debounce: false,
+				mobileWidth: 700,
+				
+				bindPopups: function() {
+					this.bindButtonToPopup('showChannelsButton','logoutChannelInner');
+					this.bindButtonToPopup('bbCodeEmoticon','emoticonsContainer');
+					this.bindButtonToPopup('bbCodeColor','colorCodesContainer');
+				},
+				
+				bindButtonToPopup: function(buttonID, popupID) {
+					var buttonElement = document.getElementById(buttonID),
+						popupElement = document.getElementById(popupID);
+				
+					if (!buttonElement || !popupElement) {
+						return;
 					}
-				}
-				ajaxChat.showHide(containerID);
-			}
-			
-			function toggleMobileContainer(containerID, hideContainerIDs) {
-				if(hideContainerIDs && window.innerWidth <= mobileWidth) {
-					for(var i=0; i<hideContainerIDs.length; i++) {
-						ajaxChat.showHide(hideContainerIDs[i], 'none');	
+					
+					buttonElement.isVisible = this.isVisible(buttonElement);
+					
+					if (buttonElement.isVisible) {
+						popupElement.style.display = 'none';
+						popupElement.className = 'popup';
+					} else {
+						popupElement.style.display = 'block';
+						popupElement.className = '';
 					}
-				}
-				ajaxChat.showHide(containerID);
-			}
-
-			var renderResize = (function( debounce ) {
-				var handler = function() {
-					// use debounce to limit the rate the event will fire
-					if (debounce === false) {
+					
+					buttonElement.popupFunc = this.toggleButton;
+					buttonElement.linkedPopupID = popupID;
+					
+					ajaxChat.addEvent(buttonElement, 'click', buttonElement.popupFunc );
+				},
+				
+				toggleButton: function() {
+					ajaxChat.setClass(this, this.className === 'button' ? 'button off' : 'button');
+					ajaxChat.showHide(this.linkedPopupID);
+				},
+				
+				renderResize: function() {
+					var self = this;
+					if (this.debounce === false) {
+						this.debounce = true;
+						
 						setTimeout(function() {
 							// to support ie8 we need to apply a height to this container and reapply it on resize
 							if (typeof isIElt8 !== 'undefined') {
@@ -47,28 +66,45 @@
 								cont.removeAttribute("style"); 
 								cont.style.height = cont.clientHeight;
 							}
+							
+							// If panels are converted to popups at this size, turn them into popups
+							self.bindPopups();
+				
 							// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-							if(window.innerWidth <= mobileWidth) {
+							if(window.innerWidth <= self.mobileWidth) {
 								ajaxChat.updateChatlistView();
-								document.getElementById('emoticonsContainer').style.display = 'none';
-							} else {
-								document.getElementById('emoticonsContainer').style.display = 'block';
 							}
-							debounce = false;
+							self.debounce = false;
 						}, 300);
-						debounce = true;
 					}
-				};
-				return handler;
-			})( false );
+				},
+				
+				isVisible: function(element) {
+					return element.offsetWidth > 0 || element.offsetHeight > 0;
+				},
+				
+				toggleContainer: function(containerID, hideContainerIDs) {
+					if(hideContainerIDs) {
+						for(var i=0; i<hideContainerIDs.length; i++) {
+							ajaxChat.showHide(hideContainerIDs[i], 'none');
+						}
+					}
+					ajaxChat.showHide(containerID);
+				}
+				
+			};
+			
 			
 			function initialize() {
-				if(window.innerWidth <= mobileWidth) {
+					
+				if(window.innerWidth <= ajaxChat.view.mobileWidth) {
 					ajaxChat.setSetting('blink', false);
-					ajaxChat.showHide('emoticonsContainer','none');
-					toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);
+					ajaxChat.view.toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);
 				}
-				ajaxChat.addEvent(window, 'resize', renderResize);
+				
+				ajaxChat.view.bindPopups();
+				
+				ajaxChat.addEvent(window, 'resize', function() { ajaxChat.view.renderResize() } );
 				
 				ajaxChat.updateButton('audio', 'audioButton');
 				ajaxChat.updateButton('autoScroll', 'autoScrollButton');
@@ -131,12 +167,15 @@
 		<h1 id="headline">[LANG]title[/LANG]</h1>
 		<div id="logoutChannelContainer">
 			<input type="button" id="logoutButton" value="[LANG]logout[/LANG]" onclick="ajaxChat.logout();"/>
-			<label for="channelSelection">[LANG]channel[/LANG]:</label>
-			<select id="channelSelection" onchange="ajaxChat.switchChannel(this.options[this.selectedIndex].value);">[CHANNEL_OPTIONS/]</select>
-			<label for="styleSelection">[LANG]style[/LANG]:</label>
-			<select id="styleSelection" onchange="ajaxChat.setActiveStyleSheet(ajaxChat.getSelectedStyle());">[STYLE_OPTIONS/]</select>
-			<label for="languageSelection">[LANG]language[/LANG]:</label>
-			<select id="languageSelection" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select>
+			<div id="logoutChannelInner">
+				<label for="channelSelection">[LANG]channel[/LANG]:</label>
+				<select id="channelSelection" onchange="ajaxChat.switchChannel(this.options[this.selectedIndex].value);">[CHANNEL_OPTIONS/]</select>
+				<label for="styleSelection">[LANG]style[/LANG]:</label>
+				<select id="styleSelection" onchange="ajaxChat.setActiveStyleSheet(ajaxChat.getSelectedStyle());">[STYLE_OPTIONS/]</select>
+				<label for="languageSelection">[LANG]language[/LANG]:</label>
+				<select id="languageSelection" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select>
+			</div>
+			<input type="image" src="img/pixel.gif" class="button" id="showChannelsButton" alt="[LANG]toggleHelp[/LANG]"/>
 		</div>
 		<div id="statusIconContainer" class="statusContainerOn"></div>
 		
@@ -364,14 +403,14 @@
 			<input id="bbCodeCode" type="button" value="[LANG]bbCodeLabelCode[/LANG]" title="[LANG]bbCodeTitleCode[/LANG]" onclick="ajaxChat.insertBBCode('code');"/>
 			<input id="bbCodeURL" type="button" value="[LANG]bbCodeLabelURL[/LANG]" title="[LANG]bbCodeTitleURL[/LANG]" onclick="ajaxChat.insertBBCode('url');"/>
 			<input id="bbCodeIMG" type="button" value="[LANG]bbCodeLabelImg[/LANG]" title="[LANG]bbCodeTitleImg[/LANG]" onclick="ajaxChat.insertBBCode('img');"/>
-			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="toggleMobileContainer('colorCodesContainer', ['emoticonsContainer']);"/>
-			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]" onclick="toggleMobileContainer('emoticonsContainer', ['colorCodesContainer']);"/>
+			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]"/>
+			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]"/>
 		</div>
 		<div id="colorCodesContainer" style="display:none;" dir="ltr"></div>
 		<div id="optionsContainer">
-			<input type="image" src="img/pixel.gif" class="button" id="helpButton" alt="[LANG]toggleHelp[/LANG]" title="[LANG]toggleHelp[/LANG]" onclick="toggleContainer('helpContainer', ['onlineListContainer','settingsContainer']);"/>
-			<input type="image" src="img/pixel.gif" class="button" id="settingsButton" alt="[LANG]toggleSettings[/LANG]" title="[LANG]toggleSettings[/LANG]" onclick="toggleContainer('settingsContainer', ['onlineListContainer','helpContainer']);"/>
-			<input type="image" src="img/pixel.gif" class="button" id="onlineListButton" alt="[LANG]toggleOnlineList[/LANG]" title="[LANG]toggleOnlineList[/LANG]" onclick="toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);"/>
+			<input type="image" src="img/pixel.gif" class="button" id="helpButton" alt="[LANG]toggleHelp[/LANG]" title="[LANG]toggleHelp[/LANG]" onclick="ajaxChat.view.toggleContainer('helpContainer', ['onlineListContainer','settingsContainer']);"/>
+			<input type="image" src="img/pixel.gif" class="button" id="settingsButton" alt="[LANG]toggleSettings[/LANG]" title="[LANG]toggleSettings[/LANG]" onclick="ajaxChat.view.toggleContainer('settingsContainer', ['onlineListContainer','helpContainer']);"/>
+			<input type="image" src="img/pixel.gif" class="button" id="onlineListButton" alt="[LANG]toggleOnlineList[/LANG]" title="[LANG]toggleOnlineList[/LANG]" onclick="ajaxChat.view.toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);"/>
 			<input type="image" src="img/pixel.gif" class="button" id="audioButton" alt="[LANG]toggleAudio[/LANG]" title="[LANG]toggleAudio[/LANG]" onclick="ajaxChat.toggleSetting('audio', 'audioButton');"/>
 			<input type="image" src="img/pixel.gif" class="button" id="autoScrollButton" alt="[LANG]toggleAutoScroll[/LANG]" title="[LANG]toggleAutoScroll[/LANG]" onclick="ajaxChat.toggleSetting('autoScroll', 'autoScrollButton');"/>
   		</div>
