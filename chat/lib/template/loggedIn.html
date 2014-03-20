@@ -33,9 +33,7 @@
 						return;
 					}
 					
-					buttonElement.isVisible = this.isVisible(buttonElement);
-					
-					if (buttonElement.isVisible) {
+					if (this.isVisible(buttonElement)) {
 						popupElement.style.display = 'none';
 						popupElement.className = 'popup';
 					} else {

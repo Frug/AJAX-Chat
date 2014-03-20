@@ -10,10 +10,7 @@
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
-
-html,body {
-	height:100%;
-}
+@import url('custom.css');
 
 input, select, textarea, #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content .rowEven,
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3, #content #inputFieldContainer, #loginContent input {
@@ -123,18 +120,18 @@ input, select{
 	border: 0;
 	padding-left: 0;
 }
+
+/* Status Icon */
 #content #statusIconContainer {
-	background-image: url('../img/loading-sprite.png');
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
 }
-#content .statusContainerOff {
-	background-position: 0px 0px;
-}
-#content .statusContainerOn {
+#content #statusIconContainer.waiting {
 	background-position: 0px -22px;
 }
-#content .statusContainerAlert {
+#content #statusIconContainer.retrying {
 	background-position: 0px -44px;
 }
+
 #content #bbCodeContainer input {
 	background-color: #d8ffd6;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#d8ffd6), to(#467a44));

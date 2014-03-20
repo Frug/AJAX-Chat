@@ -9,6 +9,7 @@
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
+@import url('custom.css');
 
 .ajax-chat {
 	background-color:#2A112F;
@@ -64,18 +65,18 @@
 	border:0;
 	padding-left:0;
 }
+
+/* Status Icon */
 #content #statusIconContainer {
-	background-image:url('../img/loading-sprite.png');
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
 }
-#content .statusContainerOff {
-	background-position:0px 0px;
+#content #statusIconContainer.waiting {
+	background-position: 0px -22px;
 }
-#content .statusContainerOn {
-	background-position:0px -22px;
+#content #statusIconContainer.retrying {
+	background-position: 0px -44px;
 }
-#content .statusContainerAlert {
-	background-position:0px -44px;
-}
+
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginButton {
 	background-color:#461124;
 	color:#DAABBC;

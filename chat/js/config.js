@@ -47,7 +47,9 @@ var ajaxChatConfig = {
 		// The ID of the color codes container:
 		colorCodesContainer: 'colorCodesContainer',
 		// The ID of the flash interface container:
-		flashInterfaceContainer: 'flashInterfaceContainer'
+		flashInterfaceContainer: 'flashInterfaceContainer',
+		// The ID of the status icon:
+		statusIcon: 'statusIconContainer'
 	},
 
 	// Defines the settings which can be modified by users:

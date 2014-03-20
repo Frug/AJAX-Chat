@@ -10,12 +10,17 @@
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
+@import url('custom.css');
 
 #content input, select, #content textarea, #loginButton { 
 	border: 0;
 }
-#loginButton{ box-shadow:0px 1px 4px 0px rgba(0,0,0,0.5) }
-#content textarea { border-color: #383838 }
+#loginButton{
+	box-shadow:0px 1px 4px 0px rgba(0,0,0,0.5);
+}
+#content textarea {
+	border-color: #383838;
+}
 .ajax-chat {
 	background-color:#0f2314;
 	color:#f0f0f0;
@@ -64,18 +69,25 @@ h1 {
 #content #onlineListContainer #onlineList ul {
 	list-style: none;
 }
-#content #emoticonsContainer { border-radius: 3px; }
-#content #bbCodeContainer { border: 0; padding-left: 0; }
-#content #statusIconContainer { background-image: url('../img/loading-sprite.png'); }
-#content .statusContainerOff {
-	background-position: 0px 0px;
+#content #emoticonsContainer {
+	border-radius: 3px;
 }
-#content .statusContainerOn {
+#content #bbCodeContainer {
+	border: 0;
+	padding-left: 0;
+}
+
+/* Status Icon */
+#content #statusIconContainer {
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
+}
+#content #statusIconContainer.waiting {
 	background-position: 0px -22px;
 }
-#content .statusContainerAlert {
+#content #statusIconContainer.retrying {
 	background-position: 0px -44px;
 }
+
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginButton {
 	background-color:#4C9C1F;
 	color:#fff;

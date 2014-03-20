@@ -13,6 +13,7 @@
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
+@import url('custom.css');
 
 /* Buttons */
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
@@ -28,15 +29,12 @@
 
 /* Status Icon */
 #content #statusIconContainer {
-	background-image: url('../img/loading-sprite.png'); 
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
 }
-#content .statusContainerOff {
-	background-position: 0px 0px;
-}
-#content .statusContainerOn {
+#content #statusIconContainer.waiting {
 	background-position: 0px -22px;
 }
-#content .statusContainerAlert {
+#content #statusIconContainer.retrying {
 	background-position: 0px -44px;
 }
 

@@ -724,24 +724,12 @@ var ajaxChat = {
 
 	setStatus: function(newStatus) {
 		// status options are: ok, retrying, waiting
-		if (this.requestStatus !== 'retrying' || newStatus === 'ok') {
+		if (!(newStatus === 'waiting' && this.requestStatus === 'retrying')) {
 			this.requestStatus = newStatus;
 		}
-
-		var statusIcon = document.getElementById('statusIconContainer');
-
-		if (statusIcon) {
-			switch (this.requestStatus) {
-				case 'ok':
-					this.setClass(statusIcon, 'statusContainerOff');
-					break;
-				case 'waiting':
-					this.setClass(statusIcon, 'statusContainerOn');
-					break;
-				case 'retrying':
-					this.setClass(statusIcon, 'statusContainerAlert');
-					break;
-			}
+		
+		if(this.dom['statusIcon']) {
+			this.dom['statusIcon'].className = this.requestStatus;
 		}
 	},
 
