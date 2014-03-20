@@ -17,7 +17,12 @@
 		// <![CDATA[
 			ajaxChat.view = {
 				debounce: false,
-				mobileWidth: 700,
+				
+				// Use the visibility of this to guess that the user is on a mobile device
+				mobileDetectElement: 'submitButtonContainer',
+				
+				// Use the visibility of this to guess that the screen is tiny and hide popups
+				tinyScreenDetectElement: 'bbCodeContainer',
 				
 				bindPopups: function() {
 					this.bindButtonToPopup('showChannelsButton','logoutChannelInner');
@@ -33,7 +38,7 @@
 						return;
 					}
 					
-					if (this.isVisible(buttonElement)) {
+					if (this.isVisible(buttonElement) || this.isTinyScreen()) {
 						popupElement.style.display = 'none';
 						popupElement.className = 'popup';
 					} else {
@@ -58,8 +63,8 @@
 				
 				renderResize: function() {
 					var self = this;
-					if (this.debounce === false) {
-						this.debounce = true;
+					if (self.debounce === false) {
+						self.debounce = true;
 						
 						setTimeout(function() {
 							// to support ie8 we need to apply a height to this container and reapply it on resize
@@ -73,9 +78,10 @@
 							self.bindPopups();
 				
 							// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-							if(window.innerWidth <= self.mobileWidth) {
+							if(self.isMobile()) {
 								ajaxChat.updateChatlistView();
 							}
+							
 							self.debounce = false;
 						}, 300);
 					}
@@ -83,6 +89,14 @@
 				
 				isVisible: function(element) {
 					return element.offsetWidth > 0 || element.offsetHeight > 0;
+				},
+				
+				isMobile: function() {
+					return !this.isVisible(document.getElementById(this.mobileDetectElement));
+				},
+				
+				isTinyScreen: function() {
+					return !this.isVisible(document.getElementById(this.tinyScreenDetectElement));
 				},
 				
 				toggleContainer: function(containerID, hideContainerIDs) {
@@ -96,10 +110,9 @@
 				
 			};
 			
-			
 			function initialize() {
 					
-				if(window.innerWidth <= ajaxChat.view.mobileWidth) {
+				if(ajaxChat.view.isMobile()) {
 					ajaxChat.setSetting('blink', false);
 					ajaxChat.view.toggleContainer('onlineListContainer', ['settingsContainer','helpContainer']);
 				}
