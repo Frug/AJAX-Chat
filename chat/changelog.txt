@@ -857,6 +857,7 @@ Notice:
 New Features:
 - XenForo integration is now included. - thanks to ManOnDaMoon.
 - Private messages now have their own sound - thanks to marquisite.
+- Private messages can have their own background color (style using .private CSS class).
 - Added two new sounds - one is extra for your customization pleasure.
 - Added a custom user group and banned user group for customization and integration - thanks to marquisite.
 - Added a custom CSS file for general style overrides - thanks to Sophist UK
