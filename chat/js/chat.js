@@ -1243,15 +1243,17 @@ var ajaxChat = {
 	},
 
 	getChatListMessageString: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
-		var rowClass = this.DOMbufferRowClass;
-		var userClass = this.getRoleClass(userRole);
-		var colon;
+		var rowClass = this.DOMbufferRowClass,
+			userClass = this.getRoleClass(userRole),
+			colon = ': ';
 		if(messageText.indexOf('/action') === 0 || messageText.indexOf('/me') === 0 || messageText.indexOf('/privaction') === 0) {
 			userClass += ' action';
 			colon = ' ';
-		} else {
-			colon = ': ';
 		}
+		if (messageText.indexOf('/privmsg') === 0 || messageText.indexOf('/privmsgto') === 0 || messageText.indexOf('/privaction') === 0) {
+			rowClass += ' private';
+		}
+		
 		var dateTime = this.settings['dateFormat'] ? '<span class="dateTime">'
 						+ this.formatDate(this.settings['dateFormat'], dateObject) + '</span> ' : '';
 		return	'<div id="'

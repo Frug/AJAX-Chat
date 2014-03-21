@@ -40,10 +40,10 @@
 					
 					if (this.isVisible(buttonElement) || this.isTinyScreen()) {
 						popupElement.style.display = 'none';
-						popupElement.className = 'popup';
+						ajaxChat.addClass(popupElement, 'popup');
 					} else {
 						popupElement.style.display = 'block';
-						popupElement.className = '';
+						ajaxChat.removeClass(popupElement, 'popup');
 					}
 					
 					if (!buttonElement.linkedPopupID) { // For IE<9 we need to avoid re-attaching events.

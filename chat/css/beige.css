@@ -82,6 +82,12 @@
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#F7F5DC;
 }
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
+}
 #content .guest {
 	color:gray;
 }
