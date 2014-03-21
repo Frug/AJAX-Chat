@@ -57,33 +57,47 @@
 					// If you don't care about IE8, remove the crud and use "this" to find the target.
 					e = e || window.event;
 					var target = e.target || e.srcElement;
-					ajaxChat.setClass(target, target.className === 'button' ? 'button off' : 'button');
+					target.className = (target.className === 'button' ? 'button off' : 'button');
 					ajaxChat.showHide(target.linkedPopupID);
 				},
 				
 				renderResize: function() {
 					var self = this;
+					
+					self.useDebounce(function() {
+						// to support ie8 we need to apply a height to this container and reapply it on resize
+						if (typeof isIElt8 !== 'undefined') {
+							var cont = document.getElementById('mainPanelContainer');
+							cont.removeAttribute("style"); 
+							cont.style.height = cont.clientHeight;
+						}
+
+						// If panels are converted to popups at this size, turn them into popups
+						self.bindPopups();
+
+						// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
+						if(self.isMobile()) {
+							ajaxChat.updateChatlistView();
+						}
+
+						// Tiny screens have no room for options
+						if (self.isTinyScreen()) {
+							ajaxChat.showHide('onlineListContainer', 'none');
+							ajaxChat.showHide('settingsContainer', 'none');
+							ajaxChat.showHide('helpContainer', 'none');
+						}
+					});
+				},
+				
+				useDebounce: function(callback) {
+					var self = this;
 					if (self.debounce === false) {
 						self.debounce = true;
 						
 						setTimeout(function() {
-							// to support ie8 we need to apply a height to this container and reapply it on resize
-							if (typeof isIElt8 !== 'undefined') {
-								var cont = document.getElementById('mainPanelContainer');
-								cont.removeAttribute("style"); 
-								cont.style.height = cont.clientHeight;
-							}
-							
-							// If panels are converted to popups at this size, turn them into popups
-							self.bindPopups();
-				
-							// Fire the auto-scroll event on a window resize for mobiles (e.g. show/hide onscreen keyboard)
-							if(self.isMobile()) {
-								ajaxChat.updateChatlistView();
-							}
-							
+							callback();
 							self.debounce = false;
-						}, 300);
+						}, 100);
 					}
 				},
 				

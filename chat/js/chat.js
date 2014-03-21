@@ -1181,7 +1181,7 @@ var ajaxChat = {
 			var node = this.dom['onlineList'].firstChild;
 			var rowEven = false;
 			while(node) {
-				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'));
+				node.className = (rowEven ? 'rowEven' : 'rowOdd');
 				node = node.nextSibling;
 				rowEven = !rowEven;
 			}
@@ -1799,8 +1799,8 @@ var ajaxChat = {
 	deleteMessage: function(messageID) {
 		var messageNode = this.getMessageNode(messageID), originalClass, nextSibling;
 		if(messageNode) {
-			originalClass = this.getClass(messageNode);
-			this.setClass(messageNode, originalClass+' deleteSelected');
+			originalClass = messageNode.className;
+			this.addClass(messageNode, 'deleteSelected');
 			if(confirm(this.lang['deleteMessageConfirm'])) {
 				nextSibling = messageNode.nextSibling;
 				try {
@@ -1813,7 +1813,7 @@ var ajaxChat = {
 					this.setClass(messageNode, originalClass);
 				}
 			} else {
-				this.setClass(messageNode, originalClass);
+				messageNode.className = originalClass;
 			}
 		}
 	},
@@ -1825,9 +1825,9 @@ var ajaxChat = {
 		}
 		if(node) {
 			previousNode = node.previousSibling;
-			rowEven = (previousNode && this.getClass(previousNode) === 'rowOdd') ? true : false;
+			rowEven = (previousNode && previousNode.className === 'rowOdd') ? true : false;
 			while(node) {
-				this.setClass(node, (rowEven ? 'rowEven' : 'rowOdd'));
+				node.className = (rowEven ? 'rowEven' : 'rowOdd');
 				node = node.nextSibling;
 				rowEven = !rowEven;
 			}
@@ -1845,21 +1845,13 @@ var ajaxChat = {
 			elem["on"+type]=eventHandle;
 		}
 	},
-
-	getClass: function(node) {
-		if(typeof node.className !== 'undefined') {
-			return node.className; // IE
-		} else {
-			return node.getAttribute('class');
-		}
+	
+	addClass: function(node, theClass) {
+		node.className += ' ' + theClass;
 	},
-
-	setClass: function(node, className) {
-		if(typeof node.className !== 'undefined') {
-			node.className = className; // IE
-		} else {
-			node.setAttribute('class', className);
-		}
+	
+	removeClass: function(node, theClass) {
+		node.className = node.className.replace( new RegExp('(?:^|\\s)' + theClass + '(?!\\S)', 'g') , '' );
 	},
 
 	scriptLinkEncode: function(text) {
@@ -1938,7 +1930,7 @@ var ajaxChat = {
 	updateButton: function(setting, buttonID) {
 		var node = document.getElementById(buttonID);
 		if(node) {
-			this.setClass(node, (this.getSetting(setting) ? 'button' : 'button off'));
+			node.className = (this.getSetting(setting) ? 'button' : 'button off');
 		}
 	},
 

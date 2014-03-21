@@ -16,17 +16,20 @@
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
 	background-color:#d9ce72;
 	color:#333333;
-	border: 1px solid #c8b360;
-	background-image: linear-gradient(to bottom, #d9ce72, #e1d995);
+	border:1px solid #c8b360;
+	background-image:linear-gradient(to bottom, #d9ce72, #e1d995);
+}
+#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover, #loginForm #loginButton:hover {
+	background-image:linear-gradient(to bottom, #C1B022, #C8BD66);
 }
 #content select, #loginForm select, #loginForm input, #content textarea {
 	color:#333333;
-	border: 1px solid #c8b360;
+	border:1px solid #c8b360;
 }
 
 /* Status Icon */
 #content #statusIconContainer {
-	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
+	background:url('../img/loading-sprite.png') no-repeat 0px 0px; 
 }
 #content #statusIconContainer.waiting {
 	background-position: 0px -22px;
@@ -59,9 +62,13 @@
 #content a {
 	color:#000;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content textarea {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content textarea {
 	border-color:gray;
 	background-color:#FFF;
+}
+#content .popup {
+	background-color:#F7F5DC;
+	border: 1px solid #808080;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -105,11 +112,4 @@
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 	background-color:#FFFFF0;
 	color:#000;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#F7F5DC;
-		border: 1px solid #808080;
-	}
 }
