@@ -929,7 +929,7 @@ var ajaxChat = {
 				userRole = userNodes[i].getAttribute('userRole');
 				onlineUsers.push(userID);
 				index = this.arraySearch(userID, this.usersList);
-				if(index === false) {
+				if(index === -1) {
 					this.addUserToOnlineList(
 						userID,
 						userName,
@@ -1520,13 +1520,17 @@ var ajaxChat = {
 	},
 
 	arraySearch: function(needle, haystack) {
-		var i = haystack.length;
-		while(i--) {
-			if(haystack[i] === needle) {
-				return i;
+		if (!Array.prototype.indexOf) { // IE<9
+			var i = haystack.length;
+			while(i--) {
+				if(haystack[i] === needle) {
+					return i;
+				}
 			}
+			return -1;
+		} else {
+			return haystack.indexOf(needle);
 		}
-	    return false;
 	},
 
 	stripTags: function(str) {
@@ -1590,7 +1594,7 @@ var ajaxChat = {
 
 	getUserIDFromUserName: function(userName) {
 		var index = this.arraySearch(userName, this.userNamesList);
-		if(index !== false) {
+		if(index !== -1) {
 			return this.usersList[index];
 		}
 		return null;
@@ -1598,7 +1602,7 @@ var ajaxChat = {
 
 	getUserNameFromUserID: function(userID) {
 		var index = this.arraySearch(userID, this.usersList);
-		if(index !== false) {
+		if(index !== -1) {
 			return this.userNamesList[index];
 		}
 		return null;
