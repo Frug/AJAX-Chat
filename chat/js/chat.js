@@ -1624,7 +1624,7 @@ var ajaxChat = {
 	},
 
 	handleInputFieldKeyDown: function(event) {
-		var text, term, m, n;
+		var text, lastWord, i;
 		
 		// Enter key without shift should send messages
 		if(event.keyCode === 13 && !event.shiftKey) {
@@ -1640,33 +1640,16 @@ var ajaxChat = {
 		else if(event.keyCode === 9 && !event.shiftKey) {
 			text = this.dom['inputField'].value;
 			if(text) {
-				// check for last word
-				n = text.lastIndexOf(" ");
-				if (n >=0) {
-					term = text.substr(n+1);
-					m = false;
-				} else {
-					term = text;
-					m = true;
-				}
-				//only look for 3 or more chars
-				if (term.length > 2){
-					// loop through userNamesList for match
-					for (var i = 0; i < this.userNamesList.length; i++) {
-						// search for usernames from beginning and case insenstive
-						if(this.userNamesList[i].replace("(","").toLowerCase().indexOf(term.toLowerCase()) === 0){
-							// check to see what part of the string needs to be updated
-							if (m){
-								// replace entire line
-								this.dom['inputField'].value = this.userNamesList[i];
-							}
-							else {
-								// replace just term (use sub to avoid duplicate matches)
-								this.dom['inputField'].value = text.substring(0,n+1) + this.userNamesList[i];
-							}
+				lastWord = text.match(/\w+/g).slice(-1)[0];
+            
+				if (lastWord.length > 2) {
+					for (i = 0; i < this.userNamesList.length; i++) {
+						if(this.userNamesList[i].replace("(","").toLowerCase().indexOf(lastWord.toLowerCase()) === 0) {
+							this.dom['inputField'].value = text.replace(new RegExp(lastWord + '$'), this.userNamesList[i]);
+							break;
 						}
 					}
-				}       
+				}   
 			}
 			try {
 				event.preventDefault();
