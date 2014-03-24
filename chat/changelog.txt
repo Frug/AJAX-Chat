@@ -861,6 +861,7 @@ New Features:
 - Added two new sounds - one is extra for your customization pleasure.
 - Added a custom user group and banned user group for customization and integration - thanks to marquisite.
 - Added a custom CSS file for general style overrides - thanks to Sophist UK
+- Pressing tab after typing the first 3 letters of a username will autocomplete their name - thanks to shermdog.
 - Many display improvements for mobile users.
 
 Bugfixes:

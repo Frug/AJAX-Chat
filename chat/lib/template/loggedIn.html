@@ -206,7 +206,7 @@
 			</div>
 			<input type="image" src="img/pixel.gif" class="button" id="showChannelsButton" alt="[LANG]toggleHelp[/LANG]"/>
 		</div>
-		<div id="statusIconContainer" class="statusContainerOn"></div>
+		<div id="statusIconContainer" class="waiting"></div>
 		
 		<div id="mainPanelContainer">
 		
@@ -417,7 +417,7 @@
 		</div>
 
 		<div id="inputFieldContainer">
-			<textarea id="inputField" rows="1" cols="50" title="[LANG]inputLineBreak[/LANG]" onkeypress="ajaxChat.handleInputFieldKeyPress(event);" onkeyup="ajaxChat.handleInputFieldKeyUp(event);"></textarea>
+			<textarea id="inputField" rows="1" cols="50" title="[LANG]inputLineBreak[/LANG]" onkeydown="ajaxChat.handleInputFieldKeyDown(event);" onkeyup="ajaxChat.handleInputFieldKeyUp(event);"></textarea>
 		</div>
 		<div id="submitButtonContainer">
 			<span id="messageLengthCounter">0/[MESSAGE_TEXT_MAX_LENGTH/]</span>

@@ -1623,16 +1623,58 @@ var ajaxChat = {
 		}
 	},
 
-	handleInputFieldKeyPress: function(event) {
+	handleInputFieldKeyDown: function(event) {
+		var text, term, m, n;
+		
+		// Enter key without shift should send messages
 		if(event.keyCode === 13 && !event.shiftKey) {
 			this.sendMessage();
+			try {
+				event.preventDefault();
+			} catch(e) {
+				event.returnValue = false; // IE<9
+			}
+			return false;
+		}
+		// Tab should complete usernames
+		else if(event.keyCode === 9 && !event.shiftKey) {
+			text = this.dom['inputField'].value;
+			if(text) {
+				// check for last word
+				n = text.lastIndexOf(" ");
+				if (n >=0) {
+					term = text.substr(n+1);
+					m = false;
+				} else {
+					term = text;
+					m = true;
+				}
+				//only look for 3 or more chars
+				if (term.length > 2){
+					// loop through userNamesList for match
+					for (var i = 0; i < this.userNamesList.length; i++) {
+						// search for usernames from beginning and case insenstive
+						if(this.userNamesList[i].replace("(","").toLowerCase().indexOf(term.toLowerCase()) === 0){
+							// check to see what part of the string needs to be updated
+							if (m){
+								// replace entire line
+								this.dom['inputField'].value = this.userNamesList[i];
+							}
+							else {
+								// replace just term (use sub to avoid duplicate matches)
+								this.dom['inputField'].value = text.substring(0,n+1) + this.userNamesList[i];
+							}
+						}
+					}
+				}       
+			}
 			try {
 				event.preventDefault();
 			} catch(e) {
 				event.returnValue = false; // IE
 			}
 			return false;
-		}
+		}       
 		return true;
 	},
 
