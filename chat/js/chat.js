@@ -324,17 +324,24 @@ var ajaxChat = {
 	},
 
 	setUnloadHandler: function() {
+		var self = this,
+			onunload;
 		// Make sure finalize() is called on page unload:
-  		var onunload = window.onunload;
-		if(typeof onunload !== 'function') {
-			window.onunload = function() {
-				ajaxChat.finalize();
-			};
+		if ('onbeforeunload' in window) {
+			self.addEvent(window, 'beforeunload', function() { self.finalize(); } );
 		} else {
-			window.onunload = function() {
-				ajaxChat.finalize();
-				onunload();
-			};
+			// Older browsers
+			onunload = window.onunload;
+			if(typeof onunload !== 'function') {
+				window.onunload = function() {
+					self.finalize();
+				};
+			} else {
+				window.onunload = function() {
+					self.finalize();
+					onunload();
+				};
+			}
 		}
 	},
 

@@ -133,7 +133,7 @@
 				
 				ajaxChat.view.bindPopups();
 				
-				ajaxChat.addEvent(window, 'resize', function() { ajaxChat.view.renderResize() } );
+				ajaxChat.addEvent(window, 'resize', function() { ajaxChat.view.renderResize(); } );
 				
 				ajaxChat.updateButton('audio', 'audioButton');
 				ajaxChat.updateButton('autoScroll', 'autoScrollButton');
@@ -185,8 +185,8 @@
 			ajaxChatConfig.socketServerHost = decodeURIComponent('[SOCKET_SERVER_HOST/]');
 			ajaxChatConfig.socketServerPort = parseInt('[SOCKET_SERVER_PORT/]');
 			ajaxChatConfig.socketServerChatID = parseInt('[SOCKET_SERVER_CHAT_ID/]');
-		
-			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, true, initialize);
+
+			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, true, initialize, function() { ajaxChat.logout(); });
 		// ]]>
 	</script>
 </head>
