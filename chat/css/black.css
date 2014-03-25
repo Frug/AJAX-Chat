@@ -1,12 +1,3 @@
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -18,6 +9,10 @@
 	color:#f0f0f0;
 	border: 1px solid #808080;
 	background-image: linear-gradient(to bottom, #222, #000);
+}
+#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover, #loginForm #loginButton:hover {
+	background-color:#222;
+	background-image: linear-gradient(to top, #222, #000);
 }
 #content select, #loginForm select, #loginForm input, #content textarea {
 	background-color:#000;
@@ -41,10 +36,10 @@
 	background-color:#000;
 	color:#FFF;
 }
-#loginContent h1 {
+.ajax-chat a {
 	color:#FFF;
 }
-#loginContent a {
+.ajax-chat h1 {
 	color:#FFF;
 }
 #loginContent input, #loginContent select {
@@ -54,15 +49,13 @@
 #loginContent #errorContainer {
 	color:red;
 }
-#content h1 {
-	color:#FFF;
-}
-#content a {
-	color:#FFF;
-}
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content textarea {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content textarea {
 	border-color:gray;
 	background-color:#000;
+}
+#content .popup {
+	background-color:#000;
+	border: 1px solid gray;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -106,11 +99,4 @@
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 	background-color:#212121;
 	color:#FFF;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#000;
-		border: 1px solid gray;
-	}
 }

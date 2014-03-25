@@ -1878,11 +1878,17 @@ var ajaxChat = {
 	},
 	
 	addClass: function(node, theClass) {
-		node.className += ' ' + theClass;
+		if (!this.hasClass(node, theClass)) {
+			node.className += ' ' + theClass;
+		}
 	},
 	
 	removeClass: function(node, theClass) {
 		node.className = node.className.replace( new RegExp('(?:^|\\s)' + theClass + '(?!\\S)', 'g') , '' );
+	},
+	
+	hasClass: function(node, theClass) {
+		return node.className.match(new RegExp('\\b' + theClass + '\\b'));
 	},
 
 	scriptLinkEncode: function(text) {

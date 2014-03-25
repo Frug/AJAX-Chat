@@ -1,12 +1,3 @@
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -43,10 +34,10 @@
 	background-color:#F7F5DC;
 	color:#000;
 }
-#loginContent h1 {
+.ajax-chat a {
 	color:#000;
 }
-#loginContent a {
+.ajax-chat h1 {
 	color:#000;
 }
 #loginContent input, #loginContent select {
@@ -55,12 +46,6 @@
 }
 #loginContent #errorContainer {
 	color:red;
-}
-#content h1 {
-	color:#000;
-}
-#content a {
-	color:#000;
 }
 #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content textarea {
 	border-color:gray;
