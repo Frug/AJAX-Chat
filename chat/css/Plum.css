@@ -1,11 +1,7 @@
 /*
  * @package AJAX_Chat
  * @author Rosina Ramirez
- * @copyright (c) Rosina Ramirez
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -15,8 +11,11 @@
 	background-color:#2A112F;
 	color:#9765A0;
 }
-#content a {
+.ajax-chat a {
 	color:#DA83A1;
+}
+.ajax-chat h1 {
+	color:#CDA6D2;
 }
 #content input, select, #content textarea, #loginButton { 
 	border: 0; box-shadow:1px 1px 4px 0px rgba(0,0,0,0.5);
@@ -35,9 +34,6 @@
 #loginContent #errorContainer {
 	color:red;
 }
-#content h1 {
-	color:#CDA6D2;
-}
 #content textarea {
 	background:rgba(0,0,0,0.3);
 	color:#9765A0;
@@ -45,7 +41,7 @@
 #content #chatList{
 	background: url('plum_images/plum.png') no-repeat bottom right rgba(0,0,0,0.3);
 }
-#content #colorCodesContainer {
+.ajax-chat #content .popup {
 	padding: 5px; 
 	box-shadow: 2px 2px 4px #000;
 	border-radius: 3px;
@@ -96,8 +92,14 @@
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background:rgba(0,0,0,0.3);
 }
+#content #chatList .rowOdd.private {
+	background-color:#700030;
+}
+#content #chatList .rowEven.private {
+	background-color:#7B0039;
+}
 #content .guest {
-	color:gray;
+	color:#CD9595;
 }
 #content .user {
 	color:#CDA6D2;
@@ -125,17 +127,8 @@
 	height: 15px;
 }
 
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		padding: 5px; 
-		box-shadow: 2px 2px 4px #000;
-		border-radius: 3px;
-		background:rgba(225,225,225,0.2);
-		border:1px solid #9765A0;
-	}
-}
 @media (max-width: 480px) {
 	#content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
-		background-color:#2A112F;
+		background:#2A112F;
 	}
 }

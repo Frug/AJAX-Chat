@@ -1,24 +1,19 @@
 /*
  * @package AJAX_Chat
  * @author Rosina Ramirez
- * @copyright (c) Rosina Ramirez
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- * 
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
 @import url('custom.css');
 
-input, select, textarea, #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content .rowEven,
+input, select, textarea, #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, 
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3, #content #inputFieldContainer, #loginContent input {
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	border:0;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#4c9546;
 }
 #content #inputFieldContainer{
@@ -45,33 +40,30 @@ input, select, textarea, #content #chatList, #content #onlineListContainer, #con
 }
 
 .ajax-chat {
-background-color: #464646;
-background-image: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#181818));
-background-image: -webkit-linear-gradient(top, #464646, #181818);
-background-image:    -moz-linear-gradient(top, #464646, #181818);
-background-image:      -o-linear-gradient(top, #464646, #181818);
-background-image:         linear-gradient(to bottom, #464646, #181818);
-color:#b0b8a8;
+	background-color: #464646;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#181818));
+	background-image: -webkit-linear-gradient(top, #464646, #181818);
+	background-image:    -moz-linear-gradient(top, #464646, #181818);
+	background-image:      -o-linear-gradient(top, #464646, #181818);
+	background-image:         linear-gradient(to bottom, #464646, #181818);
+	color:#b0b8a8;
 }
-h1, h3 {
+.ajax-chat h1, .ajax-chat h3 {
 	color:#e2e9db;
 	text-shadow: 1px 1px 2px #191919;
-}
-#content a {
-	color:#4c9546;
 }
 #loginContent input, #loginContent select {
 	background:#171717;
 	color:#b0b8a8;
 }
-input, select{
+.ajax-chat input, .ajax-chat select{
 	padding: 3px;
 }
 #content input,#content select,#content textarea {
 	background-color:#0e0e0e;
 	color:#b0b8a8;
 }
-#content #colorCodesContainer,#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, 
+.ajax-chat .popup, #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, 
 #content #inputFieldContainer, #loginContent input[type=text], #loginContent input[type=password] {
 	box-shadow: 0px 0px 8px 1px #495a49;
 	-webkit-box-shadow: 0px 0px 8px 1px #495a49;
@@ -134,7 +126,6 @@ input, select{
 
 #content #bbCodeContainer input {
 	background-color: #d8ffd6;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#d8ffd6), to(#467a44));
 	background-image: -webkit-linear-gradient(top, #d8ffd6, #467a44);
 	background-image:    -moz-linear-gradient(top, #d8ffd6, #467a44);
 	background-image:      -o-linear-gradient(top, #d8ffd6, #467a44);
@@ -143,7 +134,6 @@ input, select{
 }
 #content #bbCodeContainer input:hover{
 	background-color: #ffffff;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#08ff35));
 	background-image: -webkit-linear-gradient(top, #ffffff, #08ff35);
 	background-image:    -moz-linear-gradient(top, #ffffff, #08ff35);
 	background-image:      -o-linear-gradient(top, #ffffff, #08ff35);
@@ -154,7 +144,6 @@ input, select{
 }
 #content #logoutButton, #content #submitButton,#loginContent #loginButton{
 	background-color: #4fff58;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#4fff58), to(#194221));
 	background-image: -webkit-linear-gradient(top, #4fff58, #194221);
 	background-image:    -moz-linear-gradient(top, #4fff58, #194221);
 	background-image:      -o-linear-gradient(top, #4fff58, #194221);
@@ -164,25 +153,33 @@ input, select{
 }
 #content #logoutButton:hover, #content #submitButton:hover, #loginContent #loginButton:hover{
 	background-color: #99ffa8;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#99ffa8), to(#002405));
 	background-image: -webkit-linear-gradient(top, #99ffa8, #002405);
 	background-image:    -moz-linear-gradient(top, #99ffa8, #002405);
 	background-image:      -o-linear-gradient(top, #99ffa8, #002405);
 	background-image:         linear-gradient(to bottom, #99ffa8, #002405);
 }
 
-#content #colorCodesContainer{
+.ajax-chat .popup, .ajax-chat #content .popup#colorCodesContainer {
 	border:0;
 	background:rgba(0,0,0,0.7);
-	padding:7px;
+	padding:5px;
 }
-#content #colorCodesContainer a{border-radius:10px; box-shadow:0px 0px 3px 1px rgba(255,255,255,0.3); margin:0 5px;border:0;}
+#content #colorCodesContainer a{
+	border-radius:10px;
+	box-shadow:0px 0px 3px 1px rgba(255,255,255,0.3);
+	margin:5px;
+	border:0;
+}
 #content #optionsContainer input.button { border: 0; padding: 0; margin-right: 5px;}
 #content #optionsContainer input {
 	background-color:transparent;
 }
 #content .rowEven, #helpList dl:nth-child(even), #settingsList dl:nth-child(even) {
 	background-color:#131413;
+}
+#content #chatList .rowOdd.private, #content #chatList .rowEven.private {
+	background-color: #0C3A00;
+    background-image: linear-gradient(to bottom, #1C5417, #05410E);
 }
 #content .guest {
 	color:gray;
@@ -213,7 +210,6 @@ input, select{
 }
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 	background-color: #171717;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#3b6c37), to(#171717));
 	background-image: -webkit-linear-gradient(top, #3b6c37, #223220, #171717);
 	background-image: -moz-linear-gradient(top, #3b6c37, #223220, #171717);
 	background-image: -o-linear-gradient(top, #3b6c37, #223220, #171717);

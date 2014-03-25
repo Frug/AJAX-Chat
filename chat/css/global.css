@@ -276,8 +276,7 @@ body.ajax-chat {
 #content img {
 	border:none;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, 
-#content #colorCodesContainer a, #content textarea {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer a, #content textarea {
 	border-width:1px;
 	border-style:solid;
 }

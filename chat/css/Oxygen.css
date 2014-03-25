@@ -2,14 +2,10 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  * 
  * Color palette inspired by PunBB style "Oxygen":
  * http://punbb.org/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -18,9 +14,12 @@
 /* Buttons */
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
 	background-color:#0066B9;
-	background-image: linear-gradient(to bottom, #2A6AB8 0px, #4795CC 100%);
+	background-image: linear-gradient(to bottom, #4795CC 0px, #2A6AB8 100%);
 	color: #fff;
 	border: 1px solid #0066B9;
+}
+#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover, #loginForm #loginButton:hover {
+	background-image:linear-gradient(to top, #4795CC 0px, #2A6AB8 100%);
 }
 #content select, #loginForm select, #loginForm input, #content textarea {
 	color:#333333;
@@ -43,10 +42,10 @@
 	background-color:#F1F1F1;
 	color:#333;
 }
-#loginContent h1 {
+.ajax-chat h1 {
 	color:#333333;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#0066B9;
 }
 #loginContent input, #loginContent select {
@@ -56,15 +55,13 @@
 #loginContent #errorContainer {
 	color:red;
 }
-#content h1 {
-	color:#333333;
-}
-#content a {
-	color:#0066B9;
-}
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content textarea {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content textarea {
 	border-color:#0066B9;
 	background-color:#FFF;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border:1px solid #0066B9;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -76,7 +73,13 @@
 	background-color:#F1F1F1;
 }
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
-	background-color:#DEDFDF;
+	background-color:#E6E7E7;
+}
+#content #chatList .rowOdd.private {
+	background-color:#BCC5FF;
+}
+#content #chatList .rowEven.private {
+	background-color:#C7D1FC;
 }
 #content .guest {
 	color:gray;
@@ -109,11 +112,4 @@
 	background-color:#0066B9;
 	background-image: linear-gradient(to bottom, #2A6AB8 0px, #4795CC 100%);
 	color:#FFF;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#FFF;
-		border: 1px solid #0066B9;
-	}
 }

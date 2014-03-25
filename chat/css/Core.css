@@ -2,14 +2,10 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  * 
  * Color palette inspired by Simple Machines Forum style "SMF Default Theme - Core":
  * http://www.simplemachines.org/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -42,28 +38,26 @@
 	background-color:#E5E5E8;
 	color:#000;
 }
-#loginContent h1 {
+.ajax-chat h1 {
 	color:#000;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#000;
 }
 #loginContent #errorContainer {
 	color:red;
 }
-#content h1 {
-	color:#000;
-}
-#content a {
-	color:#000;
-}
 #content input, #content select, #content textarea {
 	background-color:#FFF;
 	color:#000;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
 	border-color:#ADADAD;
 	background-color:#FFF;
+}
+.ajax-chat .popup {
+	background-color:#ADADAD;
+	border:1px solid gray;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -76,6 +70,12 @@
 }
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#F6F6F6;
+}
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
 }
 #content .guest {
 	color:gray;

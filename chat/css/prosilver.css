@@ -2,14 +2,10 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  * 
  * Color palette inspired by phpBB style "prosilver":
  * http://www.phpbb.com/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -67,8 +63,13 @@
 	background-color:#F9F9F9;
 	color:#28313F;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
 	border-color: #ababab;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border: 1px solid #ababab;
+	box-shadow: 2px 2px 2px #777;
 }
 #content #chatList .deleteSelected {
 	border-width:1px;
@@ -115,6 +116,12 @@
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#e1eaf2;
 }
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
+}
 #content .guest {
 	color:gray;
 }
@@ -141,12 +148,4 @@
 }
 #content #chatList .deleteSelected {
 	border-color:red;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#FFF;
-		border: 1px solid #ababab;
-		box-shadow: 2px 2px 2px #777;
-	}
 }

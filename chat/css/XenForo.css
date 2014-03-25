@@ -1,9 +1,6 @@
 /*
  * @package AJAX_Chat
  * @author ManOnDaMoon
- * @copyright (c) Sebastian Tschan
- * @license GNU Affero General Public License
- * @link https://blueimp.net/ajax/
  */
 @import url('global.css');
 @import url('fonts.css');
@@ -129,7 +126,7 @@
 	background-color: #176093;
 	color: #F7F7FF;
 }
-#loginContent h1, #loginContent a {
+.ajax-chat h1, .ajax-chat a {
 	color: #60A0DC;
 }
 #loginContent #errorContainer {
@@ -144,15 +141,12 @@
 	color:#F7F7FF;
 	background:#176093;
 }
-#content h1, #content #copyright, #content #copyright a {
+#content #copyright {
 	color: #F7F7FF;
 }
 #content #copyright {
 	font-style: italic;
 	font-size: 0.8em;
-}
-#content a {
-	color: #176093;
 }
 #content #chatList,#content #colorCodesContainer {
 	background-color: rgb(240, 247, 252);
@@ -169,6 +163,17 @@
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	-khtml-border-radius: 10px;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border: 1px solid #ababab;
+	box-shadow: 2px 2px 2px #777;
+}
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
 }
 #content #onlineListContainer #onlineList, #content #helpContainer #helpList, #content #settingsContainer #settingsList, #content #reportContainer #reportList {
 	padding-top: 5px;	

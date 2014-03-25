@@ -2,12 +2,7 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -17,8 +12,11 @@
 #content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginForm #loginButton {
 	background-color:#8a8a8a;
 	color:#fff;
-	border: 1px solid #808080;
-	background-image: linear-gradient(to bottom, #8a8a8a, #444);
+	border:1px solid #808080;
+	background-image:linear-gradient(to bottom, #8a8a8a, #444);
+}
+#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover, #loginForm #loginButton:hover {
+	background-image:linear-gradient(to top, #8a8a8a, #444);
 }
 #content select, #loginForm select, #loginForm input, #content textarea {
 	color:#333333;
@@ -41,10 +39,10 @@
 	background-color:#d0d0d0;
 	color:#000;
 }
-#loginContent h1 {
+.ajax-chat h1 {
 	color:#000;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#000;
 }
 #loginContent input, #loginContent select {
@@ -54,15 +52,13 @@
 #loginContent #errorContainer {
 	color:red;
 }
-#content h1 {
-	color:#000;
-}
-#content a {
-	color:#000;
-}
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer, #content textarea {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content textarea {
 	border-color:gray;
 	background-color:#FFF;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border:1px solid gray;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -75,6 +71,12 @@
 }
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#F6F6F6;
+}
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
 }
 #content .guest {
 	color:gray;
@@ -106,11 +108,4 @@
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 	background-color:#FFF;
 	color:#000;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#F6F6F6;
-		border: 1px solid gray;
-	}
 }

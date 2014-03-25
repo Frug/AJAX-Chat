@@ -1,3 +1,8 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @author Philip Nicolcev
+ */
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -51,7 +56,7 @@
 	border-color:gray;
 	background-color:#FFF;
 }
-#content .popup {
+.ajax-chat .popup {
 	background-color:#F7F5DC;
 	border: 1px solid #808080;
 }

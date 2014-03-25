@@ -2,14 +2,10 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  * 
  * Color palette inspired by MyBB style "MyBB Default":
  * http://www.mybb.com/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -45,20 +41,14 @@
 	background-color:#FFF;
 	color:#000;
 }
-#loginContent h1 {
+.ajax-chat h1 {
 	color:#000;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#000;
 }
 #loginContent #errorContainer {
 	color:red;
-}
-#content h1 {
-	color:#000;
-}
-#content a {
-	color:#000;
 }
 #content input, #content select, #content textarea {
 	background-color:#FFF;
@@ -66,6 +56,10 @@
 }
 #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer {
 	border-color:#ADADAD;
+	background-color:#E5E5E8;
+}
+.ajax-chat .popup {
+	border:1px solid #ADADAD;
 	background-color:#E5E5E8;
 }
 #content #colorCodesContainer a {
@@ -77,6 +71,10 @@
 #content .rowEven, #content .rowOdd {
 	background-color:#EFEFEF;
 	border-bottom: 1px solid #bdccf7;
+}
+#content #chatList .private {
+	background-color:#F8D0D0;
+	border-bottom:1px solid #ED3950;
 }
 #content .guest {
 	color:gray;
@@ -108,11 +106,4 @@
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
 	background-color:#02619f;
 	color:#FFF;
-}
-
-@media (max-width: 700px) {
-	#content #emoticonsContainer {
-		border:1px solid #ADADAD;
-		background-color:#E5E5E8;
-	}
 }

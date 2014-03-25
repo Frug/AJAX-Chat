@@ -1,3 +1,11 @@
+/*
+ * @package AJAX_Chat
+ * @author Sebastian Tschan
+ * @author Philip Nicolcev
+ * 
+ * Color palette inspired by PunBB style "Cobalt":
+ * http://punbb.org/
+ */
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -53,7 +61,7 @@
 	border-color:gray;
 	background-color:#000;
 }
-#content .popup {
+.ajax-chat .popup {
 	background-color:#000;
 	border: 1px solid gray;
 }
@@ -68,6 +76,12 @@
 }
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#000;
+}
+#content #chatList .rowOdd.private {
+	background-color:#B83C1D;
+}
+#content #chatList .rowEven.private {
+	background-color:#C84A24;
 }
 #content .guest {
 	color:gray;

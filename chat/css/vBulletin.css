@@ -2,14 +2,10 @@
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @author Philip Nicolcev
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
  * 
  * Color palette inspired by vBulletin style "Standard-Style":
  * http://www.vbulletin.com/
  */
-
 @import url('global.css');
 @import url('fonts.css');
 @import url('print.css');
@@ -43,10 +39,10 @@
 	background-color:#E1E1E2;
 	color:#000;
 }
-#loginContent h1 {
+.ajax-chat h1 {
 	color:#3B5485;
 }
-#loginContent a {
+.ajax-chat a {
 	color:#3B5485;
 }
 #loginContent #errorContainer {
@@ -55,25 +51,26 @@
 #content #headline {
 	color:#fff;
 	padding-left: 20px;
-	top: 0;
-	left: 10px;
-	right: 10px;
-	background: #2F4456;
+	top:0;
+	left:10px;
+	right:10px;
+	background:#2F4456;
 	border-radius: 0px 0px 5px 5px;
 }
 #content #copyright, #content #copyright a {
-	color: white;
-}
-#content a {
-	color:#3B5485;
+	color:white;
 }
 #content input, #content select, #content textarea {
 	background-color:#FFF;
 	color:#000;
 }
-#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, #content #colorCodesContainer {
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
 	border-color:#0B198C;
 	background-color:#FFF;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border:1px solid #0B198C;
 }
 #content #colorCodesContainer a {
 	border-color:black;
@@ -86,6 +83,12 @@
 }
 #content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
 	background-color:#F5F5FF;
+}
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
 }
 #content .guest {
 	color:gray;
@@ -120,10 +123,6 @@
 }
 
 @media (max-width: 700px) {
-	#content #emoticonsContainer {
-		background-color:#FFF;
-		border: 1px solid #0B198C;
-	}
 	#content #headline {
 		left:5px;
 		right:5px;
