@@ -882,6 +882,9 @@ var ajaxChat = {
 	},
 
 	handleInfoMessage: function(infoType, infoData) {
+		if (this.handleCustomInfoMessage(infoType, infoData) === true) {
+			return;
+		}
 		switch(infoType) {
 			case 'channelSwitch':
 				this.clearChatList();
@@ -914,8 +917,6 @@ var ajaxChat = {
 			case 'socketRegistrationID':
 				this.socketRegistrationID = infoData;
 				this.socketRegister();
-			default:
-				this.handleCustomInfoMessage(infoType, infoData);
 		}
 	},
 
@@ -2927,7 +2928,9 @@ var ajaxChat = {
 	},
 
 	// Override to handle custom info messages
+	// Return true to prevent other info message handlers from firing
 	handleCustomInfoMessage: function(infoType, infoData) {
+		return false;
 	},
 
 	// Override to add custom initialization code
