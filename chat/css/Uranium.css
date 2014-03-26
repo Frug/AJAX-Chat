@@ -6,15 +6,14 @@
 @import url('fonts.css');
 @import url('print.css');
 @import url('custom.css');
-
+html {
+    height: 100%;
+}
 input, select, textarea, #content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer, 
 #content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3, #content #inputFieldContainer, #loginContent input {
 	border-radius:5px;
 	-webkit-border-radius:5px;
 	border:0;
-}
-.ajax-chat a {
-	color:#4c9546;
 }
 #content #inputFieldContainer{
 	background:#0E0E0E;
@@ -40,8 +39,8 @@ input, select, textarea, #content #chatList, #content #onlineListContainer, #con
 }
 
 .ajax-chat {
+	height: 100%;
 	background-color: #464646;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#464646), to(#181818));
 	background-image: -webkit-linear-gradient(top, #464646, #181818);
 	background-image:    -moz-linear-gradient(top, #464646, #181818);
 	background-image:      -o-linear-gradient(top, #464646, #181818);
@@ -52,12 +51,15 @@ input, select, textarea, #content #chatList, #content #onlineListContainer, #con
 	color:#e2e9db;
 	text-shadow: 1px 1px 2px #191919;
 }
-#loginContent input, #loginContent select {
-	background:#171717;
-	color:#b0b8a8;
+.ajax-chat a {
+	color:#4c9546;
 }
 .ajax-chat input, .ajax-chat select{
 	padding: 3px;
+}
+#loginContent input, #loginContent select {
+	background:#171717;
+	color:#b0b8a8;
 }
 #content input,#content select,#content textarea {
 	background-color:#0e0e0e;

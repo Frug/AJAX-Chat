@@ -864,6 +864,7 @@ New Features:
 - Added a custom CSS file for general style overrides - thanks to Sophist UK
 - Pressing tab after typing the first 3 letters of a username will autocomplete their name - thanks to shermdog.
 - Many display improvements for mobile users.
+- Added customSoundOnNewMessage javascript override to make adding custom sound events easier.
 
 Bugfixes:
 - MyBB integration now displays available forums correctly - thanks to Felix Eckhofer (for other MyBB fixes).
