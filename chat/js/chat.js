@@ -667,6 +667,9 @@ var ajaxChat = {
 	playSoundOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
 		var messageParts;
 		if(this.settings['audio'] && this.sounds && this.lastID && !this.channelSwitch) {
+			if(this.customSoundOnNewMessage(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) === false) {
+				return;
+			}
 			messageParts = messageText.split(' ', 1);
 			switch(userID) {
 				case this.chatBotID:
@@ -2991,6 +2994,12 @@ var ajaxChat = {
 	// Override to perform custom actions on new messages:
 	// Return true if message is to be added to the chatList, else false
 	customOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
+		return true;
+	},
+	
+	// Override to perform custom actions on new messages:
+	// Return true to use the default sound handler, else false
+	customSoundOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
 		return true;
 	},
 
