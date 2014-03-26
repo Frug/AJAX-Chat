@@ -853,6 +853,7 @@ Notice:
 - The $config variable was renamed to $AJAXChatConfig in config.php, so you CAN'T use your old config.php file. The order and 
   names of the options themselves are the same, except for any new ones added.
 - IE5 and IE6 support have been removed. If you must support either of these browsers, you should use an AJAX Chat 0.8.x.
+- If you are using the javascript override handleCustomInfoMessage in custom.js, it should now return true if you capture an event
 
 New Features:
 - XenForo integration is now included. - thanks to ManOnDaMoon.
