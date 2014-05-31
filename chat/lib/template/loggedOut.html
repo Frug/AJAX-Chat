@@ -28,6 +28,16 @@
 					node.appendChild(text);
 					document.getElementById('errorContainer').appendChild(node);
 				}
+				// set action post and redirect to, wordpress integration
+				ajaxChat_loginform();
+			}
+			// set wordpress specifics
+			function ajaxChat_loginform(){
+				var loginForm	=	document.getElementById('loginForm');
+				if( typeof loginForm === 'object' ){
+					loginForm.action 						= '[WP_LOGIN_URL/]';
+					loginForm.elements['redirect_to'].value = '[WP_REDIRECT_URL/]';
+				}
 			}
 			
 			ajaxChatConfig.sessionName = '[SESSION_NAME/]';
@@ -51,14 +61,17 @@
 				<input type="hidden" name="login" id="loginField" value="login"/>
 				<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
 				<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
-				<input type="text" name="userName" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
+				<input type="text" name="log" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
 				<div><label for="passwordField">[LANG]password[/LANG]*:</label><br />
-				<input type="password" name="password" id="passwordField"/></div>
+				<input type="password" name="pwd" id="passwordField"/></div>
+				<div><label><input name="rememberUser" type="checkbox" id="rememberUser" value="forever" tabindex="90" />Remember?</label></div>
 				<div><label for="channelField">[LANG]channel[/LANG]:</label><br />
 				<select name="channelName" id="channelField">[CHANNEL_OPTIONS/]</select></div>
 				<div><label for="languageSelection">[LANG]language[/LANG]:</label><br />
 				<select id="languageSelection" name="lang" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select></div>
 				<div><input type="submit" name="submit" id="loginButton" value="[LANG]login[/LANG]"/></div>
+				<div><a href="[WP_LOGIN_URL/]?action=register">Register account?</a></div>
+				<div><a href="[WP_LOGIN_URL/]?action=lostpassword">Remember password?</a></div>
 				<div id="loginRegisteredUsers">* [LANG]registeredUsers[/LANG]</div>
 			</div>
 		</form>
