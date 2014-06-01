@@ -39,7 +39,7 @@ class CustomAJAXChat extends AJAXChat {
 		if( isset( $current_user ) && is_user_logged_in() ){
 			$userData 				= 	array();
 			$userData['userID']		=	$current_user->data->ID;
-			$userData['userName']	=	$this->trimUserName( $current_user->data->display_name );
+			$userData['userName']	=	$this->trimUserName( $current_user->data->user_login );
 			if( current_user_can('install_plugins') ){
 				$userData['userRole'] = AJAX_CHAT_ADMIN;
 			}else if( current_user_can('edit_published_posts') || 
