@@ -28,16 +28,6 @@
 					node.appendChild(text);
 					document.getElementById('errorContainer').appendChild(node);
 				}
-				// set action post and redirect to, wordpress integration
-				ajaxChat_loginform();
-			}
-			// set wordpress specifics
-			function ajaxChat_loginform(){
-				var loginForm	=	document.getElementById('loginForm');
-				if( typeof loginForm === 'object' ){
-					loginForm.action 						= '[WP_LOGIN_URL/]';
-					loginForm.elements['redirect_to'].value = '[WP_REDIRECT_URL/]';
-				}
 			}
 			
 			ajaxChatConfig.sessionName = '[SESSION_NAME/]';
