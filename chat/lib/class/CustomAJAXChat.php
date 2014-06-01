@@ -32,14 +32,15 @@ class CustomAJAXChat extends AJAXChat {
 	// Returns an associative array containing userName, userID and userRole
 	// Returns guest login if null
 	function getValidLoginUserData() {
-		// globalize the important variables from WP
-		global $current_user;
+		global $current_user; // get variables from WP
+
+
 		// Check if we have a valid registered user:
 		$customUsers = $this->getCustomUsers();
 		if( isset( $current_user ) && is_user_logged_in() ){
 			$userData 				= 	array();
 			$userData['userID']		=	$current_user->data->ID;
-			$userData['userName']	=	$this->trimUserName( $current_user->data->display_name );
+			$userData['userName']	=	$this->trimUserName( $current_user->data->user_login );
 			if( current_user_can('install_plugins') ){
 				$userData['userRole'] = AJAX_CHAT_ADMIN;
 			}else if( current_user_can('edit_published_posts') || 
