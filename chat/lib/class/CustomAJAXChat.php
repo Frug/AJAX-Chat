@@ -15,19 +15,19 @@ class CustomAJAXChat extends AJAXChat {
 		}
 	}
 	
-    // Replace custom template tags:
-    function replaceCustomTemplateTags($tag, $tagContent) {
-        global $user;
-
-        switch($tag) {
-            case 'LOGIN_URL':
-                return '../wp-login.php';
-            case 'REDIRECT_URL':
-                return 'chat/';
-            default:
-                return null;
-        }
-    }
+	// Replace custom template tags:
+	function replaceCustomTemplateTags($tag, $tagContent) {
+		global $user;
+		
+		switch($tag) {
+			case 'LOGIN_URL':
+				return '../wp-login.php';
+			case 'REDIRECT_URL':
+				return 'chat/';
+			default:
+				return null;
+		}
+	}
 	
 	// Returns an associative array containing userName, userID and userRole
 	// Returns guest login if null
