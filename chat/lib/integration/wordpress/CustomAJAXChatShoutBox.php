@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
  * @package AJAX_Chat
  * @author Sebastian Tschan
  * @copyright (c) Sebastian Tschan

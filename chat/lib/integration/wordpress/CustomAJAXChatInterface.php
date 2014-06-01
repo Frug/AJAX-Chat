@@ -1,5 +1,5 @@
 <?php
-/*
+/* 
  * Use the interface class to expose chat methods such as database connections without side-effects
  * such as session handling, request var processing, or browser output.
  * 
