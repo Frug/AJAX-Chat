@@ -2667,7 +2667,7 @@ var ajaxChat = {
 					+ maxHeight
 					+ 'px;" src="'
 					+ url
-					+ '" alt="" onload="ajaxChat.updateChatlistView();"/>';
+					+ '" alt="" onload="ajaxChat.updateChatlistView();" onerror="this.src=\'img/delete.png\'"/>';
 			if(!this.inUrlBBCode) {
 				link = 	'<a href="'
 						+ url
