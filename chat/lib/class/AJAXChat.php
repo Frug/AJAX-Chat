@@ -1367,6 +1367,9 @@ class AJAXChat {
 		if(!$this->floodControl())
 			return;
 
+		if(strpos($text, '[/img]') !== false)
+			$text = preg_replace('/\s\[\/img/', '[/img', $text);
+
 		$text = $this->trimMessageText($text);	
 		if($text == '')
 			return;
