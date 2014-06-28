@@ -355,6 +355,7 @@ var ajaxChat = {
 				domNode.innerHTML += str;
 			}
 		} catch(e) {
+			this.DOMbuffer = '';
 			this.addChatBotMessageToChatList('/error DOMSyntax '+id);
 			this.updateChatlistView();
 		}
