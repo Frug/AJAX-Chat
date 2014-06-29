@@ -2553,7 +2553,7 @@ var ajaxChat = {
 		// Avoid invalid XHTML (unclosed tags):
 		if(ajaxChat.containsUnclosedTags(p3)) {
 			return str;
-		}	
+		}
 		switch(p1) {
 			case 'color':
 				return ajaxChat.replaceBBCodeColor(p3, p2);
@@ -2613,7 +2613,7 @@ var ajaxChat = {
 			);
 			if(!url || !url.match(regExpUrl))
 				return url;
-			url = url.replace(/\s/gm, this.encodeText(' '));
+			url = this.stripTags(url.replace(/\s/gm, this.encodeText(' ')));
 			maxWidth = this.dom['chatList'].offsetWidth-50;
 			maxHeight = this.dom['chatList'].offsetHeight-50;
 			return	'<a href="'
