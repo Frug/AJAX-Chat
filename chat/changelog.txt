@@ -851,7 +851,8 @@ Notice:
 - If you are using the javascript override handleCustomInfoMessage in custom.js, you should make it return true if you capture an event
 
 New Features:
-
+- Private messages now have their own sound - thanks to marquisite.
+- Added two new sounds - one is extra for your customization pleasure.
 
 Bugfixes:
 - HTML is now stripped from [IMG] tag URLs, and tag parsing errors will no longer crash chat. - thanks to 
