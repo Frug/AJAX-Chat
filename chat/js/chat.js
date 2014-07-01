@@ -890,6 +890,9 @@ var ajaxChat = {
 	},
 	
 	handleInfoMessage: function(infoType, infoData) {
+		if (this.handleCustomInfoMessage(infoType, infoData) === true) {
+			return;
+		}
 		switch(infoType) {
 			case 'channelSwitch':
 				this.clearChatList();
@@ -923,7 +926,7 @@ var ajaxChat = {
 				this.socketRegistrationID = infoData;
 				this.socketRegister();
 			default:
-				this.handleCustomInfoMessage(infoType, infoData);
+				return;
 		}
 	},
 
