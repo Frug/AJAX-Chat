@@ -316,19 +316,12 @@ var ajaxChat = {
 	},
 
 	setLoadHandler: function() {
-		// Make sure initialize() is called on page load:
-  		var onload = window.onload;
-		if(typeof onload !== 'function') {
-			window.onload = function() {
-				ajaxChat.initialize();
-			};
-		} else {
-			window.onload = function() {
-				onload();
-				ajaxChat.initialize();
-			};
-		}
-	},
+        var self = this;
+        // Make sure initialize() is called on page load:
+        this.addEvent(window,'load', function() {
+            self.initialize();
+        });
+    },
 
 	setUnloadHandler: function() {
 		// Make sure finalize() is called on page unload:
@@ -1857,6 +1850,18 @@ var ajaxChat = {
 			}
 		}
 	},
+
+	addEvent: function(elem, type, eventHandle) {
+        if (!elem)
+            return;
+        if ( elem.addEventListener ) {
+            elem.addEventListener( type, eventHandle, false );
+        } else if ( elem.attachEvent ) {
+            elem.attachEvent( "on" + type, eventHandle );
+        } else {
+            elem["on"+type]=eventHandle;
+        }
+    },
 
 	getClass: function(node) {
 		if(typeof node.className !== 'undefined') {
