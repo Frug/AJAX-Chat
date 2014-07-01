@@ -67,6 +67,9 @@
 	bottom:150px;
 	overflow:auto;
 }
+#content.logs #chatList {
+	right:20px;
+}
 #content #inputFieldContainer {
 	position:absolute;
 	left:20px;

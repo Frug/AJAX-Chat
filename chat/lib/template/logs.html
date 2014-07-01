@@ -24,13 +24,13 @@
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
-		// <![CDATA[			
+		// <![CDATA[
 			function toggleContainer(containerID, hideContainerIDs) {
 				if(hideContainerIDs) {
 					for(var i=0; i<hideContainerIDs.length; i++) {
-						ajaxChat.showHide(hideContainerIDs[i], 'none');	
+						ajaxChat.showHide(hideContainerIDs[i], 'none');
 					}
-				}		
+				}
 				ajaxChat.showHide(containerID);
 				if(typeof arguments.callee.styleProperty == 'undefined') {
 					if(typeof isIElt7 != 'undefined') {
@@ -41,14 +41,13 @@
 				}
 				var containerWidth = document.getElementById(containerID).offsetWidth;
 				if(containerWidth) {
-					document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';	
+					document.getElementById('chatList').style[arguments.callee.styleProperty] = (containerWidth+28)+'px';
 				} else {
 					document.getElementById('chatList').style[arguments.callee.styleProperty] = '20px';
-				}				
+				}
 			}
 
 			function initialize() {
-				toggleContainer('settingsContainer');
 				ajaxChat.updateButton('audio', 'audioButton');
 				ajaxChat.updateButton('autoScroll', 'autoScrollButton');
 				document.getElementById('bbCodeSetting').checked = ajaxChat.getSetting('bbCode');
@@ -108,14 +107,14 @@
 			ajaxChatConfig.settings.audio = false;
 			ajaxChatConfig.settings.blink = false;
 			ajaxChatConfig.nonPersistentSettings.push('dateFormat','audio','blink');
-			
+
 			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, true, initialize);
 		// ]]>
 	</script>
 </head>
 
 <body>
-	<div id="content">
+	<div id="content" class="logs">
 		<div id="headlineContainer">
 			<h1>[LANG]logsTitle[/LANG]</h1>
 		</div>
@@ -133,7 +132,8 @@
 			<select id="styleSelection" onchange="ajaxChat.setActiveStyleSheet(ajaxChat.getSelectedStyle());">[STYLE_OPTIONS/]</select>
 			<label for="languageSelection">[LANG]language[/LANG]:</label>
 			<select id="languageSelection" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select>
-  		</div>
+		</div>
+		<div id="statusIconContainer" class="statusContainerOn"></div>
 		<!--[if lt IE 7]>
 			<div></div>
 		<![endif]-->
@@ -148,10 +148,10 @@
 			<input type="image" src="img/pixel.gif" class="button" id="settingsButton" alt="[LANG]toggleSettings[/LANG]" title="[LANG]toggleSettings[/LANG]" onclick="toggleContainer('settingsContainer');"/>
 			<input type="image" src="img/pixel.gif" class="button" id="audioButton" alt="[LANG]toggleAudio[/LANG]" title="[LANG]toggleAudio[/LANG]" onclick="ajaxChat.toggleSetting('audio', 'audioButton');"/>
 			<input type="image" src="img/pixel.gif" class="button" id="autoScrollButton" alt="[LANG]toggleAutoScroll[/LANG]" title="[LANG]toggleAutoScroll[/LANG]" onclick="ajaxChat.toggleSetting('autoScroll', 'autoScrollButton')"/>
-  		</div>
-	  	<div id="settingsContainer" style="display:none;">
- 			<h3>[LANG]settings[/LANG]</h3>
- 			<div id="settingsList">
+		</div>
+		<div id="settingsContainer" style="display:none;">
+			<h3>[LANG]settings[/LANG]</h3>
+			<div id="settingsList">
 				<table>
 					<tr class="rowOdd">
 						<td><label for="bbCodeSetting">[LANG]settingsBBCode[/LANG]</label></td>
@@ -271,7 +271,7 @@
 			Please retain the full copyright notice below including the link to blueimp.net.
 			This not only gives respect to the amount of time given freely by the developer
 			but also helps build interest, traffic and use of AJAX Chat.
-			
+
 			Thanks,
 			Sebastian Tschan
 		//-->
