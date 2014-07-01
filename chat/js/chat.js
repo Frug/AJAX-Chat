@@ -1066,7 +1066,7 @@ var ajaxChat = {
 			if(userID === this.userID) {
 				this.userNodeString = str;
 			}
-			return str;	
+			return str;
 		}
 	},
 
@@ -1086,7 +1086,7 @@ var ajaxChat = {
 				),
 				false,
 				true
-			)
+			);
 		}
 		this.showHide(menuID);
 		this.dom['chatList'].scrollTop = this.dom['chatList'].scrollHeight;
@@ -2603,7 +2603,7 @@ var ajaxChat = {
 				+ this.replaceBBCode(content)
 				+ '</a>';
 	},
-	
+
 	replaceBBCodeImage: function(url) {
 		var regExpUrl, maxWidth, maxHeight;
 		if(this.settings['bbCodeImages']) {
@@ -2625,7 +2625,7 @@ var ajaxChat = {
 					+maxHeight
 					+'px;" src="'
 					+url
-					+'" alt="" onload="ajaxChat.updateChatlistView();"/></a>';
+					+'" alt="" onload="ajaxChat.updateChatlistView();" onerror="this.src=\'img/broken-image.png\'"/></a>';
 		}
 		return url;
 	},
