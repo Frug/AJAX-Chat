@@ -1634,6 +1634,8 @@ var ajaxChat = {
 				return 'admin';
 			case 4:
 				return 'chatBot';
+			case 5:
+				return 'customUser';
 			default:
 				return 'default';
 		}

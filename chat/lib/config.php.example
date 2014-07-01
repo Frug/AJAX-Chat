@@ -8,6 +8,8 @@
  */
 
 // Define AJAX Chat user roles:
+define('AJAX_CHAT_BANNED',		6);
+define('AJAX_CHAT_CUSTOM',		5);
 define('AJAX_CHAT_CHATBOT',		4);
 define('AJAX_CHAT_ADMIN',		3);
 define('AJAX_CHAT_MODERATOR',	2);
