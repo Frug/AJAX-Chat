@@ -859,3 +859,4 @@ New Features:
 Bugfixes:
 - HTML is now stripped from [IMG] tag URLs, and tag parsing errors will no longer crash chat. - thanks to gWorldz
 - Nesting an [IMG] inside a [URL] tag will now only open the URL instead of also opening the image - thanks to James Almer.
+- Users can now be kicked for 0 minutes, which is effectively a kick and not a ban - thanks to micheal-swiggs
