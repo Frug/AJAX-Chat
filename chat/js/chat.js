@@ -922,6 +922,8 @@ var ajaxChat = {
 			case 'socketRegistrationID':
 				this.socketRegistrationID = infoData;
 				this.socketRegister();
+			default:
+				return;
 		}
 	},
 
