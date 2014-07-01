@@ -224,14 +224,12 @@ var ajaxChatConfig = {
 	cookieDomain: null,
 	// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
 	cookieSecure: null,
-
 	// The name of the chat bot:
 	chatBotName: 'ChatBot',
 	// The userID of the chat bot:
 	chatBotID: 2147483647,
 	// Allow/Disallow registered users to delete their own messages:
 	allowUserMessageDelete: true,
-
 	// Minutes until a user is declared inactive (last status update) - the minimum is 2 minutes:
 	inactiveTimeout: 2,
 	// UserID plus this value are private channels (this is also the max userID and max channelID):
@@ -242,7 +240,6 @@ var ajaxChatConfig = {
 	showChannelMessages: true,
 	// Max messageText length:
 	messageTextMaxLength: 1040,
-
 	// Defines if the socket server is enabled:
 	socketServerEnabled: false,
 	// Defines the hostname of the socket server used to connect from client side:
@@ -254,5 +251,4 @@ var ajaxChatConfig = {
 
 	// Debug allows console logging or alerts on caught errors - false/0 = no debug, true/1/2 = console log, 2 = alerts
 	debug: false
-
-}
+};
