@@ -1408,8 +1408,13 @@ var ajaxChat = {
 		}
 		
 		if(this.settings['autoScroll']) {
-			this.dom['chatList'].scrollTop = this.dom['chatList'].scrollHeight;
+			var self = this;
+			setTimeout(function() { self.scrollChatList(); }, 50);
 		}
+	},
+
+	scrollChatList: function() {
+		this.dom['chatList'].scrollTop = this.dom['chatList'].scrollHeight;
 	},
 	
 	encodeText: function(text) {
