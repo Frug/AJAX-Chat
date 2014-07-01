@@ -844,3 +844,14 @@ Bugfixes:
 - Normalized sound volumes a bit.
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
 - Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
+
+Version 0.8.8 (?.?.2014)
+-------------------------------
+Notice:
+- If you are using the javascript override handleCustomInfoMessage in custom.js, you should make it return true if you capture an event
+
+New Features:
+
+
+Bugfixes:
+- HTML is now stripped from [IMG] tag URLs, and tag parsing errors will no longer crash chat. - thanks to 
