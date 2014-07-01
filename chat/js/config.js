@@ -1,9 +1,5 @@
 /*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
+ * AJAX Chat client-side configuration
  */
 
 // Ajax Chat config parameters:
@@ -12,11 +8,11 @@ var ajaxChatConfig = {
 	// The channelID of the channel to enter on login (the loginChannelName is used if set to null):
 	loginChannelID: null,
 	// The channelName of the channel to enter on login (the default channel is used if set to null):
-	loginChannelName: null,	
-	
+	loginChannelName: null,
+
 	// The time in ms between update calls to retrieve new chat messages:
 	timerRate: 2000,
-	
+
 	// The URL to retrieve the XML chat messages (must at least contain one parameter):
 	ajaxURL: './?ajax=true',
 	// The base URL of the chat directory, used to retrieve media files (images, sound files, etc.):
@@ -24,10 +20,10 @@ var ajaxChatConfig = {
 
 	// A regular expression for allowed source URL's for media content (e.g. images displayed inline);
 	regExpMediaUrl: '^((http)|(https)):\\/\\/',
-	
+
 	// If set to false the chat update is delayed until the event defined in ajaxChat.setStartChatHandler():
 	startChatOnLoad: true,
-	
+
 	// Defines the IDs of DOM nodes accessed by the chat:
 	domIDs: {
 		// The ID of the chat messages list:
@@ -64,27 +60,27 @@ var ajaxChatConfig = {
 		lineBreaks: true,
 		// Defines if emoticon codes are replaced with their associated images:
 		emoticons: true,
-	
+
 		// Defines if the focus is automatically set to the input field on chat load or channel switch:
 		autoFocus: true,
 		// Defines if the chat list scrolls automatically to display the latest messages:
-		autoScroll: true,	
+		autoScroll: true,
 		// The maximum count of messages displayed in the chat list (will be ignored if set to 0):
 		maxMessages: 0,
-		
+
 		// Defines if long words are wrapped to avoid vertical scrolling:
 		wordWrap: true,
-		// Defines the maximum length before a word gets wrapped: 
+		// Defines the maximum length before a word gets wrapped:
 		maxWordLength: 32,
-		
+
 		// Defines the format of the date and time displayed for each chat message:
 		dateFormat: '(%H:%i:%s)',
-		
+
 		// Defines if font colors persist without the need to assign them to each message:
-		persistFontColor: false,	
+		persistFontColor: false,
 		// The default font color, uses the page default font color if set to null:
 		fontColor: null,
-		
+
 		// Defines if sounds are played:
 		audio: true,
 		// Defines the sound volume (0.0 = mute, 1.0 = max):
@@ -103,8 +99,8 @@ var ajaxChatConfig = {
 		// Defines the sound that is played on error messages:
 		soundError: 'sound_6',
 		// Defines the sound that is played when private messages are received:
-        	soundPrivate: 'sound_7',
-		
+        soundPrivate: 'sound_7',
+
 		// Defines if the document title blinks on new messages:
 		blink: true,
 		// Defines the blink interval in ms:
@@ -112,7 +108,7 @@ var ajaxChatConfig = {
 		// Defines the number of blink intervals:
 		blinkIntervalNumber: 10
 	},
-	
+
 	// Defines a list of settings which are not to be stored in a session cookie:
 	nonPersistentSettings: [],
 
@@ -127,12 +123,12 @@ var ajaxChatConfig = {
 		'url',
 		'img'
 	],
-	
+
 	// Defines the list of allowed color codes:
 	colorCodes: [
 		'gray',
 		'silver',
-		'white',	
+		'white',
 		'yellow',
 		'orange',
 		'red',
@@ -148,7 +144,7 @@ var ajaxChatConfig = {
 		'maroon',
 		'black'
 	],
-	
+
 	// Defines the list of allowed emoticon codes:
 	emoticonCodes: [
 		':)',
@@ -173,9 +169,9 @@ var ajaxChatConfig = {
 		':help:',
 		':error:',
 		':warning:',
-		':favorite:'		
+		':favorite:'
  	],
-	
+
  	// Defines the list of emoticon files associated with the emoticon codes:
 	emoticonFiles: [
 		'smile.png',
@@ -211,16 +207,15 @@ var ajaxChatConfig = {
 		sound_4: 'sound_4.mp3',
 		sound_5: 'sound_5.mp3',
 		sound_6: 'sound_6.mp3',
-		sound_7: 'sound_1.mp3'
+		sound_7: 'sound_7.mp3'
 	},
-	
-	
+
+
 	// Once users have been logged in, the following values are overridden by those in config.php.
 	// You should set these to be the same as the ones in config.php to avoid confusion.
-	
+
 	// Session identification, used for style and setting cookies:
 	sessionName: 'ajax_chat',
-
 	// The time in days until the style and setting cookies expire:
 	cookieExpiration: 365,
 	// The path of the cookies, '/' allows to read the cookies from all directories:
@@ -229,29 +224,22 @@ var ajaxChatConfig = {
 	cookieDomain: null,
 	// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
 	cookieSecure: null,
-	
 	// The name of the chat bot:
 	chatBotName: 'ChatBot',
 	// The userID of the chat bot:
 	chatBotID: 2147483647,
-
 	// Allow/Disallow registered users to delete their own messages:
 	allowUserMessageDelete: true,
-	
 	// Minutes until a user is declared inactive (last status update) - the minimum is 2 minutes:
 	inactiveTimeout: 2,
-
 	// UserID plus this value are private channels (this is also the max userID and max channelID):
 	privateChannelDiff: 500000000,
 	// UserID plus this value are used for private messages:
 	privateMessageDiff: 1000000000,
-
 	// Defines if login/logout and channel enter/leave are displayed:
 	showChannelMessages: true,
-
 	// Max messageText length:
 	messageTextMaxLength: 1040,
-	
 	// Defines if the socket server is enabled:
 	socketServerEnabled: false,
 	// Defines the hostname of the socket server used to connect from client side:
@@ -260,5 +248,4 @@ var ajaxChatConfig = {
 	socketServerPort: 1935,
 	// This ID can be used to distinguish between different chat installations using the same socket server:
 	socketServerChatID: 0
-
-}
+};

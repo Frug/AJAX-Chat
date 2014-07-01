@@ -668,6 +668,7 @@ var ajaxChat = {
 	
 	playSoundOnNewMessage: function(dateObject, userID, userName, userRole, messageID, messageText, channelID, ip) {
 		if(this.settings['audio'] && this.sounds && this.lastID && !this.channelSwitch) {
+			console.log(this.settings['soundPrivate']);
 			switch(userID) {
 				case this.chatBotID:
 					var messageParts = messageText.split(' ', 1);
@@ -900,7 +901,7 @@ var ajaxChat = {
 				this.setSelectedChannel(infoData);
 				this.channelName = infoData;
 				this.channelSwitch = true;
-				break;			
+				break;
 			case 'channelName':
 				this.setSelectedChannel(infoData);
 				this.channelName = infoData;
@@ -910,7 +911,7 @@ var ajaxChat = {
 				break;
 			case 'userID':
 				this.userID = infoData;
-				break;			
+				break;
 			case 'userName':
 				this.userName = infoData;
 				this.encodedUserName = this.scriptLinkEncode(this.userName);
@@ -918,7 +919,7 @@ var ajaxChat = {
 				break;
 			case 'userRole':
 				this.userRole = infoData;
-				break;				
+				break;
 			case 'logout':
 				this.handleLogout(infoData);
 				return;
@@ -960,9 +961,9 @@ var ajaxChat = {
 				if(!this.inArray(onlineUsers, this.usersList[i])) {
 					this.removeUserFromOnlineList(this.usersList[i], i);
 				}
-			}	
-			this.setOnlineListRowClasses();		
-		}	
+			}
+			this.setOnlineListRowClasses();
+		}
 	},
 
 	handleChatMessages: function(messageNodes) {
