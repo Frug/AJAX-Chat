@@ -85,11 +85,12 @@ var ajaxChat = {
 	httpRequest: null,
 	retryTimer: null,
 	retryTimerDelay: null,
-	requestStatus: 'ok',
+	requestStatus: null,
 	DOMbuffering: null,
 	DOMbuffer: null,
-	DOMbufferRowClass: 'rowOdd',
-	debug: false,
+	DOMbufferRowClass: null,
+	inUrlBBCode: null,
+	debug: null,
 
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {
 		this.httpRequest		= {};
@@ -99,6 +100,9 @@ var ajaxChat = {
 		this.lastID				= 0;
 		this.localID			= 0;
 		this.lang				= lang;
+		this.requestStatus		= 'ok';
+		this.DOMbufferRowClass	= 'rowOdd';
+		this.inUrlBBCode		= false;
 		this.initConfig(config);
 		this.initDirectories();
 		if(initSettings) {
@@ -1587,7 +1591,7 @@ var ajaxChat = {
 	},
 
 	formatDate: function(format, date) {
-		date = (date == null) ? new date() : date;
+		date = (date === null) ? new date() : date;
 
 		return format
 		.replace(/%Y/g, date.getFullYear())
@@ -2603,7 +2607,7 @@ var ajaxChat = {
 	},
 
 	replaceBBCodeUrl: function(content, attribute) {
-		var url, regExpUrl;
+		var url, regExpUrl, link;
 		if(attribute)
 			url = attribute.replace(/\s/gm, this.encodeText(' '));
 		else
@@ -2614,15 +2618,19 @@ var ajaxChat = {
 		);
 		if(!url || !url.match(regExpUrl))
 			return content;
-		return 	'<a href="'
+
+		this.inUrlBBCode = true;
+		link = '<a href="'
 				+ url
 				+ '" onclick="window.open(this.href); return false;">'
 				+ this.replaceBBCode(content)
 				+ '</a>';
+		this.inUrlBBCode = false;
+		return link;
 	},
 
 	replaceBBCodeImage: function(url) {
-		var regExpUrl, maxWidth, maxHeight;
+		var regExpUrl, maxWidth, maxHeight, link;
 		if(this.settings['bbCodeImages']) {
 			regExpUrl = new RegExp(
 				this.regExpMediaUrl,
@@ -2633,16 +2641,21 @@ var ajaxChat = {
 			url = this.stripTags(url.replace(/\s/gm, this.encodeText(' ')));
 			maxWidth = this.dom['chatList'].offsetWidth-50;
 			maxHeight = this.dom['chatList'].offsetHeight-50;
-			return	'<a href="'
-					+url
-					+'" onclick="window.open(this.href); return false;">'
-					+'<img class="bbCodeImage" style="max-width:'
-					+maxWidth
-					+'px; max-height:'
-					+maxHeight
-					+'px;" src="'
-					+url
-					+'" alt="" onload="ajaxChat.updateChatlistView();" onerror="this.src=\'img/broken-image.png\'"/></a>';
+			link =  '<img class="bbCodeImage" style="max-width:'
+                    + maxWidth
+                    + 'px; max-height:'
+                    + maxHeight
+                    + 'px;" src="'
+                    + url
+                    + '" alt="" onload="ajaxChat.updateChatlistView();"/>';
+            if(!this.inUrlBBCode) {
+                link =  '<a href="'
+                        + url
+                        + '" onclick="window.open(this.href); return false;">'
+                        + link
+                        + '</a>';
+            }
+            return link;
 		}
 		return url;
 	},
@@ -2791,7 +2804,7 @@ var ajaxChat = {
 	},
 
 	setActiveStyleSheet: function(title) {
-		var i, a, main, titleFound = false;
+		var i, a,titleFound = false;
 		for(i=0; (a = document.getElementsByTagName('link')[i]); i++) {
 			if(a.getAttribute('rel').indexOf('style') !== -1 && a.getAttribute('title')) {
 				a.disabled = true;
@@ -2966,10 +2979,10 @@ var ajaxChat = {
 		msg = 'Ajax chat: ' + msg + ' exception: ';
 		if (this.debug) {
 			console.log(msg, e);
-			if (this.debug == '2') {
+			if (this.debug === 2) {
 				alert(msg + e);
 			}
 		}
-	},
+	}
 
 };
