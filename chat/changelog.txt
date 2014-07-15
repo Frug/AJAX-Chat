@@ -844,3 +844,19 @@ Bugfixes:
 - Normalized sound volumes a bit.
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
 - Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
+
+Version 0.8.8 (?.?.2014)
+-------------------------------
+Notice:
+- If you are using the javascript override handleCustomInfoMessage in custom.js, you should make it return true if you capture an event
+
+New Features:
+- Private messages now have their own sound - thanks to marquisite.
+- Added two new sounds - one is extra for your customization pleasure.
+- Added a custom user group and banned user group for customization and integration - thanks to marquisite.
+- Added a debug mode to chat.js - thanks to Sophist-UK
+
+Bugfixes:
+- HTML is now stripped from [IMG] tag URLs, and tag parsing errors will no longer crash chat. - thanks to gWorldz
+- Nesting an [IMG] inside a [URL] tag will now only open the URL instead of also opening the image - thanks to James Almer.
+- Users can now be kicked for 0 minutes, which is effectively a kick and not a ban - thanks to micheal-swiggs
