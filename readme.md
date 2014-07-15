@@ -1,7 +1,7 @@
 AJAX Chat Wordpress
 ====================
 
-This is the wordpress version of Blueimp's AJAX Chat.
+This is the WordPress version of Blueimp's AJAX Chat.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
