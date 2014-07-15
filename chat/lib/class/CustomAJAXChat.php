@@ -9,6 +9,18 @@
 
 class CustomAJAXChat extends AJAXChat {
 
+	// Initialize custom configuration settings
+	function initCustomConfig() {
+		
+		// Use the existing WordPress database connection:
+		$this->setConfig('dbConnection', 'host', DB_HOST);
+		$this->setConfig('dbConnection', 'user', DB_USER);
+		$this->setConfig('dbConnection', 'pass', DB_PASSWORD);
+		$this->setConfig('dbConnection', 'name', DB_NAME);
+
+	}
+
+	// Initialize custom request variables:
 	function initCustomRequestVars(){
 		if( !$this->getRequestVar('logout') && is_user_logged_in() ) {
 			$this->setRequestVar('login', true);
