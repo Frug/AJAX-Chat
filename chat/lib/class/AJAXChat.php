@@ -84,7 +84,7 @@ class AJAXChat {
 		$this->initCustomRequestVars();
 		
 		// Remove slashes which have been added to user input strings if magic_quotes_gpc is On:
-		if(true) {
+		if(get_magic_quotes_gpc()) {
 			// It is safe to remove the slashes as we escape user data ourself
 			array_walk(
 				$this->_requestVars,
