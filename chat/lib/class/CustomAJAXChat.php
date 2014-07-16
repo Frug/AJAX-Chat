@@ -32,7 +32,7 @@ class CustomAJAXChat extends AJAXChat {
 		global $user;
 		
 		switch($tag) {
-			case 'LOGIN_URL':
+			case 'WP_LOGIN_URL':
 				return '../wp-login.php';
 			case 'REDIRECT_URL':
 				return 'chat/';

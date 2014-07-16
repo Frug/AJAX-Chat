@@ -46,10 +46,10 @@
 		<div id="loginHeadlineContainer">
 			<h1>[LANG]title[/LANG]</h1>
 		</div>
-		<form id="loginForm" action="[LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
+		<form id="loginForm" action="[WP_LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
 			<div id="loginFormContainer">
 				<input type="hidden" name="login" id="loginField" value="login"/>
-				<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
+				<input type="hidden" name="redirect_to" id="redirectField" value="[REDIRECT_URL/]"/>
 				<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
 				<input type="text" name="log" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
 				<div><label for="passwordField">[LANG]password[/LANG]*:</label><br />
@@ -60,8 +60,8 @@
 				<div><label for="languageSelection">[LANG]language[/LANG]:</label><br />
 				<select id="languageSelection" name="lang" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select></div>
 				<div><input type="submit" name="submit" id="loginButton" value="[LANG]login[/LANG]"/></div>
-				<div><a href="[LOGIN_URL/]?action=register">Register account?</a></div>
-				<div><a href="[LOGIN_URL/]?action=lostpassword">Remember password?</a></div>
+				<div><a href="[WP_LOGIN_URL/]?action=register">Register account?</a></div>
+				<div><a href="[WP_LOGIN_URL/]?action=lostpassword">Remember password?</a></div>
 				<div id="loginRegisteredUsers">* [LANG]registeredUsers[/LANG]</div>
 			</div>
 		</form>
