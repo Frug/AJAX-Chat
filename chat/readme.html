@@ -44,7 +44,7 @@
 		<h1>
 			AJAX Chat
 			<span class="version">
-				v 0.8.8 standalone ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+				v 0.8.8 WordPress ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
 			</span>
 		</h1>
 	</div>
@@ -70,9 +70,8 @@
 <div style="margin-right: 28em;">
 	<h2 style="margin-top:0;">Version Information</h2>
 	<div class="subsection">
-			This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br>
-			If you want to integrate AJAX Chat with one of the forums we support, go back and choose the right version. <br>
-			This version is good for customizing your own integration, or using on its own.
+			This is the <strong>WordPress</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br>
+			If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.
 
 		<p class="note">
 			AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
@@ -117,37 +116,6 @@
 		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
     </section>
 	
-    <h3>Configure Database Settings</h3>
-    <div class="subsection">
-		<p>
-			The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
-			<strong>You need to create this file.</strong> <br>
-			An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br>
-			Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:
-		</p>
-		<p>
-		<code>
-			$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br>
-			$config['dbConnection']['user'] = '<em>your_database_username</em>';<br>
-			$config['dbConnection']['pass'] = '<em>your_database_password</em>';<br>
-			$config['dbConnection']['name'] = '<em>your_database_name</em>';
-		</code>
-		</p>
-		<p>Sufficed to say you need this information. Talk to your hosting provider if you don't know.</p>
-		<p>
-			In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br>
-		</p>
-		<p class="note">
-			If your host does not use mysqli you will need to change the connection type field:<br>
-			$config['dbConnection']['type'] = null;<br>
-			If this is set to &quot;null&quot; it defaults to &quot;mysqli&quot; if existing, else to &quot;mysql&quot;. In most cases this field can be left as null.<br>
-			<br>
-			You can reference an existing database connection link or object by changing:<br>
-			$config['dbConnection']['link'] = null;<br>
-			If this is set to null, a new database connection is created.
-		</p>
-    </div>
-	
 	<h3>Choose Your Channel Settings</h3>
 	<div class="subsection">
 	  <p>Edit the file <span class="filename">lib/data/channels.php.</span><br>
@@ -158,34 +126,11 @@
 		Each channel must have a unique channel id number and a unique name.<br>
 		Whitespace in the channel names will be converted to the underscore &quot;_&quot;.</p>
 	</div>
-
-    <h3>Add Your Users</h3>
-    <div class="subsection">
-		<p class="note">
-			The Standalone version of chat uses a php file to store users and rooms while the database is used for chat messages, invites and bans.<br>
-			The integration versions typically make use of a database for users and rooms. If you desire a way to manage users without having to edit a php file, consider using an integration version.
-		</p>
-		<p>
-			Edit users in <span class="filename">lib/data/users.php</span>.<br>
-			Users follow the following format:
-		</p>
-		<p><code>$users[<em>user id</em>] = array();<br>
-			$users[<em>user id</em>]['userRole'] = <em>AJAX_CHAT_ROLE</em>;<br>
-			$users[<em>user id</em>]['userName'] = '<em>user name</em>';<br>
-			$users[<em>user id</em>]['password'] = '<em>user password</em>';<br>
-			$users[<em>user id</em>]['channels'] = array(<em>allowed channel ids</em>);</code><br>
-			Each user must have a unique user id number and a unique name.<br>
-			The first user in the list (user id 0) is used for the guest user settings. All guest users will have access to the channels set for this user and the user role AJAX_CHAT_GUEST.<br>
-			Registered users can have the user roles AJAX_CHAT_USER, AJAX_CHAT_MODERATOR or AJAX_CHAT_ADMIN. (this is case sensitive, type it exactly)<br>
-			The list of channels a user has access to can be set for each user individually. Channel id's are separated by commas. eg: array(0,1,23); allows channels 0, 1 and 23.<br>
-			Whitespace in the user names will be converted to the underscore &quot;_&quot;.
-		</p>
-    </div>
 	
     <h3>Upload to Your Server</h3>
     <div class="subsection">
       <p>Upload the chat folder to your server somewhere under your document root:<br>
-        e.g. http://example.org/path/to/chat/</p>
+        e.g. http://example.org/wordpress/chat/</p>
     </div>
     <h3>Create the Database Tables</h3>
     <div class="subsection">

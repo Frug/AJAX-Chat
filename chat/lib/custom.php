@@ -7,5 +7,11 @@
  * @link https://blueimp.net/ajax/
  */
 
-// Include custom libraries and initialization code here
+// WordPress initialization:	
+$wp_root_path	= AJAX_CHAT_PATH.'../';
+require_once( $wp_root_path.'wp-config.php' );
+
+// get Wordpress user info
+global $current_user;
+get_currentuserinfo();
 ?>
