@@ -3,18 +3,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="[LANG_CODE/]" lang="[LANG_CODE/]" dir="[BASE_DIRECTION/]">
 
 <head>
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<meta http-equiv="Content-Type" content="[CONTENT_TYPE/]" />
 	<title>[LANG]title[/LANG]</title>
-	<style type="text/css">
-		body {
-			padding:0;
-			margin:0;
-		}
-	</style>
 	[STYLE_SHEETS/]
-	<!--[if lt IE 7]>
-		<link rel="stylesheet" type="text/css" href="css/ie5-6.css"/>
-	<![endif]-->
 	<script src="js/chat.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
@@ -23,8 +15,8 @@
 			function initializeLoginPage() {
 				document.getElementById('userNameField').focus();
 				if(!ajaxChat.isCookieEnabled()) {
-					var node = document.createElement('div');
-					var text = document.createTextNode(ajaxChatLang['errorCookiesRequired']);
+					var node = document.createElement('div'),
+						text = document.createTextNode(ajaxChatLang['errorCookiesRequired']);
 					node.appendChild(text);
 					document.getElementById('errorContainer').appendChild(node);
 				}
@@ -40,39 +32,32 @@
 		// ]]>
 	</script>
 </head>
-
-<body onload="initializeLoginPage();">
+<body class="ajax-chat" onload="initializeLoginPage();">
 	<div id="loginContent">
-		<div id="loginHeadlineContainer">
-			<h1>[LANG]title[/LANG]</h1>
-		</div>
-		<form id="loginForm" action="[LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
-			<div id="loginFormContainer">
-				<input type="hidden" name="login" id="loginField" value="login"/>
-				<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
-				<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
-				<input type="text" name="userName" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
-				<div><label for="passwordField">[LANG]password[/LANG]*:</label><br />
-				<input type="password" name="password" id="passwordField"/></div>
-				<div><label for="channelField">[LANG]channel[/LANG]:</label><br />
-				<select name="channelName" id="channelField">[CHANNEL_OPTIONS/]</select></div>
-				<div><label for="languageSelection">[LANG]language[/LANG]:</label><br />
-				<select id="languageSelection" name="lang" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select></div>
-				<div><input type="submit" name="submit" id="loginButton" value="[LANG]login[/LANG]"/></div>
-				<div id="loginRegisteredUsers">* [LANG]registeredUsers[/LANG]</div>
-			</div>
-		</form>
+		<h1 id="loginHeadline">[LANG]title[/LANG]</h1>
 		<div id="errorContainer">[ERROR_MESSAGES/]<noscript><div>[LANG]requiresJavaScript[/LANG]</div></noscript></div>
+		<form id="loginForm" action="[LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
+			<input type="hidden" name="login" id="loginField" value="login"/>
+			<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
+			<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
+			<input type="text" name="userName" id="userNameField" maxlength="[USER_NAME_MAX_LENGTH/]"/></div>
+			<div><label for="passwordField">[LANG]password[/LANG]*:</label><br />
+			<input type="password" name="password" id="passwordField"/></div>
+			<div><label for="channelField">[LANG]channel[/LANG]:</label><br />
+			<select name="channelName" id="channelField">[CHANNEL_OPTIONS/]</select></div>
+			<div><label for="languageSelection">[LANG]language[/LANG]:</label><br />
+			<select id="languageSelection" name="lang" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select></div>
+			<div><input type="submit" name="submit" id="loginButton" value="[LANG]login[/LANG]"/></div>
+			<div id="loginRegisteredUsers">* [LANG]registeredUsers[/LANG]</div>
+		</form>
 		<!--
 			Please retain the full copyright notice below including the link to blueimp.net.
 			This not only gives respect to the amount of time given freely by the developer
 			but also helps build interest, traffic and use of AJAX Chat.
-			
 			Thanks,
 			Sebastian Tschan
 		//-->
 		<div id="copyright"><a href="https://blueimp.net/ajax/">AJAX Chat</a> &copy; <a href="https://blueimp.net">blueimp.net</a></div>
 	</div>
 </body>
-
 </html>

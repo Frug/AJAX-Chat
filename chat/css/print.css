@@ -1,25 +1,11 @@
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
-
-
-/*
- * Print layout
- */
-
 @media print {
-
 	#content {
 		position:static;
 	}
 	#content #copyright {
 		display:none;
 	}
-	#content #headlineContainer {
+	#content #headline {
 		display:none;
 	}
 	#content #logoutChannelContainer {
@@ -72,11 +58,9 @@
 	#content #chatList .delete {
 	    display:none;
 	}
-	
 	#content #chatList {
 		border:none;
 	}
-	
 	#content {
 		font-family:'times new roman', times, serif;
 		font-size:1.0em;
@@ -85,7 +69,6 @@
 	#content #chatList code {
 		font-size:0.8em;
 	}
-	
 	#content {
 		color:#000;
 	}
@@ -94,6 +77,9 @@
 	}
 	#content .user {
 		color:#000;
+	}
+	#content .customUser {
+		color:#0044CC;
 	}
 	#content .moderator {
 		color:#00AA00;
@@ -110,5 +96,4 @@
 	#content #chatList a {
 		color:#1E90FF;
 	}
-
 }
