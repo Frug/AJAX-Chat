@@ -252,5 +252,5 @@ var ajaxChatConfig = {
 	socketServerChatID: 0,
 
 	// Debug allows console logging or alerts on caught errors - false/0 = no debug, true/1/2 = console log, 2 = alerts
-	debug: true
+	debug: false
 };

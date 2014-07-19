@@ -89,8 +89,8 @@ var ajaxChat = {
 	DOMbuffering: null,
 	DOMbuffer: null,
 	DOMbufferRowClass: null,
-	debug: null,
 	inUrlBBCode: null,
+	debug: null,
 
 	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {
 		this.httpRequest		= {};
