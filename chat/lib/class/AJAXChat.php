@@ -2389,7 +2389,7 @@ class AJAXChat {
 					FROM
 						'.$this->getDataBaseTable('online').'
 					ORDER BY
-						userName;';
+						LOWER(userName);';
 			
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
