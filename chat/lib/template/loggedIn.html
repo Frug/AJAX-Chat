@@ -193,9 +193,7 @@
 
 <body class="ajax-chat">
 	<div id="content">
-		<div id="headlineContainer">
-			<h1>[LANG]title[/LANG]</h1>
-		</div>
+		<h1 id="headline">[LANG]title[/LANG]</h1>
 		<div id="logoutChannelContainer">
 			<input type="button" id="logoutButton" value="[LANG]logout[/LANG]" onclick="ajaxChat.logout();"/>
 			<div id="logoutChannelInner">
@@ -207,15 +205,6 @@
 				<select id="languageSelection" onchange="ajaxChat.switchLanguage(this.value);">[LANGUAGE_OPTIONS/]</select>
 			</div>
 			<input type="image" src="img/pixel.gif" class="button" id="showChannelsButton" alt="[LANG]toggleHelp[/LANG]"/>
-			<input id="bbCodeBold" type="button" value="[LANG]bbCodeLabelBold[/LANG]" title="[LANG]bbCodeTitleBold[/LANG]" onclick="ajaxChat.insertBBCode('b');" style="font-weight:bold;"/>
-			<input id="bbCodeItalic" type="button" value="[LANG]bbCodeLabelItalic[/LANG]" title="[LANG]bbCodeTitleItalic[/LANG]" onclick="ajaxChat.insertBBCode('i');" style="font-style:italic;"/>
-			<input id="bbCodeUnderline" type="button" value="[LANG]bbCodeLabelUnderline[/LANG]" title="[LANG]bbCodeTitleUnderline[/LANG]" onclick="ajaxChat.insertBBCode('u');" style="text-decoration:underline;"/>
-			<input id="bbCodeQuote" type="button" value="[LANG]bbCodeLabelQuote[/LANG]" title="[LANG]bbCodeTitleQuote[/LANG]" onclick="ajaxChat.insertBBCode('quote');"/>
-			<input id="bbCodeCode" type="button" value="[LANG]bbCodeLabelCode[/LANG]" title="[LANG]bbCodeTitleCode[/LANG]" onclick="ajaxChat.insertBBCode('code');"/>
-			<input id="bbCodeURL" type="button" value="[LANG]bbCodeLabelURL[/LANG]" title="[LANG]bbCodeTitleURL[/LANG]" onclick="ajaxChat.insertBBCode('url');"/>
-			<input id="bbCodeIMG" type="button" value="[LANG]bbCodeLabelImg[/LANG]" title="[LANG]bbCodeTitleImg[/LANG]" onclick="ajaxChat.insertBBCode('img');"/>
-			<input id="bbCodeColor" type="button" value="[LANG]bbCodeLabelColor[/LANG]" title="[LANG]bbCodeTitleColor[/LANG]" onclick="ajaxChat.showHide('colorCodesContainer', null);"/>
-			<input id="bbCodeEmoticon" type="button" value="[LANG]bbCodeLabelEmoticon[/LANG]" title="[LANG]bbCodeTitleEmoticon[/LANG]" onclick="ajaxChat.showHide('emoticonsContainer', null);"/>
 		</div>
 		<div id="statusIconContainer" class="waiting"></div>
 		
