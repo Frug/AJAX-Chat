@@ -1613,9 +1613,6 @@ class AJAXChat {
 	}
 	
 	function rollDice($sides) {
-		// seed with microseconds since last "whole" second:
-		mt_srand((double)microtime()*1000000);
-		
 		return mt_rand(1, $sides);
 	}
 	
