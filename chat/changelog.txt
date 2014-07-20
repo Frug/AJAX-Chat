@@ -848,15 +848,24 @@ Bugfixes:
 Version 0.8.8 (?.?.2014)
 -------------------------------
 Notice:
-- If you are using the javascript override handleCustomInfoMessage in custom.js, you should make it return true if you capture an event
+- Templates, especially loggedIn.html have changed a lot to add mobile support. Javascript in the templates files has also changed.
+- CSS for themes has slightly changed and you may need to update your custom stylesheets.
+- The themes subSilver and subblack2 were removed.
+- If you are using the javascript override handleCustomInfoMessage in custom.js, you should make it return true if you capture an event.
 
 New Features:
 - Private messages now have their own sound - thanks to marquisite.
+- Private messages have their own background color.
 - Added two new sounds - one is extra for your customization pleasure.
 - Added a custom user group and banned user group for customization and integration - thanks to marquisite.
 - Added a debug mode to chat.js - thanks to Sophist-UK.
+- New theme "Pine" added - thanks to Rosina Ramirez.
 
 Bugfixes:
 - HTML is now stripped from [IMG] tag URLs, and tag parsing errors will no longer crash chat. - thanks to gWorldz.
 - Nesting an [IMG] inside a [URL] tag will now only open the URL instead of also opening the image - thanks to James Almer.
 - Users can now be kicked for 0 minutes, which is effectively a kick and not a ban - thanks to micheal-swiggs.
+- User list sorting is now case insensitive (lists should be properly alphabetical) - thanks to marquisite.
+
+Misc:
+- Removed unneeded call to mt_srand() - thanks to Joshua Embrey.
