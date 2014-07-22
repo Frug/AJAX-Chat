@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -33,6 +33,7 @@ $lang['bbCodeLabelCode'] = '코드';
 $lang['bbCodeLabelURL'] = 'URL';
 $lang['bbCodeLabelImg'] = '이미지';
 $lang['bbCodeLabelColor'] = '글자색';
+$lang['bbCodeLabelEmoticon'] = 'Smilies';
 $lang['bbCodeTitleBold'] = '굵게: [b]내용[/b]';
 $lang['bbCodeTitleItalic'] = '이탤릭: [i]내용[/i]';
 $lang['bbCodeTitleUnderline'] = '밑줄: [u]내용[/u]';
@@ -41,6 +42,7 @@ $lang['bbCodeTitleCode'] = '코드: [code]코드[/code]';
 $lang['bbCodeTitleURL'] = '주소: [url]http://example.org[/url] or [url=http://example.org]text[/url]';
 $lang['bbCodeTitleImg'] = '이미지: [img]http://example.org/image.jpg[/img]';
 $lang['bbCodeTitleColor'] = '글자색: [color=red]내용[/color]';
+$lang['bbCodeTitleEmoticon'] = 'Smilies list';
 $lang['help'] = '도움말';
 $lang['helpItemDescJoin'] = '채널 접속:';
 $lang['helpItemCodeJoin'] = '/join 채널명';
@@ -104,6 +106,7 @@ $lang['settingsSoundEnter'] = '로그인, 채널 접속 소리:';
 $lang['settingsSoundLeave'] = '로그아웃, 채널 접속해제 소리:';
 $lang['settingsSoundChatBot'] = '시스템 메시지 소리:';
 $lang['settingsSoundError'] = '오류 소리:';
+$lang['settingsSoundPrivate'] = 'Sound for private messages:';
 $lang['settingsBlink'] = '새로운 메시지 도착 시 타이틀 깜빡임:';
 $lang['settingsBlinkInterval'] = '밀리세컨드 단위 깜빡임 속도:';
 $lang['settingsBlinkIntervalNumber'] = '깜빡임 횟수:';

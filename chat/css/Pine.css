@@ -1,0 +1,142 @@
+/*
+ * @package AJAX_Chat
+ * @author Rosina Ramirez
+ */
+@import url('global.css');
+@import url('fonts.css');
+@import url('print.css');
+@import url('custom.css');
+
+#content input, select, #content textarea, #loginButton { 
+	border: 0;
+}
+#loginButton{
+	box-shadow:0px 1px 4px 0px rgba(0,0,0,0.5);
+}
+#content textarea {
+	border-color: #383838;
+}
+.ajax-chat {
+	background-color:#0f2314;
+	color:#f0f0f0;
+}
+.ajax-chat a, .ajax-chat a:visited, .ajax-chat h1{
+	color:#C5EBB7;
+}
+input, select {
+	background:#0A140C;
+	border: 1px solid rgba(0,0,0,1);
+	color:#C5EBB7;
+}
+#loginContent #errorContainer {
+	color:#FF6262;
+}
+
+#content textarea {
+	background:rgba(0,0,0,0.5);
+	color:#C5EBB7;
+}
+#content #chatList{
+	background: url('pine_images/chatlist.jpg') no-repeat bottom right #0a180d;
+}
+#content #chatList, #content #onlineListContainer, #content #helpContainer, #content #settingsContainer{
+	box-shadow: inset 1px 1px 10px rgba(0,0,0,0.6);
+	border:0
+}
+#content #colorCodesContainer a:first-child{
+	border-left: 1px solid #000;
+}
+#content #colorCodesContainer a {
+	border-color: #000;
+	border-left: 0;
+}
+#content #colorCodesContainer {
+	background: #000;
+	background: rgba(0,0,0,0.4);
+	border: 0;
+}
+#content #onlineListContainer, #content #helpContainer, #content #settingsContainer {
+	background: rgba(0,0,0,0.3)
+}
+#content #onlineListContainer #onlineList ul {
+	list-style: none;
+}
+#content #emoticonsContainer {
+	border-radius: 3px;
+}
+#content #bbCodeContainer {
+	border: 0;
+	padding-left: 0;
+}
+
+/* Status Icon */
+#content #statusIconContainer {
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
+}
+#content #statusIconContainer.waiting {
+	background-position: 0px -22px;
+}
+#content #statusIconContainer.retrying {
+	background-position: 0px -44px;
+}
+
+#content #bbCodeContainer input, #content #logoutButton, #content #submitButton, #loginButton {
+	background-color:#4C9C1F;
+	color:#fff;
+	padding:6px 12px
+}
+#content #bbCodeContainer input:hover, #content #logoutButton:hover, #content #submitButton:hover, #loginButton:hover {
+	background-color:#57B324;
+}
+#content #optionsContainer input.button {
+	border: 0;
+}
+#content #optionsContainer input {
+	background-color:transparent;
+}
+.ajax-chat .popup {
+	background-color:#F7F5DC;
+	border: 1px solid #808080;
+}
+#content .rowEven, #helpList dl:nth-child(even), #settingsList dl:nth-child(even) {
+	background:#2C4E3D;
+	background:rgba(44, 78, 61, 0.6)
+}
+#content .rowOdd, #helpList dl:nth-child(odd), #settingsList dl:nth-child(odd) {
+	background:#416453;
+	background:rgba(65, 100, 83, 0.6)
+}
+#content #chatList .rowOdd.private {
+	background-color:#00701C;
+}
+#content #chatList .rowEven.private {
+	background-color:#007B07;
+}
+#content .guest {
+	color:#B8B8B8;
+}
+#content .user {
+	color:#C8E4CF;
+}
+#content .customUser {
+	color:#4c9c1f;
+}
+#content .moderator {
+	color:#71E271;
+}
+#content .admin {
+	color:#FF6262;
+}
+#content .chatBot {
+	color:#E7B98E;
+}
+#content #chatList .chatBotErrorMessage {
+	color:#FF6262;
+}
+#content #chatList .deleteSelected {
+	border-color:#FF6262;
+}
+#content #onlineListContainer h3, #content #helpContainer h3, #content #settingsContainer h3 {
+	color:#C5EBB7;
+	height: 15px;
+}
