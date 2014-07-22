@@ -34,6 +34,7 @@ $lang['bbCodeLabelCode'] = 'Код';
 $lang['bbCodeLabelURL'] = 'URL';
 $lang['bbCodeLabelImg'] = 'Картинка';
 $lang['bbCodeLabelColor'] = 'Цвят на шрифта';
+$lang['bbCodeLabelEmoticon'] = 'Усмивките';
 $lang['bbCodeTitleBold'] = 'Получер текст: [b]текст[/b]';
 $lang['bbCodeTitleItalic'] = 'Курсивен текст: [i]текст[/i]';
 $lang['bbCodeTitleUnderline'] = 'Подчертан текст: [u]текст[/u]';
@@ -42,6 +43,7 @@ $lang['bbCodeTitleCode'] = 'Показване на код: [code]код[/code]'
 $lang['bbCodeTitleURL'] = 'URL: [url]http://example.org[/url] или [url=http://example.org]текст[/url]';
 $lang['bbCodeTitleImg'] = 'Вмъкване на картинка: [img]http://primer.org/kartinka.jpg[/img]';
 $lang['bbCodeTitleColor'] = 'Цвят на шрифта: [color=red]текст[/color]';
+$lang['bbCodeTitleEmoticon'] = 'списък Усмивките';
 $lang['help'] = 'Помощ';
 $lang['helpItemDescJoin'] = 'Присъединяване към канал:';
 $lang['helpItemCodeJoin'] = '/join име_на_канал';
@@ -105,6 +107,7 @@ $lang['settingsSoundEnter'] = 'Звук за съобщенията за вли�
 $lang['settingsSoundLeave'] = 'Звук за съобщенията за излизане от чата или от канала:';
 $lang['settingsSoundChatBot'] = 'Звук за съобщенията на чатбота:';
 $lang['settingsSoundError'] = 'Звук за съобщенията за грешки:';
+$lang['settingsSoundPrivate'] = 'Звук за лични за съобщенията:';
 $lang['settingsBlink'] = 'Примигване на прозоречното заглавие при нови съобщения:';
 $lang['settingsBlinkInterval'] = 'Интервал на примигване в милисекунди:';
 $lang['settingsBlinkIntervalNumber'] = 'Брой пъти на примигване:';
