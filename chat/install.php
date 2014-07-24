@@ -1,80 +1,51 @@
 <?php
 /*
  * @package AJAX_Chat
- * @author Sebastian Tschan
+ * @author Mirko Girgenti (Bomdia)
  * @copyright (c) Sebastian Tschan
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
-
-// Show all errors:
-error_reporting(E_ALL);
-
-// Remember to set up the config file to point to your database:
-file_exists('lib/config.php') or die('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
-
-// Path to the chat directory:
-define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
-
-// Include custom libraries and initialization code:
-require(AJAX_CHAT_PATH.'lib/custom.php');
-
-// Include Class libraries:
-require(AJAX_CHAT_PATH.'lib/classes.php');
-
-class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
-
-	function &getDataBaseTableCreationQueries() {
-		$queries = array();
-		$index = 0;
-		// Retrieve the queries from the SQL file:
-		$lines = file(AJAX_CHAT_PATH.'chat.sql');
-		// Stop if an error occurs:
-		if(!$lines) {
-			echo 'Failed to load queries from file (chat.sql).';
-			die();
-		}
-		foreach($lines as $line) {
-			if(empty($line)) {
-				continue;
-			}
-			$line = trim($line);
-			if(count($queries) <= $index) {
-				array_push($queries, $line."\n");
-			} else {
-				$queries[$index] .= $line."\n";	
-			}
-			// Create a new array item for each query:
-			if(substr($line, -1) == ';') {
-				$index++;
-			}
-		}
-		return $queries;
-	}
-
-	function createDataBaseTables($printSuccessConfirmation=true) {
-		$queries = $this->getDataBaseTableCreationQueries();
-		foreach($queries as $sql) {
-			// Create a new SQL query:
-			$result = $this->db->sqlQuery($sql);
-			
-			// Stop if an error occurs:
-			if($result->error()) {
-				echo $result->getError();
-				die();
-			}
-		}
-		if($printSuccessConfirmation) {
-			// Print a success confirmation:
-			echo 'Database tables created successfully - please delete this file (install.php).';
-		}
-	}
-
-}
-
-// Initialize the chat installer:
-$ajaxChatInstaller = new CustomAJAXChatInstaller();
-
-// Create the database tables:
-$ajaxChatInstaller->createDataBaseTables();
 ?>
+<html>
+    <head>
+        <title>Login in Your MySql server</title>
+        <link rel="stylesheet" type="text/css" href="install.css">
+        <script src="install.js"></script>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+    </head>
+    
+    <body>
+        <div id="main">
+            <div id="title">
+            MySql Login
+            </div>
+            <div id="login">
+                <form id="flogin" name="login">
+                 <table>
+                    <tr>
+                        <td>Username </td>
+                        <td><input type="text" name="username"></td>
+                        <td><div id="uer" class="err" style="display: none;"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Password </td>
+                        <td><input type="password" name="passwd"></td>
+                        <td><div id="per" class="err" style="display: none;"></div></td>
+                    </tr>
+                    <tr>
+                        <td>Hostname </td>
+                        <td><input type="text" value="localhost" name="host"></td>
+                        <td><div id="her" class="err" style="display: none;"></div></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="button" value="Login" onclick="Login();Anim('status')"></td>
+                    </tr>
+                </table>
+                </form>
+                <div id="status" class="red"></div>
+            </div>
+        </div>
+    </body>
+</html>
