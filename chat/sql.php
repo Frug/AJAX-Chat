@@ -56,7 +56,12 @@ function replaceSetting($file,$line,$setting,$FileBase){
     $arrayp=array_keys($line);
     for($i=0;;$i++){if($i==count($line)){break;}
         $curr=explode("=", $file[$line[$arrayp[$i]]-1]);
-        $curr[1]=" '".$setting[$arrayp[$i]]."';\n";
+        $csetting=$setting[$arrayp[$i]];
+        if($csetting=="true" or $csetting=="false"){
+            $curr[1]=" ".$csetting.";\n";
+        }else{
+            $curr[1]=" '".$csetting."';\n";
+        }
         $curr=implode("=",$curr);
         $file[$line[$arrayp[$i]]-1]=$curr;
     }
