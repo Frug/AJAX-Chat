@@ -10,9 +10,8 @@ function isFilled(){
     pwd = document.login.passwd.value;
     host = document.login.host.value;
     if(usr.length==0){var p1=false;error('uer');}else{var p1=true;}
-    if(pwd.length==0){var p2=false;error('per');}else{var p2=true;}
     if(host.length==0){var p3=false;error('her');}else{var p3=true;}
-    if(p1 && p2 && p3){return true;}else{return false;}
+    if(p1 && p3){return true;}else{return false;}
 }
 function error(id){
     var cur = document.getElementById(id);

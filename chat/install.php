@@ -31,7 +31,6 @@
                     <tr>
                         <td>Password </td>
                         <td><input type="password" name="passwd"></td>
-                        <td><div id="per" class="err" style="display: none;"></div></td>
                     </tr>
                     <tr>
                         <td>Hostname </td>
