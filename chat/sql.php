@@ -71,8 +71,18 @@ function replaceSetting($file,$line,$setting,$FileBase){
     @fclose($handle);
     if($p1 and $p2){return true;}else{return false;}
 }
-function styleAviable($file){
-    $curr=explode("=", $file[53]);
+function GetLine($FILE,$s){
+	for($i=0;;$i++){
+		if($i==count($FILE)){break;}
+		$FILE[$i]=str_replace(" ", "", $FILE[$i]);
+		$FILE[$i]=str_replace("	", "", $FILE[$i]);
+		$FILE[$i]=explode("=",$FILE[$i]);
+		if(in_array($FILE[$i][0], $s)){$arr[]=$i;}
+	}
+	return $arr;
+}
+function styleAviable($file,$line){
+    $curr=explode("=", $file[$line]);
     $car=$curr[1];
     $car=str_replace("array(","",$car);
     $car=str_replace(");","",$car);
@@ -89,8 +99,8 @@ function styleAviable($file){
     $optstyle=$optstyle."</select>";
     return $optstyle;
 }
-function languageAviable($file){
-    $curr=explode("=", $file[50], 2);
+function languageAviable($file,$line){
+    $curr=explode("=", $file[$line], 2);
     $car=$curr[1];
     $car=str_replace(" array(","",$car);
     $car=str_replace(");","",$car);
@@ -131,6 +141,7 @@ if(isset($_GET['login'])){
             echo $tocken;
         }
     }
+	exit;
 }
 if(isset($_GET['install'])){
     header("Content-Type:text/plain");
@@ -140,16 +151,36 @@ if(isset($_GET['install'])){
             $link = mysqli_connect($setting['host'],$setting['user'],$setting['passwd'],$setting['mydb']);
             $query = file_get_contents("chat.sql");
             if(mysqli_multi_query($link, $query)){$p1=true;}else{$p1=false;}
-            $line=array("host"=>25,"user"=>27,"passwd"=>29,"mydb"=>31,"language"=>49,"style"=>56,"PChannel"=>91,"PMessage"=>93,"GLogin"=>118,"GWrite"=>120,"GName"=>122,"Nchange"=>131,"UmsgDelete"=>138,"chatbot"=>143,"DBanTime"=>169);
+			$s=array(
+				'$config[\'dbConnection\'][\'host\']',
+				'$config[\'dbConnection\'][\'user\']',
+				'$config[\'dbConnection\'][\'pass\']',
+				'$config[\'dbConnection\'][\'name\']',
+				'$config[\'langDefault\']',
+				'$config[\'styleDefault\']',
+				'$config[\'allowPrivateChannels\']',
+				'$config[\'allowPrivateMessages\']',
+				'$config[\'allowGuestLogins\']',
+				'$config[\'allowGuestWrite\']',
+				'$config[\'allowGuestUserName\']',
+				'$config[\'allowNickChange\']',
+				'$config[\'allowUserMessageDelete\']',
+				'$config[\'chatBotName\']',
+				'$config[\'defaultBanTime\']'
+				);
+			$line=GetLine($file,$s);
             if(replaceSetting($file,$line,$setting,$FileBase)){$p2=true;}else{$p2=false;}
             if($p1 and $p2){echo "true";}else{echo "false";}
             @unlink('lib/tocken.txt');
         }
     }
+	exit;
 }
 if(isset($_GET['htmlguip2'])){
     if(isset($_POST['tocken'])){
         if($_POST['tocken']==GetTocken()){
+			$s=array('$config[\'langNames\']','$config[\'styleAvailable\']');
+			$line=GetLine($file,$s);
             echo'
 <div id="main2">
     <div id="title">
@@ -165,11 +196,11 @@ if(isset($_GET['htmlguip2'])){
                 </tr>
                 <tr>
                     <td>Language </td>
-                    <td>'.languageAviable($file).'</td>
+                    <td>'.languageAviable($file,$line[0]).'</td>
                 </tr>
                 <tr>
                     <td>Style </td>
-                    <td>'.styleAviable($file).'</td>
+                    <td>'.styleAviable($file,$line[1]).'</td>
                 </tr>
                 <tr>
                     <td>Private channel </td>
@@ -221,5 +252,6 @@ if(isset($_GET['htmlguip2'])){
             ';
         }
     }
+	exit;
 }
 ?>
