@@ -22,14 +22,14 @@ function tocken(){
     return $tocken;
 }
 function StoreTocken($tocken){
-	$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
+	global $ChatPath;
     $file=$ChatPath.'lib/tocken.txt';
     $handle=@fopen($file,"wb");
     @fwrite($handle,$tocken);
     @fclose($handle);
 }
 function GetTocken(){
-	$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
+	global $ChatPath;
     $file=$ChatPath.'lib/tocken.txt';
     if(file_exists($file)){
         $difftime=time()-filemtime($file);
@@ -251,7 +251,7 @@ if(isset($_GET['htmlguip2'])){
     </div>
 </div>
             ';
-        }
+        }else{echo "the given tocken is invalid";}
     }
 	exit;
 }
