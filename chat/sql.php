@@ -53,17 +53,16 @@ function Exploder($str,$divider1="&",$divider2="="){
         return $cd;
     }
 function replaceSetting($file,$line,$setting,$FileBase){
-    $arrayp=array_keys($line);
     for($i=0;;$i++){if($i==count($line)){break;}
-        $curr=explode("=", $file[$line[$arrayp[$i]]-1]);
-        $csetting=$setting[$arrayp[$i]];
+        $curr=explode("=", $file[$line[$i]]);
+        $csetting=$setting[$i];
         if($csetting=="true" or $csetting=="false"){
             $curr[1]=" ".$csetting.";\n";
         }else{
             $curr[1]=" '".$csetting."';\n";
         }
         $curr=implode("=",$curr);
-        $file[$line[$arrayp[$i]]-1]=$curr;
+        $file[$line[$i]]=$curr;
     }
     $handle=@fopen($FileBase,"wb");
     if(!$handle){$p1=false;}else{$p1=true;}
@@ -148,7 +147,7 @@ if(isset($_GET['install'])){
     if(isset($_POST['tocken']) and isset($_POST['setting'])){
         if($_POST['tocken']==GetTocken()){
             $setting=Exploder($_POST['setting'],"|","##");
-            $link = mysqli_connect($setting['host'],$setting['user'],$setting['passwd'],$setting['mydb']);
+            $link = mysqli_connect($setting[0],$setting[1],$setting[2],$setting[3]);
             $query = file_get_contents("chat.sql");
             if(mysqli_multi_query($link, $query)){$p1=true;}else{$p1=false;}
 			$s=array(
