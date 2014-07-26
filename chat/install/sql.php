@@ -6,7 +6,7 @@
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
-$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
+$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'/../';
 $FileBase=$ChatPath."lib/config.php";
 $file = file($FileBase);
 function tocken(){
