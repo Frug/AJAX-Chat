@@ -6,7 +6,7 @@
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
-$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'/';
+$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
 $FileBase=$ChatPath."lib/config.php";
 $file = file($FileBase);
 function tocken(){
@@ -22,13 +22,15 @@ function tocken(){
     return $tocken;
 }
 function StoreTocken($tocken){
-    $file='lib/tocken.txt';
+	$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
+    $file=$ChatPath.'lib/tocken.txt';
     $handle=@fopen($file,"wb");
     @fwrite($handle,$tocken);
     @fclose($handle);
 }
 function GetTocken(){
-    $file='lib/tocken.txt';
+	$ChatPath=dirname($_SERVER['SCRIPT_FILENAME']).'../';
+    $file=$ChatPath.'lib/tocken.txt';
     if(file_exists($file)){
         $difftime=time()-filemtime($file);
         if($difftime<1800){
