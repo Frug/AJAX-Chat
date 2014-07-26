@@ -58,7 +58,7 @@ function SSetting(){
     if(isFilled2()){
         var xmlhttp;
         if (window.XMLHttpRequest){xmlhttp=new XMLHttpRequest();}else{xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");}
-        var sending = "tocken="+tocken+"&setting=host##"+host+"|user##"+usr+"|passwd##"+pwd+"|mydb##"+mydb+"|language##"+document.setting.language.value+"|style##"+document.setting.style.value+"|PChannel##"+document.setting.privchannel.value+"|PMessage##"+document.setting.privmsg.value+"|GLogin##"+document.setting.glogin.value+"|GWrite##"+document.setting.gwrite.value+"|GName##"+document.setting.gusr.value+"|Nchange##"+document.setting.usrchange.value+"|UmsgDelete##"+document.setting.usrdmsg.value+"|chatbot##"+cbn+"|DBanTime##"+dbt;
+        var sending = "tocken="+tocken+"&setting=0##"+host+"|1##"+usr+"|2##"+pwd+"|3##"+mydb+"|4##"+document.setting.language.value+"|5##"+document.setting.style.value+"|6##"+document.setting.privchannel.value+"|7##"+document.setting.privmsg.value+"|8##"+document.setting.glogin.value+"|9##"+document.setting.gwrite.value+"|10##"+document.setting.gusr.value+"|11##"+document.setting.usrchange.value+"|12##"+document.setting.usrdmsg.value+"|13##"+cbn+"|14##"+dbt;
         xmlhttp.open("POST","sql.php?install",true);
         xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xmlhttp.send(sending);
