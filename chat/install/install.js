@@ -124,7 +124,7 @@ id="status";
             div.innerHTML='<span id="cinstalled">Error control setting specially database name</span>';
         }else if(div.className=="green overlay"){
             div.style.height="100%"
-            div.innerHTML='<span id="cinstalled">Correctly Installed.<br><a href="../index.php">go to chat</a></span>';
+            div.innerHTML='<span id="cinstalled">Correctly Installed.<br><a href="../index.php">go to chat</a><br>or<br><a href="../style/">go to style installer</a></span>';
         }
     }, 500 );
 }
