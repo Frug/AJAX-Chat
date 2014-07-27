@@ -1,0 +1,165 @@
+/*
+ * @package AJAX_Chat
+ * @author Mirko Girgenti (Bomdia)
+ * @copyright (c) Sebastian Tschan
+ * @license Modified MIT License
+ * @link https://blueimp.net/ajax/
+ */
+#main{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 210px;
+    width: 250px;
+    margin: -11% 0 0 -10%;
+    background: #aaa;
+}
+#title{
+    height: 50px;
+    background: #555;
+    color: white;
+    text-align: center;
+    vertical-align: middle;
+    display: table-cell;
+    width: 300px;
+    font-weight: bold;
+    font-size: large;
+}
+#login{
+
+}
+#status{
+    width: 250px;
+    height: 30px;
+    bottom: 0px;
+    position: absolute;
+}
+.err{
+width: 117px;
+height: 20px;
+background: red;
+}
+.red{
+    background:red;
+}
+.green{
+    background:green;
+}
+@keyframes onverlay {0% {height: 30px;}100%{height: 100%;}}
+@-moz-keyframes onverlay {0% {height: 30px;}100%{height: 100%;}}
+@-o-keyframes onverlay {0% {height: 30px;}100%{height: 100%;}}
+@-webkit-keyframes onverlay {0% {height: 30px;}100%{height: 100%;}}
+@keyframes outverlay {0% {height: 100%;}100%{height: 30px;}}
+@-moz-keyframes outverlay {0% {height: 100%;}100%{height: 30px;}}
+@-o-keyframes outverlay {0% {height: 100%;}100%{height: 30px;}}
+@-webkit-keyframes outverlay {0% {height: 100%;}100%{height: 30px;}}
+@keyframes outverlay2 {0% {height: 100%;opacity:1;}100%{height: 30px;opacity:0;}}
+@-moz-keyframes outverlay2 {0% {height: 100%;opacity:1;}100%{height: 30px;opacity:0;}}
+@-o-keyframes outverlay2 {0% {height: 100%;opacity:1;}100%{height: 30px;opacity:0;}}
+@-webkit-keyframes outverlay2 {0% {height: 100%;opacity:1;}100%{height: 30px;opacity:0;}}
+.overlay{
+    -webkit-animation-name: onverlay;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out;
+    -o-animation-name: onverlay;
+    -o-animation-duration: 0.5s;
+    -o-animation-timing-function: ease-in-out;
+    -moz-animation-name: onverlay;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: ease-in-out;
+    animation-name: onverlay;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+.deoverlay{
+    -webkit-animation-name: outverlay;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out;
+    -o-animation-name: outverlay;
+    -o-animation-duration: 0.5s;
+    -o-animation-timing-function: ease-in-out;
+    -moz-animation-name: outverlay;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: ease-in-out;
+    animation-name: outverlay;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+.deoverlay2{
+    -webkit-animation-name: outverlay2;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-timing-function: ease-in-out;
+    -o-animation-name: outverlay2;
+    -o-animation-duration: 0.5s;
+    -o-animation-timing-function: ease-in-out;
+    -moz-animation-name: outverlay2;
+    -moz-animation-duration: 0.5s;
+    -moz-animation-timing-function: ease-in-out;
+    animation-name: outverlay2;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in-out;
+}
+#main2{
+    position: absolute;
+    top: 0;
+    bottom:0;
+    left: 50%;
+    width: 250px;
+    margin: 0 0 0 -10%;
+    background: #aaa;
+}
+#cinstalled{
+    color: #fff;
+    font-size: xx-large;
+    text-align: center;
+    position: absolute;
+    margin: 100% 0 0 1%;
+}
+@media (max-width: 700px) {
+
+}
+@media (max-width: 480px) {
+    #main{
+        margin: initial;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: initial;
+        width: initial;
+    }
+    #main2{
+        margin: initial;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: initial;
+        width: initial;
+    }
+    #title{
+        left:0;
+        right:0;
+        width:initial;
+        position: absolute;
+    }
+    #status{
+        left:0;
+        right:0;
+        width:initial;
+    }
+    #login{
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+    }
+    #setting{
+        top: 50px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        position: absolute;
+    }
+}
