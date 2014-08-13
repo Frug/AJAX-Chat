@@ -34,7 +34,7 @@ class AddCommand extends AbstractCommand
      */
     public function execute()
     {
-        end($this->$users);
+        end($this->users);
         $nextKey = (key($this->users) + 1);
         reset($this->users);
 
