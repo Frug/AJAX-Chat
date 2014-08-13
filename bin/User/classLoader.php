@@ -11,7 +11,7 @@ require_once $scriptPath . 'CommandInterface.php';
 require_once $scriptPath . 'AbstractCommand.php';
 require_once $scriptPath . 'AddCommand.php';
 require_once $scriptPath . 'DeleteCommand.php';
+require_once $scriptPath . 'ListCommand.php';
 /*
 require_once $scriptPath . 'EditCommand.php';
-require_once $scriptPath . 'ListCommand.php';
 */
