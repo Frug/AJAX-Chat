@@ -56,7 +56,7 @@ class AddCommand extends AbstractCommand
     public function getUsage()
     {
         return array(
-            '"login name" "role" "channels" "password"',
+            '"login name" "password" "role" "channels"',
             '   available roles: ' . implode(',', array_keys($this->roles)),
             '   available channels: ' . implode(',', array_keys($this->channels))
         );
@@ -73,10 +73,10 @@ class AddCommand extends AbstractCommand
             );
         }
 
+        $channels = explode(',', trim($this->arguments[5]));
         $name = trim($this->arguments[2]);
-        $role = trim($this->arguments[3]);
-        $channels = explode(',', trim($this->arguments[4]));
-        $password = trim($this->arguments[5]);
+        $password = trim($this->arguments[3]);
+        $role = trim($this->arguments[4]);
 
         if (strlen($name) < 1) {
             throw new Exception(
