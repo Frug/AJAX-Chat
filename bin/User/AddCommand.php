@@ -57,8 +57,8 @@ class AddCommand extends AbstractCommand
     {
         return array(
             '"login name" "password" "role" "channels"',
-            '   available roles: ' . implode(',', array_keys($this->roles)),
-            '   available channels: ' . implode(',', array_keys($this->channels))
+            '   available channels: ' . implode(',', array_keys($this->channels)),
+            '   available roles: ' . implode(',', array_keys($this->roles))
         );
     }
 
