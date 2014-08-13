@@ -9,14 +9,7 @@
 
 // List containing the registered chat users:
 $users = array();
-
-// Default guest user (don't delete this one):
-$users[0] = array();
-$users[0]['userRole'] = AJAX_CHAT_GUEST;
-$users[0]['userName'] = null;
-$users[0]['password'] = null;
-$users[0]['channels'] = array(0);
-
+/*
 // Sample admin user:
 $users[1] = array();
 $users[1]['userRole'] = AJAX_CHAT_ADMIN;
@@ -37,4 +30,11 @@ $users[3]['userRole'] = AJAX_CHAT_USER;
 $users[3]['userName'] = 'user';
 $users[3]['password'] = 'user';
 $users[3]['channels'] = array(0,1);
-?>
+*/
+
+// Default guest user (don't delete this one):
+$users[0] = array();
+$users[0]['userRole'] = AJAX_CHAT_GUEST;
+$users[0]['userName'] = null;
+$users[0]['password'] = null;
+$users[0]['channels'] = array(0);
