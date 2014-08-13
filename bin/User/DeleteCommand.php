@@ -65,7 +65,8 @@ class DeleteCommand extends AbstractCommand
     public function getUsage()
     {
         return array(
-            'command: delete [user id]'
+            'command: delete [user id]',
+            '   available users: ' . implode(',', array_keys($this->users))
         );
     }
 
