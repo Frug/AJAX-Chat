@@ -4,6 +4,9 @@
  * @since 2014-08-12
  */
 
+/**
+ * Class AddCommand
+ */
 class AddCommand extends AbstractCommand
 {
     /**
@@ -35,7 +38,7 @@ class AddCommand extends AbstractCommand
         $nextKey = (key($this->users) + 1);
         reset($this->users);
 
-        $content = $this->userFile->getContent();
+        $content = $this->userFile->read();
 
         $content[] = '// added - ' . date('Y-m-d H:i:s');
         $content[] = '$users[' . $nextKey . '] = array();';
@@ -44,7 +47,7 @@ class AddCommand extends AbstractCommand
         $content[] = '$users[' . $nextKey . '][\'password\'] = \'' . $this->inputPassword . '\';';
         $content[] = '$users[' . $nextKey . '][\'channels\'] = array(' . implode(',', $this->inputChannels) . ');';
 
-        $this->userFile->setContent($content);
+        $this->userFile->write($content);
     }
 
     /**

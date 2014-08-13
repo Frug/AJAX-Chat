@@ -4,61 +4,91 @@
  * @since 2014-08-12
  */
 
-if ($argc !== 3) {
-    echo $usage;
-    echo 'command: delete [user id]' . PHP_EOL;
-    exit(1);
-}
+/**
+ * Class DeleteCommand
+ */
+class DeleteCommand extends AbstractCommand
+{
+    /**
+     * @var int
+     */
+    private $inputUserId;
 
-$validUserIds = array_keys($users);
-$inputUserId = (int) $argv[2];
+    /**
+     * @throws Exception
+     */
+    public function execute()
+    {
+        reset($this->users);
 
-//begin of validation
-if (!isset($validUserIds[$inputUserId])) {
-    throw new Exception(
-        'invalid name "' . $inputUserId . '" provided'
-    );
-}
-//end of validation
+        $lines = $this->userFile->read();
+        $content = array();
 
-//begin delete user
-reset($users);
+        foreach ($lines as $line) {
+            if ($line == '$users[0][\'channels\'] = array(0);') {
+                $content[] = $line;
+                $content[] = '';
+                break;
+            } else {
+                $content[] = $line;
+            }
+        }
 
-$lines = explode("\n", file_get_contents($pathToUsersPhp));
-$content = array();
+        unset($this->users[0]);
 
-foreach ($lines as $line) {
-    if ($line == '$users[0][\'channels\'] = array(0);') {
-        $content[] = $line;
-        $content[] = '';
-        break;
-    } else {
-        $content[] = $line;
-    }
-}
+        if (empty($this->users)) {
+            throw new Exception(
+                'nothing to delete'
+            );
+        } else {
+            unset($this->users[$this->inputUserId]);
+            $userIds = array_values($this->users);
 
-unset($users[0]);
-if (empty($users)) {
-    echo 'nothing to delete' . PHP_EOL;
-} else {
-    unset($users[$inputUserId]);
-    $users = array_values($users);
+            if (!empty($userIds)) {
+                foreach ($userIds as $id => $user) {
+                    $content[] = '// updated - ' . date('Y-m-d H:i:s');
+                    $content[] = '$users[' . $id . '] = array();';
+                    $content[] = '$users[' . $id . '][\'userRole\'] = ' . $this->roles[$user['userRole']] . ';';
+                    $content[] = '$users[' . $id . '][\'userName\'] = \'' . $user['userName'] . '\';';
+                    $content[] = '$users[' . $id . '][\'password\'] = \'' . $user['password'] . '\';';
+                    $content[] = '$users[' . $id . '][\'channels\'] = array(' . implode(',', $user['channels']) . ');';
+                }
+            }
 
-    if (!empty($users)) {
-        foreach ($users as $id => $user) {
-            $content[] = '// updated - ' . date('Y-m-d H:i:s');
-            $content[] = '$users[' . $id . '] = array();';
-            $content[] = '$users[' . $id . '][\'userRole\'] = ' . $roles[$user['userRole']] . ';';
-            $content[] = '$users[' . $id . '][\'userName\'] = \'' . $user['userName'] . '\';';
-            $content[] = '$users[' . $id . '][\'password\'] = \'' . $user['password'] . '\';';
-            $content[] = '$users[' . $id . '][\'channels\'] = array(' . implode(',', $user['channels']) . ');';
+            $this->userFile->write($content);
         }
     }
 
-    if (file_put_contents($pathToUsersPhp, implode("\n", $content)) === false) {
-        echo 'could not write content to: "' . $pathToUsersPhp . '"' . PHP_EOL;
-    } else {
-        echo 'done' . PHP_EOL;
+    /**
+     * @return array
+     */
+    public function getUsage()
+    {
+        return array(
+            'command: delete [user id]'
+        );
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function verify()
+    {
+        if (count($this->arguments) !== 3) {
+            throw new Exception(
+                'invalid number of arguments provided'
+            );
+        }
+
+        $validUserIds = array_keys($this->users);
+        $inputUserId = (int) $this->arguments[2];
+
+        if (!isset($validUserIds[$inputUserId])) {
+            throw new Exception(
+                'invalid name "' . $inputUserId . '" provided'
+            );
+        }
+
+        $this->inputUserId = $inputUserId;
     }
 }
-//end delete user

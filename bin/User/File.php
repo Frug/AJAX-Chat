@@ -28,7 +28,7 @@ class File
      * @param string|array $content
      * @throws Exception
      */
-    public function appendContent($content)
+    public function append($content)
     {
         if (is_array($content)) {
             $content = implode("\n", $content);
@@ -68,15 +68,6 @@ class File
     }
 
     /**
-     * @return array
-     * @throws Exception
-     */
-    public function getContent()
-    {
-        return explode("\n", file_get_contents($this->getPath()));
-    }
-
-    /**
      * @return string
      * @throws Exception
      */
@@ -92,10 +83,27 @@ class File
     }
 
     /**
+     * @return array
+     * @throws Exception
+     */
+    public function read()
+    {
+        return explode("\n", file_get_contents($this->getPath()));
+    }
+
+    /**
+     * @param string $path
+     */
+    public function setPath($path)
+    {
+        $this->path = (string) $path;
+    }
+
+    /**
      * @param string|array $content
      * @throws Exception
      */
-    public function setContent($content)
+    public function write($content)
     {
         if (is_array($content)) {
             $content = implode("\n", $content);
@@ -108,13 +116,5 @@ class File
                 'can not append content to file "' . $this->getPath() . '"'
             );
         }
-    }
-
-    /**
-     * @param string $path
-     */
-    public function setPath($path)
-    {
-        $this->path = (string) $path;
     }
 }
