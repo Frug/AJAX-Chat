@@ -37,27 +37,12 @@ try {
         exit(1);
     }
 
-    require_once __DIR__ . DIRECTORY_SEPARATOR . 'User' . DIRECTORY_SEPARATOR . 'classLoader.php';
+    $configuration = require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'configuration.php';
+    require_once $configuration['path_to_source_class_loader'];
 
-    $pathToChannelsPhp = realpath(__DIR__) . DIRECTORY_SEPARATOR .
-        '..' . DIRECTORY_SEPARATOR .
-        'chat' . DIRECTORY_SEPARATOR .
-        'lib' . DIRECTORY_SEPARATOR .
-        'data' . DIRECTORY_SEPARATOR .
-        'channels.php';
-
-    $pathToConfigurationPhp = realpath(__DIR__) . DIRECTORY_SEPARATOR .
-        '..' . DIRECTORY_SEPARATOR .
-        'chat' . DIRECTORY_SEPARATOR .
-        'lib' . DIRECTORY_SEPARATOR .
-        'config.php';
-
-    $pathToUsersPhp = realpath(__DIR__) . DIRECTORY_SEPARATOR .
-        '..' . DIRECTORY_SEPARATOR .
-        'chat' . DIRECTORY_SEPARATOR .
-        'lib' . DIRECTORY_SEPARATOR .
-        'data' . DIRECTORY_SEPARATOR .
-        'users.php';
+    $pathToChannelsPhp = $configuration['path_to_public_channels'];
+    $pathToConfigurationPhp = $configuration['path_to_public_configuration'];
+    $pathToUsersPhp = $configuration['path_to_public_users'];
 
     $fileToChannels = new File($pathToChannelsPhp);
     $fileToConfiguration = new File($pathToConfigurationPhp);
