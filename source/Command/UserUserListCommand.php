@@ -4,7 +4,10 @@
  * @since 2014-08-12
  */
 
-class ListCommand extends AbstractUserCommand
+/**
+ * Class UserListCommand
+ */
+class UserListCommand extends AbstractUserCommand
 {
     /**
      * @throws Exception

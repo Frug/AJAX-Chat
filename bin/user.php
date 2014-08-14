@@ -14,10 +14,10 @@ try {
     }
 
     $validCommands = array(
-        'add'       => 'AddCommand',
-        'edit'      => 'EditCommand',
-        'delete'    => 'DeleteCommand',
-        'list'      => 'ListCommand'
+        'add'       => 'UserAddCommand',
+        'edit'      => 'UserEditCommand',
+        'delete'    => 'UserDeleteCommand',
+        'list'      => 'UserListCommand'
     );
     $usage = 'Usage: ' . PHP_EOL .
         basename(__FILE__) . ' [' . implode('|', array_keys($validCommands)) . ']' . PHP_EOL;
@@ -48,7 +48,7 @@ try {
     $commandClass = $validCommands[$currentCommand];
     $fileToUsers = new File($pathToUsersPhp);
 
-    /** @var CommandInterface $command */
+    /** @var UserCommandInterface $command */
     $command = new $commandClass();
 
     $command->setArguments($argv);
