@@ -4,9 +4,6 @@
  * @since 2014-08-12
  */
 
-define('AJAX_CHAT_PATH', realpath(__DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'chat') . DIRECTORY_SEPARATOR);
-require_once AJAX_CHAT_PATH . 'lib' . DIRECTORY_SEPARATOR . 'classes.php';
-
 $isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
 
 try {
@@ -37,8 +34,7 @@ try {
         exit(1);
     }
 
-    $configuration = require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'configuration.php';
-    require_once $configuration['path_to_source_class_loader'];
+    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'initializer.php';
 
     $pathToChannelsPhp = $configuration['path_to_public_channels'];
     $pathToConfigurationPhp = $configuration['path_to_public_configuration'];
@@ -67,16 +63,6 @@ try {
     require_once $pathToChannelsPhp;
     require_once $pathToConfigurationPhp;
     require_once $pathToUsersPhp;
-
-    $roles = array(
-        AJAX_CHAT_GUEST     => 'AJAX_CHAT_GUEST',
-        AJAX_CHAT_USER      => 'AJAX_CHAT_USER',
-        AJAX_CHAT_MODERATOR => 'AJAX_CHAT_MODERATOR',
-        AJAX_CHAT_ADMIN     => 'AJAX_CHAT_ADMIN',
-        AJAX_CHAT_CHATBOT   => 'AJAX_CHAT_CHATBOT',
-        AJAX_CHAT_CUSTOM    => 'AJAX_CHAT_CUSTOM',
-        AJAX_CHAT_BANNED    => 'AJAX_CHAT_BANNED'
-    );
 
     $commandClass = $validCommands[$currentCommand];
 
