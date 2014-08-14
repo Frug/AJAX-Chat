@@ -11,6 +11,7 @@ if (!is_dir($configuration['path_to_backup'])) {
     mkdir($configuration['path_to_backup']);
 }
 
+//@todo code duplication sucks
 if (is_file($configuration['path_to_backup_channels'])) {
     echo 'channels backup file available, will delete it ...' . PHP_EOL;
     unlink($configuration['path_to_backup_channels']);
@@ -26,6 +27,11 @@ if (is_file($configuration['path_to_backup_users'])) {
     unlink($configuration['path_to_backup_users']);
 }
 
+if (is_file($configuration['path_to_backup_version'])) {
+    echo 'version backup file available, will delete it ...' . PHP_EOL;
+    unlink($configuration['path_to_backup_version']);
+}
+
 echo 'creating backup of channels ...' . PHP_EOL;
 copy($configuration['path_to_public_channels'], $configuration['path_to_backup_channels']);
 
@@ -34,6 +40,9 @@ copy($configuration['path_to_public_configuration'], $configuration['path_to_bac
 
 echo 'creating backup of users ...' . PHP_EOL;
 copy($configuration['path_to_public_users'], $configuration['path_to_backup_users']);
+
+echo 'creating backup of version ...' . PHP_EOL;
+copy($configuration['path_to_public_version'], $configuration['path_to_backup_version']);
 
 echo PHP_EOL;
 echo 'done' . PHP_EOL;

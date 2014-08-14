@@ -67,9 +67,18 @@ Features
     - backup system
     - install system
     - restore system
+    - update system
     - add, edit, delete and list existing channels
     - add, edit, delete and list existing users
 
+To Do
+-----
+
+* refactor command to set only arguments they are needing (instead of "argv" something like "array_slice($argv, 2)"
+* create command for backup/install/restore
+* create class FileSystem
+* refactor $configuration
+* refactor bootstrapping (Application, ServiceLocator, Factories, Autoloader)
 
 Help
 ----

@@ -17,7 +17,8 @@ try {
         'all' => true,
         'channels' => true,
         'configuration' => true,
-        'users' => true
+        'users' => true,
+        'version' => true
     );
     $usage = 'Usage: ' . PHP_EOL .
         basename(__FILE__) . ' [' . implode('|', array_keys($validCommands)) . ']' . PHP_EOL;
@@ -39,12 +40,14 @@ try {
     $restoreChannels = false;
     $restoreConfiguration = false;
     $restoreUsers = false;
+    $restoreVersion = false;
 
     switch ($currentCommand) {
         case 'all':
             $restoreChannels = true;
             $restoreConfiguration = true;
             $restoreUsers = true;
+            $restoreVersion = true;
             break;
         case 'channels':
             $restoreChannels = true;
@@ -55,9 +58,13 @@ try {
         case 'users':
             $restoreUsers = true;
             break;
+        case 'version':
+            $restoreVersion = true;
+            break;
     }
 
     //@todo validate return statement of copy and throw exceptions when needed
+    //@todo code duplication sucks
     if ($restoreChannels) {
         if (is_file($configuration['path_to_backup_channels'])) {
             echo 'channels backup file available, will restore it ...' . PHP_EOL;
@@ -82,6 +89,15 @@ try {
             copy($configuration['path_to_backup_users'], $configuration['path_to_public_users']);
         } else {
             echo 'no users backup file available ...' . PHP_EOL;
+        }
+    }
+
+    if ($restoreVersion) {
+        if (is_file($configuration['path_to_backup_version'])) {
+            echo 'version backup file available, will restore it ...' . PHP_EOL;
+            copy($configuration['path_to_backup_version'], $configuration['path_to_public_version']);
+        } else {
+            echo 'no version backup file available ...' . PHP_EOL;
         }
     }
 
