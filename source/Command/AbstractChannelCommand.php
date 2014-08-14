@@ -12,7 +12,7 @@ abstract class AbstractChannelCommand extends AbstractCommand implements Channel
     /**
      * @var File
      */
-    protected $channelFile;
+    protected $file;
 
     /**
      * @var array
@@ -32,6 +32,6 @@ abstract class AbstractChannelCommand extends AbstractCommand implements Channel
      */
     public function setChannelFile(File $file)
     {
-        $this->channelFile = $file;
+        $this->file = $file;
     }
 }

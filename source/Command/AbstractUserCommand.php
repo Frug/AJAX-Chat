@@ -22,7 +22,7 @@ abstract class AbstractUserCommand extends AbstractCommand implements UserComman
     /**
      * @var File
      */
-    protected $userFile;
+    protected $file;
 
     /**
      * @var array
@@ -50,7 +50,7 @@ abstract class AbstractUserCommand extends AbstractCommand implements UserComman
      */
     public function setUserFile(File $userFile)
     {
-        $this->userFile = $userFile;
+        $this->file = $userFile;
     }
 
     /**

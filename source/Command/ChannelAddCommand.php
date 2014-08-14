@@ -23,12 +23,12 @@ class ChannelAddCommand extends AbstractChannelCommand
         $nextKey = (key($this->channels) + 1);
         reset($this->channels);
 
-        $content = $this->channelFile->read();
+        $content = $this->file->read();
 
         $content[] = '// added - ' . date('Y-m-d H:i:s');
         $content[] = '$channels[' . $nextKey . '] = \'' . $this->inputName . '\';';
 
-        $this->channelFile->write($content);
+        $this->file->write($content);
     }
 
     /**

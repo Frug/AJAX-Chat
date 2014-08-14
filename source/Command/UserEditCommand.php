@@ -32,7 +32,7 @@ class UserEditCommand extends AbstractUserCommand
     /**
      * @var int
      */
-    private $inputUserId;
+    private $inputId;
 
     /**
      * @throws Exception
@@ -41,13 +41,13 @@ class UserEditCommand extends AbstractUserCommand
     {
         reset($this->users);
 
-        $lines = $this->userFile->read();
+        $lines = $this->file->read();
         $content = array();
         $contentAfterCurrentUser = array();
         $string = new String();
 
         $foundCurrentUserContent = false;
-        $linePrefixToSearchFor = '$users[' . $this->inputUserId . '][';
+        $linePrefixToSearchFor = '$users[' . $this->inputId . '][';
 
         foreach ($lines as $line) {
             if ($string->startsWith($line, $linePrefixToSearchFor)) {
@@ -61,16 +61,16 @@ class UserEditCommand extends AbstractUserCommand
             }
         }
 
-        $content[] = '$users[' . $this->inputUserId . '][\'userRole\'] = ' . $this->roles[$this->inputRole] . ';';
-        $content[] = '$users[' . $this->inputUserId . '][\'userName\'] = \'' . $this->inputName . '\';';
-        $content[] = '$users[' . $this->inputUserId . '][\'password\'] = \'' . $this->inputPassword . '\';';
-        $content[] = '$users[' . $this->inputUserId . '][\'channels\'] = array(' . implode(',', $this->inputChannels) . ');';
+        $content[] = '$users[' . $this->inputId . '][\'userRole\'] = ' . $this->roles[$this->inputRole] . ';';
+        $content[] = '$users[' . $this->inputId . '][\'userName\'] = \'' . $this->inputName . '\';';
+        $content[] = '$users[' . $this->inputId . '][\'password\'] = \'' . $this->inputPassword . '\';';
+        $content[] = '$users[' . $this->inputId . '][\'channels\'] = array(' . implode(',', $this->inputChannels) . ');';
 
         foreach ($contentAfterCurrentUser as $line) {
             $content[] = $line;
         }
 
-        $this->userFile->write($content);
+        $this->file->write($content);
     }
 
     /**
@@ -79,7 +79,7 @@ class UserEditCommand extends AbstractUserCommand
     public function getUsage()
     {
         return array(
-            ' "user id" "login name" "password" "role" "channels"',
+            ' "id" "login name" "password" "role" "channels"',
             '   available channels: ' . implode(',', array_keys($this->channels)),
             '   available roles: ' . implode(',', array_keys($this->roles)),
             '   available users: ' . implode(',', array_keys($this->users))
@@ -143,11 +143,11 @@ class UserEditCommand extends AbstractUserCommand
 
         if (($userId === 0)) {
             throw new Exception(
-                'no user id provided'
+                'no id provided'
             );
         } else if (!isset($this->users[$userId])) {
             throw new Exception(
-                'invalid user id provided'
+                'invalid id provided'
             );
         }
 
@@ -155,6 +155,6 @@ class UserEditCommand extends AbstractUserCommand
         $this->inputName = $name;
         $this->inputPassword = $password;
         $this->inputRole = $role;
-        $this->inputUserId = $userId;
+        $this->inputId = $userId;
     }
 }
