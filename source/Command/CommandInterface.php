@@ -25,26 +25,6 @@ interface CommandInterface
     public function setArguments(array $arguments);
 
     /**
-     * @param array $channels
-     */
-    public function setChannels(array $channels);
-
-    /**
-     * @param array $roles
-     */
-    public function setRoles(array $roles);
-
-    /**
-     * @param \File $userFile
-     */
-    public function setUserFile(File $userFile);
-
-    /**
-     * @param array $users
-     */
-    public function setUsers(array $users);
-
-    /**
      * @throws Exception
      */
     public function verify();

@@ -7,7 +7,7 @@
 /**
  * Class EditCommand
  */
-class EditCommand extends AbstractCommand
+class EditCommand extends AbstractUserCommand
 {
     /**
      * @var array

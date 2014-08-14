@@ -7,7 +7,7 @@
 /**
  * Class DeleteCommand
  */
-class DeleteCommand extends AbstractCommand
+class DeleteCommand extends AbstractUserCommand
 {
     /**
      * @var int
