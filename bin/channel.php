@@ -1,7 +1,7 @@
 <?php
 /**
  * @author stev leibelt <artodeto@bazzline.net>
- * @since 2014-08-12
+ * @since 2014-08-14
  */
 
 $isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
@@ -14,10 +14,10 @@ try {
     }
 
     $validCommands = array(
-        'add'       => 'UserAddCommand',
-        'edit'      => 'UserEditCommand',
-        'delete'    => 'UserDeleteCommand',
-        'list'      => 'UserListCommand'
+        'add'       => 'ChannelAddCommand',
+        'edit'      => 'ChannelEditCommand',
+        'delete'    => 'ChannelDeleteCommand',
+        'list'      => 'ChannelListCommand'
     );
     $usage = 'Usage: ' . PHP_EOL .
         basename(__FILE__) . ' [' . implode('|', array_keys($validCommands)) . ']' . PHP_EOL;
@@ -38,22 +38,18 @@ try {
     require_once 'install.php';
 
     $pathToChannelsPhp = $configuration['path_to_public_channels'];
-    $pathToUsersPhp = $configuration['path_to_public_users'];
 
     require_once $pathToChannelsPhp;
-    require_once $pathToUsersPhp;
 
     $commandClass = $validCommands[$currentCommand];
-    $fileToUsers = new File($pathToUsersPhp);
+    $fileToChannels = new File($pathToChannelsPhp);
 
-    /** @var UserCommandInterface $command */
+    /** @var ChannelCommandInterface $command */
     $command = new $commandClass();
 
     $command->setArguments($argv);
     $command->setChannels($channels);
-    $command->setRoles($roles);
-    $command->setUsers($users);
-    $command->setUserFile($fileToUsers);
+    $command->setChannelFile($fileToChannels);
 
     try {
         $command->verify();
