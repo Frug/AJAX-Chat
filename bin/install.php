@@ -6,6 +6,10 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+if (!is_dir($configuration['path_to_examples'])) {
+    mkdir($configuration['path_to_examples']);
+}
+
 if (!is_file($configuration['path_to_public_channels'])) {
     echo 'no channels file available, will create one ...' . PHP_EOL;
     copy($configuration['path_to_example_channels'], $configuration['path_to_public_channels']);
