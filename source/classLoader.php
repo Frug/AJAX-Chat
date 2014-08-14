@@ -15,6 +15,7 @@ require_once $pathToCommand . 'UserCommandInterface.php';
 require_once $pathToCommand . 'AbstractCommand.php';
 require_once $pathToCommand . 'AbstractChannelCommand.php';
 require_once $pathToCommand . 'AbstractUserCommand.php';
+require_once $pathToCommand . 'ChannelAddCommand.php';
 require_once $pathToCommand . 'ChannelListCommand.php';
 require_once $pathToCommand . 'UserAddCommand.php';
 require_once $pathToCommand . 'UserDeleteCommand.php';
