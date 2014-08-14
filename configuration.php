@@ -4,8 +4,24 @@
  * @since 2014-08-13 
  */
 
+//@todo refactor
+/*
+what about
 return array(
-    'path_to_examples' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example',
+    'backup' => array(
+        'path' => '',
+        'file' => array(
+            'channels' => ''
+        )
+    )
+)
+*/
+return array(
+    'path_to_backup' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'backup',
+    'path_to_backup_channels' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'backup' . DIRECTORY_SEPARATOR . 'channels.php',
+    'path_to_backup_configuration' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'backup' . DIRECTORY_SEPARATOR . 'config.php',
+    'path_to_backup_users' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'backup' . DIRECTORY_SEPARATOR . 'users.php',
+    'path_to_example' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example',
     'path_to_example_channels' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example' . DIRECTORY_SEPARATOR . 'channels.php',
     'path_to_example_configuration' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example' . DIRECTORY_SEPARATOR . 'channels.php',
     'path_to_example_users' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'config.php.example',

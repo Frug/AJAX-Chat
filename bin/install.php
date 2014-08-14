@@ -6,8 +6,8 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-if (!is_dir($configuration['path_to_examples'])) {
-    mkdir($configuration['path_to_examples']);
+if (!is_dir($configuration['path_to_example'])) {
+    mkdir($configuration['path_to_example']);
 }
 
 if (!is_file($configuration['path_to_public_channels'])) {
@@ -24,3 +24,6 @@ if (!is_file($configuration['path_to_public_users'])) {
     echo 'no users file available, will create one ...' . PHP_EOL;
     copy($configuration['path_to_example_users'], $configuration['path_to_public_users']);
 }
+
+echo PHP_EOL;
+echo 'done' . PHP_EOL;
