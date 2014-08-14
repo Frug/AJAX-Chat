@@ -66,6 +66,7 @@ Features
 - Command Line Utilities to:
     - backup system
     - install system
+    - restore system
     - add, edit, delete and list existing channels
     - add, edit, delete and list existing users
 

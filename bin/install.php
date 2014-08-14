@@ -6,6 +6,7 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+//@todo validate return statement of mkdir|copy and throw exceptions when needed
 if (!is_dir($configuration['path_to_example'])) {
     mkdir($configuration['path_to_example']);
 }
