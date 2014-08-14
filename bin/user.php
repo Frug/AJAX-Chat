@@ -35,36 +35,18 @@ try {
     }
 
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+    require_once 'install.php';
 
     $pathToChannelsPhp = $configuration['path_to_public_channels'];
     $pathToConfigurationPhp = $configuration['path_to_public_configuration'];
     $pathToUsersPhp = $configuration['path_to_public_users'];
-
-    $fileToChannels = new File($pathToChannelsPhp);
-    $fileToConfiguration = new File($pathToConfigurationPhp);
-    $fileToUsers = new File($pathToUsersPhp);
-
-    //copy file if not available
-    if (!$fileToChannels->exists()) {
-        echo 'no channels file available, will create one ...' . PHP_EOL;
-        $fileToChannels->copy($pathToChannelsPhp . '.example');
-    }
-
-    if (!$fileToConfiguration->exists()) {
-        echo 'no configuration file available, will create one ...' . PHP_EOL;
-        $fileToConfiguration->copy($pathToConfigurationPhp . '.example');
-    }
-
-    if (!$fileToUsers->exists()) {
-        echo 'no users file available, will create one ...' . PHP_EOL;
-        $fileToUsers->copy($pathToUsersPhp . '.example');
-    }
 
     require_once $pathToChannelsPhp;
     require_once $pathToConfigurationPhp;
     require_once $pathToUsersPhp;
 
     $commandClass = $validCommands[$currentCommand];
+    $fileToUsers = new File($pathToUsersPhp);
 
     /** @var CommandInterface $command */
     $command = new $commandClass();

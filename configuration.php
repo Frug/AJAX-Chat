@@ -5,6 +5,9 @@
  */
 
 return array(
+    'path_to_example_channels' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example' . DIRECTORY_SEPARATOR . 'channels.php',
+    'path_to_example_configuration' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example' . DIRECTORY_SEPARATOR . 'channels.php',
+    'path_to_example_users' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'config.php.example',
     'path_to_public' => __DIR__ . DIRECTORY_SEPARATOR . 'chat',
     'path_to_public_channels' => __DIR__ .  DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'channels.php',
     'path_to_public_classes' => __DIR__ .  DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'classes.php',
