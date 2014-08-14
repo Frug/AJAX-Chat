@@ -34,7 +34,7 @@ try {
         exit(1);
     }
 
-    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'initializer.php';
+    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
     $pathToChannelsPhp = $configuration['path_to_public_channels'];
     $pathToConfigurationPhp = $configuration['path_to_public_configuration'];
