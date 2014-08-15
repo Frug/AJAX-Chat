@@ -5,9 +5,9 @@
  */
 
 /**
- * Class AbstractCommand
+ * Class Command_AbstractCommandCommand
  */
-abstract class AbstractCommand implements CommandInterface
+abstract class Command_AbstractCommandCommand implements Command_CommandInterface
 {
     /**
      * @var array

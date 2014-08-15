@@ -5,9 +5,9 @@
  */
 
 /**
- * Class UserAddCommand
+ * Class UserAddAbstractCommand
  */
-class UserAddCommand extends AbstractUserCommand
+class UserAddAbstractCommand extends Command__AbstractUserCommand
 {
     /**
      * @var array

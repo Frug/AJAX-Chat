@@ -14,10 +14,10 @@ try {
     }
 
     $validCommands = array(
-        'add'       => 'ChannelAddCommand',
-        'edit'      => 'ChannelEditCommand',
-        'delete'    => 'ChannelDeleteCommand',
-        'list'      => 'ChannelListCommand'
+        'add'       => 'Command_Channel_Add',
+        'edit'      => 'Command_Channel_Edit',
+        'delete'    => 'Command_Channel_Delete',
+        'list'      => 'Command_Channel_List'
     );
     $usage = 'Usage: ' . PHP_EOL .
         basename(__FILE__) . ' [' . implode('|', array_keys($validCommands)) . ']' . PHP_EOL;
@@ -44,7 +44,7 @@ try {
     $commandClass = $validCommands[$currentCommand];
     $fileToChannels = new File($pathToChannelsPhp);
 
-    /** @var ChannelCommandInterface $command */
+    /** @var Command_Channel_Command_CommandInterface $command */
     $command = new $commandClass();
 
     $command->setArguments($argv);

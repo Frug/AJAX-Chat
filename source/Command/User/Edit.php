@@ -5,9 +5,9 @@
  */
 
 /**
- * Class UserEditCommand
+ * Class Command_User_Edit
  */
-class UserEditCommand extends AbstractUserCommand
+class Command_User_Edit extends Command__AbstractUserCommand
 {
     /**
      * @var array

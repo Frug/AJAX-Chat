@@ -5,9 +5,9 @@
  */
 
 /**
- * Class AbstractChannelCommand
+ * Class Command_Channel_Command_AbstractCommand
  */
-abstract class AbstractChannelCommand extends AbstractCommand implements ChannelCommandInterface
+abstract class Command_Channel_Command_AbstractCommand extends Command_AbstractCommandCommand implements Command_Channel_Command_CommandInterface
 {
     /**
      * @var File

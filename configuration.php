@@ -33,5 +33,5 @@ return array(
     'path_to_public_configuration' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'config.php',
     'path_to_public_users' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'users.php',
     'path_to_public_version' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'version.php',
-    'path_to_source_class_loader' => __DIR__ . DIRECTORY_SEPARATOR . 'source' . DIRECTORY_SEPARATOR . 'classLoader.php'
+    'path_to_source_class_loader' => __DIR__ . DIRECTORY_SEPARATOR . 'classLoader.php'
 );

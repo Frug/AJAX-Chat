@@ -5,9 +5,9 @@
  */
 
 /**
- * Interface ChannelCommandInterface
+ * Interface Command_Channel_Command_CommandInterface
  */
-interface ChannelCommandInterface extends CommandInterface
+interface Command_Channel_Command_CommandInterface extends Command_CommandInterface
 {
     /**
      * @param array $channels

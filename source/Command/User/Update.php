@@ -5,9 +5,9 @@
  */
 
 /**
- * Class UpdateCommand
+ * Class Command_User_Update
  */
-class UpdateCommand extends AbstractCommand
+class Command_User_Update extends Command_AbstractCommandCommand
 {
     /**
      * @throws Exception

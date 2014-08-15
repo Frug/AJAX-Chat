@@ -5,9 +5,9 @@
  */
 
 /**
- * Class ChannelAddCommand
+ * Class Command_Channel_Add
  */
-class ChannelAddCommand extends AbstractChannelCommand
+class Command_Channel_Add extends Command_Channel_Command_AbstractCommand
 {
     /**
      * @var string

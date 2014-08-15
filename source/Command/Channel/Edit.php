@@ -5,29 +5,14 @@
  */
 
 /**
- * Class ChannelEditCommand
+ * Class Command_Channel_Edit
  */
-class ChannelEditCommand extends AbstractChannelCommand
+class Command_Channel_Edit extends Command_Channel_Command_AbstractCommand
 {
-    /**
-     * @var array
-     */
-    private $inputChannels;
-
     /**
      * @var string
      */
     private $inputName;
-
-    /**
-     * @var string
-     */
-    private $inputPassword;
-
-    /**
-     * @var string
-     */
-    private $inputRole;
 
     /**
      * @var int

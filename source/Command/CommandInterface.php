@@ -5,9 +5,9 @@
  */
 
 /**
- * Interface CommandInterface
+ * Interface Command_CommandInterface
  */
-interface CommandInterface
+interface Command_CommandInterface
 {
     /**
      * @throws Exception

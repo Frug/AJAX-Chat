@@ -1,13 +1,13 @@
 <?php
 /**
  * @author stev leibelt <artodeto@bazzline.net>
- * @since 2014-08-14
+ * @since 2014-08-12
  */
 
 /**
- * Class ChannelDeleteCommand
+ * Class Command_User_Delete
  */
-class ChannelDeleteCommand extends AbstractChannelCommand
+class Command_User_Delete extends Command__AbstractUserCommand
 {
     /**
      * @var int
@@ -19,31 +19,39 @@ class ChannelDeleteCommand extends AbstractChannelCommand
      */
     public function execute()
     {
-        reset($this->channels);
+        reset($this->users);
 
         $lines = $this->file->read();
         $content = array();
 
         foreach ($lines as $line) {
-            if ($line == '// Sample channel list:') {
+            if ($line == '$users[0][\'channels\'] = array(0);') {
                 $content[] = $line;
+                $content[] = '';
                 break;
             } else {
                 $content[] = $line;
             }
         }
 
-        if (empty($this->channels)) {
+        unset($this->users[0]);
+
+        if (empty($this->users)) {
             throw new Exception(
                 'nothing to delete'
             );
         } else {
-            unset($this->channels[$this->inputId]);
-            $ids = array_values($this->channels);
+            unset($this->users[$this->inputId]);
+            $ids = array_values($this->users);
 
             if (!empty($ids)) {
-                foreach ($ids as $id => $name) {
-                    $content[] = '$channels[' . $id . '] = \'' . $name . '\';';
+                foreach ($ids as $id => $user) {
+                    $content[] = '// updated - ' . date('Y-m-d H:i:s');
+                    $content[] = '$users[' . $id . '] = array();';
+                    $content[] = '$users[' . $id . '][\'userRole\'] = ' . $this->roles[$user['userRole']] . ';';
+                    $content[] = '$users[' . $id . '][\'userName\'] = \'' . $user['userName'] . '\';';
+                    $content[] = '$users[' . $id . '][\'password\'] = \'' . $user['password'] . '\';';
+                    $content[] = '$users[' . $id . '][\'channels\'] = array(' . implode(',', $user['channels']) . ');';
                 }
             }
 
@@ -57,8 +65,8 @@ class ChannelDeleteCommand extends AbstractChannelCommand
     public function getUsage()
     {
         return array(
-            'command: delete [channel id]',
-            '   available channels: ' . implode(',', array_keys($this->channels))
+            'command: delete [user id]',
+            '   available users: ' . implode(',', array_keys($this->users))
         );
     }
 
@@ -73,7 +81,7 @@ class ChannelDeleteCommand extends AbstractChannelCommand
             );
         }
 
-        $validIds = array_keys($this->channels);
+        $validIds = array_keys($this->users);
         $inputId = (int) $this->arguments[2];
 
         if (!isset($validIds[$inputId])) {

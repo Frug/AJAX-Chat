@@ -1,36 +1,40 @@
 <?php
 /**
  * @author stev leibelt <artodeto@bazzline.net>
- * @since 2014-08-14
+ * @since 2014-08-12
  */
 
 /**
- * Class ChannelListCommand
+ * Class Command_User_List
  */
-class ChannelListCommand extends AbstractChannelCommand
+class Command_User_List extends Command__AbstractUserCommand
 {
     /**
      * @throws Exception
      */
     public function execute()
     {
-        $numberOfChannels = count($this->channels);
-        $iterator = $numberOfChannels;
+        unset($this->users[0]);
+        //remove initial user since we are not allowed to remove this user
+        $numberOfUsers = count($this->users);
+        $iterator = $numberOfUsers;
 
-        echo 'number of channels: ' . $numberOfChannels . PHP_EOL;
+        echo 'number of users: ' . $numberOfUsers . PHP_EOL;
 
         //@todo implement output styling
-        if ($numberOfChannels > 0) {
+        if ($numberOfUsers > 0) {
             echo PHP_EOL;
-            echo 'id | name ' . PHP_EOL;
-            echo '--------' . PHP_EOL;
+            echo 'id | name | role | channels' . PHP_EOL;
+            echo '----------------' . PHP_EOL;
 
-            foreach ($this->channels as $id => $name) {
+            foreach ($this->users as $id => $user) {
                 echo implode(
                     ' | ',
                     array(
                         $id,
-                        $name
+                        $user['userName'],
+                        $user['userRole'],
+                        implode(',', $user['channels'])
                     )
                 );
 
