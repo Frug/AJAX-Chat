@@ -32,4 +32,8 @@ if (function_exists('spl_autoload_register')) {
         }
     }
     spl_autoload_register('classLoader');
+} else {
+    throw new Exception(
+        'spl_autoload_register function is missing but needed'
+    );
 }
