@@ -7,26 +7,29 @@
 if (function_exists('spl_autoload_register')) {
     //own autoloader - since support is from php 5 up, no namespaces are available so back to pear style
     function classLoader($className) {
-        $pathToScript = __DIR__;
-
-        $directories = array(
-            $pathToScript . DIRECTORY_SEPARATOR . 'source'
-        );
-
         $classNameAsPath = str_replace('_', DIRECTORY_SEPARATOR, $className);
+        $directories = array(
+            __DIR__ . DIRECTORY_SEPARATOR . 'source'
+        );
+        $isLoaded = false;
+        $filePath = '';
 
         foreach ($directories as $directory) {
             $filePath = $directory . DIRECTORY_SEPARATOR . $classNameAsPath . '.php';
 
             if (is_file($filePath)) {
                 require_once $filePath;
+                $isLoaded = true;
                 break;
             }
         }
 
-        throw new Exception(
-            'can not load class "' . $className . '"'
-        );
+        if (!$isLoaded) {
+            throw new Exception(
+                'can not load class "' . $className . '"' . PHP_EOL .
+                'last try with path "' . $filePath . '"'
+            );
+        }
     }
     spl_autoload_register('classLoader');
 }

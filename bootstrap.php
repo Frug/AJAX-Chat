@@ -14,8 +14,8 @@ $configuration = require_once __DIR__ . DIRECTORY_SEPARATOR . 'configuration.php
 define('AJAX_CHAT_PATH', $configuration['public']['path'] . DIRECTORY_SEPARATOR);
 
 //chat files
-$pathToPublicClasses = $configuration['public']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['file']['classes'];
-$pathToPublicConfiguration = $configuration['public']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['file']['configuration'];
+$pathToPublicClasses = $configuration['public']['lib']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['classes'];
+$pathToPublicConfiguration = $configuration['public']['lib']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration'];
 
 require_once $pathToPublicClasses;
 

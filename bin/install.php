@@ -6,15 +6,22 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-//@todo validate return statement of mkdir|copy and throw exceptions when needed
-if (!is_dir($configuration['path_to_example'])) {
-    mkdir($configuration['path_to_example']);
+$pathToExampleDirectory = $configuration['public']['path'];
+$pathToPublicDataDirectory = $configuration['public']['data']['path'];
+
+//@todo see backup.php
+//->chat/lib/data/
+if (!is_dir($pathToPublicDataDirectory)) {
+    mkdir($pathToPublicDataDirectory);
 }
 
 //@todo code duplication sucks
-if (!is_file($configuration['path_to_public_channels'])) {
+if (!is_file($pathToPublicDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels'])) {
     echo 'no channels file available, will create one ...' . PHP_EOL;
-    copy($configuration['path_to_example_channels'], $configuration['path_to_public_channels']);
+    copy(
+        $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['channels'],
+        $pathToPublicDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+    );
 }
 
 if (!is_file($configuration['path_to_public_configuration'])) {

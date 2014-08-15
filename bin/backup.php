@@ -6,58 +6,49 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-//@todo validate return statement of mkdir|unlink|copy and throw exceptions when needed
 $pathToBackupDirectory = $configuration['backup']['path'];
-$pathToPublicDirectory = $configuration['public']['path'];
+$pathToDataDirectory = $configuration['public']['data']['path'];
+$pathToLibDirectory = $configuration['public']['lib']['path'];
 
-if (!is_dir($pathToBackupDirectory)) {
-    mkdir($pathToBackupDirectory);
+$filesystem = new Filesystem();
+
+if (!$filesystem->isDirectory($pathToBackupDirectory)) {
+    $filesystem->createDirectory($pathToBackupDirectory);
 }
 
-//@todo code duplication sucks
-if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'])) {
-    echo 'channels backup file available, will delete it ...' . PHP_EOL;
-    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels']);
-}
-
-if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration'])) {
-    echo 'configuration backup file available, will delete it ...' . PHP_EOL;
-    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration']);
-}
-
-if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'])) {
-    echo 'users backup file available, will delete it ...' . PHP_EOL;
-    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users']);
-}
-
-if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version'])) {
-    echo 'version backup file available, will delete it ...' . PHP_EOL;
-    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version']);
-}
-
-echo 'creating backup of channels ...' . PHP_EOL;
-copy(
-    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['channels'],
-    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels']
+$identifierToPaths = array(
+    'channels' => array(
+        'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'],
+        'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+    ),
+    'configuration'  => array(
+        'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration'],
+        'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration']
+    ),
+    'users' => array(
+        'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'],
+        'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users']
+    ),
+    'version' => array(
+        'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version'],
+        'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['version']
+    ),
 );
 
-echo 'creating backup of configuration ...' . PHP_EOL;
-copy(
-    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['configuration'],
-    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration']
-);
+foreach ($identifierToPaths as $identifier => $paths) {
+    if (is_file($paths['backup'])) {
+        echo $identifier . ' backup file available, will delete it ...' . PHP_EOL;
+        $filesystem->deleteFile($paths['backup']);
+    }
+}
 
-echo 'creating backup of users ...' . PHP_EOL;
-copy(
-    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['users'],
-    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users']
-);
-
-echo 'creating backup of version ...' . PHP_EOL;
-copy(
-    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['version'],
-    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version']
-);
+foreach ($identifierToPaths as $identifier => $paths) {
+    echo 'creating backup of ' . $identifier . ' ...' . PHP_EOL;
+    $filesystem->copy(
+        $paths['public'],
+        $paths['backup']
+    );
+}
 
 echo PHP_EOL;
 echo 'done' . PHP_EOL;
