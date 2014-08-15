@@ -34,16 +34,19 @@ class Command_User_Delete extends Command_User_AbstractCommand
             }
         }
 
+        unset($this->users[0]);
+
         if (empty($this->users)) {
             throw new Exception(
                 'nothing to delete'
             );
         } else {
             unset($this->users[$this->inputId]);
-            $ids = array_values($this->users);
+            $idToUser = array_values($this->users);
 
-            if (!empty($ids)) {
-                foreach ($ids as $id => $user) {
+            if (!empty($idToUser)) {
+                foreach ($idToUser as $id => $user) {
+                    ++$id; //we have to increase by one since we have to prevent overwriting the "0" user
                     $content[] = '// updated - ' . date('Y-m-d H:i:s');
                     $content[] = '$users[' . $id . '] = array();';
                     $content[] = '$users[' . $id . '][\'userRole\'] = ' . $this->roles[$user['userRole']] . ';';
@@ -62,9 +65,12 @@ class Command_User_Delete extends Command_User_AbstractCommand
      */
     public function getUsage()
     {
+        $users = $this->users;
+        unset($users[0]);
+
         return array(
             'command: delete [user id]',
-            '   available users: ' . implode(',', array_keys($this->users))
+            '   available users: ' . implode(',', array_keys($users))
         );
     }
 
@@ -84,7 +90,13 @@ class Command_User_Delete extends Command_User_AbstractCommand
 
         if (!isset($validIds[$inputId])) {
             throw new Exception(
-                'invalid name "' . $inputId . '" provided'
+                'invalid id "' . $inputId . '" provided'
+            );
+        }
+
+        if ($inputId === 0) {
+            throw new Exception(
+                'you are not allowed to delete id "' . $inputId . '"'
             );
         }
 
