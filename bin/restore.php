@@ -37,70 +37,66 @@ try {
 
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-    $restoreChannels = false;
-    $restoreConfiguration = false;
-    $restoreUsers = false;
-    $restoreVersion = false;
+    $filesystem = new Filesystem();
+    $identifiers = array();
+
+    $pathToBackupDirectory = $configuration['backup']['path'];
+    $pathToDataDirectory = $configuration['public']['data']['path'];
+    $pathToLibDirectory = $configuration['public']['lib']['path'];
 
     switch ($currentCommand) {
         case 'all':
-            $restoreChannels = true;
-            $restoreConfiguration = true;
-            $restoreUsers = true;
-            $restoreVersion = true;
+            $identifiers = array(
+                'channels',
+                'configuration',
+                'users',
+                'version'
+            );
             break;
         case 'channels':
-            $restoreChannels = true;
+            $identifiers[] = 'channels';
             break;
         case 'configuration':
-            $restoreConfiguration = true;
+            $identifiers[] = 'configuration';
             break;
         case 'users':
-            $restoreUsers = true;
+            $identifiers[] = 'users';
             break;
         case 'version':
-            $restoreVersion = true;
+            $identifiers[] = 'version';
             break;
     }
 
-    //@todo validate return statement of copy and throw exceptions when needed
-    //@todo code duplication sucks
-    if ($restoreChannels) {
-        if (is_file($configuration['path_to_backup_channels'])) {
-            echo 'channels backup file available, will restore it ...' . PHP_EOL;
-            copy($configuration['path_to_backup_channels'], $configuration['path_to_public_channels']);
+    $identifierToPaths = array(
+        'channels' => array(
+            'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+        ),
+        'configuration'  => array(
+            'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration'],
+            'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration']
+        ),
+        'users' => array(
+            'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users']
+        ),
+        'version' => array(
+            'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['version']
+        ),
+    );
+
+    foreach ($identifiers as $identifier) {
+        if ($filesystem->isFile($identifierToPaths[$identifier]['backup'])) {
+            echo $identifier . ' backup file available, will restore it ...' . PHP_EOL;
+            $filesystem->copy(
+                $identifierToPaths[$identifier]['backup'],
+                $identifierToPaths[$identifier]['public']
+            );
         } else {
-            echo 'no channels backup file available ...' . PHP_EOL;
+            echo 'no ' . $identifier .' backup file available ...' . PHP_EOL;
         }
     }
-
-    if ($restoreConfiguration) {
-        if (is_file($configuration['path_to_backup_configuration'])) {
-            echo 'configuration backup file available, will restore it ...' . PHP_EOL;
-            copy($configuration['path_to_backup_configuration'], $configuration['path_to_public_configuration']);
-        } else {
-            echo 'no configuration backup file available ...' . PHP_EOL;
-        }
-    }
-
-    if ($restoreUsers) {
-        if (is_file($configuration['path_to_backup_users'])) {
-            echo 'users backup file available, will restore it ...' . PHP_EOL;
-            copy($configuration['path_to_backup_users'], $configuration['path_to_public_users']);
-        } else {
-            echo 'no users backup file available ...' . PHP_EOL;
-        }
-    }
-
-    if ($restoreVersion) {
-        if (is_file($configuration['path_to_backup_version'])) {
-            echo 'version backup file available, will restore it ...' . PHP_EOL;
-            copy($configuration['path_to_backup_version'], $configuration['path_to_public_version']);
-        } else {
-            echo 'no version backup file available ...' . PHP_EOL;
-        }
-    }
-
 } catch (Exception $exception) {
     echo 'error occurred' . PHP_EOL;
     echo '----------------' . PHP_EOL;
