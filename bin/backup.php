@@ -44,7 +44,7 @@ try {
     );
 
     foreach ($identifierToPaths as $identifier => $paths) {
-        if (is_file($paths['backup'])) {
+        if ($filesystem->isFile($paths['backup'])) {
             echo $identifier . ' backup file available, will delete it ...' . PHP_EOL;
             $filesystem->deleteFile($paths['backup']);
         }

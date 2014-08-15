@@ -6,38 +6,57 @@
 
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-$pathToExampleDirectory = $configuration['public']['path'];
-$pathToPublicDataDirectory = $configuration['public']['data']['path'];
+$isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
 
-//@todo see backup.php
-//->chat/lib/data/
-if (!is_dir($pathToPublicDataDirectory)) {
-    mkdir($pathToPublicDataDirectory);
-}
+try {
+    if ($isNotCalledFromCommandLineInterface) {
+        throw new Exception(
+            'command line script only '
+        );
+    }
+    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-//@todo code duplication sucks
-if (!is_file($pathToPublicDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels'])) {
-    echo 'no channels file available, will create one ...' . PHP_EOL;
-    copy(
-        $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['channels'],
-        $pathToPublicDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+    $pathToExampleDirectory = $configuration['example']['path'];
+    $pathToDataDirectory = $configuration['public']['data']['path'];
+    $pathToLibDirectory = $configuration['public']['lib']['path'];
+
+    $filesystem = new Filesystem();
+
+    $identifierToPaths = array(
+        'channels' => array(
+            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['channels'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+        ),
+        'configuration'  => array(
+            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['configuration'],
+            'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration']
+        ),
+        'users' => array(
+            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['users'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users']
+        ),
+        'version' => array(
+            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['version'],
+            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['version']
+        ),
     );
-}
 
-if (!is_file($configuration['path_to_public_configuration'])) {
-    echo 'no configuration file available, will create one ...' . PHP_EOL;
-    copy($configuration['path_to_example_configuration'], $configuration['path_to_public_configuration']);
-}
+    foreach ($identifierToPaths as $identifier => $paths) {
+        if (!$filesystem->isFile($paths['public'])) {
+            echo 'no ' . $identifier . ' file available, will create one ...' . PHP_EOL;
+            $filesystem->copy(
+                $paths['example'],
+                $paths['public']
+            );
+        }
+    }
 
-if (!is_file($configuration['path_to_public_users'])) {
-    echo 'no users file available, will create one ...' . PHP_EOL;
-    copy($configuration['path_to_example_users'], $configuration['path_to_public_users']);
+    echo PHP_EOL;
+    echo 'done' . PHP_EOL;
+} catch (Exception $exception) {
+    echo 'error occurred' . PHP_EOL;
+    echo '----------------' . PHP_EOL;
+    echo $usage . PHP_EOL;
+    echo $exception->getMessage() . PHP_EOL;
+    exit(1);
 }
-
-if (!is_file($configuration['path_to_public_version'])) {
-    echo 'no version file available, will create one ...' . PHP_EOL;
-    copy($configuration['path_to_example_version'], $configuration['path_to_public_version']);
-}
-
-echo PHP_EOL;
-echo 'done' . PHP_EOL;
