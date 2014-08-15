@@ -7,42 +7,57 @@
 require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
 //@todo validate return statement of mkdir|unlink|copy and throw exceptions when needed
-if (!is_dir($configuration['path_to_backup'])) {
-    mkdir($configuration['path_to_backup']);
+$pathToBackupDirectory = $configuration['backup']['path'];
+$pathToPublicDirectory = $configuration['public']['path'];
+
+if (!is_dir($pathToBackupDirectory)) {
+    mkdir($pathToBackupDirectory);
 }
 
 //@todo code duplication sucks
-if (is_file($configuration['path_to_backup_channels'])) {
+if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'])) {
     echo 'channels backup file available, will delete it ...' . PHP_EOL;
-    unlink($configuration['path_to_backup_channels']);
+    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels']);
 }
 
-if (is_file($configuration['path_to_backup_configuration'])) {
+if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration'])) {
     echo 'configuration backup file available, will delete it ...' . PHP_EOL;
-    unlink($configuration['path_to_backup_configuration']);
+    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration']);
 }
 
-if (is_file($configuration['path_to_backup_users'])) {
+if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'])) {
     echo 'users backup file available, will delete it ...' . PHP_EOL;
-    unlink($configuration['path_to_backup_users']);
+    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users']);
 }
 
-if (is_file($configuration['path_to_backup_version'])) {
+if (is_file($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version'])) {
     echo 'version backup file available, will delete it ...' . PHP_EOL;
-    unlink($configuration['path_to_backup_version']);
+    unlink($pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version']);
 }
 
 echo 'creating backup of channels ...' . PHP_EOL;
-copy($configuration['path_to_public_channels'], $configuration['path_to_backup_channels']);
+copy(
+    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['channels'],
+    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels']
+);
 
 echo 'creating backup of configuration ...' . PHP_EOL;
-copy($configuration['path_to_public_configuration'], $configuration['path_to_backup_configuration']);
+copy(
+    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['configuration'],
+    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration']
+);
 
 echo 'creating backup of users ...' . PHP_EOL;
-copy($configuration['path_to_public_users'], $configuration['path_to_backup_users']);
+copy(
+    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['users'],
+    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users']
+);
 
 echo 'creating backup of version ...' . PHP_EOL;
-copy($configuration['path_to_public_version'], $configuration['path_to_backup_version']);
+copy(
+    $pathToPublicDirectory . DIRECTORY_SEPARATOR . $configuration['public']['file']['version'],
+    $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version']
+);
 
 echo PHP_EOL;
 echo 'done' . PHP_EOL;

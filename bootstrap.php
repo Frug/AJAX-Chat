@@ -4,19 +4,23 @@
  * @since 2014-08-14 
  */
 
-//paths
-$pathToRoot = __DIR__;
-$configuration = require_once $pathToRoot . DIRECTORY_SEPARATOR . 'configuration.php';
+//autoloader
+require_once __DIR__ . DIRECTORY_SEPARATOR . 'autoLoader.php';
+
+//configuration
+$configuration = require_once __DIR__ . DIRECTORY_SEPARATOR . 'configuration.php';
 
 //constants
-define('AJAX_CHAT_PATH', $configuration['path_to_public'] . DIRECTORY_SEPARATOR);
+define('AJAX_CHAT_PATH', $configuration['public']['path'] . DIRECTORY_SEPARATOR);
 
-//load files
-require_once $configuration['path_to_source_class_loader'];
-require_once $configuration['path_to_public_classes'];
+//chat files
+$pathToPublicClasses = $configuration['public']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['file']['classes'];
+$pathToPublicConfiguration = $configuration['public']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['file']['configuration'];
 
-if (is_file($configuration['path_to_public_configuration'])) {
-    require_once $configuration['path_to_public_configuration'];
+require_once $pathToPublicClasses;
+
+if (is_file($pathToPublicConfiguration)) {
+    require_once $pathToPublicConfiguration;
 
     //create properties
     $roles = array(
