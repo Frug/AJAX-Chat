@@ -61,7 +61,7 @@ class Command_Channel_Edit extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            ' "id" "name"',
+            '"id" "name"',
             '   available channels: ' . implode(',', array_keys($this->channels))
         );
     }

@@ -7,7 +7,7 @@
 /**
  * Class Command_Backup
  */
-class Command_Backup implements Command_CommandInterface
+class Command_Backup extends Command_AbstractCommand
 {
     /**
      * @var array
@@ -92,13 +92,6 @@ class Command_Backup implements Command_CommandInterface
     public function getUsage()
     {
         return array();
-    }
-
-    /**
-     * @param array $arguments
-     */
-    public function setArguments(array $arguments)
-    {
     }
 
     /**

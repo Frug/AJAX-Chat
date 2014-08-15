@@ -57,7 +57,7 @@ class Command_Channel_Delete extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            'command: delete [channel id]',
+            '[channel id]',
             '   available channels: ' . implode(',', array_keys($this->channels))
         );
     }

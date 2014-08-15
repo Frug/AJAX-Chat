@@ -12,13 +12,17 @@ try {
             'command line script only '
         );
     }
+
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-    //@todo move into factory
     $command = new Command_Backup();
     $command->setConfiguration($configuration);
     $command->setFilesystem(new Filesystem());
-    $command->verify();
+    try {
+        $command->verify();
+    } catch (Exception $exception) {
+        throw new Exception('Usage:' . PHP_EOL . basename(__FILE__) . ' ' . implode("\n", $command->getUsage()));
+    }
     $command->execute();
 } catch (Exception $exception) {
     echo 'error occurred' . PHP_EOL;
