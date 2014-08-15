@@ -7,7 +7,7 @@
 /**
  * Class Command_User_Edit
  */
-class Command_User_Edit extends Command__AbstractUserCommand
+class Command_User_Edit extends Command_User_AbstractCommand
 {
     /**
      * @var array

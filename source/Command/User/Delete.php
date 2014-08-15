@@ -7,7 +7,7 @@
 /**
  * Class Command_User_Delete
  */
-class Command_User_Delete extends Command__AbstractUserCommand
+class Command_User_Delete extends Command_User_AbstractCommand
 {
     /**
      * @var int

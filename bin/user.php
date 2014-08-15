@@ -14,7 +14,7 @@ try {
     }
 
     $validCommands = array(
-        'add'       => 'UserAddAbstractCommand',
+        'add'       => 'Command_User_Add',
         'edit'      => 'Command_User_Edit',
         'delete'    => 'Command_User_Delete',
         'list'      => 'Command_User_List'
@@ -37,8 +37,8 @@ try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
     require_once 'install.php';
 
-    $pathToChannelsPhp = $configuration['path_to_public_channels'];
-    $pathToUsersPhp = $configuration['path_to_public_users'];
+    $pathToChannelsPhp = $configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels'];
+    $pathToUsersPhp = $configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users'];
 
     require_once $pathToChannelsPhp;
     require_once $pathToUsersPhp;

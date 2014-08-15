@@ -7,7 +7,7 @@
 /**
  * Class Command_User_List
  */
-class Command_User_List extends Command__AbstractUserCommand
+class Command_User_List extends Command_User_AbstractCommand
 {
     /**
      * @throws Exception
