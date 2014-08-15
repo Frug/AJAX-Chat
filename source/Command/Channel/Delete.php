@@ -7,7 +7,7 @@
 /**
  * Class Command_Channel_Delete
  */
-class Command_Channel_Delete extends Command_Channel_Command_AbstractCommand
+class Command_Channel_Delete extends Command_Channel_AbstractCommand
 {
     /**
      * @var int

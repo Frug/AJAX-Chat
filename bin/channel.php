@@ -37,14 +37,14 @@ try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
     require_once 'install.php';
 
-    $pathToChannelsPhp = $configuration['path_to_public_channels'];
+    $pathToChannelsPhp = $configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels'];
 
     require_once $pathToChannelsPhp;
 
     $commandClass = $validCommands[$currentCommand];
     $fileToChannels = new File($pathToChannelsPhp);
 
-    /** @var Command_Channel_Command_CommandInterface $command */
+    /** @var Command_Channel_CommandInterface $command */
     $command = new $commandClass();
 
     $command->setArguments($argv);

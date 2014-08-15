@@ -7,7 +7,7 @@
 /**
  * Class Command_Channel_Edit
  */
-class Command_Channel_Edit extends Command_Channel_Command_AbstractCommand
+class Command_Channel_Edit extends Command_Channel_AbstractCommand
 {
     /**
      * @var string

@@ -7,7 +7,7 @@
 /**
  * Class Command_Channel_List
  */
-class Command_Channel_List extends Command_Channel_Command_AbstractCommand
+class Command_Channel_List extends Command_Channel_AbstractCommand
 {
     /**
      * @throws Exception

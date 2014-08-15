@@ -76,8 +76,7 @@ To Do
 
 * refactor command to set only arguments they are needing (instead of "argv" something like "array_slice($argv, 2)"
 * add changelog writing while updateing
-* create command for backup/install/restore
-* create class FileSystem
+* create command class for backup/install/restore
 * refactor $configuration
 * refactor bootstrapping (Application, ServiceLocator, Factories, Autoloader)
 
