@@ -34,8 +34,6 @@ class Command_User_Delete extends Command_User_AbstractCommand
             }
         }
 
-        unset($this->users[0]);
-
         if (empty($this->users)) {
             throw new Exception(
                 'nothing to delete'
