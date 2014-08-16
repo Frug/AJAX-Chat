@@ -37,6 +37,7 @@ try {
 
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+    //@todo verify if is installed and up to date
     $filesystem = new Filesystem();
     $identifiers = array();
 

@@ -35,8 +35,8 @@ try {
     }
 
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
-    require_once 'install.php';
 
+    //@todo verify if is installed and up to date
     $pathToChannelsPhp = $configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels'];
     $pathToUsersPhp = $configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users'];
 

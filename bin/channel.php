@@ -15,6 +15,7 @@ try {
 
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+    //@todo verify if is installed and up to date
     $command = new Command_Channel();
     $command->setArguments($argv);
     $command->setConfiguration($configuration);
