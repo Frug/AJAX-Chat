@@ -40,6 +40,7 @@ class Command_Validate extends Command_AbstractCommand
      */
     public function execute()
     {
+        //@todo move into Command_Validate_Local_Files
         $pathToDataDirectory = $this->configuration['public']['data']['path'];
         $pathToExampleDirectory = $this->configuration['example']['path'];
         $pathToLibDirectory = $this->configuration['public']['lib']['path'];
@@ -71,6 +72,7 @@ class Command_Validate extends Command_AbstractCommand
             }
         }
 
+        //@todo move into Command_Validate_Version
         $exampleVersion = require_once $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['version'];
         $publicVersion = require_once $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version'];
 
