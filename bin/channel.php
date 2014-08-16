@@ -19,6 +19,7 @@ try {
     $command = new Command_Channel();
     $command->setArguments($argv);
     $command->setConfiguration($configuration);
+    $command->setChannels($channels);
     $command->setFilesystem(new Filesystem());
     try {
         $command->verify();

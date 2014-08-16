@@ -28,7 +28,6 @@ try {
 } catch (Exception $exception) {
     echo 'error occurred' . PHP_EOL;
     echo '----------------' . PHP_EOL;
-    echo $usage . PHP_EOL;
-    echo $exception->getMessage() . PHP_EOL;
+    echo 'Usage:' . PHP_EOL . basename(__FILE__) . ' ' . $exception->getMessage() . PHP_EOL;
     exit(1);
 }

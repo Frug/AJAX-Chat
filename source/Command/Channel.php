@@ -7,6 +7,11 @@
 class Command_Channel extends Command_AbstractCommand
 {
     /**
+     * @var array
+     */
+    private $channels;
+
+    /**
      * @var string
      */
     private $command;
@@ -32,6 +37,14 @@ class Command_Channel extends Command_AbstractCommand
         );
 
     /**
+     * @param array $channels
+     */
+    public function setChannels(array $channels)
+    {
+        $this->channels = $channels;
+    }
+
+    /**
      * @param array $configuration
      */
     public function setConfiguration(array $configuration)
@@ -54,8 +67,6 @@ class Command_Channel extends Command_AbstractCommand
     {
         $pathToChannelsPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'];
 
-        require_once $pathToChannelsPhp;
-
         $commandClass = $this->commandToClassName[$this->command];
         $fileToChannels = new File($pathToChannelsPhp);
 
@@ -63,7 +74,7 @@ class Command_Channel extends Command_AbstractCommand
         $command = new $commandClass();
 
         $command->setArguments($this->arguments);
-        $command->setChannels($channels);
+        $command->setChannels($this->channels);
         $command->setChannelFile($fileToChannels);
 
         try {
