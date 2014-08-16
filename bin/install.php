@@ -16,43 +16,17 @@ try {
     }
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
-    $pathToExampleDirectory = $configuration['example']['path'];
-    $pathToDataDirectory = $configuration['public']['data']['path'];
-    $pathToLibDirectory = $configuration['public']['lib']['path'];
-
-    $filesystem = new Filesystem();
-
-    $identifierToPaths = array(
-        'channels' => array(
-            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['channels'],
-            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
-        ),
-        'configuration'  => array(
-            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['configuration'],
-            'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration']
-        ),
-        'users' => array(
-            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['users'],
-            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users']
-        ),
-        'version' => array(
-            'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $configuration['example']['file']['version'],
-            'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['version']
-        ),
-    );
-
-    foreach ($identifierToPaths as $identifier => $paths) {
-        if (!$filesystem->isFile($paths['public'])) {
-            echo 'no ' . $identifier . ' file available, will create one ...' . PHP_EOL;
-            $filesystem->copy(
-                $paths['example'],
-                $paths['public']
-            );
-        }
+    //@todo verify if is not installed
+    $command = new Command_Install();
+    $command->setArguments($argv);
+    $command->setConfiguration($configuration);
+    $command->setFilesystem(new Filesystem());
+    try {
+        $command->verify();
+    } catch (Exception $exception) {
+        throw new Exception(implode("\n", $command->getUsage()));
     }
-
-    echo PHP_EOL;
-    echo 'done' . PHP_EOL;
+    $command->execute();
 } catch (Exception $exception) {
     echo 'error occurred' . PHP_EOL;
     echo '----------------' . PHP_EOL;
