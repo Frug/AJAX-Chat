@@ -1,15 +1,28 @@
 <?php
 /**
  * @author stev leibelt <artodeto@bazzline.net>
- * @since 2014-08-16 
+ * @since 2014-08-17 
  */
 
-class Command_Channel extends Command_AbstractCommand
+/**
+ * Class Command_User
+ */
+class Command_User extends Command_AbstractCommand
 {
     /**
      * @var string
      */
     private $command;
+
+    /**
+     * @var array
+     */
+    private $commandToClassName = array(
+        'add'       => 'Command_User_Add',
+        'edit'      => 'Command_User_Edit',
+        'delete'    => 'Command_User_Delete',
+        'list'      => 'Command_User_List'
+    );
 
     /**
      * @var array
@@ -24,12 +37,7 @@ class Command_Channel extends Command_AbstractCommand
     /**
      * @var array
      */
-    private $commandToClassName = array(
-            'add'       => 'Command_Channel_Add',
-            'edit'      => 'Command_Channel_Edit',
-            'delete'    => 'Command_Channel_Delete',
-            'list'      => 'Command_Channel_List'
-        );
+    private $roles;
 
     /**
      * @param array $configuration
@@ -40,11 +48,19 @@ class Command_Channel extends Command_AbstractCommand
     }
 
     /**
-     * @param Filesystem $filesystem
+     * @param \Filesystem $filesystem
      */
     public function setFilesystem(Filesystem $filesystem)
     {
         $this->filesystem = $filesystem;
+    }
+
+    /**
+     * @param array $roles
+     */
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
     }
 
     /**
@@ -53,18 +69,23 @@ class Command_Channel extends Command_AbstractCommand
     public function execute()
     {
         $pathToChannelsPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'];
+        $pathToUsersPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users'];
 
         require_once $pathToChannelsPhp;
+        require_once $pathToUsersPhp;
 
         $commandClass = $this->commandToClassName[$this->command];
-        $fileToChannels = new File($pathToChannelsPhp);
+        $fileToUsers = new File($pathToUsersPhp);
 
-        /** @var Command_Channel_CommandInterface $command */
+        /** @var Command_User_CommandInterface $command */
         $command = new $commandClass();
 
+        //@todo move channels and users into setters
         $command->setArguments($this->arguments);
         $command->setChannels($channels);
-        $command->setChannelFile($fileToChannels);
+        $command->setRoles($this->roles);
+        $command->setUsers($users);
+        $command->setUserFile($fileToUsers);
 
         try {
             $command->verify();
