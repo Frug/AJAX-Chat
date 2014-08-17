@@ -10,9 +10,9 @@
 class Command_Backup extends Command_AbstractCommand
 {
     /**
-     * @var array
+     * @var Configuration_Path
      */
-    private $configuration;
+    private $pathConfiguration;
 
     /**
      * @var Filesystem
@@ -20,11 +20,11 @@ class Command_Backup extends Command_AbstractCommand
     private $filesystem;
 
     /**
-     * @param array $configuration
+     * @param Configuration_Path $configuration
      */
-    public function setConfiguration(array $configuration)
+    public function setPathConfiguration(Configuration_Path $configuration)
     {
-        $this->configuration = $configuration;
+        $this->pathConfiguration = $configuration;
     }
 
     /**
@@ -40,30 +40,26 @@ class Command_Backup extends Command_AbstractCommand
      */
     public function execute()
     {
-        $pathToBackupDirectory = $this->configuration['backup']['path'];
-        $pathToDataDirectory = $this->configuration['public']['data']['path'];
-        $pathToLibDirectory = $this->configuration['public']['lib']['path'];
-
-        if (!$this->filesystem->isDirectory($pathToBackupDirectory)) {
-            $this->filesystem->createDirectory($pathToBackupDirectory);
+        if (!$this->filesystem->isDirectory($this->pathConfiguration->getBackupPath())) {
+            $this->filesystem->createDirectory($this->pathConfiguration->getBackupPath());
         }
 
         $identifierToPaths = array(
             'channels' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $this->configuration['backup']['file']['channels'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels']
+                'backup' => $this->pathConfiguration->getBackupChannelsFilePath(),
+                'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
             'configuration'  => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $this->configuration['backup']['file']['configuration'],
-                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['configuration']
+                'backup' => $this->pathConfiguration->getBackupConfigFilePath(),
+                'chat' => $this->pathConfiguration->getChatConfigFilePath()
             ),
             'users' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $this->configuration['backup']['file']['users'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users']
+                'backup' => $this->pathConfiguration->getBackupUsersFilePath(),
+                'chat' => $this->pathConfiguration->getChatUsersFilePath()
             ),
             'version' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $this->configuration['backup']['file']['version'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version']
+                'backup' => $this->pathConfiguration->getBackupVersionFilePath(),
+                'chat' => $this->pathConfiguration->getChatVersionFilePath()
             ),
         );
 
@@ -77,7 +73,7 @@ class Command_Backup extends Command_AbstractCommand
         foreach ($identifierToPaths as $identifier => $paths) {
             echo 'creating backup of ' . $identifier . ' ...' . PHP_EOL;
             $this->filesystem->copy(
-                $paths['public'],
+                $paths['chat'],
                 $paths['backup']
             );
         }
@@ -99,7 +95,7 @@ class Command_Backup extends Command_AbstractCommand
      */
     public function verify()
     {
-        if (is_null($this->configuration)) {
+        if (is_null($this->pathConfiguration)) {
             throw new Exception(
                 'configuration is mandatory'
             );

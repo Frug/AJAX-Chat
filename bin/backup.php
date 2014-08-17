@@ -7,18 +7,12 @@
 $isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
 
 try {
-    if ($isNotCalledFromCommandLineInterface) {
-        throw new Exception(
-            'command line script only '
-        );
-    }
-
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+    $application = new Application_Cli();
     //@todo verify if is installed and up to date
-    $command = new Command_Backup();
-    $command->setConfiguration($configuration);
-    $command->setFilesystem(new Filesystem());
+    $command = $application->getBackupCommand();
+    $command->setArguments($argv);
     try {
         $command->verify();
     } catch (Exception $exception) {
