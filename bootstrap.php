@@ -7,6 +7,8 @@
 //autoloader
 require_once __DIR__ . DIRECTORY_SEPARATOR . 'autoLoader.php';
 
+//@todo move define of constants to application and implement "getRoles()" method
+
 //configuration
 $configuration = require_once __DIR__ . DIRECTORY_SEPARATOR . 'configuration.php';
 
