@@ -69,7 +69,11 @@ class Command_Channel extends Command_AbstractCommand
         try {
             $command->verify();
         } catch (Exception $exception) {
-            throw new Exception($this->command . ' ' . implode("\n", $command->getUsage()));
+            throw new Exception(
+                $this->command . ' ' . implode("\n", $command->getUsage()) . PHP_EOL .
+                PHP_EOL .
+                $exception->getMessage()
+            );
         }
         $command->execute();
     }
