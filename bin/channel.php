@@ -17,11 +17,8 @@ try {
 
     $application = new Application_Cli();
     //@todo verify if is installed and up to date
-    //$command = $application->getChannelCommand();
-    $command = new Command_Channel();
+    $command = $application->getChannelCommand();
     $command->setArguments($argv);
-    $command->setConfiguration($configuration);
-    $command->setFilesystem(new Filesystem());
     try {
         $command->verify();
     } catch (Exception $exception) {

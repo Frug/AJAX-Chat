@@ -49,7 +49,7 @@ class Command_Backup extends Command_AbstractCommand
                 'backup' => $this->pathConfiguration->getBackupChannelsFilePath(),
                 'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
-            'configuration'  => array(
+            'application'  => array(
                 'backup' => $this->pathConfiguration->getBackupConfigFilePath(),
                 'chat' => $this->pathConfiguration->getChatConfigFilePath()
             ),
@@ -97,7 +97,7 @@ class Command_Backup extends Command_AbstractCommand
     {
         if (is_null($this->pathConfiguration)) {
             throw new Exception(
-                'configuration is mandatory'
+                'application is mandatory'
             );
         }
 

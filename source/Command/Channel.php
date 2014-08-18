@@ -14,7 +14,17 @@ class Command_Channel extends Command_AbstractCommand
     /**
      * @var array
      */
-    private $configuration;
+    private $commands = array(
+            'add',
+            'edit',
+            'delete',
+            'list'
+        );
+
+    /**
+     * @var AbstractApplication
+     */
+    private $application;
 
     /**
      * @var Filesystem
@@ -22,21 +32,11 @@ class Command_Channel extends Command_AbstractCommand
     private $filesystem;
 
     /**
-     * @var array
+     * @param AbstractApplication $application
      */
-    private $commandToClassName = array(
-            'add'       => 'Command_Channel_Add',
-            'edit'      => 'Command_Channel_Edit',
-            'delete'    => 'Command_Channel_Delete',
-            'list'      => 'Command_Channel_List'
-        );
-
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration)
+    public function setApplication(AbstractApplication $application)
     {
-        $this->configuration = $configuration;
+        $this->application = $application;
     }
 
     /**
@@ -52,20 +52,26 @@ class Command_Channel extends Command_AbstractCommand
      */
     public function execute()
     {
-        $pathToChannelsPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'];
-
-        require_once $pathToChannelsPhp;
-
-        $commandClass = $this->commandToClassName[$this->command];
-        $fileToChannels = new File($pathToChannelsPhp);
-
-        /** @var Command_Channel_CommandInterface $command */
-        $command = new $commandClass();
+        switch ($this->command) {
+            case 'add':
+                $command = $this->application->getChannelAddCommand();
+                break;
+            case 'edit':
+                $command = $this->application->getChannelEditCommand();
+                break;
+            case 'delete':
+                $command = $this->application->getChannelDeleteCommand();
+                break;
+            case 'list':
+                $command = $this->application->getChannelListCommand();
+                break;
+            default:
+                throw new Exception(
+                    'unsupported command "' . $this->command . '"'
+                );
+        }
 
         $command->setArguments($this->arguments);
-        $command->setChannels($channels);
-        $command->setChannelFile($fileToChannels);
-
         try {
             $command->verify();
         } catch (Exception $exception) {
@@ -84,7 +90,7 @@ class Command_Channel extends Command_AbstractCommand
     public function getUsage()
     {
         return array(
-            '[' . implode('|', array_keys($this->commandToClassName)) . ']'
+            '[' . implode('|', $this->commands) . ']'
         );
     }
 
@@ -101,7 +107,7 @@ class Command_Channel extends Command_AbstractCommand
 
         $command = trim($this->arguments[1]);
 
-        if (!(isset($this->commandToClassName[$command]))) {
+        if (!(in_array($command, $this->commands))) {
             throw new Exception(
                 'invalid command provided'
             );

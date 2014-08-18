@@ -9,7 +9,7 @@ return array(
         'path' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'backup',
         'file' => array(
             'channels'      => 'channels.php',
-            'configuration' => 'config.php',
+            'application' => 'config.php',
             'users'         => 'users.php',
             'version'       => 'version.php'
         )
@@ -18,7 +18,7 @@ return array(
         'path' => __DIR__ . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'example',
         'file' => array(
             'channels'      => 'channels.php',
-            'configuration' => 'configuration.php',
+            'application' => 'application.php',
             'users'         => 'users.php',
             'version'       => 'version.php'
         )
@@ -37,7 +37,7 @@ return array(
             'path' => __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib',
             'file' => array(
                 'classes'       => 'classes.php',
-                'configuration' => 'config.php'
+                'application' => 'config.php'
             )
         )
     ),

@@ -49,9 +49,9 @@ class Command_Install extends Command_AbstractCommand
                 'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['channels'],
                 'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels']
             ),
-            'configuration'  => array(
-                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['configuration'],
-                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['configuration']
+            'application'  => array(
+                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['application'],
+                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['application']
             ),
             'users' => array(
                 'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['users'],

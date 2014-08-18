@@ -15,7 +15,7 @@ class Command_Restore extends Command_AbstractCommand
     private $availableCommands = array(
         'all' => true,
         'channels' => true,
-        'configuration' => true,
+        'application' => true,
         'users' => true,
         'version' => true
     );
@@ -66,7 +66,7 @@ class Command_Restore extends Command_AbstractCommand
             case 'all':
                 $identifiers = array(
                     'channels',
-                    'configuration',
+                    'application',
                     'users',
                     'version'
                 );
@@ -74,8 +74,8 @@ class Command_Restore extends Command_AbstractCommand
             case 'channels':
                 $identifiers[] = 'channels';
                 break;
-            case 'configuration':
-                $identifiers[] = 'configuration';
+            case 'application':
+                $identifiers[] = 'application';
                 break;
             case 'users':
                 $identifiers[] = 'users';
@@ -90,9 +90,9 @@ class Command_Restore extends Command_AbstractCommand
                 'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'],
                 'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
             ),
-            'configuration'  => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['configuration'],
-                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['configuration']
+            'application'  => array(
+                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['application'],
+                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['application']
             ),
             'users' => array(
                 'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'],

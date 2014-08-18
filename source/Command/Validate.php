@@ -59,7 +59,7 @@ class Command_Validate extends Command_AbstractCommand
 
         $identifierToPublicPath = array(
             'channels' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'],
-            'configuration'  => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['configuration'],
+            'application'  => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['application'],
             'users' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users'],
             'version' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version']
         );
