@@ -9,11 +9,30 @@
  */
 abstract class AbstractApplication
 {
+    /**
+     * @var array
+     */
+    private $chatConfiguration = array();
+
+    /**
+     * @var array
+     */
+    private $channels = array();
 
     /**
      * @var array
      */
     private $instancePool;
+
+    /**
+     * @var array
+     */
+    private $roles = array();
+
+    /**
+     * @var array
+     */
+    private $users = array();
 
     /**
      * @return Command_Backup
@@ -28,6 +47,39 @@ abstract class AbstractApplication
         }
 
         return $this->getFromInstancePool('command_backup');
+    }
+
+    /**
+     * @return array
+     */
+    public function getChannels()
+    {
+        if (empty($this->channels)) {
+            $this->setPropertyFromFile(
+                'channels',
+                'channels',
+                $this->getPathConfiguration()->getChatChannelsFilePath()
+            );
+        }
+
+        return $this->channels;
+    }
+
+    /**
+     * @todo will create a notice until bootstrap.php is refactored
+     * @return array
+     */
+    public function getChatConfiguration()
+    {
+        if (empty($this->chatConfiguration)) {
+            $this->setPropertyFromFile(
+                'chatConfiguration',
+                'config',
+                $this->getPathConfiguration()->getChatConfigFilePath()
+            );
+        }
+
+        return $this->chatConfiguration;
     }
 
     /**
@@ -57,6 +109,44 @@ abstract class AbstractApplication
     }
 
     /**
+     * @return array
+     */
+    public function getRoles()
+    {
+        if (empty($this->roles)) {
+            if (defined(AJAX_CHAT_GUEST)) {
+                $this->roles = array(
+                    AJAX_CHAT_GUEST     => 'AJAX_CHAT_GUEST',
+                    AJAX_CHAT_USER      => 'AJAX_CHAT_USER',
+                    AJAX_CHAT_MODERATOR => 'AJAX_CHAT_MODERATOR',
+                    AJAX_CHAT_ADMIN     => 'AJAX_CHAT_ADMIN',
+                    AJAX_CHAT_CHATBOT   => 'AJAX_CHAT_CHATBOT',
+                    AJAX_CHAT_CUSTOM    => 'AJAX_CHAT_CUSTOM',
+                    AJAX_CHAT_BANNED    => 'AJAX_CHAT_BANNED'
+                );
+            }
+        }
+
+        return $this->roles;
+    }
+
+    /**
+     * @return array
+     */
+    public function getUsers()
+    {
+        if (empty($this->users)) {
+            $this->setPropertyFromFile(
+                'users',
+                'users',
+                $this->getPathConfiguration()->getChatUsersFilePath()
+            );
+        }
+
+        return $this->users;
+    }
+
+    /**
      * @param string $key
      * @return mixed
      */
@@ -72,6 +162,24 @@ abstract class AbstractApplication
     private function isNotInInstancePool($key)
     {
         return (!(isset($this->instancePool[$key])));
+    }
+
+    /**
+     * @param string $propertyName
+     * @param string $fileValueName
+     * @param string $filePath
+     * @throws Exception
+     */
+    private function setPropertyFromFile($propertyName, $fileValueName, $filePath)
+    {
+        if (!is_file($filePath)) {
+            throw new Exception(
+                'provided file path is not valid: ' . $filePath
+            );
+        }
+
+        require $filePath;
+        $this->$propertyName = $$fileValueName;
     }
 
     /**
