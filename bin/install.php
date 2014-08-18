@@ -4,23 +4,13 @@
  * @since 2014-08-14 
  */
 
-require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
-
-$isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
-
 try {
-    if ($isNotCalledFromCommandLineInterface) {
-        throw new Exception(
-            'command line script only '
-        );
-    }
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+    $application = new Application_Cli();
     //@todo verify if is not installed
-    $command = new Command_Install();
+    $command = $application->getInstallCommand();
     $command->setArguments($argv);
-    $command->setConfiguration($configuration);
-    $command->setFilesystem(new Filesystem());
     try {
         $command->verify();
     } catch (Exception $exception) {

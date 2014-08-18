@@ -10,9 +10,9 @@
 class Command_Install extends Command_AbstractCommand
 {
     /**
-     * @var array
+     * @var Configuration_Path
      */
-    private $configuration;
+    private $pathConfiguration;
 
     /**
      * @var Filesystem
@@ -20,11 +20,11 @@ class Command_Install extends Command_AbstractCommand
     private $filesystem;
 
     /**
-     * @param array $configuration
+     * @param Configuration_Path $configuration
      */
-    public function setConfiguration(array $configuration)
+    public function setPathConfiguration(Configuration_Path $configuration)
     {
-        $this->configuration = $configuration;
+        $this->pathConfiguration = $configuration;
     }
 
     /**
@@ -40,36 +40,34 @@ class Command_Install extends Command_AbstractCommand
      */
     public function execute()
     {
-        $pathToExampleDirectory = $this->configuration['example']['path'];
-        $pathToDataDirectory = $this->configuration['public']['data']['path'];
-        $pathToLibDirectory = $this->configuration['public']['lib']['path'];
-
         $identifierToPaths = array(
             'channels' => array(
-                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['channels'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels']
+                'example' => $this->pathConfiguration->getExampleChannelsFilePath(),
+                'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
-            'application'  => array(
-                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['application'],
-                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['application']
+            'configuration'  => array(
+                'example' => $this->pathConfiguration->getExampleConfigFilePath(),
+                'chat' => $this->pathConfiguration->getChatConfigFilePath()
             ),
             'users' => array(
-                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['users'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users']
+                'example' => $this->pathConfiguration->getExampleUsersFilePath(),
+                'chat' => $this->pathConfiguration->getChatUsersFilePath()
             ),
             'version' => array(
-                'example' => $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['version'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version']
+                'example' => $this->pathConfiguration->getExampleVersionFilePath(),
+                'chat' => $this->pathConfiguration->getChatVersionFilePath()
             ),
         );
 
         foreach ($identifierToPaths as $identifier => $paths) {
-            if (!$this->filesystem->isFile($paths['public'])) {
+            if (!$this->filesystem->isFile($paths['chat'])) {
                 echo 'no ' . $identifier . ' file available, will create one ...' . PHP_EOL;
                 $this->filesystem->copy(
                     $paths['example'],
-                    $paths['public']
+                    $paths['chat']
                 );
+            } else {
+                echo $identifier . ' file available, nothing to do ...' . PHP_EOL;
             }
         }
 

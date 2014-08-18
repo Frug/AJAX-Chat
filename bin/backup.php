@@ -4,8 +4,6 @@
  * @since 2014-08-14 
  */
 
-$isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
-
 try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 

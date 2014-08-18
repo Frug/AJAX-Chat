@@ -139,6 +139,24 @@ abstract class AbstractApplication
 
         return $this->getFromInstancePool('channel_list_command');
     }
+
+    /**
+     * @return Command_Install
+     */
+    public function getInstallCommand()
+    {
+        if ($this->isNotInInstancePool('install_command')) {
+            $command = new Command_Install();
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $this->setToInstancePool(
+                'install_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('install_command');
+    }
     //end of command
 
     //begin of file
