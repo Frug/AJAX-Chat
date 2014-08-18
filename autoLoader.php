@@ -9,7 +9,8 @@ if (function_exists('spl_autoload_register')) {
     function classLoader($className) {
         $classNameAsPath = str_replace('_', DIRECTORY_SEPARATOR, $className);
         $directories = array(
-            __DIR__ . DIRECTORY_SEPARATOR . 'source'
+            __DIR__ . DIRECTORY_SEPARATOR . 'source',
+            __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'class'
         );
         $isLoaded = false;
         $filePath = '';
