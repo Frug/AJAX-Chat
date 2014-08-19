@@ -50,8 +50,8 @@ class Command_Backup extends Command_AbstractCommand
                 'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
             'application'  => array(
-                'backup' => $this->pathConfiguration->getBackupConfigFilePath(),
-                'chat' => $this->pathConfiguration->getChatConfigFilePath()
+                'backup' => $this->pathConfiguration->getBackupConfigurationFilePath(),
+                'chat' => $this->pathConfiguration->getChatConfigurationFilePath()
             ),
             'users' => array(
                 'backup' => $this->pathConfiguration->getBackupUsersFilePath(),

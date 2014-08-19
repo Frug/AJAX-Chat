@@ -162,8 +162,8 @@ abstract class AbstractApplication
     {
         if ($this->isNotInInstancePool('restore_command')) {
             $command = new Command_Restore();
-            $command->setPathConfiguration($this->getPathConfiguration());
             $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
             $this->setToInstancePool(
                 'restore_command',
                 $command
@@ -171,6 +171,21 @@ abstract class AbstractApplication
         }
 
         return $this->getFromInstancePool('restore_command');
+    }
+
+    public function getValidateCommand()
+    {
+        if ($this->isNotInInstancePool('validate_command')) {
+            $command = new Command_Validate();
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $this->setToInstancePool(
+                'validate_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('validate_command');
     }
     //end of command
 

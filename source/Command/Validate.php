@@ -10,22 +10,14 @@
 class Command_Validate extends Command_AbstractCommand
 {
     /**
-     * @var array
+     * @var Configuration_Path
      */
-    private $configuration;
+    private $pathConfiguration;
 
     /**
      * @var Filesystem
      */
     private $filesystem;
-
-    /**
-     * @param array $configuration
-     */
-    public function setConfiguration(array $configuration)
-    {
-        $this->configuration = $configuration;
-    }
 
     /**
      * @param Filesystem $filesystem
@@ -36,20 +28,28 @@ class Command_Validate extends Command_AbstractCommand
     }
 
     /**
+     * @param Configuration_Path $configuration
+     */
+    public function setPathConfiguration(Configuration_Path $configuration)
+    {
+        $this->pathConfiguration = $configuration;
+    }
+
+    /**
      * @throws Exception
      */
     public function execute()
     {
         //@todo move into Command_Validate_Local_Files
-        $pathToDataDirectory = $this->configuration['public']['data']['path'];
-        $pathToExampleDirectory = $this->configuration['example']['path'];
-        $pathToLibDirectory = $this->configuration['public']['lib']['path'];
+        $pathToLibDirectory = $this->pathConfiguration->getChatPath() . DIRECTORY_SEPARATOR . 'lib';
 
         if (!$this->filesystem->isDirectory($pathToLibDirectory)) {
             throw new Exception(
                 'directory "lib" is missing, installation needed'
             );
         }
+
+        $pathToDataDirectory = $pathToLibDirectory . DIRECTORY_SEPARATOR . 'data';
 
         if (!$this->filesystem->isDirectory($pathToDataDirectory)) {
             throw new Exception(
@@ -58,10 +58,10 @@ class Command_Validate extends Command_AbstractCommand
         }
 
         $identifierToPublicPath = array(
-            'channels' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'],
-            'application'  => $pathToLibDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['lib']['file']['application'],
-            'users' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users'],
-            'version' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version']
+            'channels' => $this->pathConfiguration->getChatChannelsFilePath(),
+            'configuration'  => $this->pathConfiguration->getChatConfigurationFilePath(),
+            'users' => $this->pathConfiguration->getChatUsersFilePath(),
+            'version' => $this->pathConfiguration->getChatVersionFilePath()
         );
 
         foreach ($identifierToPublicPath as $identifier => $path) {
@@ -73,12 +73,12 @@ class Command_Validate extends Command_AbstractCommand
         }
 
         //@todo move into Command_Validate_Version
-        $exampleVersion = require_once $pathToExampleDirectory . DIRECTORY_SEPARATOR . $this->configuration['example']['file']['version'];
-        $publicVersion = require_once $pathToDataDirectory . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['version'];
+        $exampleVersion = require_once $this->pathConfiguration->getExampleVersionFilePath();
+        $chatVersion = require_once $this->pathConfiguration->getChatVersionFilePath();
 
-        if ($exampleVersion !== $publicVersion) {
+        if ($exampleVersion !== $chatVersion) {
             throw new Exception(
-                'current version "' . $publicVersion . '" and code version "' . $exampleVersion . '" differs, update needed'
+                'current version "' . $chatVersion . '" and code version "' . $exampleVersion . '" differs, update needed'
             );
         }
 
