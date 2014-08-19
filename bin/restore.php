@@ -4,15 +4,7 @@
  * @since 2014-08-14 
  */
 
-$isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
-
 try {
-    if ($isNotCalledFromCommandLineInterface) {
-        throw new Exception(
-            'command line script only '
-        );
-    }
-
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
     //@todo verify if is installed and up to date

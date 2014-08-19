@@ -6,6 +6,10 @@
 
 /**
  * Class AbstractApplication
+ * This class is doing a lot. See it as class that is the
+ *  - Application
+ *  - Factory
+ *  - ServiceLocator
  */
 abstract class AbstractApplication
 {
