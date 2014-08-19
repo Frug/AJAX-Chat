@@ -5,9 +5,9 @@
  */
 
 /**
- * Class Command_Validate
+ * Class Command_VerifyInstallation
  */
-class Command_Validate extends Command_AbstractCommand
+class Command_VerifyInstallation extends Command_AbstractCommand
 {
     /**
      * @var Filesystem

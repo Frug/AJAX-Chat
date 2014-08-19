@@ -276,12 +276,12 @@ abstract class AbstractApplication
     }
 
     /**
-     * @return Command_Validate
+     * @return Command_VerifyInstallation
      */
-    public function getValidateCommand()
+    public function getVerifyInstallationCommand()
     {
         if ($this->isNotInInstancePool('validate_command')) {
-            $command = new Command_Validate();
+            $command = new Command_VerifyInstallation();
             $command->setFilesystem($this->getFilesystem());
             $command->setPathConfiguration($this->getPathConfiguration());
             $this->setToInstancePool(
@@ -347,7 +347,6 @@ abstract class AbstractApplication
     }
 
     /**
-     * @todo will create a notice until bootstrap.php is refactored
      * @return array
      */
     public function getChatConfiguration()
