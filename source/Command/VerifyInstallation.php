@@ -59,7 +59,7 @@ class Command_VerifyInstallation extends Command_AbstractCommand
 
         $identifierToPublicPath = array(
             'channels' => $this->pathConfiguration->getChatChannelsFilePath(),
-            'configuration'  => $this->pathConfiguration->getChatConfigurationFilePath(),
+            'pathConfiguration'  => $this->pathConfiguration->getChatConfigurationFilePath(),
             'users' => $this->pathConfiguration->getChatUsersFilePath(),
             'version' => $this->pathConfiguration->getChatVersionFilePath()
         );
@@ -87,7 +87,7 @@ class Command_VerifyInstallation extends Command_AbstractCommand
 
         //@todo validate if 'install.php' is still available
 
-        $this->output->addLine('installation is valid.');
+        $this->output->addLine('installation is valid');
     }
 
     /**

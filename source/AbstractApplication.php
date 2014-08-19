@@ -191,6 +191,25 @@ abstract class AbstractApplication
     /**
      * @return Command_User
      */
+    public function getUpdateCommand()
+    {
+        if ($this->isNotInInstancePool('update_command')) {
+            $command = new Command_Update();
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'update_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('update_command');
+    }
+
+    /**
+     * @return Command_User
+     */
     public function getUserCommand()
     {
         if ($this->isNotInInstancePool('user_command')) {

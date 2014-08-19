@@ -46,7 +46,7 @@ class Command_Install extends Command_AbstractCommand
                 'example' => $this->pathConfiguration->getExampleChannelsFilePath(),
                 'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
-            'configuration'  => array(
+            'pathConfiguration'  => array(
                 'example' => $this->pathConfiguration->getExampleConfigurationFilePath(),
                 'chat' => $this->pathConfiguration->getChatConfigurationFilePath()
             ),

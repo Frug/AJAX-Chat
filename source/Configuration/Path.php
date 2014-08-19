@@ -30,6 +30,7 @@ class Configuration_Path
         }
     }
 
+    //begin of path
     /**
      * @return string
      */
@@ -161,6 +162,16 @@ class Configuration_Path
     /**
      * @return string
      */
+    public function getReleasePath()
+    {
+        return $this->pathToRootDirectory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'release';
+    }
+    //end of path
+
+    //begin of file name
+    /**
+     * @return string
+     */
     public function getChannelsFileName()
     {
         return 'channels.php';
@@ -197,4 +208,5 @@ class Configuration_Path
     {
         return 'version.php';
     }
+    //end of file name
 }

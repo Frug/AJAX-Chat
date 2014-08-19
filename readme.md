@@ -77,7 +77,7 @@ To Do
 
 * refactor command to set only arguments they are needing (instead of "argv" something like "array_slice($argv, 2)"
 * create command class for backup/install/restore
-* refactor $configuration
+* refactor $pathConfiguration
 * refactor bootstrapping (Application, ServiceLocator, Factories, Autoloader)
 
 Help

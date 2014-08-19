@@ -10,21 +10,21 @@
 class Command_Update extends Command_AbstractCommand
 {
     /**
-     * @var array
-     */
-    private $configuration;
-
-    /**
      * @var Filesystem
      */
     private $filesystem;
 
     /**
-     * @param array $configuration
+     * @var Configuration_Path
      */
-    public function setConfiguration(array $configuration)
+    private $pathConfiguration;
+
+    /**
+     * @param Configuration_Path $configuration
+     */
+    public function setPathConfiguration(Configuration_Path $configuration)
     {
-        $this->configuration = $configuration;
+        $this->pathConfiguration = $configuration;
     }
 
     /**
@@ -41,10 +41,28 @@ class Command_Update extends Command_AbstractCommand
     public function execute()
     {
         //__general
+        $releases = $this->filesystem->getDirectories(
+            $this->pathConfiguration->getReleasePath(),
+            array('upcoming'),
+            false
+        );
+        $currentVersion = '0.8.8';
+        $releasesToProcess = array();
+        foreach ($releases as $release) {
+            $isNewer = version_compare($release, $currentVersion, '>');
+            if ($isNewer) {
+                $releasesToProcess[] = $release;
+            }
+        }
+        natsort($releasesToProcess);
+
+        foreach ($releasesToProcess as $release) {
+            $pathToRelease = $this->pathConfiguration->getReleasePath() . DIRECTORY_SEPARATOR . $release;
+        }
         //there should be a version directory per release
         //there should be a "not released" directory that contains all prepared updates
-        //each version directory can contain multiple update php files, prefixed with a suffix
-        //  suffix could be yyyy_mm_dd_hh_ii_ss_maintainer.php
+        //each version directory can contain multiple update php files
+        //  prefix could be update_yyyy_mm_dd_hh_ii_ss_maintainer_-_$description.php
         //  this fill will be required_once and should work "out of the box"
 
         //__process

@@ -62,7 +62,7 @@ class Command_Restore extends Command_AbstractCommand
             case 'all':
                 $identifiers = array(
                     'channels',
-                    'configuration',
+                    'pathConfiguration',
                     'users',
                     'version'
                 );
@@ -70,8 +70,8 @@ class Command_Restore extends Command_AbstractCommand
             case 'channels':
                 $identifiers[] = 'channels';
                 break;
-            case 'configuration':
-                $identifiers[] = 'configuration';
+            case 'pathConfiguration':
+                $identifiers[] = 'pathConfiguration';
                 break;
             case 'users':
                 $identifiers[] = 'users';
@@ -86,7 +86,7 @@ class Command_Restore extends Command_AbstractCommand
                 'backup' => $this->pathConfiguration->getBackupChannelsFilePath(),
                 'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
-            'configuration'  => array(
+            'pathConfiguration'  => array(
                 'backup' => $this->pathConfiguration->getBackupConfigurationFilePath(),
                 'chat' => $this->pathConfiguration->getChatConfigurationFilePath()
             ),

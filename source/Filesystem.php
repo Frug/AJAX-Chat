@@ -98,6 +98,75 @@ class Filesystem
     }
 
     /**
+     * taken from: https://github.com/stevleibelt/examples/blob/master/php/filesystem/listFilesInDirectory.php
+     * @param string $path
+     * @param array $blackList
+     * @param bool $addPathToName
+     * @return array
+     */
+    public function getDirectories($path, array $blackList = array(), $addPathToName = true)
+    {
+        $blackList = array_merge(
+            $blackList,
+            array(
+                '.',
+                '..'
+            )
+        );
+        $directories = array();
+
+        if (is_dir($path)) {
+            if ($directoryHandle = opendir($path)) {
+                while (false !== ($directory = readdir($directoryHandle))) {
+                    if (is_dir($path . DIRECTORY_SEPARATOR . $directory)) {
+                        if (!in_array($directory, $blackList)) {
+                            if ($addPathToName) {
+                                $directories[] = $path . DIRECTORY_SEPARATOR . $directory;
+                            } else {
+                                $directories[] = $directory;
+                            }
+                        }
+                    }
+                }
+                closedir($directoryHandle);
+            }
+        }
+
+        return $directories;
+    }
+
+    /**
+     * taken from: https://github.com/stevleibelt/examples/blob/master/php/filesystem/listFilesInDirectory.php
+     * @param string $path
+     * @param array $blackList
+     * @param bool $addPathToName
+     * @return array
+     */
+    public function getFiles($path, array $blackList = array(), $addPathToName = true)
+    {
+        $files = array();
+
+        if (is_dir($path)) {
+            if ($directoryHandle = opendir($path)) {
+                while (false !== ($file = readdir($directoryHandle))) {
+                    if (is_file($path . DIRECTORY_SEPARATOR . $file)) {
+                        if (!in_array($file, $blackList)) {
+                            if ($addPathToName) {
+                                $files[] = $path . DIRECTORY_SEPARATOR . $file;
+                            } else {
+                                $files[] = $file;
+                            }
+                        }
+                    }
+                }
+                closedir($directoryHandle);
+            }
+        }
+
+        return $files;
+    }
+
+    /**
      * @param string $path
      * @return bool
      */

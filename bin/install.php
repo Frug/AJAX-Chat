@@ -5,7 +5,7 @@
  */
 
 try {
-    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
+    require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoLoader.php';
 
     $application = new Application_Cli();
     //@todo verify if is not installed
