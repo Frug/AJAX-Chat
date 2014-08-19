@@ -70,6 +70,7 @@ Features
     - update system (this is done by introducing a "version" file)
     - add, edit, delete and list existing channels
     - add, edit, delete and list existing users
+    - verify existing installation
 
 To Do
 -----

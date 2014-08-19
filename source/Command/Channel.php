@@ -7,6 +7,11 @@
 class Command_Channel extends Command_AbstractCommand
 {
     /**
+     * @var AbstractApplication
+     */
+    private $application;
+
+    /**
      * @var string
      */
     private $command;
@@ -20,11 +25,6 @@ class Command_Channel extends Command_AbstractCommand
             'delete',
             'list'
         );
-
-    /**
-     * @var AbstractApplication
-     */
-    private $application;
 
     /**
      * @var Filesystem
@@ -72,6 +72,8 @@ class Command_Channel extends Command_AbstractCommand
         }
 
         $command->setArguments($this->arguments);
+        $command->setOutput($this->output);
+
         try {
             $command->verify();
         } catch (Exception $exception) {

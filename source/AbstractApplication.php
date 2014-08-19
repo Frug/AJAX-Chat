@@ -48,6 +48,7 @@ abstract class AbstractApplication
             $command = new Command_Backup();
             $command->setFilesystem($this->getFilesystem());
             $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool('command_backup', $command);
         }
 
@@ -63,6 +64,7 @@ abstract class AbstractApplication
             $command = new Command_Channel();
             $command->setApplication($this);
             $command->setFilesystem($this->getFilesystem());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'channel_command',
                 $command
@@ -81,6 +83,7 @@ abstract class AbstractApplication
             $command = new Command_Channel_Add();
             $command->setChannelFile($this->getChannelFile());
             $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'channel_add_command',
                 $command
@@ -99,6 +102,7 @@ abstract class AbstractApplication
             $command = new Command_Channel_Delete();
             $command->setChannelFile($this->getChannelFile());
             $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'channel_delete_command',
                 $command
@@ -117,6 +121,7 @@ abstract class AbstractApplication
             $command = new Command_Channel_Edit();
             $command->setChannelFile($this->getChannelFile());
             $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'channel_edit_command',
                 $command
@@ -135,6 +140,7 @@ abstract class AbstractApplication
             $command = new Command_Channel_List();
             $command->setChannelFile($this->getChannelFile());
             $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'channel_list_command',
                 $command
@@ -153,6 +159,7 @@ abstract class AbstractApplication
             $command = new Command_Install();
             $command->setFilesystem($this->getFilesystem());
             $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
             $this->setToInstancePool(
                 'install_command',
                 $command
@@ -161,9 +168,154 @@ abstract class AbstractApplication
 
         return $this->getFromInstancePool('install_command');
     }
+
+    /**
+     * @return Command_Restore
+     */
+    public function getRestoreCommand()
+    {
+        if ($this->isNotInInstancePool('restore_command')) {
+            $command = new Command_Restore();
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'restore_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('restore_command');
+    }
+
+    /**
+     * @return Command_User
+     */
+    public function getUserCommand()
+    {
+        if ($this->isNotInInstancePool('user_command')) {
+            $command = new Command_User();
+            $command->setApplication($this);
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'user_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('user_command');
+    }
+
+    /**
+     * @return Command_User_Add
+     */
+    public function getUserAddCommand()
+    {
+        if ($this->isNotInInstancePool('user_add_command')) {
+            $command = new Command_User_Add();
+            $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_add_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_add_command');
+    }
+
+    /**
+     * @return Command_User_Edit
+     */
+    public function getUserEditCommand()
+    {
+        if ($this->isNotInInstancePool('user_edit_command')) {
+            $command = new Command_User_Edit();
+            $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_edit_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_edit_command');
+    }
+
+    /**
+     * @return Command_User_Delete
+     */
+    public function getUserDeleteCommand()
+    {
+        if ($this->isNotInInstancePool('user_delete_command')) {
+            $command = new Command_User_Delete();
+            $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_delete_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_delete_command');
+    }
+
+    /**
+     * @return Command_User_List
+     */
+    public function getUserListCommand()
+    {
+        if ($this->isNotInInstancePool('user_list_command')) {
+            $command = new Command_User_List();
+            $command->setChannels($this->getChannels());
+            $command->setOutput($this->getOutput());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_list_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_list_command');
+    }
+
+    /**
+     * @return Command_VerifyInstallation
+     */
+    public function getVerifyInstallationCommand()
+    {
+        if ($this->isNotInInstancePool('validate_command')) {
+            $command = new Command_VerifyInstallation();
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'validate_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('validate_command');
+    }
     //end of command
 
     //begin of file
+    /**
+     * @return File
+     */
     public function getChannelFile()
     {
         if ($this->isNotInInstancePool('channel_file')) {
@@ -176,6 +328,23 @@ abstract class AbstractApplication
         }
 
         return $this->getFromInstancePool('channel_file');
+    }
+
+    /**
+     * @return File
+     */
+    public function getUserFile()
+    {
+        if ($this->isNotInInstancePool('user_file')) {
+            $this->setToInstancePool(
+                'user_file',
+                $this->getFile(
+                    $this->getPathConfiguration()->getChatUsersFilePath()
+                )
+            );
+        }
+
+        return $this->getFromInstancePool('user_file');
     }
     //end of file
 
@@ -196,7 +365,6 @@ abstract class AbstractApplication
     }
 
     /**
-     * @todo will create a notice until bootstrap.php is refactored
      * @return array
      */
     public function getChatConfiguration()
@@ -205,7 +373,7 @@ abstract class AbstractApplication
             $this->setPropertyFromFile(
                 'chatConfiguration',
                 'config',
-                $this->getPathConfiguration()->getChatConfigFilePath()
+                $this->getPathConfiguration()->getChatConfigurationFilePath()
             );
         }
 
@@ -232,6 +400,14 @@ abstract class AbstractApplication
         }
 
         return $this->getFromInstancePool('filesystem');
+    }
+
+    /**
+     * @return Output
+     */
+    public function getOutput()
+    {
+        return new Output();
     }
 
     /**

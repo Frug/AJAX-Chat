@@ -15,6 +15,27 @@ abstract class Command_AbstractCommand implements Command_CommandInterface
     protected $arguments;
 
     /**
+     * @var Output
+     */
+    protected $output;
+
+    /**
+     * @return null|Output
+     */
+    public function getOutput()
+    {
+        return $this->output;
+    }
+
+    /**
+     * @param Output $output
+     */
+    public function setOutput(Output $output)
+    {
+        $this->output = $output;
+    }
+
+    /**
      * @param array $arguments
      */
     public function setArguments(array $arguments)

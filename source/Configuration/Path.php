@@ -49,7 +49,7 @@ class Configuration_Path
     /**
      * @return string
      */
-    public function getBackupConfigFilePath()
+    public function getBackupConfigurationFilePath()
     {
         return $this->getBackupPath() . DIRECTORY_SEPARATOR . $this->getConfigurationFileName();
     }
@@ -89,9 +89,9 @@ class Configuration_Path
     /**
      * @return string
      */
-    public function getExampleConfigFilePath()
+    public function getExampleConfigurationFilePath()
     {
-        return $this->getExamplePath() . DIRECTORY_SEPARATOR . $this->getConfigurationFileName();
+        return $this->getChatPath() . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $this->getConfigurationFileName() . '.example';
     }
 
     /**
@@ -137,7 +137,7 @@ class Configuration_Path
     /**
      * @return string
      */
-    public function getChatConfigFilePath()
+    public function getChatConfigurationFilePath()
     {
         return $this->getChatPath() . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . $this->getConfigurationFileName();
     }

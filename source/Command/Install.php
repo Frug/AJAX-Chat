@@ -37,6 +37,7 @@ class Command_Install extends Command_AbstractCommand
 
     /**
      * @throws Exception
+     * @todo implement setup of database (check if connection is available, split it up in multiple steps (Command_Install_Files, Command_Install_Database)
      */
     public function execute()
     {
@@ -46,8 +47,8 @@ class Command_Install extends Command_AbstractCommand
                 'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
             'configuration'  => array(
-                'example' => $this->pathConfiguration->getExampleConfigFilePath(),
-                'chat' => $this->pathConfiguration->getChatConfigFilePath()
+                'example' => $this->pathConfiguration->getExampleConfigurationFilePath(),
+                'chat' => $this->pathConfiguration->getChatConfigurationFilePath()
             ),
             'users' => array(
                 'example' => $this->pathConfiguration->getExampleUsersFilePath(),
@@ -61,18 +62,24 @@ class Command_Install extends Command_AbstractCommand
 
         foreach ($identifierToPaths as $identifier => $paths) {
             if (!$this->filesystem->isFile($paths['chat'])) {
-                echo 'no ' . $identifier . ' file available, will create one ...' . PHP_EOL;
+                $directoryPath = dirname($paths['chat']);
+
+                if (!$this->filesystem->isDirectory($directoryPath)) {
+                    $this->output->addLine('no directory available at "' . $directoryPath . '", will create one ...');
+                    $this->filesystem->createDirectory($directoryPath);
+                }
+                $this->output->addLine('no ' . $identifier . ' file available, will create one ...');
                 $this->filesystem->copy(
                     $paths['example'],
                     $paths['chat']
                 );
             } else {
-                echo $identifier . ' file available, nothing to do ...' . PHP_EOL;
+                $this->output->addLine($identifier . ' file available, nothing to do ...');
             }
         }
 
-        echo PHP_EOL;
-        echo 'done' . PHP_EOL;
+        $this->output->addLine();
+        $this->output->addLine('done');
     }
 
     /**
