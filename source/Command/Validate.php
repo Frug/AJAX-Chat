@@ -10,14 +10,14 @@
 class Command_Validate extends Command_AbstractCommand
 {
     /**
-     * @var Configuration_Path
-     */
-    private $pathConfiguration;
-
-    /**
      * @var Filesystem
      */
     private $filesystem;
+
+    /**
+     * @var Configuration_Path
+     */
+    private $pathConfiguration;
 
     /**
      * @param Filesystem $filesystem

@@ -158,6 +158,9 @@ abstract class AbstractApplication
         return $this->getFromInstancePool('install_command');
     }
 
+    /**
+     * @return Command_Restore
+     */
     public function getRestoreCommand()
     {
         if ($this->isNotInInstancePool('restore_command')) {
@@ -173,6 +176,108 @@ abstract class AbstractApplication
         return $this->getFromInstancePool('restore_command');
     }
 
+    /**
+     * @return Command_User
+     */
+    public function getUserCommand()
+    {
+        if ($this->isNotInInstancePool('user_command')) {
+            $command = new Command_User();
+            $command->setApplication($this);
+            $command->setFilesystem($this->getFilesystem());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $this->setToInstancePool(
+                'user_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('user_command');
+    }
+
+    /**
+     * @return Command_User_Add
+     */
+    public function getUserAddCommand()
+    {
+        if ($this->isNotInInstancePool('user_add_command')) {
+            $command = new Command_User_Add();
+            $command->setChannels($this->getChannels());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_add_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_add_command');
+    }
+
+    /**
+     * @return Command_User_Edit
+     */
+    public function getUserEditCommand()
+    {
+        if ($this->isNotInInstancePool('user_edit_command')) {
+            $command = new Command_User_Edit();
+            $command->setChannels($this->getChannels());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_edit_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_edit_command');
+    }
+
+    /**
+     * @return Command_User_Delete
+     */
+    public function getUserDeleteCommand()
+    {
+        if ($this->isNotInInstancePool('user_delete_command')) {
+            $command = new Command_User_Delete();
+            $command->setChannels($this->getChannels());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_delete_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_delete_command');
+    }
+
+    /**
+     * @return Command_User_List
+     */
+    public function getUserListCommand()
+    {
+        if ($this->isNotInInstancePool('user_list_command')) {
+            $command = new Command_User_List();
+            $command->setChannels($this->getChannels());
+            $command->setRoles($this->getRoles());
+            $command->setUserFile($this->getUserFile());
+            $command->setUsers($this->getUsers());
+            $this->setToInstancePool(
+                'user_list_command',
+                $command
+            );
+        }
+
+        return $this->getInstallCommand('user_list_command');
+    }
+
+    /**
+     * @return Command_Validate
+     */
     public function getValidateCommand()
     {
         if ($this->isNotInInstancePool('validate_command')) {
@@ -190,6 +295,9 @@ abstract class AbstractApplication
     //end of command
 
     //begin of file
+    /**
+     * @return File
+     */
     public function getChannelFile()
     {
         if ($this->isNotInInstancePool('channel_file')) {
@@ -202,6 +310,23 @@ abstract class AbstractApplication
         }
 
         return $this->getFromInstancePool('channel_file');
+    }
+
+    /**
+     * @return File
+     */
+    public function getUserFile()
+    {
+        if ($this->isNotInInstancePool('user_file')) {
+            $this->setToInstancePool(
+                'user_file',
+                $this->getFile(
+                    $this->getPathConfiguration()->getChatUsersFilePath()
+                )
+            );
+        }
+
+        return $this->getFromInstancePool('user_file');
     }
     //end of file
 

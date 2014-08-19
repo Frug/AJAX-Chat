@@ -8,9 +8,11 @@ if (function_exists('spl_autoload_register')) {
     //own autoloader - since support is from php 5 up, no namespaces are available so back to pear style
     function classLoader($className) {
         $classNameAsPath = str_replace('_', DIRECTORY_SEPARATOR, $className);
+
+        //keep the most important file path on top
         $directories = array(
-            __DIR__ . DIRECTORY_SEPARATOR . 'source',
-            __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'class'
+            __DIR__ . DIRECTORY_SEPARATOR . 'chat' . DIRECTORY_SEPARATOR . 'lib' . DIRECTORY_SEPARATOR . 'class',
+            __DIR__ . DIRECTORY_SEPARATOR . 'source'
         );
         $isLoaded = false;
         $filePath = '';

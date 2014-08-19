@@ -4,23 +4,13 @@
  * @since 2014-08-12
  */
 
-$isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
-
 try {
-    if ($isNotCalledFromCommandLineInterface) {
-        throw new Exception(
-            'command line script only '
-        );
-    }
-
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'bootstrap.php';
 
+    $application = new Application_Cli();
     //@todo verify if is installed and up to date
-    $command = new Command_User();
+    $command = $application->getUserCommand();
     $command->setArguments($argv);
-    $command->setConfiguration($configuration);
-    $command->setFilesystem(new Filesystem());
-    $command->setRoles($roles);
     try {
         $command->verify();
     } catch (Exception $exception) {

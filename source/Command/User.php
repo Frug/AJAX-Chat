@@ -10,6 +10,11 @@
 class Command_User extends Command_AbstractCommand
 {
     /**
+     * @var AbstractApplication
+     */
+    private $application;
+
+    /**
      * @var string
      */
     private $command;
@@ -17,17 +22,12 @@ class Command_User extends Command_AbstractCommand
     /**
      * @var array
      */
-    private $commandToClassName = array(
-        'add'       => 'Command_User_Add',
-        'edit'      => 'Command_User_Edit',
-        'delete'    => 'Command_User_Delete',
-        'list'      => 'Command_User_List'
+    private $commands = array(
+        'add',
+        'edit',
+        'delete',
+        'list'
     );
-
-    /**
-     * @var array
-     */
-    private $configuration;
 
     /**
      * @var Filesystem
@@ -35,16 +35,24 @@ class Command_User extends Command_AbstractCommand
     private $filesystem;
 
     /**
-     * @var array
+     * @var Configuration_Path
      */
-    private $roles;
+    private $pathConfiguration;
 
     /**
-     * @param array $configuration
+     * @param AbstractApplication $application
      */
-    public function setConfiguration(array $configuration)
+    public function setApplication(AbstractApplication $application)
     {
-        $this->configuration = $configuration;
+        $this->application = $application;
+    }
+
+    /**
+     * @param Configuration_Path $configuration
+     */
+    public function setPathConfiguration(Configuration_Path $configuration)
+    {
+        $this->pathConfiguration = $configuration;
     }
 
     /**
@@ -56,37 +64,30 @@ class Command_User extends Command_AbstractCommand
     }
 
     /**
-     * @param array $roles
-     */
-    public function setRoles(array $roles)
-    {
-        $this->roles = $roles;
-    }
-
-    /**
      * @throws Exception
      */
     public function execute()
     {
-        $pathToChannelsPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['channels'];
-        $pathToUsersPhp = $this->configuration['public']['data']['path'] . DIRECTORY_SEPARATOR . $this->configuration['public']['data']['file']['users'];
+        switch ($this->command) {
+            case 'add':
+                $command = $this->application->getUserAddCommand();
+                break;
+            case 'edit':
+                $command = $this->application->getUserEditCommand();
+                break;
+            case 'delete':
+                $command = $this->application->getUserDeleteCommand();
+                break;
+            case 'list':
+                $command = $this->application->getUserListCommand();
+                break;
+            default:
+                throw new Exception(
+                    'unsupported command "' . $this->command . '"'
+                );
+        }
 
-        require_once $pathToChannelsPhp;
-        require_once $pathToUsersPhp;
-
-        $commandClass = $this->commandToClassName[$this->command];
-        $fileToUsers = new File($pathToUsersPhp);
-
-        /** @var Command_User_CommandInterface $command */
-        $command = new $commandClass();
-
-        //@todo move channels and users into setters
         $command->setArguments($this->arguments);
-        $command->setChannels($channels);
-        $command->setRoles($this->roles);
-        $command->setUsers($users);
-        $command->setUserFile($fileToUsers);
-
         try {
             $command->verify();
         } catch (Exception $exception) {
@@ -105,7 +106,7 @@ class Command_User extends Command_AbstractCommand
     public function getUsage()
     {
         return array(
-            '[' . implode('|', array_keys($this->commandToClassName)) . ']'
+            '[' . implode('|', $this->commands) . ']'
         );
     }
 
@@ -122,7 +123,7 @@ class Command_User extends Command_AbstractCommand
 
         $command = trim($this->arguments[1]);
 
-        if (!(isset($this->commandToClassName[$command]))) {
+        if (!(in_array($command, $this->commands))) {
             throw new Exception(
                 'invalid command provided'
             );
