@@ -26,21 +26,21 @@ class Command_Restore extends Command_AbstractCommand
     private $command;
 
     /**
-     * @var array
-     */
-    private $configuration;
-
-    /**
      * @var Filesystem
      */
     private $filesystem;
 
     /**
-     * @param array $configuration
+     * @var Configuration_Path
      */
-    public function setConfiguration(array $configuration)
+    private $pathConfiguration;
+
+    /**
+     * @param Configuration_Path $configuration
+     */
+    public function setPathConfiguration(Configuration_Path $configuration)
     {
-        $this->configuration = $configuration;
+        $this->pathConfiguration = $configuration;
     }
 
     /**
@@ -58,15 +58,11 @@ class Command_Restore extends Command_AbstractCommand
     {
         $identifiers = array();
 
-        $pathToBackupDirectory = $this->configuration['backup']['path'];
-        $pathToDataDirectory = $this->configuration['public']['data']['path'];
-        $pathToLibDirectory = $this->configuration['public']['lib']['path'];
-
         switch ($this->command) {
             case 'all':
                 $identifiers = array(
                     'channels',
-                    'application',
+                    'configuration',
                     'users',
                     'version'
                 );
@@ -74,8 +70,8 @@ class Command_Restore extends Command_AbstractCommand
             case 'channels':
                 $identifiers[] = 'channels';
                 break;
-            case 'application':
-                $identifiers[] = 'application';
+            case 'configuration':
+                $identifiers[] = 'configuration';
                 break;
             case 'users':
                 $identifiers[] = 'users';
@@ -87,20 +83,20 @@ class Command_Restore extends Command_AbstractCommand
 
         $identifierToPaths = array(
             'channels' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['channels'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['channels']
+                'backup' => $this->pathConfiguration->getBackupChannelsFilePath(),
+                'chat' => $this->pathConfiguration->getChatChannelsFilePath()
             ),
-            'application'  => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['application'],
-                'public' => $pathToLibDirectory . DIRECTORY_SEPARATOR . $configuration['public']['lib']['file']['application']
+            'configuration'  => array(
+                'backup' => $this->pathConfiguration->getBackupConfigurationFilePath(),
+                'chat' => $this->pathConfiguration->getChatConfigurationFilePath()
             ),
             'users' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['users'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['users']
+                'backup' => $this->pathConfiguration->getBackupUsersFilePath(),
+                'chat' => $this->pathConfiguration->getChatUsersFilePath()
             ),
             'version' => array(
-                'backup' => $pathToBackupDirectory . DIRECTORY_SEPARATOR . $configuration['backup']['file']['version'],
-                'public' => $pathToDataDirectory . DIRECTORY_SEPARATOR . $configuration['public']['data']['file']['version']
+                'backup' => $this->pathConfiguration->getBackupVersionFilePath(),
+                'chat' => $this->pathConfiguration->getChatVersionFilePath()
             ),
         );
 
@@ -109,7 +105,7 @@ class Command_Restore extends Command_AbstractCommand
                 echo $identifier . ' backup file available, will restore it ...' . PHP_EOL;
                 $this->filesystem->copy(
                     $identifierToPaths[$identifier]['backup'],
-                    $identifierToPaths[$identifier]['public']
+                    $identifierToPaths[$identifier]['chat']
                 );
             } else {
                 echo 'no ' . $identifier .' backup file available ...' . PHP_EOL;

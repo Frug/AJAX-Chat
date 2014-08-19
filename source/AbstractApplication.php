@@ -157,6 +157,21 @@ abstract class AbstractApplication
 
         return $this->getFromInstancePool('install_command');
     }
+
+    public function getRestoreCommand()
+    {
+        if ($this->isNotInInstancePool('restore_command')) {
+            $command = new Command_Restore();
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setFilesystem($this->getFilesystem());
+            $this->setToInstancePool(
+                'restore_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('restore_command');
+    }
     //end of command
 
     //begin of file
@@ -201,7 +216,7 @@ abstract class AbstractApplication
             $this->setPropertyFromFile(
                 'chatConfiguration',
                 'config',
-                $this->getPathConfiguration()->getChatConfigFilePath()
+                $this->getPathConfiguration()->getChatConfigurationFilePath()
             );
         }
 

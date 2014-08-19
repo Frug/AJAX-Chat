@@ -37,6 +37,7 @@ class Command_Install extends Command_AbstractCommand
 
     /**
      * @throws Exception
+     * @todo implement setup of database (check if connection is available, split it up in multiple steps (Command_Install_Files, Command_Install_Database)
      */
     public function execute()
     {
