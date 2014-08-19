@@ -17,27 +17,24 @@ class Command_Channel_List extends Command_Channel_AbstractCommand
         $numberOfChannels = count($this->channels);
         $iterator = $numberOfChannels;
 
-        echo 'number of channels: ' . $numberOfChannels . PHP_EOL;
+        $this->output->addLine('number of channels: ' . $numberOfChannels);
 
         //@todo implement output styling
         if ($numberOfChannels > 0) {
-            echo PHP_EOL;
-            echo 'id | name ' . PHP_EOL;
-            echo '--------' . PHP_EOL;
+            $this->output->addLine();
+            $this->output->addLine('id | name ');
+            $this->output->addLine('--------');
 
             foreach ($this->channels as $id => $name) {
-                echo implode(
-                    ' | ',
-                    array(
-                        $id,
-                        $name
+                $this->output->addLine(
+                        implode(
+                        ' | ',
+                        array(
+                            $id,
+                            $name
+                        )
                     )
                 );
-
-                if ($iterator > 0) {
-                    echo PHP_EOL;
-                    --$iterator;
-                }
             }
         }
     }

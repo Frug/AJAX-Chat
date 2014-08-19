@@ -19,29 +19,26 @@ class Command_User_List extends Command_User_AbstractCommand
         $numberOfUsers = count($this->users);
         $iterator = $numberOfUsers;
 
-        echo 'number of users: ' . $numberOfUsers . PHP_EOL;
+        $this->output->addLine('number of users: ' . $numberOfUsers);
 
         //@todo implement output styling
         if ($numberOfUsers > 0) {
-            echo PHP_EOL;
-            echo 'id | name | role | channels' . PHP_EOL;
-            echo '----------------' . PHP_EOL;
+            $this->output->addLine();
+            $this->output->addLine('id | name | role | channels');
+            $this->output->addLine('----------------');
 
             foreach ($this->users as $id => $user) {
-                echo implode(
-                    ' | ',
-                    array(
-                        $id,
-                        $user['userName'],
-                        $user['userRole'],
-                        implode(',', $user['channels'])
+                $this->output->addLine(
+                    implode(
+                        ' | ',
+                        array(
+                            $id,
+                            $user['userName'],
+                            $user['userRole'],
+                            implode(',', $user['channels'])
+                        )
                     )
                 );
-
-                if ($iterator > 0) {
-                    echo PHP_EOL;
-                    --$iterator;
-                }
             }
         }
     }

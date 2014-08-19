@@ -7,7 +7,7 @@
 /**
  * Interface Command_CommandInterface
  */
-interface Command_CommandInterface
+interface Command_CommandInterface extends OutputDependentInterface
 {
     /**
      * @throws Exception

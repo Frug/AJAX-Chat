@@ -16,6 +16,10 @@ try {
         throw new Exception(implode("\n", $command->getUsage()));
     }
     $command->execute();
+
+    foreach ($command->getOutput()->toArray() as $line) {
+        echo $line . PHP_EOL;
+    }
 } catch (Exception $exception) {
     echo 'error occurred' . PHP_EOL;
     echo '----------------' . PHP_EOL;

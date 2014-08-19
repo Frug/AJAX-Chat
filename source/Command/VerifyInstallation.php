@@ -73,6 +73,7 @@ class Command_VerifyInstallation extends Command_AbstractCommand
         }
 
         //@todo move into Command_Validate_Version
+        //@todo move this into application method getExampleVersion|getChatVersion?
         $exampleVersion = require_once $this->pathConfiguration->getExampleVersionFilePath();
         $chatVersion = require_once $this->pathConfiguration->getChatVersionFilePath();
 
@@ -82,7 +83,11 @@ class Command_VerifyInstallation extends Command_AbstractCommand
             );
         }
 
-        echo 'installation is valid.' . PHP_EOL;
+        //@todo fetch current version from url
+
+        //@todo validate if 'install.php' is still available
+
+        $this->output->addLine('installation is valid.');
     }
 
     /**

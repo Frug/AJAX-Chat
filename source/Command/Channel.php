@@ -72,6 +72,8 @@ class Command_Channel extends Command_AbstractCommand
         }
 
         $command->setArguments($this->arguments);
+        $command->setOutput($this->output);
+
         try {
             $command->verify();
         } catch (Exception $exception) {

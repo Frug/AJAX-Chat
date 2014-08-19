@@ -62,18 +62,18 @@ class Command_Install extends Command_AbstractCommand
 
         foreach ($identifierToPaths as $identifier => $paths) {
             if (!$this->filesystem->isFile($paths['chat'])) {
-                echo 'no ' . $identifier . ' file available, will create one ...' . PHP_EOL;
+                $this->output->addLine('no ' . $identifier . ' file available, will create one ...');
                 $this->filesystem->copy(
                     $paths['example'],
                     $paths['chat']
                 );
             } else {
-                echo $identifier . ' file available, nothing to do ...' . PHP_EOL;
+                $this->output->addLine($identifier . ' file available, nothing to do ...');
             }
         }
 
-        echo PHP_EOL;
-        echo 'done' . PHP_EOL;
+        $this->output->addLine();
+        $this->output->addLine('done');
     }
 
     /**

@@ -102,13 +102,13 @@ class Command_Restore extends Command_AbstractCommand
 
         foreach ($identifiers as $identifier) {
             if ($this->filesystem->isFile($identifierToPaths[$identifier]['backup'])) {
-                echo $identifier . ' backup file available, will restore it ...' . PHP_EOL;
+                $this->output->addLine($identifier . ' backup file available, will restore it ...');
                 $this->filesystem->copy(
                     $identifierToPaths[$identifier]['backup'],
                     $identifierToPaths[$identifier]['chat']
                 );
             } else {
-                echo 'no ' . $identifier .' backup file available ...' . PHP_EOL;
+                $this->output->addLine('no ' . $identifier .' backup file available ...');
             }
         }
     }

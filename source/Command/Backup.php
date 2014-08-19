@@ -65,7 +65,7 @@ class Command_Backup extends Command_AbstractCommand
 
         foreach ($identifierToPaths as $identifier => $paths) {
             if ($this->filesystem->isFile($paths['backup'])) {
-                echo $identifier . ' backup file available, will delete it ...' . PHP_EOL;
+                $this->output->addLine($identifier . ' backup file available, will delete it ...');
                 $this->filesystem->deleteFile($paths['backup']);
             }
         }
@@ -78,8 +78,8 @@ class Command_Backup extends Command_AbstractCommand
             );
         }
 
-        echo PHP_EOL;
-        echo 'done' . PHP_EOL;
+        $this->output->addLine();
+        $this->output->addLine('done');
     }
 
     /**
