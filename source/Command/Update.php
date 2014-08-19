@@ -10,6 +10,11 @@
 class Command_Update extends Command_AbstractCommand
 {
     /**
+     * @var AbstractApplication
+     */
+    private $application;
+
+    /**
      * @var Filesystem
      */
     private $filesystem;
@@ -18,6 +23,14 @@ class Command_Update extends Command_AbstractCommand
      * @var Configuration_Path
      */
     private $pathConfiguration;
+
+    /**
+     * @param AbstractApplication $application
+     */
+    public function setApplication(AbstractApplication $application)
+    {
+        $this->application = $application;
+    }
 
     /**
      * @param Configuration_Path $configuration
@@ -41,24 +54,19 @@ class Command_Update extends Command_AbstractCommand
     public function execute()
     {
         //__general
-        $releases = $this->filesystem->getDirectories(
-            $this->pathConfiguration->getReleasePath(),
-            array('upcoming'),
-            false
-        );
-        $currentVersion = '0.8.8';
-        $releasesToProcess = array();
+        $releases = $this->fetchReleasesToProcess();
+
         foreach ($releases as $release) {
-            $isNewer = version_compare($release, $currentVersion, '>');
-            if ($isNewer) {
-                $releasesToProcess[] = $release;
+            $updateFiles = $this->fetchUpdatesFilesFromRelease($release);
+            //@todo output per release
+            foreach ($updateFiles as $updateFile) {
+                //@todo output per file
+                $this->executeUpdateFile($updateFile);
             }
         }
-        natsort($releasesToProcess);
+        //@todo implement changelog
+        //update version
 
-        foreach ($releasesToProcess as $release) {
-            $pathToRelease = $this->pathConfiguration->getReleasePath() . DIRECTORY_SEPARATOR . $release;
-        }
         //there should be a version directory per release
         //there should be a "not released" directory that contains all prepared updates
         //each version directory can contain multiple update php files
@@ -91,5 +99,54 @@ class Command_Update extends Command_AbstractCommand
      */
     public function verify()
     {
+    }
+
+    /**
+     * @return array
+     */
+    private function fetchReleasesToProcess()
+    {
+        $releases = $this->filesystem->getDirectories(
+            $this->pathConfiguration->getReleasePath(),
+            array('upcoming'),
+            false
+        );
+//@todo replace by real value
+$currentVersion = '0.8.8';
+        $releasesToProcess = array();
+        foreach ($releases as $release) {
+            $isNewer = version_compare($release, $currentVersion, '>');
+            if ($isNewer) {
+                $releasesToProcess[] = $release;
+            }
+        }
+        natsort($releasesToProcess);
+
+        return $releasesToProcess;
+    }
+
+    /**
+     * @param string $release
+     * @return array
+     * @todo add validation
+     */
+    private function fetchUpdatesFilesFromRelease($release)
+    {
+        $updateFiles = array();
+        //@todo
+
+        return $updateFiles;
+    }
+
+    /**
+     * @todo add validation
+     * @param string $file
+     * @throws Exception
+     */
+    private function executeUpdateFile($file)
+    {
+        $application = $this->application;
+
+        require $file;
     }
 }
