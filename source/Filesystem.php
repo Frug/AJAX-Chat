@@ -40,6 +40,7 @@ class Filesystem
 
     /**
      * @param string $path
+     * @return File
      * @throws Exception
      */
     public function createFile($path)
@@ -49,6 +50,8 @@ class Filesystem
                 'can not create file "' . $path . '"'
             );
         }
+
+        return $this->getFile($path);
     }
 
     /**
@@ -182,5 +185,19 @@ class Filesystem
     public function isFile($path)
     {
         return is_file($path);
+    }
+
+    /**
+     * @param string $source
+     * @param string $target
+     * @throws Exception
+     */
+    public function move($source, $target)
+    {
+        if (rename($source, $target) === false) {
+            throw new Exception(
+                'can not move "' . $source . '" to "' . $target . '"'
+            );
+        }
     }
 }

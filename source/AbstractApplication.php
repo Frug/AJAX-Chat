@@ -189,22 +189,24 @@ abstract class AbstractApplication
     }
 
     /**
-     * @return Command_User
+     * @return Command_Upgrade
      */
-    public function getUpdateCommand()
+    public function getUpgradeCommand()
     {
-        if ($this->isNotInInstancePool('update_command')) {
-            $command = new Command_Update();
+        if ($this->isNotInInstancePool('upgrade_command')) {
+            $command = new Command_Upgrade();
+            $command->setApplication($this);
+            $command->setChangeLog($this->getFile($this->getPathConfiguration()->getChangeLogFilePath()));
             $command->setFilesystem($this->getFilesystem());
             $command->setPathConfiguration($this->getPathConfiguration());
             $command->setOutput($this->getOutput());
             $this->setToInstancePool(
-                'update_command',
+                'upgrade_command',
                 $command
             );
         }
 
-        return $this->getFromInstancePool('update_command');
+        return $this->getFromInstancePool('upgrade_command');
     }
 
     /**
@@ -397,6 +399,22 @@ abstract class AbstractApplication
         }
 
         return $this->chatConfiguration;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCurrentVersion()
+    {
+        return require $this->getPathConfiguration()->getChatVersionFilePath();
+    }
+
+    /**
+     * @return string
+     */
+    public function getExampleVersion()
+    {
+        return require $this->getPathConfiguration()->getExampleVersionFilePath();
     }
 
     /**

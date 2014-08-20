@@ -166,6 +166,14 @@ class Configuration_Path
     {
         return $this->pathToRootDirectory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'release';
     }
+
+    /**
+     * @return string
+     */
+    public function getChangeLogFilePath()
+    {
+        return $this->pathToRootDirectory . DIRECTORY_SEPARATOR . 'data' . DIRECTORY_SEPARATOR . 'change.log';
+    }
     //end of path
 
     //begin of file name

@@ -31,7 +31,9 @@ class File
     public function append($content)
     {
         if (is_array($content)) {
-            $content = implode("\n", $content);
+            $content = implode(PHP_EOL, $content);
+        } else {
+            $content .= PHP_EOL;
         }
 
         $numberOfBytes = file_put_contents($this->getPath(), $content, FILE_APPEND);
