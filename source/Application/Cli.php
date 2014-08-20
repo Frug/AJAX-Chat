@@ -14,6 +14,8 @@ class Application_Cli extends AbstractApplication
      */
     public function __construct()
     {
+        global $argv;
+
         $isNotCalledFromCommandLineInterface = (PHP_SAPI !== 'cli');
 
         if ($isNotCalledFromCommandLineInterface) {
@@ -21,5 +23,8 @@ class Application_Cli extends AbstractApplication
                 'command line script only '
             );
         }
+        $arguments = $argv;
+        array_shift($arguments);
+        $this->setArguments($arguments);
     }
 }

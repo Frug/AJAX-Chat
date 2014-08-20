@@ -10,14 +10,30 @@
 abstract class Command_AbstractCommand implements Command_CommandInterface
 {
     /**
-     * @var array
+     * @var Input
      */
-    protected $arguments;
+    protected $input;
 
     /**
      * @var Output
      */
     protected $output;
+
+    /**
+     * @return Input
+     */
+    public function getInput()
+    {
+        return $this->input;
+    }
+
+    /**
+     * @param Input $input
+     */
+    public function setInput(Input $input)
+    {
+        $this->input = $input;
+    }
 
     /**
      * @return null|Output
@@ -33,13 +49,5 @@ abstract class Command_AbstractCommand implements Command_CommandInterface
     public function setOutput(Output $output)
     {
         $this->output = $output;
-    }
-
-    /**
-     * @param array $arguments
-     */
-    public function setArguments(array $arguments)
-    {
-        $this->arguments = $arguments;
     }
 }

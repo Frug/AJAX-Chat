@@ -7,7 +7,7 @@
 /**
  * Interface Command_CommandInterface
  */
-interface Command_CommandInterface extends OutputDependentInterface
+interface Command_CommandInterface extends InputDependentInterface, OutputDependentInterface
 {
     /**
      * @throws Exception
@@ -18,11 +18,6 @@ interface Command_CommandInterface extends OutputDependentInterface
      * @return array
      */
     public function getUsage();
-
-    /**
-     * @param array $arguments
-     */
-    public function setArguments(array $arguments);
 
     /**
      * @throws Exception

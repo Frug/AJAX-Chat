@@ -61,7 +61,7 @@ class Command_Channel_Edit extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            '"id" "name"',
+            'id=<id> name="<name>"',
             '   available channels: ' . implode(',', array_keys($this->channels))
         );
     }
@@ -71,22 +71,22 @@ class Command_Channel_Edit extends Command_Channel_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) !== 4) {
+        if ($this->input->getNumberOfArguments() !== 2) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
-        $name = trim($this->arguments[3]);
-        $id = (int) $this->arguments[2];
+        $name = $this->input->getParameterValue('name');
+        $id = $this->input->getParameterValue('id');
 
-        if (strlen($name) < 1) {
+        if (is_null($name)) {
             throw new Exception(
-                'invalid name "' . $name . '" provided'
+                'no name provided'
             );
         }
 
-        if (($id === 0)) {
+        if (is_null($id)) {
             throw new Exception(
                 'no id provided'
             );

@@ -56,7 +56,7 @@ class Command_User_Add extends Command_User_AbstractCommand
     public function getUsage()
     {
         return array(
-            '"login name" "password" "role" "channels"',
+            'name="<login name>" password="<password>" role=<id> channels="<id>[,<id>[...]]"',
             '   available channels: ' . implode(',', array_keys($this->channels)),
             '   available roles: ' . implode(',', array_keys($this->roles))
         );
@@ -67,26 +67,26 @@ class Command_User_Add extends Command_User_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) !== 6) {
+        if ($this->input->getNumberOfArguments() !== 4) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
-        $channels = explode(',', trim($this->arguments[5]));
-        $name = trim($this->arguments[2]);
-        $password = trim($this->arguments[3]);
-        $role = trim($this->arguments[4]);
+        $channels = explode(',', $this->input->getParameterValue('channels', ''));
+        $name = $this->input->getParameterValue('name');
+        $password = $this->input->getParameterValue('password');
+        $role = $this->input->getParameterValue('role');
 
-        if (strlen($name) < 1) {
+        if (is_null($name)) {
             throw new Exception(
-                'invalid name "' . $name . '" provided'
+                'no name "' . $name . '" provided'
             );
         }
 
-        if (strlen($role) < 1) {
+        if (is_null($role)) {
             throw new Exception(
-                'invalid name "' . $role . '" provided'
+                'no role "' . $role . '" provided'
             );
         } else {
             if (!isset($this->roles[$role])) {
@@ -96,9 +96,9 @@ class Command_User_Add extends Command_User_AbstractCommand
             }
         }
 
-        if (strlen($password) < 1) {
+        if (is_null($password)) {
             throw new Exception(
-                'invalid name "' . $password . '" provided'
+                'no password "' . $password . '" provided'
             );
         }
 

@@ -10,7 +10,6 @@ try {
     $application = new Application_Cli();
     //@todo verify if is not installed
     $command = $application->getInstallCommand();
-    $command->setArguments($argv);
     try {
         $command->verify();
     } catch (Exception $exception) {

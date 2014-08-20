@@ -15,11 +15,9 @@ class Command_Channel_List extends Command_Channel_AbstractCommand
     public function execute()
     {
         $numberOfChannels = count($this->channels);
-        $iterator = $numberOfChannels;
 
         $this->output->addLine('number of channels: ' . $numberOfChannels);
 
-        //@todo implement output styling
         if ($numberOfChannels > 0) {
             $this->output->addLine();
             $this->output->addLine('id | name ');

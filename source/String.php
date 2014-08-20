@@ -18,4 +18,21 @@ class String
     {
         return (strncmp($string, $prefix, strlen($prefix)) === 0);
     }
-} 
+
+    /**
+     * @param string $string
+     * @param int $start
+     * @param null|int $length
+     * @return string
+     */
+    public function cut($string, $start = 0, $length = 0)
+    {
+        if (($length === 0)) {
+            $part = substr($string, $start);
+        } else {
+            $part = substr($string, $start, $length);
+        }
+
+        return $part;
+    }
+}

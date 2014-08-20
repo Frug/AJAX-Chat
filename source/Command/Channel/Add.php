@@ -37,7 +37,7 @@ class Command_Channel_Add extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            '"channel name"',
+            'name="<channel name>"',
             '   available channels: ' . implode(',', array_keys($this->channels)),
         );
     }
@@ -47,15 +47,15 @@ class Command_Channel_Add extends Command_Channel_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) !== 3) {
+        if ($this->input->getNumberOfArguments() !== 1) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
-        $name = trim($this->arguments[2]);
+        $name = $this->input->getParameterValue('name');
 
-        if (strlen($name) < 1) {
+        if (is_null($name)) {
             throw new Exception(
                 'invalid name "' . $name . '" provided'
             );

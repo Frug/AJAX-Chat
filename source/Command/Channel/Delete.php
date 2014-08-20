@@ -57,7 +57,7 @@ class Command_Channel_Delete extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            '[channel id]',
+            'channel_id=<channel id>',
             '   available channels: ' . implode(',', array_keys($this->channels))
         );
     }
@@ -67,14 +67,14 @@ class Command_Channel_Delete extends Command_Channel_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) !== 3) {
+        if ($this->input->getNumberOfArguments() !== 1) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
         $validIds = array_keys($this->channels);
-        $inputId = (int) $this->arguments[2];
+        $inputId = $this->input->getParameterValue('channel_id');
 
         if (!isset($validIds[$inputId])) {
             throw new Exception(

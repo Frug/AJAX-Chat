@@ -71,7 +71,7 @@ class Command_Channel extends Command_AbstractCommand
                 );
         }
 
-        $command->setArguments($this->arguments);
+        $command->setInput($this->input);
         $command->setOutput($this->output);
 
         try {
@@ -92,7 +92,7 @@ class Command_Channel extends Command_AbstractCommand
     public function getUsage()
     {
         return array(
-            '[' . implode('|', $this->commands) . ']'
+            '[--' . implode('|--', $this->commands) . ']'
         );
     }
 
@@ -101,20 +101,27 @@ class Command_Channel extends Command_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) < 2) {
+        $this->command = null;
+
+        if ($this->input->getNumberOfArguments() < 1) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
-        $command = trim($this->arguments[1]);
+        foreach ($this->commands as $command) {
+            if ($this->input->hasLongOption($command)) {
+                $this->command = $command;
+                break;
+            }
+        }
 
-        if (!(in_array($command, $this->commands))) {
+        if (is_null($this->command)) {
             throw new Exception(
                 'invalid command provided'
             );
         }
 
-        $this->command = $command;
+        $this->input->removeLongOption($this->command);
     }
 }
