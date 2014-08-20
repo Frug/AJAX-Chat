@@ -77,9 +77,6 @@ class Command_Backup extends Command_AbstractCommand
                 $paths['backup']
             );
         }
-
-        $this->output->addLine();
-        $this->output->addLine('done');
     }
 
     /**

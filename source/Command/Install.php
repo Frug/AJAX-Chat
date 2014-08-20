@@ -77,9 +77,6 @@ class Command_Install extends Command_AbstractCommand
                 $this->output->addLine($identifier . ' file available, nothing to do ...');
             }
         }
-
-        $this->output->addLine();
-        $this->output->addLine('done');
     }
 
     /**
