@@ -8,12 +8,16 @@ try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoLoader.php';
 
     $application = new Application_Cli();
-    //@todo verify if is installed and up to date
+
+    $verifyInstallation = $application->getVerifyInstallationCommand();
+    $verifyInstallation->verify();
+    $verifyInstallation->execute();
+
     $command = $application->getBackupCommand();
     try {
         $command->verify();
     } catch (Exception $exception) {
-        throw new Exception('Usage:' . PHP_EOL . basename(__FILE__) . ' ' . implode("\n", $command->getUsage()));
+        throw new Exception(implode("\n", $command->getUsage()));
     }
     $command->execute();
 

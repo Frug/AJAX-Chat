@@ -8,7 +8,22 @@ try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoLoader.php';
 
     $application = new Application_Cli();
-    //@todo verify if is not installed
+    $isInstalled = true;
+
+    try {
+        $verifyInstallation = $application->getVerifyInstallationCommand();
+        $verifyInstallation->verify();
+        $verifyInstallation->execute();
+    } catch (Exception $exception) {
+        $isInstalled = false;
+    }
+
+    if ($isInstalled) {
+        throw new Exception(
+            'already installed'
+        );
+    }
+
     $command = $application->getInstallCommand();
     try {
         $command->verify();
@@ -17,6 +32,9 @@ try {
     }
     $command->execute();
 
+    $command->getOutput()->addLine();
+    $command->getOutput()->addLine('please execute install.php and remove the file afterwards');
+    $command->getOutput()->addLine();
     $command->getOutput()->addLine('done');
 
     foreach ($command->getOutput()->toArray() as $line) {

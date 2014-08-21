@@ -103,7 +103,6 @@ class Command_Upgrade extends Command_AbstractCommand
 
     /**
      * @throws Exception
-     * @todo move this calls out and replace by provided properties
      */
     private function backup()
     {
@@ -121,7 +120,6 @@ class Command_Upgrade extends Command_AbstractCommand
      * @param string $pathToIndexPhp
      * @param string $pathToBackupOfIndexPhp
      * @throws Exception
-     * @todo move this calls out and replace by provided properties
      */
     private function executePreUpdateTasks($pathToIndexPhp, $pathToBackupOfIndexPhp)
     {
@@ -137,7 +135,6 @@ class Command_Upgrade extends Command_AbstractCommand
      * @param string $pathToIndexPhp
      * @param string $pathToBackupOfIndexPhp
      * @throws Exception
-     * @todo move this calls out and replace by provided properties
      */
     private function executePostUpdateTasks($pathToIndexPhp, $pathToBackupOfIndexPhp)
     {

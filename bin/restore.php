@@ -8,7 +8,11 @@ try {
     require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'autoLoader.php';
 
     $application = new Application_Cli();
-    //@todo verify if is installed and up to date
+
+    $verifyInstallation = $application->getVerifyInstallationCommand();
+    $verifyInstallation->verify();
+    $verifyInstallation->execute();
+
     $command = $application->getRestoreCommand();
     try {
         $command->verify();

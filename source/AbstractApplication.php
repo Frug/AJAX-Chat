@@ -336,19 +336,60 @@ abstract class AbstractApplication
      */
     public function getVerifyInstallationCommand()
     {
-        if ($this->isNotInInstancePool('validate_command')) {
+        if ($this->isNotInInstancePool('validate_installation_command')) {
             $command = new Command_VerifyInstallation();
+            $command->setApplication($this);
+            $command->setInput($this->getInput());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'validate_installation_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('validate_installation_command');
+    }
+
+    /**
+     * @return Command_VerifyInstallation_LocalFiles
+     */
+    public function getVerifyInstallationLocalFilesCommand()
+    {
+        if ($this->isNotInInstancePool('validate_installation_local_files_command')) {
+            $command = new Command_VerifyInstallation_LocalFiles();
+            $command->setApplication($this);
             $command->setFilesystem($this->getFilesystem());
             $command->setInput($this->getInput());
             $command->setPathConfiguration($this->getPathConfiguration());
             $command->setOutput($this->getOutput());
             $this->setToInstancePool(
-                'validate_command',
+                'validate_installation_local_files_command',
                 $command
             );
         }
 
-        return $this->getFromInstancePool('validate_command');
+        return $this->getFromInstancePool('validate_installation_local_files_command');
+    }
+
+    /**
+     * @return Command_VerifyInstallation_Version
+     */
+    public function getVerifyInstallationVersionCommand()
+    {
+        if ($this->isNotInInstancePool('validate_installation_version_command')) {
+            $command = new Command_VerifyInstallation_Version();
+            $command->setApplication($this);
+            $command->setFilesystem($this->getFilesystem());
+            $command->setInput($this->getInput());
+            $command->setPathConfiguration($this->getPathConfiguration());
+            $command->setOutput($this->getOutput());
+            $this->setToInstancePool(
+                'validate_installation_version_command',
+                $command
+            );
+        }
+
+        return $this->getFromInstancePool('validate_installation_version_command');
     }
     //end of command
 
@@ -463,7 +504,14 @@ abstract class AbstractApplication
      */
     public function getInput()
     {
-        return new Input($this->getString(), $this->arguments);
+        if ($this->isNotInInstancePool('input')) {
+            $this->setToInstancePool(
+                'input',
+                new Input($this->getString(), $this->arguments)
+            );
+        }
+
+        return $this->getFromInstancePool('input');
     }
 
     /**
@@ -471,7 +519,14 @@ abstract class AbstractApplication
      */
     public function getOutput()
     {
-        return new Output();
+        if ($this->isNotInInstancePool('output')) {
+            $this->setToInstancePool(
+                'output',
+                new Output()
+            );
+        }
+
+        return $this->getFromInstancePool('output');
     }
 
     /**

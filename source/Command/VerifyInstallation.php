@@ -10,29 +10,16 @@
 class Command_VerifyInstallation extends Command_AbstractCommand
 {
     /**
-     * @var Filesystem
+     * @var AbstractApplication
      */
-    private $filesystem;
+    protected $application;
 
     /**
-     * @var Configuration_Path
+     * @param AbstractApplication $application
      */
-    private $pathConfiguration;
-
-    /**
-     * @param Filesystem $filesystem
-     */
-    public function setFilesystem(Filesystem $filesystem)
+    public function setApplication(AbstractApplication $application)
     {
-        $this->filesystem = $filesystem;
-    }
-
-    /**
-     * @param Configuration_Path $configuration
-     */
-    public function setPathConfiguration(Configuration_Path $configuration)
-    {
-        $this->pathConfiguration = $configuration;
+        $this->application = $application;
     }
 
     /**
@@ -40,54 +27,29 @@ class Command_VerifyInstallation extends Command_AbstractCommand
      */
     public function execute()
     {
-        //@todo move into Command_Validate_Local_Files
-        $pathToLibDirectory = $this->pathConfiguration->getChatPath() . DIRECTORY_SEPARATOR . 'lib';
-
-        if (!$this->filesystem->isDirectory($pathToLibDirectory)) {
-            throw new Exception(
-                'directory "lib" is missing, installation needed'
-            );
-        }
-
-        $pathToDataDirectory = $pathToLibDirectory . DIRECTORY_SEPARATOR . 'data';
-
-        if (!$this->filesystem->isDirectory($pathToDataDirectory)) {
-            throw new Exception(
-                'directory "data" is missing, installation needed'
-            );
-        }
-
-        $identifierToPublicPath = array(
-            'channels' => $this->pathConfiguration->getChatChannelsFilePath(),
-            'pathConfiguration'  => $this->pathConfiguration->getChatConfigurationFilePath(),
-            'users' => $this->pathConfiguration->getChatUsersFilePath(),
-            'version' => $this->pathConfiguration->getChatVersionFilePath()
-        );
-
-        foreach ($identifierToPublicPath as $identifier => $path) {
-            if (!$this->filesystem->isFile($path)) {
-                throw new Exception(
-                    'file "' . $identifier . '" is missing, installation needed'
-                );
-            }
-        }
-
-        //@todo move into Command_Validate_Version
-        //@todo move this into application method getExampleVersion|getChatVersion?
-        $exampleVersion = require_once $this->pathConfiguration->getExampleVersionFilePath();
-        $chatVersion = require_once $this->pathConfiguration->getChatVersionFilePath();
-
-        if ($exampleVersion !== $chatVersion) {
-            throw new Exception(
-                'current version "' . $chatVersion . '" and code version "' . $exampleVersion . '" differs, update needed'
-            );
-        }
-
+        $this->verifyLocalFiles($this->application, $this->input, $this->output);
+        $this->verifyVersion($this->application, $this->input, $this->output);
         //@todo fetch current version from url
+    }
 
-        //@todo validate if 'install.php' is still available
+    /**
+     * @param AbstractApplication $application
+     */
+    private function verifyLocalFiles(AbstractApplication $application)
+    {
+        $command = $application->getVerifyInstallationLocalFilesCommand();
+        $command->verify();
+        $command->execute();
+    }
 
-        $this->output->addLine('installation is valid');
+    /**
+     * @param AbstractApplication $application
+     */
+    private function verifyVersion(AbstractApplication $application)
+    {
+        $command = $application->getVerifyInstallationVersionCommand();
+        $command->verify();
+        $command->execute();
     }
 
     /**

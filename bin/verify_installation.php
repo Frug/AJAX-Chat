@@ -16,7 +16,7 @@ try {
     }
     $command->execute();
 
-    $command->getOutput()->addLine('done');
+    $command->getOutput()->addLine('installation is valid');
 
     foreach ($command->getOutput()->toArray() as $line) {
         echo $line . PHP_EOL;
