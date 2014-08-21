@@ -9,7 +9,6 @@ try {
 
     $application = new Application_Cli();
     $command = $application->getVerifyInstallationCommand();
-    $command->setArguments($argv);
     try {
         $command->verify();
     } catch (Exception $exception) {

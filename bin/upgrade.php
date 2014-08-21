@@ -10,7 +10,6 @@ try {
     $application = new Application_Cli();
     //@todo verify if is installed and up to date
     $command = $application->getUpgradeCommand();
-    $command->setArguments($argv);
     try {
         $command->verify();
     } catch (Exception $exception) {

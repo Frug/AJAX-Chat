@@ -108,11 +108,10 @@ class Command_Upgrade extends Command_AbstractCommand
     private function backup()
     {
         $command = $this->application->getBackupCommand();
-        $arguments = array(
-            $this->arguments[0],
-            'all'
-        );
-        $command->setArguments($arguments);
+
+        $this->input->setArguments(array('--all'));
+
+        $command->setInput($this->input);
         $command->setOutput($this->output);
         $command->verify();
         $command->execute();

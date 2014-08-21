@@ -10,20 +10,20 @@
 class Command_Restore extends Command_AbstractCommand
 {
     /**
-     * @var array
-     */
-    private $availableCommands = array(
-        'all' => true,
-        'channels' => true,
-        'application' => true,
-        'users' => true,
-        'version' => true
-    );
-
-    /**
      * @var string
      */
     private $command;
+
+    /**
+     * @var array
+     */
+    private $commands = array(
+        'all',
+        'channels',
+        'application',
+        'users',
+        'version'
+    );
 
     /**
      * @var Filesystem
@@ -119,7 +119,7 @@ class Command_Restore extends Command_AbstractCommand
     public function getUsage()
     {
         return array(
-            '[' . implode('|', array_keys($this->availableCommands)) . ']'
+            '[--' . implode('|--', $this->commands) . ']'
         );
     }
 
@@ -128,15 +128,20 @@ class Command_Restore extends Command_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) != 2) {
+        if ($this->input->getNumberOfArguments() !== 1) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
-        $command = trim($this->arguments[1]);
+        foreach ($this->commands as $command) {
+            if ($this->input->hasLongOption($command)) {
+                $this->command = $command;
+                break;
+            }
+        }
 
-        if (!(isset($this->availableCommands[$command]))) {
+        if (is_null($this->command)) {
             throw new Exception(
                 'invalid command provided'
             );
