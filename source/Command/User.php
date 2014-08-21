@@ -94,7 +94,7 @@ class Command_User extends Command_AbstractCommand
             $command->verify();
         } catch (Exception $exception) {
             throw new Exception(
-                $this->command . ' ' . implode("\n", $command->getUsage()) . PHP_EOL .
+                '--' . $this->command . ' ' . implode("\n", $command->getUsage()) . PHP_EOL .
                 PHP_EOL .
                 $exception->getMessage()
             );

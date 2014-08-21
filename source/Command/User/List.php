@@ -17,11 +17,9 @@ class Command_User_List extends Command_User_AbstractCommand
         unset($this->users[0]);
         //remove initial user since we are not allowed to remove this user
         $numberOfUsers = count($this->users);
-        $iterator = $numberOfUsers;
 
         $this->output->addLine('number of users: ' . $numberOfUsers);
 
-        //@todo implement output styling
         if ($numberOfUsers > 0) {
             $this->output->addLine();
             $this->output->addLine('id | name | role | channels');

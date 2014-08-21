@@ -492,6 +492,7 @@ abstract class AbstractApplication
      */
     public function getRoles()
     {
+        $this->getChatConfiguration();
         if (empty($this->roles)) {
             if (defined('AJAX_CHAT_GUEST')) {
                 $this->roles = array(

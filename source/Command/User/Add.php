@@ -56,7 +56,7 @@ class Command_User_Add extends Command_User_AbstractCommand
     public function getUsage()
     {
         return array(
-            'name="<login name>" password="<password>" role=<id> channels="<id>[,<id>[...]]"',
+            'name="<name>" password="<password>" role=<id> channels="<id>[,<id>[...]]"',
             '   available channels: ' . implode(',', array_keys($this->channels)),
             '   available roles: ' . implode(',', array_keys($this->roles))
         );

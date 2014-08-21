@@ -37,7 +37,7 @@ class Command_Channel_Add extends Command_Channel_AbstractCommand
     public function getUsage()
     {
         return array(
-            'name="<channel name>"',
+            'name="<name>"',
             '   available channels: ' . implode(',', array_keys($this->channels)),
         );
     }

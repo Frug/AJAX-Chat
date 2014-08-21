@@ -17,7 +17,6 @@ try {
     }
     $command->execute();
 
-    $command->getOutput()->addLine();
     $command->getOutput()->addLine('done');
 
     foreach ($command->getOutput()->toArray() as $line) {

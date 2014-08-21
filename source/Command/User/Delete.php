@@ -69,7 +69,7 @@ class Command_User_Delete extends Command_User_AbstractCommand
         unset($users[0]);
 
         return array(
-            'command: delete [user id]',
+            'userid=<id>',
             '   available users: ' . implode(',', array_keys($users))
         );
     }
@@ -79,27 +79,27 @@ class Command_User_Delete extends Command_User_AbstractCommand
      */
     public function verify()
     {
-        if (count($this->arguments) !== 3) {
+        if ($this->input->getNumberOfArguments() !== 1) {
             throw new Exception(
                 'invalid number of arguments provided'
             );
         }
 
         $validIds = array_keys($this->users);
-        $inputId = (int) $this->arguments[2];
+        $userId = $this->input->getParameterValue('user_id');
 
-        if (!isset($validIds[$inputId])) {
+        if (!isset($validIds[$userId])) {
             throw new Exception(
-                'invalid id "' . $inputId . '" provided'
+                'invalid id "' . $userId . '" provided'
             );
         }
 
-        if ($inputId === 0) {
+        if ($userId === 0) {
             throw new Exception(
-                'you are not allowed to delete id "' . $inputId . '"'
+                'you are not allowed to delete id "' . $userId . '"'
             );
         }
 
-        $this->inputId = $inputId;
+        $this->inputId = $userId;
     }
 }
