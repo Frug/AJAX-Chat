@@ -1,0 +1,9 @@
+<?php
+/**
+ * @author stev leibelt <artodeto@bazzline.net>
+ * @since 2014-08-20
+ */
+
+/** @var AbstractApplication $application */
+$application = $this->application;
+$this->output->addLine(__FILE__);

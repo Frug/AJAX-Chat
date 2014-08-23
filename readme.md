@@ -63,8 +63,14 @@ Features
 - Well commented Source Code
 - Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
 - Tested successfully with Microsoft Internet Explorer, Mozilla Firefox, Opera and Safari - built to work with all modern browsers :)
-
-
+- Command Line Utilities to:
+    - backup system
+    - install system
+    - restore system
+    - update system (this is done by introducing a "version" file)
+    - add, edit, delete and list existing channels
+    - add, edit, delete and list existing users
+    - verify existing installation
 
 Help
 ----
