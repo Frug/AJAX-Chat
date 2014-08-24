@@ -1,2 +1,7 @@
 /chat/lib/config.php
+/chat/lib/data/channels.php
+/chat/lib/data/users.php
+/chat/lib/data/version.php
+/data/backup/*
 /nbproject/*
+.idea
