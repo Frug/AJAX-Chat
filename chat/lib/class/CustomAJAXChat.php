@@ -12,33 +12,7 @@ class CustomAJAXChat extends AJAXChat {
 	// Returns an associative array containing userName, userID and userRole
 	// Returns null if login is invalid
 	function getValidLoginUserData() {
-		
-		$customUsers = $this->getCustomUsers();
-		
-		if($this->getRequestVar('password')) {
-			// Check if we have a valid registered user:
-
-			$userName = $this->getRequestVar('userName');
-			$userName = $this->convertEncoding($userName, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			$password = $this->getRequestVar('password');
-			$password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
-
-			foreach($customUsers as $key=>$value) {
-				if(($value['userName'] == $userName) && ($value['password'] == $password)) {
-					$userData = array();
-					$userData['userID'] = $key;
-					$userData['userName'] = $this->trimUserName($value['userName']);
-					$userData['userRole'] = $value['userRole'];
-					return $userData;
-				}
-			}
-			
-			return null;
-		} else {
-			// Guest users:
-			return $this->getGuestUser();
-		}
+		return MoodleBridge::get()->CurrentUser();
 	}
 
 	// Store the channels the current user has access to
@@ -109,6 +83,8 @@ class CustomAJAXChat extends AJAXChat {
 		// List containing the registered chat users:
 		$users = null;
 		require(AJAX_CHAT_PATH.'lib/data/users.php');
+		
+		$users = array_merge($users, MoodleBridge::get()->AllUsers());
 		return $users;
 	}
 	

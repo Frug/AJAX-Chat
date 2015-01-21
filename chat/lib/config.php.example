@@ -175,7 +175,7 @@ $config['maxMessageRate'] = 20;
 $config['defaultBanTime'] = 5;
 
 // Argument that is given to the handleLogout JavaScript method:
-$config['logoutData'] = './?logout=true';
+$config['logoutData'] = '/'; //Return back to the moodle
 
 // If true, checks if the user IP is the same when logged in:
 $config['ipCheck'] = true;

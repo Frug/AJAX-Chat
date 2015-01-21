@@ -8,4 +8,9 @@
  */
 
 // Include custom libraries and initialization code here
+
+require_once(dirname(__FILE__).'/moodle_bridge.php');
+
+MoodleBridge::Get(); //Executes the moodle things, to avoid collisions
+
 ?>

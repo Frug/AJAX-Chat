@@ -1,24 +1,19 @@
-AJAX Chat Standalone
+AJAX Chat Moodle Bridge
 ====================
 
-This is the standalone version of Blueimp's AJAX Chat. If you are looking for a version to integrate with your forum, select a different branch.
+This project is derived from Blueimp's AJAX Chat and provides a "bridge" (it is not a plugin) to integrate AJAX Chat with moodle LMS (moodle.org).
 
-AJAX stands for "Asynchronous JavaScript and XML".
-The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
-Instead of delivering a complete HTML page only updated data is sent in XML format. 
 
-By using JavaScript the chat page can be updated without having to reload the whole page.
 
 Requirements
 ------------
-
-
 
 | *Server-Side*          | *Client-Side*                | 
 | ---------------------- | ---------------------------- |
 | PHP >= 5               | Enabled JavaScript           |
 | MySQL >= 4             | Enabled Cookies              |
-| Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
+| Moodle >= 2.8          |                              |
+
 
 
 Features
@@ -68,7 +63,6 @@ Features
 
 Help
 ----
-Essential documentation is contained in the attached readme files
 
 For more documentation consult the github wiki: https://github.com/Frug/AJAX-Chat/wiki
 

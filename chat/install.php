@@ -16,8 +16,8 @@ file_exists('lib/config.php') or die('Failed to load lib/config.php. Did you rem
 // Path to the chat directory:
 define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
 
-// Include custom libraries and initialization code:
-require(AJAX_CHAT_PATH.'lib/custom.php');
+// This one is not required
+// require(AJAX_CHAT_PATH.'lib/custom.php'); 
 
 // Include Class libraries:
 require(AJAX_CHAT_PATH.'lib/classes.php');
