@@ -23,6 +23,7 @@ class MoodleBridge {
 
 	private function __construct() {
 		require_once(dirname(__FILE__).'/../../config.php'); //Moodle Config File
+		require_once(dirname(__FILE__).'/config.php'); //AJAX Chat Config File
 
 		require_login(); //this one will show moodle login too
 		
@@ -90,6 +91,3 @@ class MoodleBridge {
 		//Not yet implemented
 	}
 }
-
-
-?>
