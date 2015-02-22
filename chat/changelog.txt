@@ -866,6 +866,7 @@ Bugfixes:
 - Nesting an [IMG] inside a [URL] tag will now only open the URL instead of also opening the image - thanks to James Almer.
 - Users can now be kicked for 0 minutes, which is effectively a kick and not a ban - thanks to micheal-swiggs.
 - User list sorting is now case insensitive (lists should be properly alphabetical) - thanks to marquisite.
+- MyBB forums were not showing up correctly in the room list.
 
 Misc:
 - Removed unneeded call to mt_srand() - thanks to Joshua Embrey.
