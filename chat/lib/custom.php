@@ -11,12 +11,14 @@
  */
 
 // phpBB initialization:		
+
+// Varaibles required to be set before including common.php
 define('IN_PHPBB', true);
-$phpbb_root_path = AJAX_CHAT_PATH.'../';
+$phpbb_root_path = dirname(AJAX_CHAT_PATH) . '/';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
+
 require($phpbb_root_path.'common.'.$phpEx);
 
 // phpBB session management:
 $user->session_begin();
 $auth->acl($user->data);
-?>
