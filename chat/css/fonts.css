@@ -1,12 +1,3 @@
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
-
-/* Fonts */
 #loginContent {
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size:0.8em;
@@ -58,6 +49,9 @@
 #content #chatList span.user {
 	font-weight:bold;
 }
+#content #chatList span.customUser {
+	font-weight:bold;
+}
 #content #chatList span.moderator {
 	font-weight:bold;
 }
@@ -89,12 +83,9 @@
 #content #onlineListContainer #onlineList div {
 	font-size:0.9em;
 }
-#content #helpContainer #helpList td {
+#content #helpContainer #helpList, #content #settingsContainer #settingsList {
 	font-size:0.9em;
 }
-#content #helpContainer #helpList td.code {
+#content #helpContainer #helpList dd {
 	font-style:italic;
-}
-#content #settingsContainer #settingsList td {
-	font-size:0.9em;
 }

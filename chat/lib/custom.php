@@ -12,6 +12,5 @@
 
 // MyBB initialization:
 define('IN_MYBB', 1);
-chdir(AJAX_CHAT_PATH.'../');
-require(AJAX_CHAT_PATH.'../global.php');
-?>
+
+require(dirname(AJAX_CHAT_PATH).'/global.php');

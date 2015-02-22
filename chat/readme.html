@@ -6,119 +6,133 @@
 	
 	<style type="text/css">
 	body,td,th { font-family: Arial, Helvetica, sans-serif; line-height:1.6em; color:#000; font-size: inherit; }
-	body{background:#E7E7E7;margin:0; font-size: 0.8em;}
-	pre {font-size: 1.2em}
-	#wrap{max-width:1200px;background:#fff;margin:0.5em auto;padding:1.5em;box-shadow:2px 2px 4px #555;}
+	body{background:#FFFFFF;margin:0;font-size: 0.8em;}
+	pre{font-size: 1.2em}
+	.container{max-width:1200px;margin:0 auto;padding:1.5em;}
 	.subsection{border:1px solid #006;padding:0.8em 1.6em; background:#F2F5F9;}
 	.subsection .subsection{border:0}
-	a:link{color:#036;text-decoration:none}
-	a:visited{color:#03F;text-decoration:none}
-	td{padding:.5em}
+	a{color:#036;text-decoration:none}
 	.filename{color:#060}
-	.note{font-style:italic;background-color:#FFFFa9;border-radius:10px;padding:1em 1.2em}
+	.note{font-style:italic;font-family:trebuchet ms,sans-serif;background-color:#5B62E6;color:white;border-radius:10px;padding:1em 1.2em;margin:1em;}
+	.note h3{background:transparent;border-radius:0;color:white;padding-top:0;font-family:trebuchet ms,sans-serif;}
+	.note a {color: #F0F0FF;}
 	a:hover{color:#03F;text-decoration:underline}
 	a:active{color:#03F;text-decoration:none;text-align:center}
 	h1,h2,h3,h4,h5,h6{font-weight:400;line-height:100%;margin:0; font-family: Verdana, Geneva, sans-serif;}
-	h1{font-size:1.8em;color:#E3E3FB;margin:-0.7em -0.7em 0.5em -0.7em;padding:0.8em; background: #2F2E8B; font-weight: 700;}
-	h2{font-size:1.3em;color:#FFF;background-color:#2F2E8B;clear:both;border-radius:5px 5px 0 0;margin:2em 0 0;padding:.5em}
+	h2{font-size:1.3em;color:#FFF;background-color:#2F2E8B;border-radius:5px 5px 0 0;margin:2em 0 0;padding:.5em}
 	h2:target{background-color:#6854E4;}
+	header{color:#E3E3FB; background: #2F2E8B; font-weight: 700;}
 	.version { font-size: 0.6em; font-weight: bold; line-height: 150%; display: block; }
 	.version a { color:#e4e4e4; text-decoration: underline;}
-	#toc{color:#000;background-color:#EBEBEB;display:block;float:right;width:20em;line-height:170%;border-radius:5px;border-color:#FFF;margin:0 0 1em 1em;padding:1.2em}
-	#toc h2{background:#333;color:#FFF;margin:-1em -1em 0.5em;padding:0.5em}
-	#toc ol{margin:0}
 	ol li{margin-bottom:1em}
 	h3{color:#000;background-color:#CED2DD;padding:.5em; font-weight: bold;border-radius:5px;}
 	code{display:block;background-color:#DDD;margin:1em;padding:1em; font-family: Consolas,"Liberation Mono",Courier,monospace;}
 	table{border:0}
+	td{padding:.2em}
 	th{font-weight:bold;vertical-align:middle;text-align:left;padding:.2em; }
 	p{margin:.5em 0}
-	#toc ol li,#toc p{margin:0;padding:0}
+	#toc{color:#000;background:#F9E7E7;display:block;float:right;width:22em;line-height:170%;border-radius:6px;border:1px solid #EB5B56;margin:0 0 1em 1em;padding:15px}
+	#toc h2{background:#EB5B56;color:#FFF;margin:-15px -15px 0.8em;padding:0.5em}
+	#toc ol{margin:0; padding: 0 0 0 2em;font-size:1.2em;}
+	#toc ol li{margin:0;padding:0}
 	</style>
 </head>
 
 <body>
-<div id="wrap">
+<header>
+	<div class="container">
+		<h1>
+			AJAX Chat for MyBB
+			<span class="version">
+				v 0.8.8 mybb ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+			</span>
+		</h1>
+	</div>
+</header>
 
-<h1 id="top">AJAX Chat for MyBB
-	<span class="version">
-		v 0.8.7 MyBB ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
-	</span>
-</h1> 
+<div class="container">
 
 <div id="toc">
 	<h2>Table of Contents</h2>
-	<p><a href="#requirements">Requirements</a></p>
-	<p><a href="#installation">Installation</a></p>
-	<p><a href="#configuring">Configuring and Customizing</a></p>
-	<p><a href="#logs">Logs</a></p>
-	<p><a href="#shoutbox">Shoutbox</a></p>
-	<p><a href="#socket">Socket Server</a></p>
-	<p><a href="#support">Support</a></p>
-	<p><a href="#donate">Donate</a></p>
-	<p><a href="#license">License</a></p>
+	<ol>
+		<li><a href="#requirements">Requirements</a></li>
+		<li><a href="#installation">Installation</a></li>
+		<li><a href="#configuring">Configuring and Customizing</a></li>
+		<li><a href="#logs">Logs</a></li>
+		<li><a href="#shoutbox">Shoutbox</a></li>
+		<li><a href="#socket">Socket Server</a></li>
+		<li><a href="#support">Support</a></li>
+		<li><a href="#donate">Donate</a></li>
+		<li><a href="#license">License</a></li>
+	</ol>
 </div>
 
-<p style="margin:1.5em">This is the version of Blueimp's AJAX Chat desinged to be run with <a href="http://www.mybb.com/">MyBB</a>.<br>
-If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.</p>
+<div style="margin-right: 28em;">
+	<h2 style="margin-top:0;">Version Information</h2>
+	<div class="subsection">
+			This is the version of Blueimp's AJAX Chat desinged to be run with <a href="http://www.mybb.com/">MyBB</a>.<br>
+			If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.
 
-<p class="note" style="margin-right: 30em;">
-	AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
-	The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
-	Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
-	By using JavaScript the chat page can be updated without having to reload the whole page.<br>
-	PHP is used to communicate with the database and authenticate users.
-</p>
+		<p class="note">
+			AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
+			The AJAX Chat client (your browser) uses JavaScript to query the web server for updates.<br>
+			Instead of delivering a complete HTML page only updated data is sent in XML format.<br>
+			By using JavaScript the chat page can be updated without having to reload the whole page.<br>
+			PHP is used to communicate with the database and authenticate users.
+		</p>
+	</div>
+</div>
 
-<h2 id="requirements">Requirements</h2>
+<h2 id="requirements">1. Requirements</h2>
 <div class="subsection">
-  <table style="width: 550px;" summary="Requirements for running AJAX Chat.">
-    <tr>
-      <th width="275" scope="col">Server-Side</th>
-      <th width="275" scope="col">Client-Side</th>
-    </tr>
-    <tr>
-      <td>
-		PHP &gt;= 5<br>
-		MySQL &gt;= 4<br>
-		Ruby &gt;= 1.8 (optional)
-	  </td>
-      <td>
-		Enabled JavaScript<br>
-		Enabled Cookies<br>
-		Flash Plugin &gt;= 9 (optional)
-	  </td>
-    </tr>
-  </table>
+	<table style="width: 550px;" summary="Requirements for running AJAX Chat.">
+	<tr>
+		<th width="275" scope="col">Server-Side</th>
+		<th width="275" scope="col">Client-Side</th>
+	</tr>
+	<tr>
+		<td>
+			PHP &gt;= 5<br>
+			MySQL &gt;= 4<br>
+			Ruby &gt;= 1.8 (optional)
+		</td>
+		<td>
+			Enabled JavaScript<br>
+			Enabled Cookies<br>
+			Flash Plugin &gt;= 9 (optional)
+		</td>
+	</tr>
+	</table>
 </div>
 
-<h2 id="installation">Installation</h2>
+<h2 id="installation">2. Installation</h2>
 <div class="subsection">
     <p>Download your preferred version of AJAX Chat and unzip the file on your computer.<br></p>
-    <h3>Before You Begin</h3>
-    <div class="subsection">
-		<p>
-			In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. 
-			We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
-			If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
-		</p>
-    </div>
+
+    <section class="note">
+		<h3>Use a Proper Text Editor!</h3>
+		In order to edit PHP files you will need a good text editor. <strong>You should not use Windows notepad, wordpad, or Microsoft Word to edit PHP files.</strong> These programs will add something called a byte-order-mark (BOM) to the files and this may prevent chat from functioning properly. 
+		We recommend using Notepad ++ ( <a href="http://notepad-plus-plus.org/">http://notepad-plus-plus.org</a> ) for editing all files. It also has the benefit of color-coding your files so you can edit them more easily.<br>
+		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
+    </section>
 	
 	<h3>Upload to Server</h3>
 	<div class="subsection">
-	  <p>
+		<p>
 		Upload the chat folder to your server into your mybb forum directory:<br>
-		e.g. http://example.org/mybb/chat/</p>
+		e.g. <span class="filename">http://example.org/mybb/chat/</span></p>
+		</p>
 	</div>
 	
 	<h3>Create the Database Tables</h3>
     <div class="subsection">
       <p>There are two options available to you to create the database. The first, and usually the easiest option, is to run the installation script included with AJAX Chat. Alternatively, you may use a database tool like PHPMyAdmin to manually create the tables.</p>
       <ol>
-        <li> To use the installation script, visit the following URL in your browser:<br>
+        <li>
           <span class="filename">http://example.org/mybb/chat/install.php</span><br> 
-          Where 
-          &quot;http://example.org/mybb/chat/&quot; is the real URL to your chat directory.</li>
+			Where &quot;http://example.org/mybb/chat/&quot; is the real URL to your chat directory.<br>
+			Be sure to delete the install.php file after you have completed this step!
+		</li>
         <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
       </ol>
       <p>Either of these methods will create the tables your database needs to store chat messages and other information.</p>
@@ -136,7 +150,7 @@ If you want to integrate AJAX Chat with one of the other forums we support, go b
     </div>
 </div>
 
-<h2 id="configuring">Configuring and Customizing</h2>
+<h2 id="configuring">3. Configuring and Customizing</h2>
 <div class="subsection">
   <h3>Configuration Files</h3>
   <div class="subsection">
@@ -207,7 +221,7 @@ If you want to integrate AJAX Chat with one of the other forums we support, go b
   
 </div>
 
-<h2 id="logs">Logs</h2>
+<h2 id="logs">4. Logs</h2>
 <div class="subsection">
   <h3>Accessing the Logs</h3>
   <div class="subsection">
@@ -223,7 +237,7 @@ If you want to integrate AJAX Chat with one of the other forums we support, go b
   </div>
 </div>
 
-<h2 id="shoutbox">Shoutbox</h2>
+<h2 id="shoutbox">5. Shoutbox</h2>
 <div class="subsection">
 	<p>AJAX Chat is also usable as shoutbox - this is a short guide on how to set it up:</p>
 
@@ -280,8 +294,15 @@ return null;
 	</div>
 </div>
 
-<h2 id="socket">Socket Server</h2>
+<h2 id="socket">6. Socket Server</h2>
 <div class="subsection">
+	<p class="note">
+		This part of the setup is OPTIONAL and meant for experienced users only.<br>
+		The Socket Server is no longer actively supported and may not function correctly out of the box. 
+		Later versions of AJAX Chat may have this socket server implementation replaced with something else.<br>
+		Please do not report bugs regarding the socket server - you're on your own with this one!
+	</p>
+
 	<p>Using the AJAX technology alone the chat clients have to permanently pull updates from the server.<br>
 	This is due to AJAX being a web technology and HTTP being a stateless protocol.<br>
 	Events pushed from server-side need a permanent or long-lasting socket connection between clients and server.<br>
@@ -289,7 +310,6 @@ return null;
 	<p>AJAX Chat uses a JavaScript-to-Flash bridge to establish a permanent socket connection from client side.<br>
 	The JavaScript-to-Flash bridge requires a Flash plugin &gt;= 9 installed on the user browser.<br>
 	Clients without this requirement will fall back to pull the server for updates.</p>
-	<p class="note">This part of the setup is OPTIONAL and meant for experienced users only.</p>
 	<h3>Installation</h3>
 	<div class="subsection">
 	<p>The socket server coming with AJAX Chat is implemented in Ruby.<br>
@@ -347,7 +367,7 @@ return null;
 	<p>&nbsp;</p>
 </div>
 
-<h2 id="support">Support</h2>
+<h2 id="support">7. Support</h2>
 <div class="subsection">
 	<p>
 		<b>Please do not email the devs with support questions.</b><br>
@@ -357,21 +377,21 @@ return null;
 	</p>
 </div>
 
-<h2 id="donate">Donate</h2>
+<h2 id="donate">8. Donate</h2>
 <div class="subsection">
 	<p>
 		Your donations contribute to the growth and development of this project and are always appreciated.<br>
 		<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 		<input type="hidden" name="cmd" value="_s-xclick">
 		<input type="hidden" name="hosted_button_id" value="PUMN737V7XKG8">
-		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit">
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" name="submit" alt="donate">
 		<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 		</form>
 		I'm on gittip at <a href="https://www.gittip.com/Frug/">https://www.gittip.com/Frug</a>
 	</p>
 </div>
 
-<h2 id="license">License</h2>
+<h2 id="license">9. License</h2>
 <div class="subsection">
 	<p>Bluimp's AJAX Chat is released under a Modified MIT License.</p>
 	<p>You should also find this license included with your download of this project.</p>
