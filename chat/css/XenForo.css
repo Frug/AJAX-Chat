@@ -1,0 +1,238 @@
+/*
+ * @package AJAX_Chat
+ * @author ManOnDaMoon
+ */
+@import url('global.css');
+@import url('fonts.css');
+@import url('print.css');
+@import url('custom.css');
+
+/* Main Buttons */
+#content #logoutButton,#content #submitButton,#loginForm #loginButton {
+	font: 12pt Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: white;
+	font-weight: bold;
+	background: #e68c17 url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x center -7px;
+	border: 3px solid White;
+	border-radius: 8px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	-khtml-border-radius: 8px;
+	text-align: center;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	-khtml-box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+	display: inline-block;
+	cursor: pointer;
+	height: 33px;
+	background-color: #e68c17;
+	padding: 0 10px 0 10px;
+}
+#content #logoutButton:hover,#content #submitButton:hover,#loginForm #loginButton:hover {
+	box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	-webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	-khtml-box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+	position: relative;
+	top: 2px;
+}
+
+/* BBCode Buttons */
+#content #bbCodeContainer input {
+	font-style: normal;
+	font-size: 12px;
+	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: rgb(0, 0, 0);
+	background: rgb(220, 220, 235) url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x top;
+	padding: 0px 6px;
+	border: 1px solid rgb(221, 221, 235);
+	border-top-color: rgb(255, 255, 255);
+	border-bottom-color: rgb(179, 179, 189);
+	border-radius: 7px;
+	-webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-khtml-border-radius: 7px;
+	text-align: center;
+	box-shadow: 0px 1px 4px 0px rgb(200, 200, 210);
+	-webkit-box-shadow: 0px 1px 4px 0px rgb(200, 200, 210);
+	-moz-box-shadow: 0px 1px 4px 0px rgb(200, 200, 210);
+	-khtml-box-shadow: 0px 1px 4px 0px rgb(200, 200, 210);
+	text-shadow: 0 0 0 transparent, 0px -1px 2px white;
+	outline: none;
+	line-height: 23px;
+	display: inline-block;
+	cursor: pointer;
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	height: 23px;
+}
+#content #bbCodeContainer input:hover {
+	color: black;
+	text-decoration: none;
+	background-color: rgb(255, 255, 200);
+	border-color: rgb(255, 255, 200);
+	border-top-color: white;
+	border-bottom-color: rgb(190, 190, 170);
+}
+#content textarea {
+	font-size: 13px;
+	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: #000000;
+	background-color: rgb(240, 247, 252);
+	border-width: 1px;
+	border-style: solid;
+	border-top-color: rgb(192, 192, 192);
+	border-right-color: rgb(233, 233, 233);
+	border-bottom-color: rgb(233, 233, 233);
+	border-left-color: rgb(192, 192, 192);
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	-khtml-border-radius: 4px;
+	outline: 0;
+}
+#content textarea:focus {
+	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
+	border-top-color: rgb(150, 150, 150);
+	border-bottom-color: rgb(230, 230, 230);
+}
+#content select,#loginForm select,#loginForm input {
+	background-color: #F7F7FF;
+	color: #60A0DC;
+	border: 1px solid #a5cae4;
+}
+#content select:focus,#loginForm select:focus,#loginForm input:focus {
+	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
+	border-top-color: rgb(150, 150, 150);
+	border-bottom-color: rgb(230, 230, 230);
+}
+
+/* Status Icon */
+#content #statusIconContainer {
+	background: url('../img/loading-sprite.png') no-repeat 0px 0px; 
+}
+#content #statusIconContainer.waiting {
+	background-position: 0px -22px;
+}
+#content #statusIconContainer.retrying {
+	background-position: 0px -44px;
+}
+
+/* Other Theme Elements */
+.ajax-chat {
+	background-color: #176093;
+	color: #F7F7FF;
+}
+.ajax-chat h1, .ajax-chat a {
+	color: #60A0DC;
+}
+#loginContent #errorContainer {
+	color: red;
+}
+#content {
+	background-color: #F7F7FF;
+	color: #176093;
+	font-size: 12px;
+}
+#content #headline {
+	color:#F7F7FF;
+	background:#176093;
+}
+#content #copyright {
+	color: #F7F7FF;
+}
+#content #copyright {
+	font-style: italic;
+	font-size: 0.8em;
+}
+#content #chatList,#content #colorCodesContainer {
+	background-color: rgb(240, 247, 252);
+	border: 1px solid #a5cae4;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+}
+#content #onlineListContainer,#content #helpContainer,#content #settingsContainer, #content #reportContainer {
+	background-color: rgb(240, 247, 252);
+	border: 1px solid #a5cae4;
+	border-radius: 10px;
+	-webkit-border-radius: 10px;
+	-moz-border-radius: 10px;
+	-khtml-border-radius: 10px;
+}
+.ajax-chat .popup {
+	background-color:#FFF;
+	border: 1px solid #ababab;
+	box-shadow: 2px 2px 2px #777;
+}
+#content #chatList .rowOdd.private {
+	background-color:#F8D0D0;
+}
+#content #chatList .rowEven.private {
+	background-color:#F8D9D0;
+}
+#content #onlineListContainer #onlineList, #content #helpContainer #helpList, #content #settingsContainer #settingsList, #content #reportContainer #reportList {
+	padding-top: 5px;	
+}
+#content #bbCodeContainer,#content #emoticonsContainer {
+	background-color: rgb(240, 247, 252);
+	padding: 5px;
+}
+#content #colorCodesContainer a {
+	border-color: #a5cae4;
+}
+#content #optionsContainer input {
+	background-color: transparent;
+}
+#content .rowEven {
+	background: #d7edfc url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
+}
+#content .rowOdd {
+	background-color: #F7F7FF;
+}
+#content .guest {
+	color: gray;
+}
+#content .user {
+	color: #176093;
+}
+#content .customUser {
+	color: #e68c17;
+}
+#content .moderator {
+	color: #00AA00;
+}
+#content .admin, #content .chatBotErrorMessage {
+	color: red;
+}
+#content .chatBot {
+	color: #60A0DC;
+}
+#content #chatList a {
+	color: #60A0DC;
+}
+#content #chatList .deleteSelected {
+	border-color: red;
+}
+#content #onlineListContainer h3,#content #helpContainer h3,#content #settingsContainer h3,#content #reportContainer h3 {
+	font-size: 11px;
+	background: #f9d9b0 url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
+	color: #6d3f03;
+	border-bottom: 1px solid #f9bc6d;
+}
+#content #chatList .report {
+	display:block;
+	float:right;
+	width:10px;
+	height:10px;
+	margin-top:2px;
+	margin-left:5px;
+	background:url('../img/report.gif') 0 0 no-repeat;
+}
+#content #chatList .report:hover {
+	background-position:0 -10px;;
+}
