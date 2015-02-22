@@ -116,7 +116,7 @@ class CustomAJAXChat extends AJAXChat {
 				}
 
 				// Add the valid channels to the channel list (the defaultChannelID is always valid):
-				if($forumPermissions[$value]['canview'] == 'yes' ||  $value == $this->getConfig('defaultChannelID')) {
+				if($forumPermissions[$value]['canview'] == '1' ||  $value == $this->getConfig('defaultChannelID')) {
 					$this->_channels[$key] = $value;
 				}
 			}
