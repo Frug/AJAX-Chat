@@ -120,18 +120,7 @@
 	<div class="subsection">
 		<p>
 		Upload the chat folder to your server into your mybb forum directory:<br>
-		e.g. http://example.org/mybb/chat/</p>
-		</p>
-			$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br>
-		</code>
-			In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br>
-			If your host does not use mysqli you will need to change the connection type field:<br>
-		</p>
-			The Standalone version of chat uses a php file to store users and rooms while the database is used for chat messages, invites and bans.<br>
-			The integration versions typically make use of a database for users and rooms. If you desire a way to manage users without having to edit a php file, consider using an integration version.
-		</p>
-		<p>
-			Edit users in <span class="filename">lib/data/users.php</span>.<br>
+		e.g. <span class="filename">http://example.org/mybb/chat/</span></p>
 		</p>
 	</div>
 	
@@ -141,8 +130,7 @@
       <ol>
         <li>
           <span class="filename">http://example.org/mybb/chat/install.php</span><br> 
-			Where 
-          &quot;http://example.org/mybb/chat/&quot; is the real URL to your chat directory.</li>
+			Where &quot;http://example.org/mybb/chat/&quot; is the real URL to your chat directory.<br>
 			Be sure to delete the install.php file after you have completed this step!
 		</li>
         <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
