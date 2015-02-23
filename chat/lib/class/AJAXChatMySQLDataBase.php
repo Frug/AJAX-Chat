@@ -15,7 +15,7 @@ class AJAXChatDataBaseMySQL {
 	var $_error = '';
 	var $_dbName;
 
-	function AJAXChatDataBaseMySQL(&$dbConnectionConfig) {
+	function __construct(&$dbConnectionConfig) {
 		$this->_connectionID = $dbConnectionConfig['link'];
 		$this->_dbName = $dbConnectionConfig['name'];
 	}
