@@ -11,5 +11,4 @@
  */
 
 // SMF initialization:
-require_once(AJAX_CHAT_PATH.'/../SSI.php');
-?>
+require_once(dirname(AJAX_CHAT_PATH) . '/SSI.php');
