@@ -22,13 +22,13 @@ $config = array();
 // Database connection values:
 $config['dbConnection'] = array();
 // Database hostname:
-$config['dbConnection']['host'] = 'localhost';
+$config['dbConnection']['host'] = null;
 // Database username:
-$config['dbConnection']['user'] = 'root';
+$config['dbConnection']['user'] = null;
 // Database password:
-$config['dbConnection']['pass'] = '';
+$config['dbConnection']['pass'] = null;
 // Database name:
-$config['dbConnection']['name'] = 'chat';
+$config['dbConnection']['name'] = null;
 // Database type:
 $config['dbConnection']['type'] = null;
 // Database link:

@@ -42,9 +42,9 @@
 <header>
 	<div class="container">
 		<h1>
-			AJAX Chat
+			AJAX Chat phpBB3 (for 3.0.x)
 			<span class="version">
-				v 0.8.8 standalone ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
+				v 0.8.8 phpBB 3.0.x ( <a href="https://blueimp.net/ajax/">blueimp.net/ajax/</a> )
 			</span>
 		</h1>
 	</div>
@@ -70,9 +70,8 @@
 <div style="margin-right: 28em;">
 	<h2 style="margin-top:0;">Version Information</h2>
 	<div class="subsection">
-			This is the <strong>standalone</strong> version of blueimp's AJAX Chat designed to run on its own, without another web application.<br>
-			If you want to integrate AJAX Chat with one of the forums we support, go back and choose the right version. <br>
-			This version is good for customizing your own integration, or using on its own.
+		This is the version of Blueimp's AJAX Chat desinged to be run with <b>phpBB3 version 3.0.x</b>.<br>
+		If you want to integrate AJAX Chat with one of the other forums we support, go back and choose the right version.
 
 		<p class="note">
 			AJAX stands for &quot;Asynchronous JavaScript and XML&quot;.<br>
@@ -117,85 +116,19 @@
 		If you get an error message like &quot;<strong>Cannot modify header information - headers already sent</strong>&quot; it is likely because you have used one of the above programs to edit files.
     </section>
 	
-    <h3>Configure Database Settings</h3>
-    <div class="subsection">
-		<p>
-			The first and most important thing you need to do is tell AJAX Chat how to connect to your database. This, and all core settings must be located inside the file <span class="filename">lib/config.php</span>. <br>
-			<strong>You need to create this file.</strong> <br>
-			An example <span class="filename">config.php</span> file can be found in <span class="filename">lib/config.php.example</span> that shipped with chat.<br>
-			Duplicate this file and save it as config.php (or just delete .example from the end of the file name) and then fill out at least the following four fields in the file:
-		</p>
-		<p>
-		<code>
-			$config['dbConnection']['host'] = '<em>your_database_hostname</em>';<br>
-			$config['dbConnection']['user'] = '<em>your_database_username</em>';<br>
-			$config['dbConnection']['pass'] = '<em>your_database_password</em>';<br>
-			$config['dbConnection']['name'] = '<em>your_database_name</em>';
-		</code>
-		</p>
-		<p>Sufficed to say you need this information. Talk to your hosting provider if you don't know.</p>
-		<p>
-			In most cases, chat will function with only these fields filled out and you can proceed to the next step.<br>
-		</p>
-		<p class="note">
-			If your host does not use mysqli you will need to change the connection type field:<br>
-			$config['dbConnection']['type'] = null;<br>
-			If this is set to &quot;null&quot; it defaults to &quot;mysqli&quot; if existing, else to &quot;mysql&quot;. In most cases this field can be left as null.<br>
-			<br>
-			You can reference an existing database connection link or object by changing:<br>
-			$config['dbConnection']['link'] = null;<br>
-			If this is set to null, a new database connection is created.
-		</p>
-    </div>
-	
-	<h3>Choose Your Channel Settings</h3>
+	<h3>Upload to Server</h3>
 	<div class="subsection">
-	  <p>Edit the file <span class="filename">lib/data/channels.php.</span><br>
-		We have provided you with two sample channels, named public and private. You can add your own, or leave it as-is.<br>
-		Channels follow the following format:
-		<br>
-		<code>$channels[<em>channel id</em>] = '<em>channel name</em>';</code>
-		Each channel must have a unique channel id number and a unique name.<br>
-		Whitespace in the channel names will be converted to the underscore &quot;_&quot;.</p>
+		Upload the chat folder to your server into your phpBB3 forum directory:<br>
+		eg. <span class="filename">http://example.org/phpBB3/chat/</span>
 	</div>
 
-    <h3>Add Your Users</h3>
-    <div class="subsection">
-		<p class="note">
-			The Standalone version of chat uses a php file to store users and rooms while the database is used for chat messages, invites and bans.<br>
-			The integration versions typically make use of a database for users and rooms. If you desire a way to manage users without having to edit a php file, consider using an integration version.
-		</p>
-		<p>
-			Edit users in <span class="filename">lib/data/users.php</span>.<br>
-			Users follow the following format:
-		</p>
-		<p><code>$users[<em>user id</em>] = array();<br>
-			$users[<em>user id</em>]['userRole'] = <em>AJAX_CHAT_ROLE</em>;<br>
-			$users[<em>user id</em>]['userName'] = '<em>user name</em>';<br>
-			$users[<em>user id</em>]['password'] = '<em>user password</em>';<br>
-			$users[<em>user id</em>]['channels'] = array(<em>allowed channel ids</em>);</code><br>
-			Each user must have a unique user id number and a unique name.<br>
-			The first user in the list (user id 0) is used for the guest user settings. All guest users will have access to the channels set for this user and the user role AJAX_CHAT_GUEST.<br>
-			Registered users can have the user roles AJAX_CHAT_USER, AJAX_CHAT_MODERATOR or AJAX_CHAT_ADMIN. (this is case sensitive, type it exactly)<br>
-			The list of channels a user has access to can be set for each user individually. Channel id's are separated by commas. eg: array(0,1,23); allows channels 0, 1 and 23.<br>
-			Whitespace in the user names will be converted to the underscore &quot;_&quot;.
-		</p>
-    </div>
-	
-    <h3>Upload to Your Server</h3>
-    <div class="subsection">
-      <p>Upload the chat folder to your server somewhere under your document root:<br>
-        e.g. http://example.org/path/to/chat/</p>
-    </div>
-    <h3>Create the Database Tables</h3>
+	<h3>Create the Database Tables</h3>
     <div class="subsection">
       <p>There are two options available to you to create the database. The first, and usually the easiest option, is to run the installation script included with AJAX Chat. Alternatively, you may use a database tool like PHPMyAdmin to manually create the tables.</p>
       <ol>
         <li>
-			To use the installation script, visit the following URL in your browser:<br>
-			<span class="filename">http://example.org/path/to/chat/install.php</span><br> 
-			Where 
-			&quot;http://example.org/path/to/chat/&quot; is the real URL to your chat directory.<br>
+          <span class="filename">http://example.org/phpBB3/chat/install.php</span><br> 
+			Where &quot;http://example.org/phpBB3/chat/&quot; is the real URL to your chat directory.<br>
 			Be sure to delete the install.php file after you have completed this step!
 		</li>
         <li>To install it manually using PHPMyAdmin or a similar tool, copy the contents of the <span class="filename">chat.sql</span> file and run it as a query.</li>
@@ -304,60 +237,81 @@
 
 <h2 id="shoutbox">5. Shoutbox</h2>
 <div class="subsection">
-	<p>AJAX Chat is also usable as shoutbox - this is a short guide on how to set it up:</p>
+  <p>AJAX Chat is also usable as shoutbox - this is a short guide on how to set it up to display on a PHPBB3 forum.<br>
+  The following edits are made in files you can find in your phpbb3 installation directory.</p>
 
-	<h3>Shoutbox Stylesheet</h3>
+  
+	<h3>PHPBB3 Shoutbox Integration</h3>
 	<div class="subsection">
-	<p>Add the following line to the stylesheet (CSS) of all pages displaying the shoutbox:</p>
-	<p> <code>@import url(&quot;http://example.org/path/to/chat/css/shoutbox.css&quot;);</code></p>
-	<p> Replace http://example.org/path/to/chat/ with the URL to the chat.<br>
-	  Modify css/shoutbox.css to your liking.</p>
-	</div>
-
-	<h3>Shoutbox Function</h3>
-	<div class="subsection">
-		<p>Add the following function to your PHP code:</p>
-
-<code><pre>
-&lt;?php
-function getShoutBoxContent() {
-// URL to the chat directory:
-if(!defined('AJAX_CHAT_URL')) {
-	define('AJAX_CHAT_URL', './chat/');
-}
-
-// Path to the chat directory:
-if(!defined('AJAX_CHAT_PATH')) {
-	define('AJAX_CHAT_PATH', realpath(dirname($_SERVER['SCRIPT_FILENAME']).'/chat').'/');
-}
-
-// Validate the path to the chat:
-if(@is_file(AJAX_CHAT_PATH.'lib/classes.php')) {
+    <p><b>In includes/functions.php</b></p>
 	
-	// Include Class libraries:
-	require_once(AJAX_CHAT_PATH.'lib/classes.php');
-	
-	// Initialize the shoutbox:
-	$ajaxChat = new CustomAJAXChatShoutBox();
-	
-	// Parse and return the shoutbox template content:
-	return $ajaxChat-&gt;getShoutBoxContent();
+	Add:
+    <code><pre>
+function getShoutBoxContent()
+{
+	global $phpEx, $phpbb_root_path;
+
+	// Get the URL to the chat directory:
+	if (!defined('AJAX_CHAT_URL'))
+	{
+		define('AJAX_CHAT_URL', $phpbb_root_path . 'chat/');
+	}
+
+	// Get the real path to the chat directory:
+	if (!defined('AJAX_CHAT_PATH'))
+	{
+		if (empty($_SERVER['SCRIPT_FILENAME']))
+		{
+			$_SERVER['SCRIPT_FILENAME'] = $_SERVER['DOCUMENT_ROOT'] . $_SERVER['SCRIPT_URL'];
+		}
+		define('AJAX_CHAT_PATH', realpath(dirname($_SERVER['SCRIPT_FILENAME']) . '/chat') . '/');
+	}
+
+	// Validate the path to the chat:
+	if (@is_file(AJAX_CHAT_PATH . 'lib/classes.' . $phpEx))
+	{
+		// Include Class libraries:
+		require_once(AJAX_CHAT_PATH.'lib/classes.' . $phpEx);
+
+		// Initialize the shoutbox:
+		$ajaxChat = new CustomAJAXChatShoutBox();
+
+		// Parse and return the shoutbox template content:
+		return $ajaxChat->getShoutBoxContent();
+	}
+
+	return null;
 }
-
-return null;
-}
-?&gt;
-</pre></code>
-
-		<p>Make sure AJAX_CHAT_URL and AJAX_CHAT_PATH point to the chat directory.</p>
-	</div>
-
-	<h3>Shoutbox Output</h3>
-	<div class="subsection">
-		<p>Display the shoutbox content using the shoutbox function:</p>
-		<p> <code>&lt;div style=&quot;width:200px;&quot;&gt;&lt;?php echo getShoutBoxContent(); ?&gt;&lt;/div&gt;</code></p>
+    </pre></code>
+	Before
+	<code><pre>?></pre></code>
+	Add:
+	<code><pre>'SHOUTBOX'                  => getShoutBoxContent(),</pre></code>
+	After
+	<code><pre>
+	// The following assigns all _common_ variables that may be used at any point in a template.
+	$template->assign_vars(array(</pre></code>
+	
+	<p><b>In styles/[STYLE_NAME]/template/overall_footer.html</b></p>
+	Add:
+	<code><pre>
+	&lt;!-- IF not S_IS_BOT --&gt;
+	&lt;div style="font-size: 1.2em; margin-bottom: 20px;"&gt;{SHOUTBOX}&lt;/div&gt;
+	&lt;!-- ELSE --&gt;
+	&lt;div id="ajaxChatCopyright"&gt;&lt;a href="https://blueimp.net/ajax/"&gt;AJAX Chat&lt;/a&gt; Â© &lt;a href="https://blueimp.net"&gt;blueimp.net&lt;/a&gt;&lt;/div&gt;
+	&lt;!-- ENDIF --&gt;</pre></code>
+	After
+	<code><pre>&lt;div id="page-footer"&gt;</pre></code>
+	
+	<p><b>In styles/[STYLE_NAME]/theme/stylesheet.css</b></p>
+	Add:
+	<code>@import url("../../../chat/css/shoutbox.css");</code>
+	After
+	<code>&lt;div id="page-footer"&gt;</code>
+	
 	</div>
 </div>
+
 
 <h2 id="socket">6. Socket Server</h2>
 <div class="subsection">

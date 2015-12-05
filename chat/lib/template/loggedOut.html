@@ -12,6 +12,28 @@
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
+			function handleLogin() {
+				var loginForm = document.getElementById('loginForm');
+				var userNameField = document.getElementById('userNameField');
+				var passwordField = document.getElementById('passwordField');
+				var channelField = document.getElementById('channelField');
+				var redirectField = document.getElementById('redirectField');
+				if(passwordField.value.length == 0) {
+					loginForm.setAttribute('action', '[LOGIN_URL/]');
+					userNameField.setAttribute('name', 'userName');
+				} else {
+					var channelRequest = 'channelName=' + encodeURIComponent(channelField.value);
+					var regExp = /\?/;
+					if(regExp.test(redirectField.value)) {
+						redirectField.value += '&';
+					} else {
+						redirectField.value += '?';
+					}
+					redirectField.value += channelRequest;
+				}
+				return true;
+			}
+
 			function initializeLoginPage() {
 				document.getElementById('userNameField').focus();
 				if(!ajaxChat.isCookieEnabled()) {
@@ -36,7 +58,7 @@
 	<div id="loginContent">
 		<h1 id="loginHeadline">[LANG]title[/LANG]</h1>
 		<div id="errorContainer">[ERROR_MESSAGES/]<noscript><div>[LANG]requiresJavaScript[/LANG]</div></noscript></div>
-		<form id="loginForm" action="[LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded">
+		<form id="loginForm" action="[FORUM_LOGIN_URL/]" method="post" enctype="application/x-www-form-urlencoded" onsubmit="return handleLogin();">
 			<input type="hidden" name="login" id="loginField" value="login"/>
 			<input type="hidden" name="redirect" id="redirectField" value="[REDIRECT_URL/]"/>
 			<div><label for="userNameField">[LANG]userName[/LANG]:</label><br />
