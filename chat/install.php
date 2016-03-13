@@ -9,12 +9,13 @@
 
 // Show all errors:
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Remember to set up the config file to point to your database:
 file_exists('lib/config.php') or die('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
 
 // Path to the chat directory:
-define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
+define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']) . '/');
 
 // Include custom libraries and initialization code:
 require(AJAX_CHAT_PATH.'lib/custom.php');
@@ -24,15 +25,14 @@ require(AJAX_CHAT_PATH.'lib/classes.php');
 
 class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 
-	function &getDataBaseTableCreationQueries() {
-		$queries = array();
+	protected function getDataBaseTableCreationQueries() {
+		$queries = [];
 		$index = 0;
 		// Retrieve the queries from the SQL file:
 		$lines = file(AJAX_CHAT_PATH.'chat.sql');
 		// Stop if an error occurs:
 		if(!$lines) {
-			echo 'Failed to load queries from file (chat.sql).';
-			die();
+			die('Failed to load queries from file (chat.sql).');
 		}
 		foreach($lines as $line) {
 			if(empty($line)) {
@@ -42,7 +42,7 @@ class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 			if(count($queries) <= $index) {
 				array_push($queries, $line."\n");
 			} else {
-				$queries[$index] .= $line."\n";	
+				$queries[$index] .= $line."\n";
 			}
 			// Create a new array item for each query:
 			if(substr($line, -1) == ';') {
@@ -52,16 +52,15 @@ class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 		return $queries;
 	}
 
-	function createDataBaseTables($printSuccessConfirmation=true) {
+	protected function createDataBaseTables($printSuccessConfirmation=true) {
 		$queries = $this->getDataBaseTableCreationQueries();
 		foreach($queries as $sql) {
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
-			
+
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				die($result->getError());
 			}
 		}
 		if($printSuccessConfirmation) {
@@ -77,4 +76,3 @@ $ajaxChatInstaller = new CustomAJAXChatInstaller();
 
 // Create the database tables:
 $ajaxChatInstaller->createDataBaseTables();
-?>
