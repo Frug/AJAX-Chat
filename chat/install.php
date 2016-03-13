@@ -52,7 +52,7 @@ class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 		return $queries;
 	}
 
-	protected function createDataBaseTables($printSuccessConfirmation=true) {
+	public function createDataBaseTables($printSuccessConfirmation=true) {
 		$queries = $this->getDataBaseTableCreationQueries();
 		foreach($queries as $sql) {
 			// Create a new SQL query:
