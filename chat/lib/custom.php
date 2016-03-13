@@ -22,6 +22,7 @@ if (!file_exists($phpbb_root_path.'common.'.$phpEx)) {
 }
 require($phpbb_root_path.'common.'.$phpEx);
 
+$request->enable_super_globals();
 // phpBB session management:
 $user->session_begin();
 $auth->acl($user->data);
