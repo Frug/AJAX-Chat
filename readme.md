@@ -1,7 +1,7 @@
-AJAX Chat punbb
-====================
+AJAX Chat for FluxBB
+==========================
 
-This is the version of Blueimp's AJAX Chat for punbb.
+This is the version of Blueimp's AJAX Chat for Fluxbb (formerly punbb).
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
