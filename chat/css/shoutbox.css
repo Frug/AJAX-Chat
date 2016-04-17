@@ -90,6 +90,10 @@
 	font-size:0.9em;
 	font-weight:bold;
 }
+#ajaxChatContent #ajaxChatChatList span.customUser {
+	font-size:0.9em;
+	font-weight:bold;
+}
 #ajaxChatContent #ajaxChatChatList span.moderator {
 	font-size:0.9em;
 	font-weight:bold;

@@ -1,0 +1,17 @@
+/* Custom CSS - enter css overrides for all styles below */
+
+/* e.g. to hide the logout button and the channel, style and language selectors, uncomment the following:
+
+#content #logoutChannelContainer {
+	display:none;
+}
+#content #mainPanelContainer {
+	top: 45px;
+}
+#content #copyright {
+	right: 60px;
+}
+#content #statusIconContainer {
+	top: 10px;
+}
+*/

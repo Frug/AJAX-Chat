@@ -8,6 +8,8 @@
  */
 
 // Define AJAX Chat user roles:
+define('AJAX_CHAT_BANNED',		6);
+define('AJAX_CHAT_CUSTOM',		5);
 define('AJAX_CHAT_CHATBOT',		4);
 define('AJAX_CHAT_ADMIN',		3);
 define('AJAX_CHAT_MODERATOR',	2);
@@ -55,7 +57,7 @@ $config['langNames'] = array(
 );
 
 // Available styles:
-$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Plum','prosilver','subblack2','subSilver','Core','MyBB','vBulletin');
+$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Pine','Plum','prosilver','Core','MyBB','vBulletin','XenForo');
 // Default style:
 $config['styleDefault'] = 'vBulletin';
 
