@@ -12,7 +12,7 @@ class AJAXChatDataBase {
 
 	var $_db;
 
-	function AJAXChatDataBase(&$dbConnectionConfig) {
+	function __construct(&$dbConnectionConfig) {
 		switch($dbConnectionConfig['type']) {
 			case 'mysqli':
 				$this->_db = new AJAXChatDatabaseMySQLi($dbConnectionConfig);

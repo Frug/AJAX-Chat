@@ -17,7 +17,7 @@ class AJAXChatMySQLQuery {
 	var $_error = '';
 
 	// Constructor:
-	function AJAXChatMySQLQuery($sql, $connectionID = null) {
+	function __construct($sql, $connectionID = null) {
 		$this->_sql = trim($sql);
 		$this->_connectionID = $connectionID;
 		if($this->_connectionID) {

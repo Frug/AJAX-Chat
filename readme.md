@@ -1,5 +1,5 @@
 AJAX Chat punbb
-=========
+====================
 
 This is the version of Blueimp's AJAX Chat for punbb.
 
@@ -10,21 +10,19 @@ Instead of delivering a complete HTML page only updated data is sent in XML form
 By using JavaScript the chat page can be updated without having to reload the whole page.
 
 Requirements
-============
+------------
 
-###Server-Side:
-- PHP >= 5
-- MySQL >= 4
-- Ruby >= 1.8 (optional)
 
-###Client-Side:
-- Enabled JavaScript
-- Enabled Cookies
-- Flash Plugin >= 9 (optional)
+
+| *Server-Side*          | *Client-Side*                | 
+| ---------------------- | ---------------------------- |
+| PHP >= 5               | Enabled JavaScript           |
+| MySQL >= 4             | Enabled Cookies              |
+| Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
 
 
 Features
-========
+--------
 - Easy installation
 - Usable as shoutbox
 - Multiple channels
@@ -60,16 +58,16 @@ Features
 - Optional support to push updates over a Flash based socket connection (increased performance and responsiveness)
 - Survives connection timeouts
 - Easy integration into existing authentication systems
-- Sample phpBB2, phpBB3, MyBB, PunBB, SMF and vBulletin integrations provided
+- Sample phpBB3, MyBB, PunBB, SMF and vBulletin integrations available
 - Separation of layout and code
 - Well commented Source Code
 - Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
-- Tested successfully with Microsoft Internet Explorer, Mozilla Firefox, Opera, Safari and Konqueror - built to work with all modern browsers :)
+- Tested successfully with Microsoft Internet Explorer, Mozilla Firefox, Opera and Safari - built to work with all modern browsers :)
 
 
 
 Help
-====
+----
 Essential documentation is contained in the attached readme files
 
 For more documentation consult the github wiki: https://github.com/Frug/AJAX-Chat/wiki

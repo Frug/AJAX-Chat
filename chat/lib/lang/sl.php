@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -34,6 +34,7 @@ $lang['bbCodeLabelCode'] = 'Koda';
 $lang['bbCodeLabelURL'] = 'URL';
 $lang['bbCodeLabelImg'] = 'Slika';
 $lang['bbCodeLabelColor'] = 'Barva črk';
+$lang['bbCodeLabelEmoticon'] = 'Smeške';
 $lang['bbCodeTitleBold'] = 'Odebeljeno besedilo: [b]besedilo[/b]';
 $lang['bbCodeTitleItalic'] = 'Poševno besedilo: [i]besedilo[/i]';
 $lang['bbCodeTitleUnderline'] = 'Podčrtano besedilo: [u]besedilo[/u]';
@@ -42,6 +43,7 @@ $lang['bbCodeTitleCode'] = 'Prikazovanje kode: [code]koda[/code]';
 $lang['bbCodeTitleURL'] = 'Vnesi URL: [url]http://www.primer.org/[/url] ali [url=http://www.primer.org/]besedilo[/url]';
 $lang['bbCodeTitleImg'] = 'Vstavi sliko: [img]http://priemr.org/slika.jpg[/img]';
 $lang['bbCodeTitleColor'] = 'Barva črk: [color=red]besedilo[/color]';
+$lang['bbCodeTitleEmoticon'] = 'Smeške seznam';
 $lang['help'] = 'Pomoč';
 $lang['helpItemDescJoin'] = 'Vstopi v sobo:';
 $lang['helpItemCodeJoin'] = '/join Ime sobe';
@@ -105,6 +107,7 @@ $lang['settingsSoundEnter'] = 'Zvok za prijavo in vstop v sobo:';
 $lang['settingsSoundLeave'] = 'Zvok za odjavo in izhod iz sobe:';
 $lang['settingsSoundChatBot'] = 'Zvok za chatbot sporočila:';
 $lang['settingsSoundError'] = 'Zvuk za sporočila o napakah:';
+$lang['settingsSoundPrivate'] = 'Zvok za zasebna sporočila:';
 $lang['settingsBlink'] = 'Trepetanje imena okna za nova sporočila:';
 $lang['settingsBlinkInterval'] = 'Interval trepetanja v milisekundah:';
 $lang['settingsBlinkIntervalNumber'] = 'Število intervalov trepetanja:';
