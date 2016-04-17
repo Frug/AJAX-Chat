@@ -6,11 +6,11 @@
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  * 
- * PunBB integration:
- * http://punbb.org/
+ * FluxBB integration:
+ * http://fluxbb.org/
  */
 
-// PunBB initialization:
-define('PUN_ROOT', AJAX_CHAT_PATH.'../');
+// FluxBB initialization:
+$fluxbb_root_path = dirname(AJAX_CHAT_PATH) . '/';
+define('PUN_ROOT', $fluxbb_root_path);
 require PUN_ROOT.'include/common.php';
-?>
