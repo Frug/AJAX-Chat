@@ -845,7 +845,7 @@ Bugfixes:
 - Fixed mybb integration database connection. Connection details should be pulled automatically now.
 - Fidex mybb integration guest logins to accept guests that don't enter a username (assign numbers like other versions).
 
-Version 0.8.8 (?.?.2014)
+Version 0.8.8 (17.04.2016)
 -------------------------------
 Notice:
 - Templates, especially loggedIn.html have changed a lot to add mobile support. Javascript in the templates files has also changed.
