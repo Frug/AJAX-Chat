@@ -1,5 +1,5 @@
 AJAX Chat MyBB
-====================
+==============
 
 This is the MyBB integration version of Blueimp's AJAX Chat. 
 
