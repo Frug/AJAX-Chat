@@ -1613,9 +1613,6 @@ class AJAXChat {
 	}
 	
 	function rollDice($sides) {
-		// seed with microseconds since last "whole" second:
-		mt_srand((double)microtime()*1000000);
-		
 		return mt_rand(1, $sides);
 	}
 	
@@ -1627,7 +1624,7 @@ class AJAXChat {
 			return;
 		}
 
-		$banMinutes = $banMinutes ? $banMinutes : $this->getConfig('defaultBanTime');
+		$banMinutes = ($banMinutes !== null) ? $banMinutes : $this->getConfig('defaultBanTime');
 
 		if($banMinutes) {
 			// Ban User for the given time in minutes:
@@ -2389,7 +2386,7 @@ class AJAXChat {
 					FROM
 						'.$this->getDataBaseTable('online').'
 					ORDER BY
-						userName;';
+						LOWER(userName);';
 			
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
