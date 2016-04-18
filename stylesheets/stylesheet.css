@@ -96,6 +96,7 @@ code{background-color:#f2f2f2;border:solid 1px #ddd;padding:0 3px}
 pre{background:#303030;color:#f2f2f2;text-shadow:none;overflow:auto;padding:20px}
 pre code{color:#f2f2f2;background-color:#303030;border:none;padding:0}
 
+small{font-size:0.8em;}
 hr{height:1px;line-height:1px;margin-top:1em;padding-bottom:1em;border:none;background:transparent url(../images/hr.png) 50% 0 no-repeat}
 strong{font-weight:700}
 em{font-style:italic}
