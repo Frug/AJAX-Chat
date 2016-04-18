@@ -38,7 +38,8 @@ nav a { color: #000; padding: 0 0.5em; margin: 0 1em; }
 section.container { margin-bottom: 20px; }
 section.panel { background: #2F2E8B; color: white; border-radius:3px; margin:4px; margin-bottom: 15px; padding:10px;}
 section.panel a { color: white; border-bottom: dotted 1px #fafafa; }
-#downloads section {float:left; background-color:#40B164;}
+#downloads section {float:left; background-color:#40B164; margin-right: 0; margin-right: 2%; width: 46%;}
+#downloads section:nth-child(even) { margin-right: 0; }
 #downloads section h3 {margin:0;padding:0; color: white;}
 #downloads-dev section {background-color:#CFE2F1;}
 
