@@ -10,14 +10,16 @@
 // Class to handle HTML templates
 class AJAXChatTemplate {
 
-	var $ajaxChat;
-	var $_regExpTemplateTags;
-	var $_templateFile;
-	var $_contentType;
-	var $_content;
-	var $_parsedContent;
+	public
+		$ajaxChat;
 
-	// Constructor:
+	protected
+		$_regExpTemplateTags,
+		$_templateFile,
+		$_contentType,
+		$_content,
+		$_parsedContent;
+
 	function __construct(&$ajaxChat, $templateFile, $contentType=null) {
 		$this->ajaxChat = $ajaxChat;
 		$this->_regExpTemplateTags = '/\[(\w+?)(?:(?:\/)|(?:\](.+?)\[\/\1))\]/s';		

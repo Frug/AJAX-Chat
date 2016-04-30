@@ -10,9 +10,10 @@
 // Class to manage HTTP header
 class AJAXChatHTTPHeader {
 
-	var $_contentType;
-	var $_constant;
-	var $_noCache;
+	protected
+		$_contentType,
+		$_constant,
+		$_noCache;
 
 	function __construct($encoding='UTF-8', $contentType=null, $noCache=true) {
 		if($contentType) {

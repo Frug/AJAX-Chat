@@ -10,19 +10,22 @@
 // Ajax Chat backend logic:
 class AJAXChat {
 
-	var $db;
-	var $_config;
-	var $_requestVars;
-	var $_infoMessages;
-	var $_channels;
-	var $_allChannels;
-	var $_view;
-	var $_lang;
-	var $_invitations;
-	var $_customVars;
-	var $_sessionNew;
-	var $_onlineUsersData;
-	var $_bannedUsersData;
+	public
+		$db;
+
+	protected
+		$_config,
+		$_requestVars,
+		$_infoMessages,
+		$_channels,
+		$_allChannels,
+		$_view,
+		$_lang,
+		$_invitations,
+		$_customVars,
+		$_sessionNew,
+		$_onlineUsersData,
+		$_bannedUsersData;
 	
 	function __construct() {
 		$this->initialize();

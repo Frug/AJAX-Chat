@@ -10,7 +10,8 @@
 // Class to initialize the DataBase connection:
 class AJAXChatDataBase {
 
-	var $_db;
+	protected
+		$_db;
 
 	function __construct(&$dbConnectionConfig) {
 		switch($dbConnectionConfig['type']) {
@@ -67,9 +68,9 @@ class AJAXChatDataBase {
 	
 	// Method to retrieve the current DataBase name:
 	function getName() {
-		return $this->_db->getName(); 
+		return $this->_db->getName();
 		//If your database has hyphens ( - ) in it, try using this instead:
-		//return '`'.$this->_db->getName().'`'; 
+		//return '`'.$this->_db->getName().'`';
 	}
 
 	// Method to retrieve the last inserted ID:

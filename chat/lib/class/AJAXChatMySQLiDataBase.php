@@ -10,10 +10,11 @@
 // Class to initialize the MySQL DataBase connection:
 class AJAXChatDataBaseMySQLi {
 
-	var $_connectionID;
-	var $_errno = 0;
-	var $_error = '';
-	var $_dbName;
+    protected
+		$_connectionID,
+		$_errno = 0,
+		$_error = '',
+		$_dbName;
 
 	function __construct(&$dbConnectionConfig) {
 		$this->_connectionID = $dbConnectionConfig['link'];

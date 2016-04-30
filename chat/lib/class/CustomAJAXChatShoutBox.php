@@ -19,6 +19,6 @@ class CustomAJAXChatShoutBox extends CustomAJAXChat {
 		
 		// Return parsed template content:
 		return $template->getParsedContent();
-	}	
+	}
 
 }

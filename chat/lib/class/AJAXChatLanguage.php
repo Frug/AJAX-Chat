@@ -9,11 +9,12 @@
 
 class AJAXChatLanguage {
 
-	var $_regExpAcceptLangCode;
-	var $_availableLangCodes;
-	var $_defaultLangCode;
-	var $_strictMode;
-	var $_langCode;
+	protected
+		$_regExpAcceptLangCode,
+		$_availableLangCodes,
+		$_defaultLangCode,
+		$_strictMode,
+		$_langCode;
 
 	function __construct($availableLangCodes, $defaultLangCode, $langCode=null, $strictMode=false) {
 		$this->_regExpAcceptLangCode = '/^([a-z]{1,8}(?:-[a-z]{1,8})*)(?:;\s*q=(0(?:\.[0-9]{1,3})?|1(?:\.0{1,3})?))?$/i';
