@@ -123,4 +123,3 @@ $lang['logsTime'] = '시간';
 $lang['logsSearch'] = '검색';
 $lang['logsPrivateChannels'] = '개인채널';
 $lang['logsPrivateMessages'] = '개인 메시지';
-?>

@@ -124,4 +124,3 @@ $lang['logsTime'] = 'Ura';
 $lang['logsSearch'] = 'Iskanje';
 $lang['logsPrivateChannels'] = 'Privatne sobe';
 $lang['logsPrivateMessages'] = 'Privatna sporočila';
-?>

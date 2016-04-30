@@ -123,4 +123,3 @@ $lang['logsTime'] = 'Waktu';
 $lang['logsSearch'] = 'Cari';
 $lang['logsPrivateChannels'] = 'Saluran-saluran privasi';
 $lang['logsPrivateMessages'] = 'Pesan Pribadi';
-?>

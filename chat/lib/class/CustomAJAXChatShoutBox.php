@@ -22,4 +22,3 @@ class CustomAJAXChatShoutBox extends CustomAJAXChat {
 	}	
 
 }
-?>

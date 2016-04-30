@@ -3320,4 +3320,3 @@ class AJAXChat {
 	}
 
 }
-?>

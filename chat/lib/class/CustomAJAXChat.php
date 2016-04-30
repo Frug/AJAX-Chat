@@ -17,7 +17,7 @@ class CustomAJAXChat extends AJAXChat {
 		global $db;
 		
 		// Use the existing phpBB database connection:
-		$this->setConfig('dbConnection', 'link', $db->db_connect_id);
+		$this->setConfig('dbConnection', 'link', $db->get_db_connect_id());
 	}
 
 	// Initialize custom request variables:

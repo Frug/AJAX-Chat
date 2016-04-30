@@ -124,4 +124,3 @@ $lang['logsTime'] = 'زمان';
 $lang['logsSearch'] = 'جست و جو';
 $lang['logsPrivateChannels'] = 'اطاق های خصوصی';
 $lang['logsPrivateMessages'] = 'پیغام های خصوصی';
-?>

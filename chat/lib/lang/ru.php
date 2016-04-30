@@ -125,4 +125,3 @@ $lang['logsTime'] = 'Время';
 $lang['logsSearch'] = 'Поиск';
 $lang['logsPrivateChannels'] = 'Приватные каналы';
 $lang['logsPrivateMessages'] = 'Приватные сообщения';
-?>

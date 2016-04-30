@@ -1,7 +1,7 @@
-AJAX Chat for phpBB3
-====================
+AJAX Chat for phpBB3.1
+======================
 
-This is the version of Blueimp's AJAX Chat for phpBB3 (versions 3.0.x). 
+This is the version of Blueimp's AJAX Chat for phpBB3 (versions 3.1.x).
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
@@ -12,11 +12,9 @@ By using JavaScript the chat page can be updated without having to reload the wh
 Requirements
 ------------
 
-
-
-| *Server-Side*          | *Client-Side*                | 
+| *Server-Side*          | *Client-Side*                |
 | ---------------------- | ---------------------------- |
-| PHP >= 5               | Enabled JavaScript           |
+| PHP >= 5.4             | Enabled JavaScript           |
 | MySQL >= 4             | Enabled Cookies              |
 | Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
 
@@ -62,7 +60,7 @@ Features
 - Separation of layout and code
 - Well commented Source Code
 - Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
-- Tested successfully with Microsoft Internet Explorer, Mozilla Firefox, Opera and Safari - built to work with all modern browsers :)
+- Tested successfully with Google Chrome, Firefox, Opera and Safari - built to work with all modern browsers :)
 
 
 

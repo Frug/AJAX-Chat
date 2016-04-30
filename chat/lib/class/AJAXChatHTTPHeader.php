@@ -45,7 +45,7 @@ class AJAXChatHTTPHeader {
 			header('Vary: Accept');
 		}
 	}
-    
+
 	// Method to return the content-type string:
 	function getContentType() {
 		// Return the content-type string:
@@ -53,4 +53,3 @@ class AJAXChatHTTPHeader {
 	}
 
 }
-?>

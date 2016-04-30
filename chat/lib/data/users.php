@@ -37,4 +37,3 @@ $users[3]['userRole'] = AJAX_CHAT_USER;
 $users[3]['userName'] = 'user';
 $users[3]['password'] = 'user';
 $users[3]['channels'] = array(0,1);
-?>
