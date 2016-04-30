@@ -77,4 +77,3 @@ $ajaxChatInstaller = new CustomAJAXChatInstaller();
 
 // Create the database tables:
 $ajaxChatInstaller->createDataBaseTables();
-?>
