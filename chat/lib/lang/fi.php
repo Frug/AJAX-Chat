@@ -125,4 +125,3 @@ $lang['logsTime'] = 'Aika';
 $lang['logsSearch'] = 'Etsi';
 $lang['logsPrivateChannels'] = 'Näytä yksityiset kanavat';
 $lang['logsPrivateMessages'] = 'Yksityiset viestit';
-?>

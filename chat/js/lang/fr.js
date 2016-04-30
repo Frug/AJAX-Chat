@@ -20,7 +20,7 @@ var ajaxChatLang = {
 	privmsg: '(murmure)',
 	privmsgto: '(murmure à l’oreille de %s)',
 	invite: '%s vous invite à rejoindre %s.',
-	inviteto: 'Votre invation pour %s à rejoindre le salon %s a bien été envoyée.',
+	inviteto: 'Votre invitation pour %s à rejoindre le salon %s a bien été envoyée.',
 	uninvite: '%s annule son invitation pour le salon %s.',
 	uninviteto: 'Votre annulaton d’invitation pour %s au salon %s a bien été envoyée.',	
 	queryOpen: 'Salon privé ouvert sous le titre %s.',

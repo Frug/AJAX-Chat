@@ -123,4 +123,3 @@ $lang['logsTime'] = 'Kellaaeg';
 $lang['logsSearch'] = 'Otsi';
 $lang['logsPrivateChannels'] = 'Privaat-kanalid';
 $lang['logsPrivateMessages'] = 'Privaat-sõnumid';
-?>
