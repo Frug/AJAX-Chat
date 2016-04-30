@@ -870,3 +870,11 @@ Bugfixes:
 
 Misc:
 - Removed unneeded call to mt_srand() - thanks to Joshua Embrey.
+
+Version 0.8.9 (??.??.2016)
+-------------------------------
+Bugfixes:
+- French translation typo fixed. - thanks to Excale.
+
+Misc:
+- Database userID and channel fields changed to unsigned int.
