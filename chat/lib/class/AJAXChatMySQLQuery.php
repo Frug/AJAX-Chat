@@ -10,11 +10,12 @@
 // Class to perform SQL (MySQL) queries:
 class AJAXChatMySQLQuery {
 
-	var $_connectionID;
-	var $_sql = '';
-	var $_result = 0;
-	var $_errno = 0;
-	var $_error = '';
+    protected
+		$_connectionID,
+		$_sql = '',
+		$_result = 0,
+		$_errno = 0,
+		$_error = '';
 
 	// Constructor:
 	function __construct($sql, $connectionID = null) {
