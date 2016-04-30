@@ -15,4 +15,3 @@ error_reporting(E_ALL & ~E_NOTICE);
 define('THIS_SCRIPT', 'ajax_chat');
 chdir(AJAX_CHAT_PATH.'../');
 require(AJAX_CHAT_PATH.'../global.php');
-?>
