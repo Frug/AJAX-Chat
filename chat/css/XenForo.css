@@ -12,7 +12,7 @@
 	font: 12pt Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	color: white;
 	font-weight: bold;
-	background: #e68c17 url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x center -7px;
+	background: #e68c17;
 	border: 3px solid White;
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
@@ -44,7 +44,7 @@
 	font-size: 12px;
 	font-family: Calibri, 'Trebuchet MS', Verdana, Geneva, Arial, Helvetica, sans-serif;
 	color: rgb(0, 0, 0);
-	background: rgb(220, 220, 235) url('../../styles/default/xenforo/gradients/form-button-white-25px.png') repeat-x top;
+	background: rgb(220, 220, 235);
 	padding: 0px 6px;
 	border: 1px solid rgb(221, 221, 235);
 	border-top-color: rgb(255, 255, 255);
@@ -95,7 +95,7 @@
 	outline: 0;
 }
 #content textarea:focus {
-	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
+	background: rgb(255, 255, 240);
 	border-top-color: rgb(150, 150, 150);
 	border-bottom-color: rgb(230, 230, 230);
 }
@@ -105,7 +105,7 @@
 	border: 1px solid #a5cae4;
 }
 #content select:focus,#loginForm select:focus,#loginForm input:focus {
-	background: rgb(255, 255, 240) url('../../styles/default/xenforo/gradients/form-element-focus-25.png') repeat-x;
+	background: rgb(255, 255, 240);
 	border-top-color: rgb(150, 150, 150);
 	border-bottom-color: rgb(230, 230, 230);
 }
@@ -189,7 +189,7 @@
 	background-color: transparent;
 }
 #content .rowEven {
-	background: #d7edfc url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
+	background: #d7edfc;
 }
 #content .rowOdd {
 	background-color: #F7F7FF;
@@ -220,7 +220,7 @@
 }
 #content #onlineListContainer h3,#content #helpContainer h3,#content #settingsContainer h3,#content #reportContainer h3 {
 	font-size: 11px;
-	background: #f9d9b0 url('../../styles/default/xenforo/gradients/category-23px-light.png') repeat-x top;
+	background: #f9d9b0;
 	color: #6d3f03;
 	border-bottom: 1px solid #f9bc6d;
 }
