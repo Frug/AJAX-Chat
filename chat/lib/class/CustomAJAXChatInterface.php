@@ -18,4 +18,3 @@ class CustomAJAXChatInterface extends CustomAJAXChat {
 	}
 
 }
-?>
