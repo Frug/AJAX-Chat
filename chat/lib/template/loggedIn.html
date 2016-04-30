@@ -149,6 +149,12 @@
 				document.getElementById('maxWordLengthSetting').value = ajaxChat.getSetting('maxWordLength');
 				document.getElementById('dateFormatSetting').value = ajaxChat.getSetting('dateFormat');
 				document.getElementById('persistFontColorSetting').checked = ajaxChat.getSetting('persistFontColor');
+				for(var i=0; i<document.getElementById('audioBackendSetting').options.length; i++) {
+					if(document.getElementById('audioBackendSetting').options[i].value == ajaxChat.getSetting('audioBackend')) {
+						document.getElementById('audioBackendSetting').options[i].selected = true;
+						break;
+					}
+				}
 				for(var i=0; i<document.getElementById('audioVolumeSetting').options.length; i++) {
 					if(document.getElementById('audioVolumeSetting').options[i].value == ajaxChat.getSetting('audioVolume')) {
 						document.getElementById('audioVolumeSetting').options[i].selected = true;
@@ -353,6 +359,16 @@
 					<dl>
 						<dt><label for="persistFontColorSetting">[LANG]settingsPersistFontColor[/LANG]</label></dt>
 						<dd><input type="checkbox" id="persistFontColorSetting" onclick="ajaxChat.setPersistFontColor(this.checked);"/></dd>
+					</dl>
+					<dl>
+						<dt><label for="audioBackendSetting">[LANG]settingsAudioVolume[/LANG]</label></dt>
+						<dd>
+							<select id="audioBackendSetting" onchange="ajaxChat.setSetting('audioBackend', this.options[this.selectedIndex].value);">
+								<option value="-1">Auto</option>
+								<option value="1">Flash</option>
+								<option value="0">HTML5</option>
+							</select>
+						</dd>
 					</dl>
 					<dl>
 						<dt><label for="audioVolumeSetting">[LANG]settingsAudioVolume[/LANG]</label></dt>
