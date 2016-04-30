@@ -26,4 +26,3 @@ $dependencies->preLoadData();
 XenForo_Session::startPublicSession();
 error_reporting(E_ALL & ~E_NOTICE); // Turn off the strict error reporting.
 
-?>
