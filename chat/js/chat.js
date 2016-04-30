@@ -448,8 +448,9 @@ var ajaxChat = {
 			} else if((navigator.plugins && !navigator.plugins["Shockwave Flash"]) || (navigator.mimeTypes && !navigator.mimeTypes['application/x-shockwave-flash'])) {
 				this.flashSounds = false;
 			}
-		} else
+		} else {
 			this.flashSounds = !!this.settings['audioBackend'];
+        }
 
 		if(this.flashSounds) {
 			this.updateDOM(
