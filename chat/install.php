@@ -9,6 +9,7 @@
 
 // Show all errors:
 error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
 // Remember to set up the config file to point to your database:
 file_exists('lib/config.php') or die('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
@@ -31,8 +32,7 @@ class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
 		$lines = file(AJAX_CHAT_PATH.'chat.sql');
 		// Stop if an error occurs:
 		if(!$lines) {
-			echo 'Failed to load queries from file (chat.sql).';
-			die();
+			die('Failed to load queries from file (chat.sql).');
 		}
 		foreach($lines as $line) {
 			if(empty($line)) {
