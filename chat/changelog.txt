@@ -873,6 +873,9 @@ Misc:
 
 Version 0.8.9 (??.??.2016)
 -------------------------------
+New Features:
+- Added HTML5 audio support. - thanks to Jamrial.
+
 Bugfixes:
 - French translation typo fixed. - thanks to Excale.
 
