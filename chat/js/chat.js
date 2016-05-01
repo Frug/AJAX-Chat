@@ -2741,6 +2741,8 @@ var ajaxChat = {
 	},
 
 	replaceBBCodeImage: function(url) {
+		// prevent embeding chat logout URL in images by stripping it from url
+		url = url.replace("?logout=true", "");
 		var regExpUrl, maxWidth, maxHeight, link;
 		if(this.settings['bbCodeImages']) {
 			regExpUrl = new RegExp(
