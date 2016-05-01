@@ -363,7 +363,7 @@
 					<dl>
 						<dt><label for="audioBackendSetting">[LANG]settingsAudioVolume[/LANG]</label></dt>
 						<dd>
-							<select id="audioBackendSetting" onchange="ajaxChat.setSetting('audioBackend', this.options[this.selectedIndex].value);">
+							<select id="audioBackendSetting" onchange="ajaxChat.setAudioBackend(this.options[this.selectedIndex].value);">
 								<option value="-1">Auto</option>
 								<option value="1">Flash</option>
 								<option value="0">HTML5</option>
