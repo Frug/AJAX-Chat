@@ -90,14 +90,15 @@ var ajaxChat = {
 	DOMbuffer: null,
 	DOMbufferRowClass: null,
 	inUrlBBCode: null,
+	flashSounds: null,
 	debug: null,
-
-	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {
+	
+	init: function(config, lang, initSettings, initStyle, initialize, initializeFunction, finalizeFunction) {	
 		this.httpRequest		= {};
 		this.usersList			= [];
 		this.userNamesList		= [];
 		this.userMenuCounter	= 0;
-		this.lastID				= 0;
+		this.lastID			= 0;
 		this.localID			= 0;
 		this.lang				= lang;
 		this.requestStatus		= 'ok';
@@ -111,8 +112,8 @@ var ajaxChat = {
 		if(initStyle) {
 			this.initStyle();
 		}
-		this.initializeFunction = initializeFunction;
-		this.finalizeFunction = finalizeFunction;
+		this.initializeFunction	= initializeFunction;
+		this.finalizeFunction	= finalizeFunction;
 		if(initialize) {
 			this.setLoadHandler();
 		}
@@ -126,17 +127,17 @@ var ajaxChat = {
 		this.baseURL				= config['baseURL'];
 		this.regExpMediaUrl			= config['regExpMediaUrl'];
 		this.startChatOnLoad		= config['startChatOnLoad'];
-		this.domIDs					= config['domIDs'];
+		this.domIDs				= config['domIDs'];
 		this.settings				= config['settings'];
 		this.nonPersistentSettings	= config['nonPersistentSettings'];
-		this.bbCodeTags				= config['bbCodeTags'];
-		this.colorCodes				= config['colorCodes'];
+		this.bbCodeTags			= config['bbCodeTags'];
+		this.colorCodes			= config['colorCodes'];
 		this.emoticonCodes			= config['emoticonCodes'];
 		this.emoticonFiles			= config['emoticonFiles'];
-		this.soundFiles				= config['soundFiles'];
+		this.soundFiles			= config['soundFiles'];
 		this.sessionName			= config['sessionName'];
 		this.cookieExpiration		= config['cookieExpiration'];
-		this.cookiePath				= config['cookiePath'];
+		this.cookiePath			= config['cookiePath'];
 		this.cookieDomain			= config['cookieDomain'];
 		this.cookieSecure			= config['cookieSecure'];
 		this.chatBotName			= config['chatBotName'];
@@ -145,13 +146,13 @@ var ajaxChat = {
 		this.inactiveTimeout		= Math.max(config['inactiveTimeout'],2);
 		this.privateChannelDiff		= config['privateChannelDiff'];
 		this.privateMessageDiff		= config['privateMessageDiff'];
-		this.showChannelMessages	= config['showChannelMessages'];
+		this.showChannelMessages		= config['showChannelMessages'];
 		this.messageTextMaxLength	= config['messageTextMaxLength'];
-		this.socketServerEnabled	= config['socketServerEnabled'];
+		this.socketServerEnabled		= config['socketServerEnabled'];
 		this.socketServerHost		= config['socketServerHost'];
 		this.socketServerPort		= config['socketServerPort'];
 		this.socketServerChatID		= config['socketServerChatID'];
-		this.debug					= config['debug'];
+		this.debug				= config['debug'];
 		this.DOMbuffering			= false;
 		this.DOMbuffer				= "";
 		this.retryTimerDelay 		= (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
@@ -201,6 +202,7 @@ var ajaxChat = {
 						this.unusedSettings[key] = value;
 					} else {
 						this.settings[key] = value;
+
 					}
 				}
 			}
@@ -262,7 +264,6 @@ var ajaxChat = {
 		this.initializeSettings();
 		this.setSelectedStyle();
 		this.customInitialize();
-		// preload the Alert icon (it can't display if there's no connection unless it's cached!)
 		this.setStatus('retrying');
 		if(typeof this.initializeFunction === 'function') {
 			this.initializeFunction();
@@ -305,7 +306,14 @@ var ajaxChat = {
 		if(this.dom['inputField'] && this.settings['autoFocus']) {
 			this.dom['inputField'].focus();
 		}
-		this.loadFlashInterface();
+		this.checkFlashSounds();
+
+		if (this.socketServerEnabled || this.flashSounds) {
+			this.loadFlashInterface();
+		} else {
+			this.initializeHTML5Sounds();
+		}
+
 		this.startChatUpdate();
 	},
 
@@ -409,7 +417,6 @@ var ajaxChat = {
 		}
 	},
 
-
 	startChatUpdate: function() {
 		// Start the chat update and retrieve current user and channel info and set the login channel:
 		var infos = 'userID,userName,userRole,channelID,channelName';
@@ -436,24 +443,54 @@ var ajaxChat = {
 	},
 
 	loadFlashInterface: function() {
-		if(this.dom['flashInterfaceContainer']) {
-			this.updateDOM(
-				'flashInterfaceContainer',
-				'<object id="ajaxChatFlashInterface" style="position:absolute; left:-100px;" '
-				+'classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '
-				+'codebase="'
-				+ window.location.protocol
-				+'//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" '
-				+'height="1" width="1">'
-				+'<param name="flashvars" value="bridgeName=ajaxChat"/>'
-				+'<param name="src" value="'+this.dirs['flash']+'FABridge.swf"/>'
-				+'<embed name="ajaxChatFlashInterface" type="application/x-shockwave-flash" pluginspage="'
-				+ window.location.protocol
-				+'//www.macromedia.com/go/getflashplayer" '
-				+'src="'+this.dirs['flash']+'FABridge.swf" height="1" width="1" flashvars="bridgeName=ajaxChat"/>'
-				+'</object>'
-			);
-			FABridge.addInitializationCallback('ajaxChat', this.flashInterfaceLoadCompleteHandler);
+		if(!this.dom['flashInterfaceContainer'] || this.dom['flashInterfaceContainer'].flashLoaded) {
+			return;
+		}
+
+		this.updateDOM(
+			'flashInterfaceContainer',
+			'<object id="ajaxChatFlashInterface" style="position:absolute; left:-100px;" '
+			+'classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" '
+			+'codebase="'
+			+ window.location.protocol
+			+'//download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" '
+			+'height="1" width="1">'
+			+'<param name="flashvars" value="bridgeName=ajaxChat"/>'
+			+'<param name="src" value="'+this.dirs['flash']+'FABridge.swf"/>'
+			+'<embed name="ajaxChatFlashInterface" type="application/x-shockwave-flash" pluginspage="'
+			+ window.location.protocol
+			+'//www.macromedia.com/go/getflashplayer" '
+			+'src="'+this.dirs['flash']+'FABridge.swf" height="1" width="1" flashvars="bridgeName=ajaxChat"/>'
+			+'</object>'
+		);
+		FABridge.addInitializationCallback('ajaxChat', this.flashInterfaceLoadCompleteHandler);
+		this.dom['flashInterfaceContainer'].flashLoaded = true;
+	},
+
+	setAudioBackend: function(audioBackend) {
+		this.setSetting('audioBackend', audioBackend);
+		this.checkFlashSounds();
+		if(this.flashSounds) {
+			this.loadFlashInterface();
+		} else {
+			this.initializeHTML5Sounds();
+		}
+	},
+
+	checkFlashSounds: function() {
+		if(this.settings['audioBackend'] < 0) {
+			// autodetect if flash is supported, and default to flash.
+			if(navigator.appVersion.indexOf("MSIE") != -1) {
+				try {
+					flash = new ActiveXObject('ShockwaveFlash.ShockwaveFlash');
+				} catch(e) {
+					this.flashSounds = false;
+				}
+			} else if((navigator.plugins && !navigator.plugins["Shockwave Flash"]) || (navigator.mimeTypes && !navigator.mimeTypes['application/x-shockwave-flash'])) {
+				this.flashSounds = false;
+			}
+		} else {
+			this.flashSounds = this.settings['audioBackend'] == 1;
 		}
 	},
 
@@ -466,7 +503,7 @@ var ajaxChat = {
 			this.socketTimerRate = (this.inactiveTimeout-1)*60*1000;
 			this.socketConnect();
 		}
-		this.loadSounds();
+		this.loadFlashSounds();
 		this.initializeCustomFlashInterface();
 	},
 
@@ -600,32 +637,67 @@ var ajaxChat = {
 				volume = 1.0;
 			}
 			this.settings['audioVolume'] = volume;
-			try {
-				if(!this.soundTransform) {
-					this.soundTransform = FABridge.ajaxChat.create('flash.media.SoundTransform');
+			if(this.flashSounds) {
+				try {
+					if(!this.soundTransform) {
+						this.soundTransform = FABridge.ajaxChat.create('flash.media.SoundTransform');
+					}
+					this.soundTransform.setVolume(volume);
+				} catch(e) {
+					this.debugMessage('setAudioVolumeFlash', e);
 				}
-				this.soundTransform.setVolume(volume);
-			} catch(e) {
-				this.debugMessage('setAudioVolume', e);
+			} else {
+				try {
+					for(var key in this.soundFiles) {
+						this.sounds[key].volume = volume;
+					}
+				} catch(e) {
+					this.debugMessage('setAudioVolume', e);
+				}
 			}
 		}
 	},
 
-	loadSounds: function() {
+	initializeHTML5Sounds: function() {
+		var audio, mo3, ogg;
 		try {
-			this.setAudioVolume(this.settings['audioVolume']);
-			this.sounds = {};
-			var sound,urlRequest;
-			for(var key in this.soundFiles) {
-				sound = FABridge.ajaxChat.create('flash.media.Sound');
-				sound.addEventListener('complete', this.soundLoadCompleteHandler);
-				sound.addEventListener('ioError', this.soundIOErrorHandler);
-				urlRequest = FABridge.ajaxChat.create('flash.net.URLRequest');
-				urlRequest.setUrl(this.dirs['sounds']+this.soundFiles[key]);
-				sound.load(urlRequest);
+			audio = document.createElement('audio');
+			mp3 = !!(audio.canPlayType && audio.canPlayType('audio/mpeg;').replace(/no/, ''));
+			ogg = !!(audio.canPlayType && audio.canPlayType('audio/ogg; codecs="vorbis"').replace(/no/, ''));
+			this.sounds = [];
+			if(mp3) {
+				format = ".mp3";
+			} else if(ogg) {
+				format = ".ogg";
+			} else {
+				format = ".wav";
 			}
+			for(var key in this.soundFiles) {
+				this.sounds[key] = new Audio(this.dirs['sounds']+key+format);
+			}
+			this.setAudioVolume(this.settings['audioVolume']);
 		} catch(e) {
-			this.debugMessage('loadSounds', e);
+			this.debugMessage('initializeHTML5Sounds', e);
+		}
+	},
+
+	loadFlashSounds: function() {
+		var sound, urlRequest;
+		if(this.flashSounds) {
+			try {
+				this.setAudioVolume(this.settings['audioVolume']);
+				this.sounds = {};
+				for(var key in this.soundFiles) {
+					sound = FABridge.ajaxChat.create('flash.media.Sound');
+					sound.addEventListener('complete', this.soundLoadCompleteHandler);
+					sound.addEventListener('ioError', this.soundIOErrorHandler);
+					urlRequest = FABridge.ajaxChat.create('flash.net.URLRequest');
+					urlRequest.setUrl(this.dirs['sounds']+this.soundFiles[key]);
+					sound.load(urlRequest);
+				}
+			} catch(e) {
+				this.debugMessage('loadFlashSounds', e);
+			}
 		}
 	},
 
@@ -652,14 +724,23 @@ var ajaxChat = {
 
 	playSound: function(soundID) {
 		if(this.sounds && this.sounds[soundID]) {
-			try {
-				// play() parameters are
-				// startTime:Number (default = 0),
-				// loops:int (default = 0) and
-				// sndTransform:SoundTransform  (default = null)
-				return this.sounds[soundID].play(0, 0, this.soundTransform);
-			} catch(e) {
-				this.debugMessage('playSound', e);
+			if(this.flashSounds) {
+				try {
+					// play() parameters are
+					// startTime:Number (default = 0),
+					// loops:int (default = 0) and
+					// sndTransform:SoundTransform  (default = null)
+					return this.sounds[soundID].play(0, 0, this.soundTransform);
+				} catch(e) {
+					this.debugMessage('playSound', e);
+				}
+			} else {
+				try {
+					this.sounds[soundID].currentTime = 0;
+					return this.sounds[soundID].play();
+				} catch(e) {
+					this.debugMessage('playSound', e);
+				}
 			}
 		}
 		return null;
