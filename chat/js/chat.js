@@ -120,6 +120,7 @@ var ajaxChat = {
 	},
 
 	initConfig: function(config) {
+                this.token                              = config["token"];
 		this.loginChannelID			= config['loginChannelID'];
 		this.loginChannelName		= config['loginChannelName'];
 		this.timerRate				= config['timerRate'];
@@ -2044,7 +2045,7 @@ var ajaxChat = {
 	logout: function() {
 		clearTimeout(this.timer);
 		var message = 'logout=true';
-		this.makeRequest(this.ajaxURL,'POST',message);
+		this.makeRequest(this.ajaxURL+"&token="+this.token,'POST',message);
 	},
 
 	handleLogout: function(url) {
