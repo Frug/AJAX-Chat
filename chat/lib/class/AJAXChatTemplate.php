@@ -174,6 +174,8 @@ class AJAXChatTemplate {
 					return 'write_forbidden';
 				else
 					return 'write_allowed';
+                        case 'TOKEN':
+                                return session_id();
 			
 			default:
 				return $this->ajaxChat->replaceCustomTemplateTags($tagData[1], (isset($tagData[2]) ? $tagData[2] : null));
