@@ -139,8 +139,14 @@ class AJAXChat {
 				return;
 			}
 
+                        //wee know the ip is match. now wee need to know if the token is correct.
+                        if(!$this->getRequestVar('token') || $this->getRequestVar('token') != session_id()){
+                               $this->logout('TOKEN');
+                               return;
+                        }
+
 			// Logout if we receive a logout request, the chat has been closed or the userID could not be revalidated:
-			if($this->getRequestVar('logout') && $this->getRequestVar('token') == session_id() || !$this->isChatOpen() || !$this->revalidateUserID()) {
+			if($this->getRequestVar('logout') || !$this->isChatOpen() || !$this->revalidateUserID()) {
 				$this->logout();
 				return;
 			}
