@@ -82,7 +82,7 @@ class AJAXChat {
 		$this->_requestVars['getInfos']		= isset($_REQUEST['getInfos'])		? $_REQUEST['getInfos']			: null;
 		$this->_requestVars['lang']			= isset($_REQUEST['lang'])			? $_REQUEST['lang']				: null;
 		$this->_requestVars['delete']		= isset($_REQUEST['delete'])		? (int)$_REQUEST['delete']		: null;
-                $this->_requestVars['token']            = isset($_REQUEST['token'])             ? $_REQUEST['token'] : null;
+		$this->_requestVars['token']		= isset($_REQUEST['token'])			? $_REQUEST['token']			: null;
 		
 		// Initialize custom request variables:
 		$this->initCustomRequestVars();
@@ -133,7 +133,7 @@ class AJAXChat {
 		$this->startSession();
 
 		if($this->isLoggedIn()) {
-// Logout if the Session IP is not the same when logged in and ipCheck is enabled:
+			// Logout if the Session IP is not the same when logged in and ipCheck is enabled:
 			if($this->getConfig('ipCheck') && ($this->getSessionIP() === null || $this->getSessionIP() != $_SERVER['REMOTE_ADDR'])) {
 				$this->logout('IP');
 				return;

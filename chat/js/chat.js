@@ -120,7 +120,7 @@ var ajaxChat = {
 	},
 
 	initConfig: function(config) {
-                this.token                              = config["token"];
+		this.token					= config["token"];
 		this.loginChannelID			= config['loginChannelID'];
 		this.loginChannelName		= config['loginChannelName'];
 		this.timerRate				= config['timerRate'];
@@ -2742,8 +2742,6 @@ var ajaxChat = {
 	},
 
 	replaceBBCodeImage: function(url) {
-		// prevent embeding chat logout URL in images by stripping it from url
-		url = url.replace("?logout=true", "");
 		var regExpUrl, maxWidth, maxHeight, link;
 		if(this.settings['bbCodeImages']) {
 			regExpUrl = new RegExp(
