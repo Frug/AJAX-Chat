@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = '遇長字彙時隨螢幕大小自動斷行：';
 $lang['settingsMaxWordLength'] = '字被截斷之前的最大長度：';
 $lang['settingsDateFormat'] = '時間格式：';
 $lang['settingsPersistFontColor'] = '固定字體顏色：';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = '音效的音量：';
 $lang['settingsSoundReceive'] = '新訊息的音效：';
 $lang['settingsSoundSend'] = '舊訊息的音效：';

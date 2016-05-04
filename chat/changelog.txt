@@ -875,6 +875,7 @@ Version 0.8.9 (??.??.2016)
 -------------------------------
 New Features:
 - Added HTML5 audio support. - thanks to Jamrial.
+- Added token to logout request to prevent an exploit that could log users out of chat. - thanks to Jugolo (and jsebean)
 
 Bugfixes:
 - French translation typo fixed. - thanks to Excale.

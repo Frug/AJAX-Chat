@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Aktiver ombrydning af lange ord:';
 $lang['settingsMaxWordLength'] = 'Maximum længde af et ord før det bliver ombrudt:';
 $lang['settingsDateFormat'] = 'Metoden hvorpå data og klokkeslet vises:';
 $lang['settingsPersistFontColor'] = 'Vedhold en tekst farve:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Lydstyrke:';
 $lang['settingsSoundReceive'] = 'Lyd for indgående beskeder:';
 $lang['settingsSoundSend'] = 'Lyd for udgående:';

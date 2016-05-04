@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Префрлање на текст:';
 $lang['settingsMaxWordLength'] = 'Максимална должина на порака пред да биде пренесена:';
 $lang['settingsDateFormat'] = 'Формат на датата и часот:';
 $lang['settingsPersistFontColor'] = 'Постојана боја на фонтот:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Гласност на звука:';
 $lang['settingsSoundReceive'] = 'Звук за приемни пораки:';
 $lang['settingsSoundSend'] = 'Звук за испратени пораки:';

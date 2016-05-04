@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'เปิดใช้งานการเว้น
 $lang['settingsMaxWordLength'] = 'ความาวของคำก่อนที่จะเว้นบรรทัดใหม่ให้:';
 $lang['settingsDateFormat'] = 'รูปแบบวันที่และเวลา:';
 $lang['settingsPersistFontColor'] = 'สีอักษรทั้งข้อความ:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'ระดับเสียง:';
 $lang['settingsSoundReceive'] = 'เสียงสำหรับข้อความเข้า:';
 $lang['settingsSoundSend'] = 'เสียงสำหรับข้อความออกไป:';

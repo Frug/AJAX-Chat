@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Hosszú szavak tördelése:';
 $lang['settingsMaxWordLength'] = 'Maximális karakterszám egy szó tördelése előtt:';
 $lang['settingsDateFormat'] = 'Dátum és idő kijelzésének formátuma:';
 $lang['settingsPersistFontColor'] = 'Folyamatos betűszín használata:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Hangerő:';
 $lang['settingsSoundReceive'] = 'Bejövő üzenetek hangja:';
 $lang['settingsSoundSend'] = 'Kimenő üzenetek hangja:';

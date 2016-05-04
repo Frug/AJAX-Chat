@@ -320,7 +320,7 @@ class AJAXChat {
 		$template = new AJAXChatTemplate($this, $this->getTemplateFileName(), $httpHeader->getContentType());
 
 		// Send HTTP header:
-		$httpHeader->send();		
+		$httpHeader->send();
 
 		// Send parsed template content:
 		echo $template->getParsedContent();

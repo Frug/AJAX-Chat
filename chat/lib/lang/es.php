@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Permitir la separación del las palabras largas:';
 $lang['settingsMaxWordLength'] = 'Máximo tamaño de una palabara antes de que se separe:';
 $lang['settingsDateFormat'] = 'Formato de la fecha y hora a mostrar:';
 $lang['settingsPersistFontColor'] = 'Mantener el color de la fuente:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volumen Sonido:';
 $lang['settingsSoundReceive'] = 'Sonido para mensajes entrantes:';
 $lang['settingsSoundSend'] = 'Sonido para mensajes salientes:';

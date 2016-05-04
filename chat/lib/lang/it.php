@@ -101,6 +101,7 @@ $lang['settingsWordWrap'] = 'Attiva taglio parole lunghe:';
 $lang['settingsMaxWordLength'] = 'Lunghezza massima parole:';
 $lang['settingsDateFormat'] = 'Formato data ed ora:';
 $lang['settingsPersistFontColor'] = 'Colore font persistente:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volume suono:';
 $lang['settingsSoundReceive'] = 'Suono messaggi entranti:';
 $lang['settingsSoundSend'] = 'Suono messaggi uscenti:';

@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Membolehkan memecah suku kata yang panjang:';
 $lang['settingsMaxWordLength'] = 'Panjang maksimum sebuah kata sebelum dipecah:';
 $lang['settingsDateFormat'] = 'Format dari tampilan tanggal dan waktu:';
 $lang['settingsPersistFontColor'] = 'Mempertahankan Warna Huruf:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volume Suara:';
 $lang['settingsSoundReceive'] = 'Suara pada saat pesan masuk:';
 $lang['settingsSoundSend'] = 'Suara pada saat pesan keluar:';

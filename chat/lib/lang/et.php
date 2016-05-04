@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Luba pikkade sõnade murdmine:';
 $lang['settingsMaxWordLength'] = 'Maksimum sõna pikkus enne kui seda murtakse:';
 $lang['settingsDateFormat'] = 'Kuupäeva ja kellaaja formaat:';
 $lang['settingsPersistFontColor'] = 'Püsiv fondi värv';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Heli tugevus:';
 $lang['settingsSoundReceive'] = 'Heli sisenemisel:';
 $lang['settingsSoundSend'] = 'Heli väljumisel:';

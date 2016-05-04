@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Lange Wörter umbrechen:';
 $lang['settingsMaxWordLength'] = 'Maximallänge eines Wortes bevor es umgebrochen wird:';
 $lang['settingsDateFormat'] = 'Datums- und Zeitanzeige:';
 $lang['settingsPersistFontColor'] = 'Schriftfarbe dauerhaft setzen:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Lautstärke:';
 $lang['settingsSoundReceive'] = 'Klang für empfangene Nachrichten:';
 $lang['settingsSoundSend'] = 'Klang für gesendete Nachrichten:';

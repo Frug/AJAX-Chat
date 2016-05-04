@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Galluogi lapio geiriau hir:';
 $lang['settingsMaxWordLength'] = 'Hyd mwyaf y gair cyn iddo gael ei lapio:';
 $lang['settingsDateFormat'] = 'Fformat y dyddiad a\'r amser:';
 $lang['settingsPersistFontColor'] = 'Lliw ffont parhaus:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Uchder Sain:';
 $lang['settingsSoundReceive'] = 'Sain am negeseuon yn dyfod i mewn:';
 $lang['settingsSoundSend'] = 'Sain am negeseuon yn mynd allan:';

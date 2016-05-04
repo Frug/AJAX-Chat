@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Permitir palavras longas:';
 $lang['settingsMaxWordLength'] = 'O comprimento máximo de uma palavra é de:';
 $lang['settingsDateFormat'] = 'Formato da hora e data:';
 $lang['settingsPersistFontColor'] = 'Persistir cor da fonte:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volume do som:';
 $lang['settingsSoundReceive'] = 'Som para as mensagens recebidas:';
 $lang['settingsSoundSend'] = 'Som de mensagens enviadas:';

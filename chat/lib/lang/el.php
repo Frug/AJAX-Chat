@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Ενεργοποίηση καλύμματος με�
 $lang['settingsMaxWordLength'] = 'Μέγιστο μήκος μιας λέξης χωρίς κάλυμμα:';
 $lang['settingsDateFormat'] = 'Μορφή ημερομηνίας και ώρας που θα εμφανίζετε:';
 $lang['settingsPersistFontColor'] = 'Έντονο χρώμα γραμματοσειράς:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Ένταση ήχου:';
 $lang['settingsSoundReceive'] = 'Ήχος για εισερχόμενα μηνύματα:';
 $lang['settingsSoundSend'] = 'Ήχος για εξερχόμενα μηνύματα:';

@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = '長い英数字の折り返しを有効にする :'
 $lang['settingsMaxWordLength'] = '折り返しされない英数字の最大字数 :';
 $lang['settingsDateFormat'] = '日付と表示時間のフォーマット :';
 $lang['settingsPersistFontColor'] = 'フォントカラーを保持する :';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'サウンドのボリューム :';
 $lang['settingsSoundReceive'] = 'サウンド - メッセージの到着 :';
 $lang['settingsSoundSend'] = 'サウンド - メッセージの送信 :';

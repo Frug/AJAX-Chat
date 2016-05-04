@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = '긴 문장 다음줄로 표시:';
 $lang['settingsMaxWordLength'] = '최대 글자수:';
 $lang['settingsDateFormat'] = '날짜, 시간 표시 형식:';
 $lang['settingsPersistFontColor'] = '글자색 고정:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = '소리크기:';
 $lang['settingsSoundReceive'] = '메시지 수신 소리:';
 $lang['settingsSoundSend'] = '메시지 송신 소리:';

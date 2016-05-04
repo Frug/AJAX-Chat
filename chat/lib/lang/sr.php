@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Omogući omotavanje dugačkih reči:';
 $lang['settingsMaxWordLength'] = 'Maksimalna dužina reči pre nego što se omota:';
 $lang['settingsDateFormat'] = 'Format prikaza datuma i vremena:';
 $lang['settingsPersistFontColor'] = 'Stalna boja fonta:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Jačina zvuka:';
 $lang['settingsSoundReceive'] = 'Zvuk za primljene poruke:';
 $lang['settingsSoundSend'] = 'Zvuk za poslate poruke:';

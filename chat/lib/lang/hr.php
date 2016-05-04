@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Omogući obmatanje dugih riječi:';
 $lang['settingsMaxWordLength'] = 'Najveća duljina riječi prije njezinog obmatanja:';
 $lang['settingsDateFormat'] = 'Oblikovanje datuma i vremena:';
 $lang['settingsPersistFontColor'] = 'Dosljedna boja fonta:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Glasnoća zvuka:';
 $lang['settingsSoundReceive'] = 'Zvuk za dolazne poruke:';
 $lang['settingsSoundSend'] = 'Zvuk za odlazne poruke:';

@@ -99,6 +99,7 @@ $lang['settingsWordWrap'] = 'Povolit zalomení řádku u dlouhého slova:';
 $lang['settingsMaxWordLength'] = 'Maximální délka slova, než bude zalomeno:';
 $lang['settingsDateFormat'] = 'Formát zobrazení data a času:';
 $lang['settingsPersistFontColor'] = 'Neměnná barva textu:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Hlasitost:';
 $lang['settingsSoundReceive'] = 'Zvuk pro příchozí zprávy:';
 $lang['settingsSoundSend'] = 'Zvuk pro odchozí zprávy:';

@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Пренасяне на дълги думи:';
 $lang['settingsMaxWordLength'] = 'Максимална дължина на дума преди да бъде пренесена:';
 $lang['settingsDateFormat'] = 'Формат на датата и часа:';
 $lang['settingsPersistFontColor'] = 'Устойчив цвят на шрифта:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Височина на звука:';
 $lang['settingsSoundReceive'] = 'Звук за входящи съобщения:';
 $lang['settingsSoundSend'] = 'Звук за изходящи съобщения:';

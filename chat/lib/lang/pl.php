@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Pozwól dzielić długie wyrazy:';
 $lang['settingsMaxWordLength'] = 'Maksymalna długość wyrazu, którego nie wolno dzielić:';
 $lang['settingsDateFormat'] = 'Format wyświetlanej daty i czasu:';
 $lang['settingsPersistFontColor'] = 'Nie pozwól na zmianę koloru tekstu:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Głośność:';
 $lang['settingsSoundReceive'] = 'Dźwięk dla przychodzących wiadomości:';
 $lang['settingsSoundSend'] = 'Dźwięk dla wysyłanych wiadomości:';

@@ -101,6 +101,7 @@ $lang['settingsWordWrap'] = 'Activer la coupure des mots :';
 $lang['settingsMaxWordLength'] = 'Longueur maximum des mots :';
 $lang['settingsDateFormat'] = 'Format de la date :';
 $lang['settingsPersistFontColor'] = 'Garder la couleur du font :';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volume du son :';
 $lang['settingsSoundReceive'] = 'Son message entrant :';
 $lang['settingsSoundSend'] = 'Son message sortant :';

@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Activar wrapping en palabras largas:';
 $lang['settingsMaxWordLength'] = 'Máxima lonxutide de palabra antes de wrap:';
 $lang['settingsDateFormat'] = 'Formato de data e hora:';
 $lang['settingsPersistFontColor'] = 'Fixar cor de fonte:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Volume  sons:';
 $lang['settingsSoundReceive'] = 'Son para mensaxes entrantes:';
 $lang['settingsSoundSend'] = 'Son para mensaxes salientes:';

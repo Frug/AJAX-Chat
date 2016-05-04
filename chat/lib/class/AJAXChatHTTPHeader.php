@@ -15,7 +15,7 @@ class AJAXChatHTTPHeader {
 		$_constant,
 		$_noCache;
 
-	function __construct($encoding='UTF-8', $contentType=null, $noCache=true) {
+	public function __construct($encoding='UTF-8', $contentType=null, $noCache=true) {
 		if($contentType) {
 			$this->_contentType = $contentType.'; charset='.$encoding;
 			$this->_constant = true;
@@ -31,7 +31,7 @@ class AJAXChatHTTPHeader {
 	}
 
 	// Method to send the HTTP header:
-	function send() {
+	public function send() {
 		// Prevent caching:
 		if($this->_noCache) {
 			header('Cache-Control: no-cache, must-revalidate');
@@ -48,7 +48,7 @@ class AJAXChatHTTPHeader {
 	}
 
 	// Method to return the content-type string:
-	function getContentType() {
+	public function getContentType() {
 		// Return the content-type string:
 		return $this->_contentType;
 	}

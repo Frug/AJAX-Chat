@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Uzun kelimeleri kısaltmayı aç:';
 $lang['settingsMaxWordLength'] = 'Kısaltılacak kelimenin maksimum uzunluğu:';
 $lang['settingsDateFormat'] = 'Tarih ve zaman gösterim formatı:';
 $lang['settingsPersistFontColor'] = 'Kalıcı font rengi:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Ses Düzeyi:';
 $lang['settingsSoundReceive'] = 'Gelen mesaj sesi:';
 $lang['settingsSoundSend'] = 'Giden mesaj sesi:';

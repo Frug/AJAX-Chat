@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Habilitar partir paraules llargues';
 $lang['settingsMaxWordLength'] = 'Màxima llargada d\'una paraula abns de ser tallada:';
 $lang['settingsDateFormat'] = 'Format de dia i hora:';
 $lang['settingsPersistFontColor'] = 'Color de font persistent:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'So volum:';
 $lang['settingsSoundReceive'] = 'So per missatdes d\'entrada:';
 $lang['settingsSoundSend'] = 'So per missatges de sortida:';

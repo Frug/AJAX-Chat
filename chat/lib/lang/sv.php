@@ -100,6 +100,7 @@ $lang['settingsWordWrap']		= 'Aktivera "wrapping" av långa ord:';
 $lang['settingsMaxWordLength']		= 'Maxlängd på ord innan det blir avdelat:';
 $lang['settingsDateFormat']		= 'Visningsformat av datum och tid:';
 $lang['settingsPersistFontColor']	= 'Behåll textfärg:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume']		= 'Volym:';
 $lang['settingsSoundReceive']		= 'Ljud för inkommande meddelanden:';
 $lang['settingsSoundSend']		= 'Ljud för utgående meddelanden:';

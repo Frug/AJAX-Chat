@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = '开启超宽换行：';
 $lang['settingsMaxWordLength'] = '行宽：';
 $lang['settingsDateFormat'] = '时间和日期显示格式：';
 $lang['settingsPersistFontColor'] = '字体颜色：';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = '音量：';
 $lang['settingsSoundReceive'] = '声音提示进入信息：';
 $lang['settingsSoundSend'] = '声音提示离开信息：';

@@ -101,6 +101,7 @@ $lang['settingsWordWrap'] = 'Salli pitkien sanojen rivinvaihto:';
 $lang['settingsMaxWordLength'] = 'Sanan enimmäispituus ennen kuin riviä vaihdetaan:';
 $lang['settingsDateFormat'] = 'Ajan ja päivämäärän muoto:';
 $lang['settingsPersistFontColor'] = 'Pysyvä fontin väri:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Äänenvoimakkuus:';
 $lang['settingsSoundReceive'] = 'Ääni tuleville viesteille:';
 $lang['settingsSoundSend'] = 'Ääni lähteville viesteille:';

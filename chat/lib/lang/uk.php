@@ -100,6 +100,7 @@ $lang['settingsWordWrap'] = 'Розділювати довгі слова:';
 $lang['settingsMaxWordLength'] = 'Максимальна довжина слова після якої його буде розділено:';
 $lang['settingsDateFormat'] = 'Формат дати та часу:';
 $lang['settingsPersistFontColor'] = 'Колір для привернення уваги:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Гучність:';
 $lang['settingsSoundReceive'] = 'Звук для отриманих повідомлень:';
 $lang['settingsSoundSend'] = 'Звук для надісланих повідомлень:';

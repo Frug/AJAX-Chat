@@ -101,6 +101,7 @@ $lang['settingsWordWrap'] = 'Переносить длинные слова:';
 $lang['settingsMaxWordLength'] = 'Максимально допустимая длина слова, которе не будет разбито для переноса:';
 $lang['settingsDateFormat'] = 'Формат даты и времени:';
 $lang['settingsPersistFontColor'] = 'Постоянный цвет шрифта:';
+$lang['settingsAudioSupport'] = 'Audio Support:';
 $lang['settingsAudioVolume'] = 'Громкость:';
 $lang['settingsSoundReceive'] = 'Звук для входящих сообщений:';
 $lang['settingsSoundSend'] = 'Звук для исходящих сообщений:';
