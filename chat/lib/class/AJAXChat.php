@@ -141,7 +141,6 @@ class AJAXChat {
 
                         //wee know the ip is match. now wee need to know if the token is correct.
                         if(!$this->getRequestVar('token') || $this->getRequestVar('token') != session_id()){
-                               $this->logout('TOKEN');
                                return;
                         }
 
