@@ -81,7 +81,7 @@ var ajaxChatLang = {
 	errorCommandNotAllowed: 'Error: Command not allowed: %s',
 	errorUnknownCommand: 'Error: Unknown command: %s',
 	errorMaxMessageRate: 'Error: You exceeded the maximum number of messages per minute.',
-	errorConnectionTimeout: 'Error: Connection timeout. Please try again.',
+	errorConnectionTimeout: 'Error: Connection timeout.',
 	errorConnectionStatus: 'Error: Connection status: %s',
 	errorSoundIO: 'Error: Failed to load sound file (Flash IO Error).',
 	errorSocketIO: 'Error: Connection to socket server failed (Flash IO Error).',

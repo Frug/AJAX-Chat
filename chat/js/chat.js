@@ -84,7 +84,6 @@ var ajaxChat = {
 	blinkInterval: null,
 	httpRequest: null,
 	retryTimer: null,
-	retryTimerDelay: null,
 	requestStatus: null,
 	DOMbuffering: null,
 	DOMbuffer: null,
@@ -128,17 +127,17 @@ var ajaxChat = {
 		this.baseURL				= config['baseURL'];
 		this.regExpMediaUrl			= config['regExpMediaUrl'];
 		this.startChatOnLoad		= config['startChatOnLoad'];
-		this.domIDs				= config['domIDs'];
+		this.domIDs					= config['domIDs'];
 		this.settings				= config['settings'];
 		this.nonPersistentSettings	= config['nonPersistentSettings'];
-		this.bbCodeTags			= config['bbCodeTags'];
-		this.colorCodes			= config['colorCodes'];
+		this.bbCodeTags				= config['bbCodeTags'];
+		this.colorCodes				= config['colorCodes'];
 		this.emoticonCodes			= config['emoticonCodes'];
 		this.emoticonFiles			= config['emoticonFiles'];
-		this.soundFiles			= config['soundFiles'];
+		this.soundFiles				= config['soundFiles'];
 		this.sessionName			= config['sessionName'];
 		this.cookieExpiration		= config['cookieExpiration'];
-		this.cookiePath			= config['cookiePath'];
+		this.cookiePath				= config['cookiePath'];
 		this.cookieDomain			= config['cookieDomain'];
 		this.cookieSecure			= config['cookieSecure'];
 		this.chatBotName			= config['chatBotName'];
@@ -147,16 +146,15 @@ var ajaxChat = {
 		this.inactiveTimeout		= Math.max(config['inactiveTimeout'],2);
 		this.privateChannelDiff		= config['privateChannelDiff'];
 		this.privateMessageDiff		= config['privateMessageDiff'];
-		this.showChannelMessages		= config['showChannelMessages'];
+		this.showChannelMessages	= config['showChannelMessages'];
 		this.messageTextMaxLength	= config['messageTextMaxLength'];
-		this.socketServerEnabled		= config['socketServerEnabled'];
+		this.socketServerEnabled	= config['socketServerEnabled'];
 		this.socketServerHost		= config['socketServerHost'];
 		this.socketServerPort		= config['socketServerPort'];
 		this.socketServerChatID		= config['socketServerChatID'];
-		this.debug				= config['debug'];
+		this.debug					= config['debug'];
 		this.DOMbuffering			= false;
 		this.DOMbuffer				= "";
-		this.retryTimerDelay 		= (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
 	},
 
 	initDirectories: function() {
@@ -293,11 +291,12 @@ var ajaxChat = {
 	},
 
 	setStartChatHandler: function() {
-		if(this.dom['inputField']) {
-			this.dom['inputField'].onfocus = function() {
-				ajaxChat.startChat();
+		var self = this;
+		if(self.dom['inputField']) {
+			self.dom['inputField'].onfocus = function() {
+				self.startChat();
 				// Reset the onfocus event on first call:
-				ajaxChat.dom['inputField'].onfocus = '';
+				self.dom['inputField'].onfocus = '';
 			};
 		}
 	},
@@ -440,6 +439,7 @@ var ajaxChat = {
 		if(paramString) {
 			requestUrl += paramString;
 		}
+		console.log('updateChat');
 		this.makeRequest(requestUrl,'GET',null);
 	},
 
@@ -820,7 +820,9 @@ var ajaxChat = {
 	},
 
 	forceNewRequest: function() {
+		ajaxChat.addChatBotMessageToChatList('/error ConnectionTimeout');
 		ajaxChat.updateChat(null);
+		ajaxChat.updateChatlistView();
 		ajaxChat.setStatus('retrying');
 	},
 
@@ -845,117 +847,121 @@ var ajaxChat = {
 		return this.httpRequest[identifier];
 	},
 
+	startRetryTimer: function() {
+		console.log('startRetryTimer');
+		var retryTimerDelay = (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
+		this.clearRetryTimer();
+		this.retryTimer = setTimeout(this.forceNewRequest, retryTimerDelay);
+	},
+
+	clearRetryTimer: function() {
+		console.log('clearRetryTimer');
+		clearTimeout(this.retryTimer);
+	},
+
 	makeRequest: function(url, method, data) {
-		var self = this,
-			identifier;
-		self.setStatus('waiting');
+		console.log('makeRequest');
+		var identifier;
+		this.setStatus('waiting');
 
-		try {
-			if(data) {
-				// Create up to 50 HTTPRequest objects:
-				if(!arguments.callee.identifier || arguments.callee.identifier > 50) {
-					arguments.callee.identifier = 1;
-				} else {
-					arguments.callee.identifier++;
-				}
-				identifier = arguments.callee.identifier;
+		if(data) {
+			// Create up to 50 HTTPRequest objects (callbacks are handled asynchronously, so these are queued up):
+			if(!this.makeRequest.identifier || this.makeRequest.identifier > 50) {
+				this.makeRequest.identifier = 1;
 			} else {
-				identifier = 0;
+				this.makeRequest.identifier++;
 			}
-			//if the response takes longer than retryTimerDelay to give an OK status, abort the connection and start again.
-			self.retryTimer = setTimeout(ajaxChat.forceNewRequest, ajaxChat.retryTimerDelay);
+			identifier = this.makeRequest.identifier;
+		} else {
+			// 0 is the standard page refresh timer.
+			identifier = 0;
+			this.startRetryTimer();
+		}
 
-			self.getHttpRequest(identifier).open(method, url, true);
-			self.getHttpRequest(identifier).onreadystatechange = function() {
-				try {
-					ajaxChat.handleResponse(identifier);
-				} catch(e) {
-					try {
-						clearTimeout(ajaxChat.timer);
-					} catch(e) {
-						self.debugMessage('makeRequest::clearTimeout', e);
-					}
-					try {
-						if(data) {
-							ajaxChat.addChatBotMessageToChatList('/error ConnectionTimeout');
-							ajaxChat.setStatus('retrying');
-							ajaxChat.updateChatlistView();
-						}
-					} catch(e) {
-						self.debugMessage('makeRequest::logRetry', e);
-					}
-					try {
-						ajaxChat.timer = setTimeout(function() { ajaxChat.updateChat(null); }, ajaxChat.timerRate);
-					} catch(e) {
-						self.debugMessage('makeRequest::setTimeout', e);
-					}
+		this.getHttpRequest(identifier).open(method, url, true);
+		this.getHttpRequest(identifier).onreadystatechange = this.getReadyStateChangeHandler(identifier, data);
+
+		if(method === 'POST') {
+			this.getHttpRequest(identifier).setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+		}
+		this.getHttpRequest(identifier).send(data);
+	},
+
+	getReadyStateChangeHandler: function(identifier, data) {
+		var self = this;
+		return function() {
+			// A readyState of 4 means the request has completed.
+			if (self.getHttpRequest(identifier).readyState !== 4) {
+				return;
+			}
+
+			if (self.getHttpRequest(identifier).status !== 200) {
+				// Dropped or failed connections can result in a status 0. self can be ignored unless the user
+				// is trying to send a command.
+				// Other response codes, like 404, should not be ignored - they indicate a server problem.
+				if ((self.getHttpRequest(identifier).status === 0 && data) || self.getHttpRequest(identifier).status !== 0) {
+					self.addChatBotMessageToChatList('/error ConnectionStatus ' + self.getHttpRequest(identifier).status);
 				}
-			};
-			if(method === 'POST') {
-				self.getHttpRequest(identifier).setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-			}
-			self.getHttpRequest(identifier).send(data);
-		} catch(e) {
-			clearTimeout(this.timer);
-			if(data) {
-				self.addChatBotMessageToChatList('/error ConnectionTimeout');
-				ajaxChat.setStatus('retrying');
+				if (self.getHttpRequest(identifier).status !== 0) {
+					self.setStatus('retrying');
+				} else {
+					self.setStatus('waiting');
+				}
 				self.updateChatlistView();
+				return;
 			}
-			self.timer = setTimeout(function() { ajaxChat.updateChat(null); }, self.timerRate);
+
+			self.clearRetryTimer();
+			self.setChatUpdateTimer();
+
+			// TODO: Clean this up, report why response couldn't be handled
+			if (!self.handleResponse(identifier)) {
+				if(data) {
+					// TODO: Figure out why self is here and do something better
+					self.addChatBotMessageToChatList('/error ConnectionStatus Unknown');
+					self.setStatus('retrying');
+					self.updateChatlistView();
+				}
+			}
 		}
 	},
 
 	handleResponse: function(identifier) {
 		var xmlDoc;
-		if (this.getHttpRequest(identifier).readyState === 4) {
-			if (this.getHttpRequest(identifier).status === 200) {
-				clearTimeout(ajaxChat.retryTimer);
-				xmlDoc = this.getHttpRequest(identifier).responseXML;
-				ajaxChat.setStatus('ok');
-			} else {
-				// Connection status 0 can be ignored.
-				if (this.getHttpRequest(identifier).status === 0) {
-					this.setStatus('waiting');
-					this.updateChatlistView();
-					return false;
-				} else {
-					this.addChatBotMessageToChatList('/error ConnectionStatus '+this.getHttpRequest(identifier).status);
-					this.setStatus('retrying');
-					this.updateChatlistView();
-					return false;
-				}
-			}
-		}
+		xmlDoc = this.getHttpRequest(identifier).responseXML;
 		if(!xmlDoc) {
 			return false;
 		}
 		this.handleXML(xmlDoc);
+		this.setStatus('ok');
 		return true;
 	},
 
+	// TODO: Error handling here? Does handleResponse cover it all?
 	handleXML: function(xmlDoc) {
 		this.handleInfoMessages(xmlDoc.getElementsByTagName('info'));
 		this.handleOnlineUsers(xmlDoc.getElementsByTagName('user'));
 		this.handleChatMessages(xmlDoc.getElementsByTagName('message'));
 		this.channelSwitch = null;
-		this.setChatUpdateTimer();
 	},
 
 	setChatUpdateTimer: function() {
-		clearTimeout(this.timer);
-		if(this.chatStarted) {
-			var timeout;
-			if(this.socketIsConnected) {
-				timeout = this.socketTimerRate;
+		var timeout,
+			self = this;
+		console.log('setChatUpdateTimer');
+
+		clearTimeout(self.timer);
+		if(self.chatStarted) {
+			if(self.socketIsConnected) {
+				timeout = self.socketTimerRate;
 			} else {
-				timeout = this.timerRate;
-				if(this.socketServerEnabled && !this.socketReconnectTimer) {
+				timeout = self.timerRate;
+				if(self.socketServerEnabled && !self.socketReconnectTimer) {
 					// If the socket connection fails try to reconnect once in a minute:
-					this.socketReconnectTimer = setTimeout(ajaxChat.socketConnect, 60000);
+					self.socketReconnectTimer = setTimeout(self.socketConnect, 60000);
 				}
 			}
-			this.timer = setTimeout(function() {ajaxChat.updateChat(null);}, timeout);
+			self.timer = setTimeout(function() {self.updateChat(null);}, timeout);
 		}
 	},
 
@@ -1934,7 +1940,8 @@ var ajaxChat = {
 					if(nextSibling) {
 						this.updateChatListRowClasses(nextSibling);
 					}
-					this.updateChat('&delete='+messageID);
+					message = "delete=" + messageID;
+					this.makeRequest(this.ajaxURL+"&token="+this.token,'POST',message);
 				} catch(e) {
 					messageNode.className = originalClass;
 				}
@@ -2754,20 +2761,20 @@ var ajaxChat = {
 			maxWidth = this.dom['chatList'].offsetWidth-50;
 			maxHeight = this.dom['chatList'].offsetHeight-50;
 			link =  '<img class="bbCodeImage" style="max-width:'
-                    + maxWidth
-                    + 'px; max-height:'
-                    + maxHeight
-                    + 'px;" src="'
-                    + url
-                    + '" alt="" onload="ajaxChat.updateChatlistView();"/>';
-            if(!this.inUrlBBCode) {
-                link =  '<a href="'
-                        + url
-                        + '" onclick="window.open(this.href); return false;">'
-                        + link
-                        + '</a>';
-            }
-            return link;
+					+ maxWidth
+					+ 'px; max-height:'
+					+ maxHeight
+					+ 'px;" src="'
+					+ url
+					+ '" alt="" onload="ajaxChat.updateChatlistView();"/>';
+			if(!this.inUrlBBCode) {
+				link =  '<a href="'
+						+ url
+						+ '" onclick="window.open(this.href); return false;">'
+						+ link
+						+ '</a>';
+			}
+			return link;
 		}
 		return url;
 	},

@@ -40,7 +40,7 @@ class AJAXChat {
 
 		// Initialize request variables:
 		$this->initRequestVars();
-		
+
 		// Initialize the chat session:
 		$this->initSession();
 		
@@ -51,8 +51,7 @@ class AJAXChat {
 	function initConfig() {
 		$config = null;
 		if (!include(AJAX_CHAT_PATH.'lib/config.php')) {
-			echo('<strong>Error:</strong> Could not find a config.php file in "'.AJAX_CHAT_PATH.'"lib/". Check to make sure the file exists.');
-			die();
+			die('<strong>Error:</strong> Could not find a config.php file in "'.AJAX_CHAT_PATH.'"lib/". Check to make sure the file exists.');
 		}
 		$this->_config = &$config;
 
@@ -62,23 +61,23 @@ class AJAXChat {
 	
 	function initRequestVars() {
 		$this->_requestVars = array();
-		$this->_requestVars['ajax']			= isset($_REQUEST['ajax'])			? true							: false;
+		$this->_requestVars['ajax']			= isset($_GET['ajax'])				? true							: false;
+		$this->_requestVars['shoutbox']		= isset($_GET['shoutbox'])			? true							: false;
 		$this->_requestVars['userID']		= isset($_REQUEST['userID'])		? (int)$_REQUEST['userID']		: null;
 		$this->_requestVars['userName']		= isset($_REQUEST['userName'])		? $_REQUEST['userName']			: null;
 		$this->_requestVars['channelID']	= isset($_REQUEST['channelID'])		? (int)$_REQUEST['channelID']	: null;
 		$this->_requestVars['channelName']	= isset($_REQUEST['channelName'])	? $_REQUEST['channelName']		: null;
 		$this->_requestVars['text']			= isset($_POST['text'])				? $_POST['text']				: null;
+		$this->_requestVars['password']		= isset($_POST['password'])			? $_POST['password']			: null;
 		$this->_requestVars['lastID']		= isset($_REQUEST['lastID'])		? (int)$_REQUEST['lastID']		: 0;
 		$this->_requestVars['login']		= isset($_REQUEST['login'])			? true							: false;
 		$this->_requestVars['logout']		= isset($_REQUEST['logout'])		? true							: false;
-		$this->_requestVars['password']		= isset($_REQUEST['password'])		? $_REQUEST['password']			: null;
 		$this->_requestVars['view']			= isset($_REQUEST['view'])			? $_REQUEST['view']				: null;
 		$this->_requestVars['year']			= isset($_REQUEST['year'])			? (int)$_REQUEST['year']		: null;
 		$this->_requestVars['month']		= isset($_REQUEST['month'])			? (int)$_REQUEST['month']		: null;
 		$this->_requestVars['day']			= isset($_REQUEST['day'])			? (int)$_REQUEST['day']			: null;
 		$this->_requestVars['hour']			= isset($_REQUEST['hour'])			? (int)$_REQUEST['hour']		: null;
 		$this->_requestVars['search']		= isset($_REQUEST['search'])		? $_REQUEST['search']			: null;
-		$this->_requestVars['shoutbox']		= isset($_REQUEST['shoutbox'])		? true							: false;
 		$this->_requestVars['getInfos']		= isset($_REQUEST['getInfos'])		? $_REQUEST['getInfos']			: null;
 		$this->_requestVars['lang']			= isset($_REQUEST['lang'])			? $_REQUEST['lang']				: null;
 		$this->_requestVars['delete']		= isset($_REQUEST['delete'])		? (int)$_REQUEST['delete']		: null;
@@ -2373,7 +2372,7 @@ class AJAXChat {
 	
 	function setRequestVar($key, $value) {
 		if(!$this->_requestVars) {
-			$this->_requestVars = array();
+			$this->_requestVars = [];
 		}
 		$this->_requestVars[$key] = $value;
 	}
