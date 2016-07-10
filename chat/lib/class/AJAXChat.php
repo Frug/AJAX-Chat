@@ -834,7 +834,7 @@ class AJAXChat {
 					}
 				} else {
 					// Insert /privaction command if /describe is used:
-					$command = ($textParts[0] == '/describe') ? '/privaction' : '/privmsg';							
+					$command = ($textParts[0] == '/describe') ? '/privaction' : '/privmsg';
 					// Copy of private message to current User:
 					$this->insertCustomMessage(
 						$this->getUserID(),
@@ -842,7 +842,7 @@ class AJAXChat {
 						$this->getUserRole(),
 						$this->getPrivateMessageID(),
 						$command.'to '.$textParts[1].' '.implode(' ', array_slice($textParts, 2))
-					);								
+					);
 					// Private message to requested User:
 					$this->insertCustomMessage(
 						$this->getUserID(),
@@ -890,7 +890,7 @@ class AJAXChat {
 						'/invite '.$this->getUserName().' '.$invitationChannelName
 					);
 				}
-			}						
+			}
 		} else {
 			$this->insertChatBotMessage(
 				$this->getPrivateMessageID(),
@@ -913,7 +913,7 @@ class AJAXChat {
 						$this->getPrivateMessageID(),
 						'/error UserNameNotFound '.$textParts[1]
 					);
-				} else {						
+				} else {
 					// Remove the invitation from the database:
 					$this->removeInvitation($toUserID);
 					$invitationChannelName = $this->getChannelNameFromChannelID($this->getChannel());
@@ -921,19 +921,19 @@ class AJAXChat {
 					$this->insertChatBotMessage(
 						$this->getPrivateMessageID(),
 						'/uninviteto '.$textParts[1].' '.$invitationChannelName
-					);			
+					);
 					// Uninvitation to requested User:
 					$this->insertChatBotMessage(
 						$this->getPrivateMessageID($toUserID),
 						'/uninvite '.$this->getUserName().' '.$invitationChannelName
 					);
 				}
-			}						
+			}
 		} else {
 			$this->insertChatBotMessage(
 				$this->getPrivateMessageID(),
 				'/error UninviteNotAllowed'
-			);						
+			);
 		}
 	}
 		
@@ -1891,6 +1891,7 @@ class AJAXChat {
 	}
 	
 	function sendXMLMessages() {		
+
 		$httpHeader = new AJAXChatHTTPHeader('UTF-8', 'text/xml');
 
 		// Send HTTP header:

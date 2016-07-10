@@ -848,9 +848,9 @@ var ajaxChat = {
 	},
 
 	startRetryTimer: function() {
-		console.log('startRetryTimer');
 		var retryTimerDelay = (this.inactiveTimeout*6000 - this.timerRate)/4 + this.timerRate;
 		this.clearRetryTimer();
+		console.log('startRetryTimer');
 		this.retryTimer = setTimeout(this.forceNewRequest, retryTimerDelay);
 	},
 
