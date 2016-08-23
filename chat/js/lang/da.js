@@ -9,8 +9,8 @@
 // Ajax Chat language Object:
 var ajaxChatLang = {
 
-	login: '%s Logger dig ind.',
-	logout: '%s Logger dig ud.',
+	login: '%s er logget ind.',
+	logout: '%s er logget ud.',
 	logoutTimeout: '%s Er logget ud (Timeout).',
 	logoutIP: '%s er logget ud (ugyldig IP addresse).',
 	logoutKicked: '%s er logget ud (Kicked).',
@@ -19,7 +19,7 @@ var ajaxChatLang = {
 	privmsg: '(hvisker)',
 	privmsgto: '(hvisker til %s)',
 	invite: '%s inviterede dig til at joine %s.',
-	inviteto: 'Din invitation %s til at joine kanal %s er blevet sendt.',
+	inviteto: 'Din invitation til %s om at joine %s er blevet sendt.',
 	uninvite: '%s Du er nu ikke længere inviteret til %s.',
 	uninviteto: 'Anullere invitation for %s på kanal %s.',	
 	queryOpen: 'Privat kanal åben for %s.',
