@@ -9,7 +9,7 @@
  */
 
 // Suppress errors:
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
 
 // Path to the chat directory:
 define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
