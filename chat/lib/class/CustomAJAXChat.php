@@ -9,37 +9,50 @@
 
 class CustomAJAXChat extends AJAXChat {
 
-	// Returns an associative array containing userName, userID and userRole
-	// Returns null if login is invalid
-	function getValidLoginUserData() {
-		
-		$customUsers = $this->getCustomUsers();
-		
-		if($this->getRequestVar('password')) {
-			// Check if we have a valid registered user:
+    // Returns an associative array containing userName, userID and userRole
+    // Returns null if login is invalid
+    function getValidLoginUserData() {
 
-			$userName = $this->getRequestVar('userName');
-			$userName = $this->convertEncoding($userName, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
+        $customUsers = $this->getCustomUsers();
 
-			$password = $this->getRequestVar('password');
-			$password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
+        if($this->getRequestVar('password')) {
+            // Check if we have a valid registered user:
+            $userName = $this->getRequestVar('userName');
+            $userName = $this->convertEncoding($userName, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
+            $password = $this->getRequestVar('password');
+            $password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
+            foreach($customUsers as $key=>$value) {
+                if(($value['userName'] == $userName) && ($value['password'] == $password)) {
+                    $userData = array();
+                    $userData['userID'] = $key;
+                    $userData['userName'] = $this->trimUserName($value['userName']);
+                    $userData['userRole'] = $value['userRole'];
+                    return $userData;
+                }
+            }
 
-			foreach($customUsers as $key=>$value) {
-				if(($value['userName'] == $userName) && ($value['password'] == $password)) {
+            return null;
+        } else {
+            // Guest users:
+            return $this->getGuestUser();
+        }
+    }
+
+	function isLoggedIn(){
+        if(isset($_COOKIE['sp'])) {
+            $user = new User();
+            if ($user->auth($_COOKIE['sp'])) {
 					$userData = array();
-					$userData['userID'] = $key;
-					$userData['userName'] = $this->trimUserName($value['userName']);
-					$userData['userRole'] = $value['userRole'];
-					return $userData;
-				}
-			}
-			
-			return null;
-		} else {
-			// Guest users:
-			return $this->getGuestUser();
-		}
-	}
+					$userData['userID'] = [$user->getId()];
+					$userData['userName'] = $this->trimUserName($user->getId());
+					$userData['userRole'] = $user->getRole();
+                    $this->login($userData);
+                    return true;
+            } else {
+                   return (bool)$this->getSessionVar('LoggedIn');
+            }
+        }
+    }
 
 	// Store the channels the current user has access to
 	// Make sure channel names don't contain any whitespace

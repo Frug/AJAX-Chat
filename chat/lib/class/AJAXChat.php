@@ -131,7 +131,6 @@ class AJAXChat {
 	function initSession() {
 		// Start the PHP session (if not already started):
 		$this->startSession();
-
 		if($this->isLoggedIn()) {
 			// Logout if the Session IP is not the same when logged in and ipCheck is enabled:
 			if($this->getConfig('ipCheck') && ($this->getSessionIP() === null || $this->getSessionIP() != $_SERVER['REMOTE_ADDR'])) {
@@ -374,7 +373,7 @@ class AJAXChat {
 	function login() {
 		// Retrieve valid login user data (from request variables or session data):
 		$userData = $this->getValidLoginUserData();
-		
+
 		if(!$userData) {
 			$this->addInfoMessage('errorInvalidUser');
 			return false;
@@ -2347,7 +2346,7 @@ class AJAXChat {
 			return $this->_infoMessages;
 		}
 	}
-	
+
 	function addInfoMessage($info, $type='error') {
 		if(!isset($this->_infoMessages)) {
 			$this->_infoMessages = array();

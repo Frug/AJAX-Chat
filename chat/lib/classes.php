@@ -8,6 +8,7 @@
  */
 
 // Include Class libraries:
+require(AJAX_CHAT_PATH.'lib/class/User.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChat.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChatDataBase.php');
 require(AJAX_CHAT_PATH.'lib/class/AJAXChatMySQLDataBase.php');
