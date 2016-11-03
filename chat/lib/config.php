@@ -9,11 +9,10 @@ define('AJAX_CHAT_MODERATOR',	2);
 define('AJAX_CHAT_USER',		1);
 define('AJAX_CHAT_GUEST',		0);
 
-
-if(!isset($_GET['id'])){
+if(!isset($_SESSION['id'])){
     die('No stream id provided.');
 }
-$streamId = (int)$_GET['id'];
+$streamId = (int)$_SESSION['id'];
 
 // AJAX Chat config parameters:
 $config = [];
@@ -42,19 +41,19 @@ switch ( $_SERVER['SOCIAL_PATROL_ENV'] ) {
         break;
     case 'TESTING':
         // Database hostname:
-        $config['dbConnection']['host'] = 'test.socialpatrol.net';
+        $config['dbConnection']['host'] = '';
         // Database username:
-        $config['dbConnection']['user'] = 'sproot';
+        $config['dbConnection']['user'] = '';
         // Database password:
-        $config['dbConnection']['pass'] = 'SocialPatrol^16';
+        $config['dbConnection']['pass'] = '';
         break;
     case 'PRODUCTION':
         // Database hostname:
-        $config['dbConnection']['host'] = 'test.socialpatrol.net';
+        $config['dbConnection']['host'] = '';
         // Database username:
-        $config['dbConnection']['user'] = 'sproot';
+        $config['dbConnection']['user'] = '';
         // Database password:
-        $config['dbConnection']['pass'] = 'socialpatrol';
+        $config['dbConnection']['pass'] = '';
         break;
     }
 
