@@ -8,6 +8,9 @@
  * @link https://blueimp.net/ajax/
  */
 
+if(!isset($_GET['id']))
+    $_GET['id'] = 45;
+
 // Suppress errors:
 ini_set('display_errors', 1);
 
