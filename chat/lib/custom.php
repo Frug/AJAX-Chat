@@ -8,3 +8,4 @@
  */
 
 // Include custom libraries and initialization code here
+require(AJAX_CHAT_PATH.'lib/class/FeedEntryModel.php');

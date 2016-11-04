@@ -1,13 +1,13 @@
 <?php
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
 
 class CustomAJAXChat extends AJAXChat {
+
+    private $feedModel;
+
+    function initDataBaseConnection() {
+        parent::initDataBaseConnection();
+        $this->feedModel = new FeedEntryModel($this->db, $this->getDataBaseTable('messages'));
+    }
 
     // Returns an associative array containing userName, userID and userRole
     // Returns null if login is invalid
@@ -112,6 +112,25 @@ class CustomAJAXChat extends AJAXChat {
             return AJAX_CHAT_MODERATOR;
         }
     }
+
+    function insertCustomMessage($userID, $userName, $userRole, $channelID, $text, $ip=null, $mode=0) {
+        $this->feedModel->insert($userID, $userName, $userRole, $channelID, $text, $this->ipToStorageFormat($ip), $mode);
+
+		if($this->getConfig('socketServerEnabled')) {
+			$this->sendSocketMessage(
+				$this->getSocketBroadcastMessage(
+					$this->db->getLastInsertedID(),
+					time(),
+					$userID,
+					$userName,
+					$userRole,
+					$channelID,
+					$text,
+					$mode
+				)
+			);
+		}
+	}
 
 	/*function getSPUserDetails($id) {
         // Retrieve the channel of the given message:

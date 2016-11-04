@@ -120,7 +120,7 @@ $config['dbConnection']['pass'] = $feedConnDetails['db_passwd'];
 
 // Database table names:
 $config['dbTableNames'] = [];
-$config['dbTableNames']['messages']		= $feedConnDetails['feed_table'].'_chat_messages';
+$config['dbTableNames']['messages']		= $feedConnDetails['feed_table'];
 $config['dbTableNames']['online']		= $feedConnDetails['feed_table'].'_chat_online';
 $config['dbTableNames']['bans']			= $feedConnDetails['feed_table'].'_chat_bans';
 $config['dbTableNames']['invitations']	= $feedConnDetails['feed_table'].'_chat_invitations';
