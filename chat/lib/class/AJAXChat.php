@@ -169,8 +169,9 @@ class AJAXChat {
 			// Set langCode cookie:
 			$this->setLangCodeCookie();
 		}
-		
+
 		$this->initCustomSession();
+
 	}
 
 	function initLogsViewSession() {
@@ -423,7 +424,6 @@ class AJAXChat {
 		$this->setUserRole($userData['userRole']);
 		$this->setLoggedIn(true);	
 		$this->setLoginTimeStamp(time());
-
 		// IP Security check variable:
 		$this->setSessionIP($_SERVER['REMOTE_ADDR']);
 
@@ -1495,7 +1495,6 @@ class AJAXChat {
 		// 0 = normal messages
 		// 1 = channel messages (e.g. login/logout, channel enter/leave, kick)
 		// 2 = messages with online user updates (nick)
-		
 		$ip = $ip ? $ip : $_SERVER['REMOTE_ADDR'];
 		
 		$sql = 'INSERT INTO '.$this->getDataBaseTable('messages').'(

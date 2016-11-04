@@ -86,6 +86,7 @@ switch ( $_SERVER['SOCIAL_PATROL_ENV'] ) {
 $primaryConn = new AJAXChatDataBase($config['dbConnection']);
 $primaryConn->connect($config['dbConnection']);
 $primaryConn->select($config['dbConnection']['name']);
+$config['primaryConn'] = $primaryConn;
 
 // get feed connection details
 $sql = 'SELECT s.id as id, s.name as stream_name, s.feed_table as feed_table, sd.db_addr as db_addr,
@@ -119,7 +120,7 @@ $config['dbConnection']['pass'] = $feedConnDetails['db_passwd'];
 
 // Database table names:
 $config['dbTableNames'] = [];
-$config['dbTableNames']['messages']		= $feedConnDetails['feed_table'];
+$config['dbTableNames']['messages']		= $feedConnDetails['feed_table'].'_chat_messages';
 $config['dbTableNames']['online']		= $feedConnDetails['feed_table'].'_chat_online';
 $config['dbTableNames']['bans']			= $feedConnDetails['feed_table'].'_chat_bans';
 $config['dbTableNames']['invitations']	= $feedConnDetails['feed_table'].'_chat_invitations';
@@ -190,11 +191,11 @@ $config['closingHour'] = 24;
 $config['openingWeekDays'] = array(0,1,2,3,4,5,6);
 
 // Enable/Disable guest logins:
-$config['allowGuestLogins'] = true;
+$config['allowGuestLogins'] = false;
 // Enable/Disable write access for guest users - if disabled, guest users may not write messages:
-$config['allowGuestWrite'] = true;
+$config['allowGuestWrite'] = false;
 // Allow/Disallow guest users to choose their own userName:
-$config['allowGuestUserName'] = true;
+$config['allowGuestUserName'] = false;
 // Guest users should be distinguished by either a prefix or a suffix or both (no whitespace):
 $config['guestUserPrefix'] = '(';
 // Guest users should be distinguished by either a prefix or a suffix or both (no whitespace):

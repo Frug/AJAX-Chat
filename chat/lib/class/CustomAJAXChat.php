@@ -112,4 +112,27 @@ class CustomAJAXChat extends AJAXChat {
             return AJAX_CHAT_MODERATOR;
         }
     }
+
+	/*function getSPUserDetails($id) {
+        // Retrieve the channel of the given message:
+        $sql = 'SELECT
+					CONCAT(first_name, \' \', last_name) as name
+				FROM
+					user
+				WHERE
+					id='.$id.';';
+
+        // Create a new SQL query:
+        $result = $this->_config['primaryConn']->sqlQuery($sql);
+
+        // Stop if an error occurs:
+        if($result->error()) {
+            echo $result->getError();
+            die();
+        }
+
+        $row = $result->fetch();
+        return isset($row['name']) ? $row['name'] : '';
+    }*/
+
 }
