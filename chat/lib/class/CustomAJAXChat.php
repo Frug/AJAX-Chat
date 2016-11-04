@@ -44,13 +44,22 @@ class CustomAJAXChat extends AJAXChat {
             if ($user->auth($_COOKIE['sp'])) {
 					$userData = array();
 					$userData['userID'] = [$user->getId()];
-					$userData['userName'] = $this->trimUserName($user->getId());
-					$userData['userRole'] = $user->getRole();
+					$userData['userName'] = $this->trimUserName($this->getSPUserDetails($user->getId()));
+					$userData['userRole'] = $this->getACUserRole($user->getRole());
                     $this->login($userData);
                     return true;
             } else {
                    return (bool)$this->getSessionVar('LoggedIn');
             }
+        }
+    }
+
+
+    function getACUserRole($role) {
+        if($role == 'ADMIN') {
+            return AJAX_CHAT_ADMIN;
+        }else {
+            return AJAX_CHAT_MODERATOR;
         }
     }
 
@@ -133,5 +142,27 @@ class CustomAJAXChat extends AJAXChat {
 		// ChannelName => ChannelID
 		return array_flip($channels);
 	}
+
+	function getSPUserDetails($id) {
+        // Retrieve the channel of the given message:
+        $sql = 'SELECT
+					CONCAT(first_name, \' \', last_name) as name
+				FROM
+					user
+				WHERE
+					id='.$id.';';
+
+        // Create a new SQL query:
+        $result = $this->_config['primaryConn']->sqlQuery($sql);
+
+        // Stop if an error occurs:
+        if($result->error()) {
+            echo $result->getError();
+            die();
+        }
+
+        $row = $result->fetch();
+        return isset($row['name']) ? $row['name'] : '';
+    }
 
 }
