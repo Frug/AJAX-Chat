@@ -9,13 +9,38 @@ define('AJAX_CHAT_MODERATOR',	2);
 define('AJAX_CHAT_USER',		1);
 define('AJAX_CHAT_GUEST',		0);
 
-if(!isset($_SESSION['id'])){
-    die('No stream id provided.');
-}
-$streamId = (int)$_SESSION['id'];
-
 // AJAX Chat config parameters:
 $config = [];
+
+// Session name used to identify the session cookie:
+$config['sessionName'] = 'ajax_chat';
+// Prefix added to every session key:
+$config['sessionKeyPrefix'] = 'ajaxChat';
+// The lifetime of the language, style and setting cookies in days:
+$config['sessionCookieLifeTime'] = 365;
+// The path of the cookies, '/' allows to read the cookies from all directories:
+$config['sessionCookiePath'] = '/';
+// The domain of the cookies, defaults to the hostname of the server if set to null:
+$config['sessionCookieDomain'] = null;
+// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
+$config['sessionCookieSecure'] = null;
+
+
+if(isset($_GET['id'])) {
+    $streamId = (int)$_GET['id'];
+    setcookie(
+        $config['sessionName'].'_stream_id',
+        $streamId,
+        time()+60*60*24*$config['sessionCookieLifeTime'],
+        $config['sessionCookiePath'],
+        $config['sessionCookieDomain'],
+        $config['sessionCookieSecure']
+    );
+}else if(isset($_COOKIE[$config['sessionName'].'_stream_id'])){
+    $streamId = (int)$_COOKIE[$config['sessionName'].'_stream_id'];
+}else{
+    die('No stream id provided.');
+}
 
 // Database connection values:
 $config['dbConnection'] = [];
@@ -124,19 +149,6 @@ $config['contentEncoding'] = 'UTF-8';
 $config['sourceEncoding'] = 'UTF-8';
 // The content-type of the XHTML page (e.g. "text/html", will be set dependent on browser capabilities if set to null):
 $config['contentType'] = null;
-
-// Session name used to identify the session cookie:
-$config['sessionName'] = 'ajax_chat';
-// Prefix added to every session key:
-$config['sessionKeyPrefix'] = 'ajaxChat';
-// The lifetime of the language, style and setting cookies in days:
-$config['sessionCookieLifeTime'] = 365;
-// The path of the cookies, '/' allows to read the cookies from all directories:
-$config['sessionCookiePath'] = '/';
-// The domain of the cookies, defaults to the hostname of the server if set to null:
-$config['sessionCookieDomain'] = null;
-// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
-$config['sessionCookieSecure'] = null;
 
 // Default channelName used together with the defaultChannelID if no channel with this ID exists:
 $config['defaultChannelName'] = 'Public';

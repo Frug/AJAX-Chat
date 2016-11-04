@@ -1,5 +1,4 @@
 <?php
-session_start();
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -8,10 +7,6 @@ session_start();
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
-
-if(isset($_GET['id']) && !isset($_SESSION['id'])){
-    $_SESSION['id'] = $_GET['id'];
-}
 
 // Suppress errors:
 ini_set('display_errors', 1);
