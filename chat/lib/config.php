@@ -152,7 +152,7 @@ $config['sourceEncoding'] = 'UTF-8';
 $config['contentType'] = null;
 
 // Default channelName used together with the defaultChannelID if no channel with this ID exists:
-$config['defaultChannelName'] = 'Public';
+$config['defaultChannelName'] = 'Moderator';
 // ChannelID used when no channel is given:
 $config['defaultChannelID'] = 0;
 // Defines an array of channelIDs (e.g. array(0, 1)) to limit the number of available channels, will be ignored if set to null:
@@ -174,7 +174,7 @@ $config['privateChannelPrefix'] = '[';
 $config['privateChannelSuffix'] = ']';
 
 // If enabled, users will be logged in automatically as guest users (if allowed), if not authenticated:
-$config['forceAutoLogin'] = false;
+$config['forceAutoLogin'] = true;
 
 // Defines if login/logout and channel enter/leave are displayed:
 $config['showChannelMessages'] = true;

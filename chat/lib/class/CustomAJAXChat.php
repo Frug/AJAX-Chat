@@ -31,14 +31,8 @@ class CustomAJAXChat extends AJAXChat {
 		if($this->_channels === null) {
 			$this->_channels = array();
 
-			$customUsers = $this->getCustomUsers();
-
-			// Get the channels, the user has access to:
-			if($this->getUserRole() == AJAX_CHAT_GUEST) {
-				$validChannels = $customUsers[0]['channels'];
-			} else {
-				$validChannels = $customUsers[$this->getUserID()]['channels'];
-			}
+            // To-do : based on requirement we may need to give more channels
+			$validChannels = array(0);
 
 			// Add the valid channels to the channel list (the defaultChannelID is always valid):
 			foreach($this->getAllChannels() as $key=>$value) {
@@ -131,6 +125,132 @@ class CustomAJAXChat extends AJAXChat {
 			);
 		}
 	}
+
+    function getChatViewMessagesXML() {
+        // Get the last messages in descending order (this optimises the LIMIT usage):
+        $result =  $this->feedModel->select($this->getTeaserMessageCondition(), $this->getMessageFilter(), $this->getConfig('requestMessagesLimit'));
+
+        $messages = '';
+
+        // Add the messages in reverse order so it is ascending again:
+        while($row = $result->fetch()) {
+            $entry_data = json_decode($row['id'],true);
+            $message = $this->getChatViewMessageXML(
+                $row['id'],
+                $row['timeStamp'],
+                $row['userID'],
+                $row['userName'],
+                $entry_data['userRole'],
+                $row['channelID'],
+                $row['text']
+            );
+            $messages = $message.$messages;
+        }
+        $result->free();
+
+        $messages = '<messages>'.$messages.'</messages>';
+        return $messages;
+    }
+
+    function getTeaserViewMessagesXML() {
+        // Get the last messages in descending order (this optimises the LIMIT usage):
+
+        $result =  $this->feedModel->select($this->getMessageCondition(), $this->getMessageFilter(), $this->getConfig('requestMessagesLimit'));
+        $messages = '';
+
+        // Add the messages in reverse order so it is ascending again:
+        while($row = $result->fetch()) {
+            $entry_data = json_decode($row['id'],true);
+            $message = '';
+            $message .= '<message';
+            $message .= ' id="'.$row['id'].'"';
+            $message .= ' dateTime="'.date('r', $row['timeStamp']).'"';
+            $message .= ' userID="'.$row['userID'].'"';
+            $message .= ' userRole="'.$entry_data['userRole'].'"';
+            $message .= ' channelID="'.$row['channelID'].'"';
+            $message .= '>';
+            $message .= '<username><![CDATA['.$this->encodeSpecialChars($row['userName']).']]></username>';
+            $message .= '<text><![CDATA['.$this->encodeSpecialChars($row['text']).']]></text>';
+            $message .= '</message>';
+            $messages = $message.$messages;
+        }
+        $result->free();
+
+        $messages = '<messages>'.$messages.'</messages>';
+        return $messages;
+    }
+
+    function getLogsViewMessagesXML() {
+
+        $result =  $this->feedModel->select($this->getTeaserMessageCondition(), $this->getMessageFilter(), $this->getConfig('requestMessagesLimit'));
+
+        $xml = '<messages>';
+        while($row = $result->fetch()) {
+            $entry_data = json_decode($row['id'],true);
+            $xml .= '<message';
+            $xml .= ' id="'.$row['id'].'"';
+            $xml .= ' dateTime="'.date('r', $row['timeStamp']).'"';
+            $xml .= ' userID="'.$row['userID'].'"';
+            $xml .= ' userRole="'.$entry_data['userRole'].'"';
+            $xml .= ' channelID="'.$row['channelID'].'"';
+            if($this->getUserRole() == AJAX_CHAT_ADMIN || $this->getUserRole() == AJAX_CHAT_MODERATOR) {
+                $xml .= ' ip="'.$this->ipFromStorageFormat($row['ip']).'"';
+            }
+            $xml .= '>';
+            $xml .= '<username><![CDATA['.$this->encodeSpecialChars($row['userName']).']]></username>';
+            $xml .= '<text><![CDATA['.$this->encodeSpecialChars($row['text']).']]></text>';
+            $xml .= '</message>';
+        }
+        $result->free();
+
+        $xml .= '</messages>';
+
+        return $xml;
+    }
+
+    function getMessageCondition() {
+        $condition = 	'dateTime > '.$this->db->makeSafe($this->getRequestVar('lastID')).'
+						AND (
+							parent_id_code = '.$this->db->makeSafe($this->getChannel()).'
+							OR
+							parent_id_code = '.$this->db->makeSafe($this->getPrivateMessageID()).'
+						)
+						AND
+						';
+        if($this->getConfig('requestMessagesPriorChannelEnter') ||
+            ($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($this->getChannel(), $this->getConfig('requestMessagesPriorChannelEnterList')))) {
+            $condition .= 'NOW() < DATE_ADD(dateTime, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
+        } else {
+            $condition .= 'dateTime >= FROM_UNIXTIME(' . $this->getChannelEnterTimeStamp() . ')';
+        }
+        return $condition;
+    }
+
+    function getTeaserMessageCondition() {
+        $channelID = $this->getValidRequestChannelID();
+        $condition = 	'parent_id_code = '.$this->db->makeSafe($channelID).'
+						AND
+						';
+        if($this->getConfig('requestMessagesPriorChannelEnter') ||
+            ($this->getConfig('requestMessagesPriorChannelEnterList') && in_array($channelID, $this->getConfig('requestMessagesPriorChannelEnterList')))) {
+            $condition .= 'NOW() < DATE_ADD(entry_time, interval '.$this->getConfig('requestMessagesTimeDiff').' HOUR)';
+        } else {
+            // Teaser content may not be shown for this channel:
+            $condition .= '0 = 1';
+        }
+        return $condition;
+    }
+
+    function purgeLogs() {
+
+        echo "can't delete messages";
+        exit;
+    }
+
+    function deleteMessage($messageID) {
+        echo "can't delete messages";
+        exit;
+    }
 
 	/*function getSPUserDetails($id) {
         // Retrieve the channel of the given message:
