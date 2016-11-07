@@ -4,6 +4,7 @@ class Auth
 {
     private $id;
     private $idTemp;
+    private $name;
     private $socialNetwork;
     private $roleCode;
     private $lastStream;
@@ -19,6 +20,10 @@ class Auth
     public function getIdTemp()
     {
         return $this->idTemp;
+    }
+    public function getName()
+    {
+        return $this->name;
     }
 
     public function getSocialNetwork()
@@ -91,6 +96,7 @@ class Auth
         if (isset($data['user_id'], $data['role_code'], $data['last_login'], $data['access_token'])) {
             $this->id = $data['user_id'];
             $this->idTemp = $data['user_id'];
+            $this->name = $data['name'];
             $this->roleCode = $data['role_code'];
             $this->socialNetwork = $data['social_network'];
             $this->accessToken = $data['access_token'];

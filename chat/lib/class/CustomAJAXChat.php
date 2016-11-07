@@ -19,7 +19,7 @@ class CustomAJAXChat extends AJAXChat {
             if ($user->authenticate($_COOKIE['sp'], $this->userModel, $this->getConfig('client_id'))) {
 					$userData = [];
 					$userData['userID'] = $user->getId();
-					$userData['userName'] = $this->trimUserName($user->getId());
+					$userData['userName'] = $this->trimUserName($user->getName());
 					$userData['userRole'] = $this->getACUserRole($user->getRole());
 
                     return $userData;
