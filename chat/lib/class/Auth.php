@@ -1,6 +1,6 @@
 <?php
 
-class User
+class Auth
 {
     private $id;
     private $idTemp;
@@ -51,11 +51,14 @@ class User
         return md5($ip.$userAgent.$userId);
     }
 
-    public function auth($authData, $isPortal = false)
+    public function authenticate($authData, $userModel, $client_id, $isPortal = false)
     {
         if ($authData) {
             $userData = json_decode(trim($this->decrypt($authData)), true);
             if ($this->isRoleAccessAllowed($userData['role_code'], $isPortal) && $userData['access_token'] === $this->generateAccessToken($this->getRemoteIPAddress(), $_SERVER['HTTP_USER_AGENT'], $userData['user_id'])) {
+                if($userData['role_code'] != 'ADMIN') {
+                    $this->authorize($userData, $userModel, $client_id);
+                }
                 $this->setProperties($userData);
                 return true;
             }
@@ -72,30 +75,15 @@ class User
         return true;
     }
 
-    public function authorize($user, $socialNetwork, $code, $app)
+    public function authorize($userData, $userModel, $client_id)
     {
-        // data for encryption
-        $userData = [
-            'user_id' => $user['id'],
-            'user_id_temp' => $user['id'],
-            'role_code' => $user['role_code'],
-            'last_login' => $user['last_login'],
-            'social_network' => $socialNetwork,
-            'access_token' =>  $this->generateAccessToken($this->getRemoteIPAddress(), $_SERVER['HTTP_USER_AGENT'], $user['id']),
-        ];
-        $this->setProperties($userData);
-        // set encrypted cookie
-        // expires never
-        // http only
-        $app->setCookie('sp', $this->encrypt(json_encode($userData)), '2 days', null, null, null, true);
-        // TODO: this should be removed in the future
-        $app->setCookie('code', $code, '2 days');
-        $app->setCookie('user_id_temp', $user['id'], '2 days');
-        $app->setCookie('role_code', $user['role_code'], '2 days');
-        $app->setCookie('last_login', $user['last_login'], '2 days');
-        $app->setCookie('initialLogin', 'messageNotSeen', '2 days');
-        $app->deleteCookie('targetURL');
-        $app->deleteCookie('stateCode');
+        $result = $userModel->getTeamUsers($client_id);
+        while($row = $result->fetch()) {
+            if($row['user_id'] == $userData['user_id']){
+                return true;
+            }
+        }
+        self::forbidden('You are not authorised for this client');
     }
 
     private function setProperties($data)
@@ -157,10 +145,7 @@ class User
     {
         http_response_code(403);
         header('Content-Type: application/json');
-        exit(json_encode([
-            'messageType' => 'error',
-            'message' => $message
-        ]));
+        die($message);
     }
 
     public function getRemoteIPAddress() {

@@ -90,7 +90,7 @@ $config['primaryConn'] = $primaryConn;
 
 // get feed connection details
 $sql = 'SELECT s.id as id, s.name as stream_name, s.feed_table as feed_table, sd.db_addr as db_addr,
-            sd.db_name as db_name, sd.db_user as db_user, sd.db_passwd as db_passwd
+            sd.db_name as db_name, sd.db_user as db_user, sd.db_passwd as db_passwd, s.client_id as client_id
         FROM stream as s
         INNER JOIN system_database as sd ON s.feed_db=sd.db_name
         WHERE s.id = '.$primaryConn->makeSafe($streamId).'
@@ -105,6 +105,8 @@ $feedConnDetails = $result->fetch();
 if(!isset($feedConnDetails['db_addr']) || !isset($feedConnDetails['feed_table'])){
     die('Stream inexistent or not configured properly.');
 }
+
+$config['client_id']  = $feedConnDetails['client_id'];
 
 // set feed connection details
 

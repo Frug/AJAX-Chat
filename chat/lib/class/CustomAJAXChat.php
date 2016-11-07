@@ -3,18 +3,20 @@
 class CustomAJAXChat extends AJAXChat {
 
     private $feedModel;
+    private $userModel;
 
     function initDataBaseConnection() {
         parent::initDataBaseConnection();
         $this->feedModel = new FeedEntryModel($this->db, $this->getDataBaseTable('messages'));
+        $this->userModel = new UserModel($this->getConfig('primaryConn'));
     }
 
     // Returns an associative array containing userName, userID and userRole
     // Returns null if login is invalid
     function getValidLoginUserData() {
         if(isset($_COOKIE['sp'])) {
-            $user = new User();
-            if ($user->auth($_COOKIE['sp'])) {
+            $user = new Auth();
+            if ($user->authenticate($_COOKIE['sp'], $this->userModel, $this->getConfig('client_id'))) {
 					$userData = [];
 					$userData['userID'] = $user->getId();
 					$userData['userName'] = $this->trimUserName($user->getId());
