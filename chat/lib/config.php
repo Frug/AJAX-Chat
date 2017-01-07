@@ -1,11 +1,4 @@
 <?php
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
 
 // Define AJAX Chat user roles:
 define('AJAX_CHAT_BANNED',		6);
@@ -17,56 +10,7 @@ define('AJAX_CHAT_USER',		1);
 define('AJAX_CHAT_GUEST',		0);
 
 // AJAX Chat config parameters:
-$config = array();
-
-// Database connection values:
-$config['dbConnection'] = array();
-// Database hostname:
-$config['dbConnection']['host'] = 'localhost';
-// Database username:
-$config['dbConnection']['user'] = 'root';
-// Database password:
-$config['dbConnection']['pass'] = '';
-// Database name:
-$config['dbConnection']['name'] = 'chat';
-// Database type:
-$config['dbConnection']['type'] = null;
-// Database link:
-$config['dbConnection']['link'] = null;
-
-// Database table names:
-$config['dbTableNames'] = array();
-$config['dbTableNames']['online']		= 'ajax_chat_online';
-$config['dbTableNames']['messages']		= 'ajax_chat_messages';
-$config['dbTableNames']['bans']			= 'ajax_chat_bans';
-$config['dbTableNames']['invitations']	= 'ajax_chat_invitations';
-
-// Available languages:
-$config['langAvailable'] = array(
-	'ar','bg','ca','cy','cz','da','de','el','en','es','et','fa','fi','fr','gl','he','hr','hu','in','it','ja','ka','kr','mk','nl','nl-be','no','pl','pt-br','pt-pt','ro','ru','sk','sl','sr','sv','th','tr','uk','zh','zh-tw'
-);
-// Default language:
-$config['langDefault'] = 'en';
-// Language names (each languge code in available languages must have a display name assigned here):
-$config['langNames'] = array(
-	'ar'=>'عربي', 'bg'=>'Български', 'ca'=>'Català', 'cy'=>'Cymraeg', 'cz'=>'Česky', 'da'=>'Dansk', 'de'=>'Deutsch', 'el'=>'Ελληνικα', 'en'=>'English',
-	'es'=>'Español', 'et'=>'Eesti', 'fa'=>'فارسی', 'fi'=>'Suomi', 'fr'=>'Français', 'gl'=>'Galego', 'he'=>'עברית', 'hr' => 'Hrvatski', 'hu' => 'Magyar', 'in'=>'Bahasa Indonesia', 'it'=>'Italiano',
-	'ja'=>'日本語','ka'=>'ქართული','kr'=>'한 글','mk'=>'Македонски', 'nl'=>'Nederlands', 'nl-be'=>'Nederlands (België)', 'no'=>'Norsk', 'pl'=> 'Polski', 'pt-br'=>'Português (Brasil)', 'pt-pt'=>'Português (Portugal)', 
-	'ro'=>'România', 'ru'=>'Русский', 'sk'=> 'Slovenčina', 'sl'=>'Slovensko', 'sr'=>'Srpski', 'sv'=> 'Svenska', 'th'=>'&#x0e20;&#x0e32;&#x0e29;&#x0e32;&#x0e44;&#x0e17;&#x0e22;', 
-	'tr'=>'Türkçe', 'uk'=>'Українська', 'zh'=>'中文 (简体)', 'zh-tw'=>'中文 (繁體)'
-);
-
-// Available styles:
-$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Pine','Plum','prosilver','Core','MyBB','vBulletin','XenForo');
-// Default style:
-$config['styleDefault'] = 'prosilver';
-
-// The encoding used for the XHTML content:
-$config['contentEncoding'] = 'UTF-8';
-// The encoding of the data source, like userNames and channelNames:
-$config['sourceEncoding'] = 'UTF-8';
-// The content-type of the XHTML page (e.g. "text/html", will be set dependent on browser capabilities if set to null):
-$config['contentType'] = null;
+$config = [];
 
 // Session name used to identify the session cookie:
 $config['sessionName'] = 'ajax_chat';
@@ -81,8 +25,136 @@ $config['sessionCookieDomain'] = null;
 // If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
 $config['sessionCookieSecure'] = null;
 
+
+if(isset($_GET['id'])) {
+    $streamId = (int)$_GET['id'];
+    setcookie(
+        $config['sessionName'].'_stream_id',
+        $streamId,
+        time()+60*60*24*$config['sessionCookieLifeTime'],
+        $config['sessionCookiePath'],
+        $config['sessionCookieDomain'],
+        $config['sessionCookieSecure']
+    );
+}else if(isset($_COOKIE[$config['sessionName'].'_stream_id'])){
+    $streamId = (int)$_COOKIE[$config['sessionName'].'_stream_id'];
+}else{
+    die('No stream id provided.');
+}
+
+// Database connection values:
+$config['dbConnection'] = [];
+// Database type:
+$config['dbConnection']['type'] = null;
+// Database link:
+$config['dbConnection']['link'] = null;
+// Database name:
+$config['dbConnection']['name'] = 'social_patrol_primary';
+
+//
+// Environment specific options
+//
+$_SERVER['SOCIAL_PATROL_ENV'] = 'DEVELOPMENT';
+switch ( $_SERVER['SOCIAL_PATROL_ENV'] ) {
+    case 'DEVELOPMENT':
+        // Database hostname:
+        $config['dbConnection']['host'] = 'localhost';
+        // Database username:
+        $config['dbConnection']['user'] = 'root';
+        // Database password:
+        $config['dbConnection']['pass'] = 'socialpatrol';
+        break;
+    case 'TESTING':
+        // Database hostname:
+        $config['dbConnection']['host'] = '';
+        // Database username:
+        $config['dbConnection']['user'] = '';
+        // Database password:
+        $config['dbConnection']['pass'] = '';
+        break;
+    case 'PRODUCTION':
+        // Database hostname:
+        $config['dbConnection']['host'] = '';
+        // Database username:
+        $config['dbConnection']['user'] = '';
+        // Database password:
+        $config['dbConnection']['pass'] = '';
+        break;
+    }
+
+//connect to SP primary DB
+$primaryConn = new AJAXChatDataBase($config['dbConnection']);
+$primaryConn->connect($config['dbConnection']);
+$primaryConn->select($config['dbConnection']['name']);
+$config['primaryConn'] = $primaryConn;
+
+// get feed connection details
+$sql = 'SELECT s.id as id, s.name as stream_name, s.feed_table as feed_table, sd.db_addr as db_addr,
+            sd.db_name as db_name, sd.db_user as db_user, sd.db_passwd as db_passwd, s.client_id as client_id
+        FROM stream as s
+        INNER JOIN system_database as sd ON s.feed_db=sd.db_name
+        WHERE s.id = '.$primaryConn->makeSafe($streamId).'
+        AND s.feed_db IS NOT NULL AND s.feed_table is NOT NULL';
+$result = $primaryConn->sqlQuery($sql);
+// Stop if an error occurs:
+if($result->error()) {
+    echo $result->getError();
+    die();
+}
+$feedConnDetails = $result->fetch();
+if(!isset($feedConnDetails['db_addr']) || !isset($feedConnDetails['feed_table'])){
+    die('Stream inexistent or not configured properly.');
+}
+
+$config['client_id']  = $feedConnDetails['client_id'];
+
+// set feed connection details
+
+// Database name:
+$config['dbConnection']['name'] = $feedConnDetails['db_name'];
+// Database hostname:
+$config['dbConnection']['host'] = $feedConnDetails['db_addr'];
+// Database username:
+$config['dbConnection']['user'] = $feedConnDetails['db_user'];
+// Database password:
+$config['dbConnection']['pass'] = $feedConnDetails['db_passwd'];
+
+
+// Database table names:
+$config['dbTableNames'] = [];
+$config['dbTableNames']['messages']		= $feedConnDetails['feed_table'];
+$config['dbTableNames']['online']		= $feedConnDetails['feed_table'].'_chat_online';
+$config['dbTableNames']['bans']			= $feedConnDetails['feed_table'].'_chat_bans';
+$config['dbTableNames']['invitations']	= $feedConnDetails['feed_table'].'_chat_invitations';
+
+
+// Available languages:
+$config['langAvailable'] = ['ar','bg','ca','cy','cz','da','de','el','en','es','et','fa','fi','fr','gl','he','hr','hu','in','it','ja','ka','kr','mk','nl','nl-be','no','pl','pt-br','pt-pt','ro','ru','sk','sl','sr','sv','th','tr','uk','zh','zh-tw'];
+// Default language:
+$config['langDefault'] = 'en';
+// Language names (each languge code in available languages must have a display name assigned here):
+$config['langNames'] = [
+	'ar'=>'عربي', 'bg'=>'Български', 'ca'=>'Català', 'cy'=>'Cymraeg', 'cz'=>'Česky', 'da'=>'Dansk', 'de'=>'Deutsch', 'el'=>'Ελληνικα', 'en'=>'English',
+	'es'=>'Español', 'et'=>'Eesti', 'fa'=>'فارسی', 'fi'=>'Suomi', 'fr'=>'Français', 'gl'=>'Galego', 'he'=>'עברית', 'hr' => 'Hrvatski', 'hu' => 'Magyar', 'in'=>'Bahasa Indonesia', 'it'=>'Italiano',
+	'ja'=>'日本語','ka'=>'ქართული','kr'=>'한 글','mk'=>'Македонски', 'nl'=>'Nederlands', 'nl-be'=>'Nederlands (België)', 'no'=>'Norsk', 'pl'=> 'Polski', 'pt-br'=>'Português (Brasil)', 'pt-pt'=>'Português (Portugal)',
+	'ro'=>'România', 'ru'=>'Русский', 'sk'=> 'Slovenčina', 'sl'=>'Slovensko', 'sr'=>'Srpski', 'sv'=> 'Svenska', 'th'=>'&#x0e20;&#x0e32;&#x0e29;&#x0e32;&#x0e44;&#x0e17;&#x0e22;',
+	'tr'=>'Türkçe', 'uk'=>'Українська', 'zh'=>'中文 (简体)', 'zh-tw'=>'中文 (繁體)'
+];
+
+// Available styles:
+$config['styleAvailable'] = array('beige','black','grey','Oxygen','Lithium','Sulfur','Cobalt','Mercury','Uranium','Pine','Plum','prosilver','Core','MyBB','vBulletin','XenForo');
+// Default style:
+$config['styleDefault'] = 'prosilver';
+
+// The encoding used for the XHTML content:
+$config['contentEncoding'] = 'UTF-8';
+// The encoding of the data source, like userNames and channelNames:
+$config['sourceEncoding'] = 'UTF-8';
+// The content-type of the XHTML page (e.g. "text/html", will be set dependent on browser capabilities if set to null):
+$config['contentType'] = null;
+
 // Default channelName used together with the defaultChannelID if no channel with this ID exists:
-$config['defaultChannelName'] = 'Public';
+$config['defaultChannelName'] = 'Moderator';
 // ChannelID used when no channel is given:
 $config['defaultChannelID'] = 0;
 // Defines an array of channelIDs (e.g. array(0, 1)) to limit the number of available channels, will be ignored if set to null:
@@ -104,7 +176,7 @@ $config['privateChannelPrefix'] = '[';
 $config['privateChannelSuffix'] = ']';
 
 // If enabled, users will be logged in automatically as guest users (if allowed), if not authenticated:
-$config['forceAutoLogin'] = false;
+$config['forceAutoLogin'] = true;
 
 // Defines if login/logout and channel enter/leave are displayed:
 $config['showChannelMessages'] = true;
@@ -121,11 +193,11 @@ $config['closingHour'] = 24;
 $config['openingWeekDays'] = array(0,1,2,3,4,5,6);
 
 // Enable/Disable guest logins:
-$config['allowGuestLogins'] = true;
+$config['allowGuestLogins'] = false;
 // Enable/Disable write access for guest users - if disabled, guest users may not write messages:
-$config['allowGuestWrite'] = true;
+$config['allowGuestWrite'] = false;
 // Allow/Disallow guest users to choose their own userName:
-$config['allowGuestUserName'] = true;
+$config['allowGuestUserName'] = false;
 // Guest users should be distinguished by either a prefix or a suffix or both (no whitespace):
 $config['guestUserPrefix'] = '(';
 // Guest users should be distinguished by either a prefix or a suffix or both (no whitespace):

@@ -119,7 +119,6 @@ class AJAXChat {
 	function initSession() {
 		// Start the PHP session (if not already started):
 		$this->startSession();
-
 		if($this->isLoggedIn()) {
 			// Logout if the Session IP is not the same when logged in and ipCheck is enabled:
 			if($this->getConfig('ipCheck') && ($this->getSessionIP() === null || $this->getSessionIP() != $_SERVER['REMOTE_ADDR'])) {
@@ -158,8 +157,9 @@ class AJAXChat {
 			// Set langCode cookie:
 			$this->setLangCodeCookie();
 		}
-		
+
 		$this->initCustomSession();
+
 	}
 
 	function initLogsViewSession() {
@@ -362,7 +362,7 @@ class AJAXChat {
 	function login() {
 		// Retrieve valid login user data (from request variables or session data):
 		$userData = $this->getValidLoginUserData();
-		
+
 		if(!$userData) {
 			$this->addInfoMessage('errorInvalidUser');
 			return false;
@@ -412,7 +412,6 @@ class AJAXChat {
 		$this->setUserRole($userData['userRole']);
 		$this->setLoggedIn(true);	
 		$this->setLoginTimeStamp(time());
-
 		// IP Security check variable:
 		$this->setSessionIP($_SERVER['REMOTE_ADDR']);
 
@@ -1484,7 +1483,6 @@ class AJAXChat {
 		// 0 = normal messages
 		// 1 = channel messages (e.g. login/logout, channel enter/leave, kick)
 		// 2 = messages with online user updates (nick)
-		
 		$ip = $ip ? $ip : $_SERVER['REMOTE_ADDR'];
 		
 		$sql = 'INSERT INTO '.$this->getDataBaseTable('messages').'(
@@ -2335,7 +2333,7 @@ class AJAXChat {
 			return $this->_infoMessages;
 		}
 	}
-	
+
 	function addInfoMessage($info, $type='error') {
 		if(!isset($this->_infoMessages)) {
 			$this->_infoMessages = array();
