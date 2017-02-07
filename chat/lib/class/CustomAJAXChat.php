@@ -5,7 +5,7 @@
  * @copyright (c) Sebastian Tschan
  * @license GNU Affero General Public License
  * @link https://blueimp.net/ajax/
- * 
+ *
  * SMF integration:
  * http://www.simplemachines.org/
  */
@@ -14,10 +14,20 @@ class CustomAJAXChat extends AJAXChat {
 
 	// Initialize custom configuration settings
 	function initCustomConfig() {
-		global $db_name,$db_connection;
-		
+		global $db_name,$db_connection,$db_prefix;
+
 		// Use the existing SMF database connection:
 		$this->setConfig('dbConnection', 'link', $db_connection);
+
+		// SMF uses a db prefix so we need to add it to every ajax table.
+		$tables = array (
+			'online' => $db_prefix .'ajax_chat_online',
+			'messages' => $db_prefix .'ajax_chat_messages',
+			'bans' => $db_prefix .'ajax_chat_bans',
+			'invitations' => $db_prefix .'ajax_chat_invitations',
+		);
+
+		$this->setConfig('dbTableNames', false, $tables);
 	}
 
 	// Override the database connection method to make sure the SMF database is selected:
@@ -48,7 +58,7 @@ class CustomAJAXChat extends AJAXChat {
 	// Replace custom template tags:
 	function replaceCustomTemplateTags($tag, $tagContent) {
 		global $context,$boardurl;
-		
+
 		switch($tag) {
 
 			case 'FORUM_LOGIN_URL':
@@ -58,7 +68,7 @@ class CustomAJAXChat extends AJAXChat {
 					return $this->htmlEncode($boardurl).'/index.php?action=login2';
 				}
 
-				
+
 			case 'REDIRECT_URL':
 				if(!$context['user']['is_guest']) {
 					return '';
@@ -73,7 +83,7 @@ class CustomAJAXChat extends AJAXChat {
 					}
 					return $redirectURL;
 				}
-			
+
 			default:
 				return null;
 		}
@@ -83,7 +93,7 @@ class CustomAJAXChat extends AJAXChat {
 	// or the user is authenticated as guest in the chat and the authentication system
 	function revalidateUserID() {
 		global $context;
-		
+
 		if($this->getUserRole() === AJAX_CHAT_GUEST && $context['user']['is_guest'] || ($this->getUserID() === $context['user']['id'])) {
 			return true;
 		}
@@ -94,26 +104,26 @@ class CustomAJAXChat extends AJAXChat {
 	// Returns null if login is invalid
 	function getValidLoginUserData() {
 		global $context,$user_info;
-		
+
 		// Check if we have a valid registered user:
 		if(!$context['user']['is_guest']) {
 			$userData = array();
 			$userData['userID'] = $context['user']['id'];
-			
+
 			$userData['userName'] = $this->trimUserName($context['user']['name']);
-			
+
 			if($context['user']['is_admin'])
 				$userData['userRole'] = AJAX_CHAT_ADMIN;
 			// $context['user']['is_mod'] is always false if no board is loaded.
 			// As a workaround we check the permission 'calendar_post'.
-			// This is only set to true for global moderators by default: 
+			// This is only set to true for global moderators by default:
 			elseif(in_array('calendar_post', $user_info['permissions']))
 				$userData['userRole'] = AJAX_CHAT_MODERATOR;
 			else
 				$userData['userRole'] = AJAX_CHAT_USER;
 
 			return $userData;
-			
+
 		} else {
 			// Guest users:
 			return $this->getGuestUser();
@@ -125,9 +135,9 @@ class CustomAJAXChat extends AJAXChat {
 	function &getChannels() {
 		if($this->_channels === null) {
 			global $db_prefix,$user_info;
-			
+
 			$this->_channels = array();
-			
+
 			$sql = 'SELECT
 						ID_BOARD,
 						name
@@ -138,7 +148,7 @@ class CustomAJAXChat extends AJAXChat {
 
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
-			
+
 			// Stop if an error occurs:
 			if($result->error()) {
 			    echo $result->getError();
@@ -146,7 +156,7 @@ class CustomAJAXChat extends AJAXChat {
 			}
 
 			$defaultChannelFound = false;
-						
+
 			while($row = $result->fetch()) {
 				// Check if we have to limit the available channels:
 				if($this->getConfig('limitChannelList') && !in_array($row['ID_BOARD'], $this->getConfig('limitChannelList'))) {
@@ -154,13 +164,13 @@ class CustomAJAXChat extends AJAXChat {
 				}
 
 				$forumName = $this->trimChannelName($row['name']);
-				
+
 				$this->_channels[$forumName] = $row['ID_BOARD'];
 
 				if(!$defaultChannelFound && $row['ID_BOARD'] == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
-			}		
+			}
 			$result->free();
 
 			if(!$defaultChannelFound) {
@@ -181,9 +191,9 @@ class CustomAJAXChat extends AJAXChat {
 	function &getAllChannels() {
 		if($this->_allChannels === null) {
 			global $db_prefix,$user_info;
-			
+
 			$this->_allChannels = array();
-			
+
 			$sql = 'SELECT
 						ID_BOARD,
 						name
@@ -192,7 +202,7 @@ class CustomAJAXChat extends AJAXChat {
 
 			// Create a new SQL query:
 			$result = $this->db->sqlQuery($sql);
-			
+
 			// Stop if an error occurs:
 			if($result->error()) {
 			    echo $result->getError();
@@ -200,16 +210,16 @@ class CustomAJAXChat extends AJAXChat {
 			}
 
 			$defaultChannelFound = false;
-						
+
 			while($row = $result->fetch()) {
 				$forumName = $this->trimChannelName($row['name']);
-				
+
 				$this->_allChannels[$forumName] = $row['ID_BOARD'];
 
 				if(!$defaultChannelFound && $row['ID_BOARD'] == $this->getConfig('defaultChannelID')) {
 					$defaultChannelFound = true;
 				}
-			}		
+			}
 			$result->free();
 
 			if(!$defaultChannelFound) {
@@ -228,10 +238,10 @@ class CustomAJAXChat extends AJAXChat {
 	// Method to set the style cookie depending on the SMF user style:
 	function setStyle() {
 		global $db_prefix,$settings;
-		
+
 		if(isset($_COOKIE[$this->getConfig('sessionName').'_style']) && in_array($_COOKIE[$this->getConfig('sessionName').'_style'], $this->getConfig('styleAvailable')))
 			return;
-		
+
 		$sql = 'SELECT
 						value
 					FROM
@@ -243,22 +253,22 @@ class CustomAJAXChat extends AJAXChat {
 
 		// Create a new SQL query:
 		$result = $this->db->sqlQuery($sql);
-			
+
 		// Stop if an error occurs:
 		if($result->error()) {
 		    echo $result->getError();
 		    die();
 		}
-		
+
 		$row = $result->fetch();
 		$styleName = $row['value'];
-		
+
 		$result->free();
-		
+
 		if(!in_array($styleName, $this->getConfig('styleAvailable'))) {
 			$styleName = $this->getConfig('styleDefault');
 		}
-		
+
 		setcookie(
 			$this->getConfig('sessionName').'_style',
 			$styleName,
@@ -270,4 +280,7 @@ class CustomAJAXChat extends AJAXChat {
 		return;
 	}
 
+	function getDataBaseTable($table) {
+		return $this->getConfig('dbTableNames',$table);
+	}
 }
