@@ -1,0 +1,21 @@
+{
+    "name": "frug/ajax-chat",
+    "description": "This is the standalone version of Blueimp's AJAX Chat, a fully customizable web chat implemented in JavaScript, PHP and MySQL.",
+    "type": "project",
+    "license": "Modified MIT License (MIT)",
+    "autoload": {
+        "psr-4": {
+            "AjaxChat\\": "src/AjaxChat",
+            "AjaxChat\\Database\\": "src/Database"
+        }
+    },
+    "authors": [
+        {
+            "name": "Philip Nicolcev",
+            "email": "frugen@gmail.com"
+        }
+    ],
+    "require": {
+        "symfony/polyfill-mbstring": "^1.20"
+    }
+}

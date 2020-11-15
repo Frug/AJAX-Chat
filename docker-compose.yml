@@ -5,8 +5,10 @@ services:
         ports:
             - "80:8080"
         volumes:
-            - ./chat:/var/www/html
-    db:
+            - ./public:/var/www/html
+            - ./src:/var/www/src
+            - ./vendor:/var/www/vendor
+    db-hostname:
         image: "yobasystems/alpine-mariadb:10.4.15"
         ports:
             - "3306:3306"
