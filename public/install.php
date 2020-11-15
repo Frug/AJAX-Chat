@@ -11,25 +11,25 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Remember to set up the config file to point to your database:
-file_exists('lib/config.php') or die('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
-
 // Path to the chat directory:
-define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
-
-// Include custom libraries and initialization code:
-require(AJAX_CHAT_PATH.'lib/custom.php');
+define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/../');
 
 // Include Class libraries:
-require(AJAX_CHAT_PATH.'lib/classes.php');
+require(AJAX_CHAT_PATH.'vendor/autoload.php');
 
-class CustomAJAXChatInstaller extends CustomAJAXChatInterface {
+// Remember to set up the config file to point to your database:
+file_exists(AJAX_CHAT_PATH.'src/config.php') or die('Failed to load lib/config.php. Did you remember to create a config file based on config.php.example?');
+
+// Include custom libraries and initialization code:
+require(AJAX_CHAT_PATH.'src/custom.php');
+
+class CustomAJAXChatInstaller extends \AjaxChat\Standalone\CustomAJAXChatInterface {
 
 	function &getDataBaseTableCreationQueries() {
 		$queries = array();
 		$index = 0;
 		// Retrieve the queries from the SQL file:
-		$lines = file(AJAX_CHAT_PATH.'chat.sql');
+		$lines = file(AJAX_CHAT_PATH.'src/migrations/chat.sql');
 		// Stop if an error occurs:
 		if(!$lines) {
 			die('Failed to load queries from file (chat.sql).');
