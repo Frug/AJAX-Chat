@@ -9,7 +9,8 @@
  */
 
 // Suppress errors:
-ini_set('display_errors', 0);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 // Path to the chat directory:
 define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
@@ -18,7 +19,7 @@ define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
 require(AJAX_CHAT_PATH.'lib/custom.php');
 
 // Include Class libraries:
-require(AJAX_CHAT_PATH.'lib/classes.php');
+require(AJAX_CHAT_PATH.'/vendor/autoload.php');
 
 // Initialize the chat:
 $ajaxChat = new CustomAJAXChat();

@@ -1,4 +1,6 @@
 <?php
+namespace AjaxChat\Database;
+
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -8,7 +10,7 @@
  */
 
 // Class to perform SQL (MySQLi) queries:
-class AJAXChatMySQLiQuery {
+class MySQLiQuery {
 
 	protected
 		$_connectionID,

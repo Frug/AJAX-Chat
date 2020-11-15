@@ -7,6 +7,8 @@
  * @link https://blueimp.net/ajax/
  */
 
+use AjaxChat\Database\Database;
+
 // Ajax Chat backend logic:
 class AJAXChat {
 
@@ -90,7 +92,7 @@ class AJAXChat {
 	
 	function initDataBaseConnection() {
 		// Create a new database object:
-		$this->db = new AJAXChatDataBase(
+		$this->db = new Database(
 			$this->_config['dbConnection']
 		);
 		// Use a new database connection if no existing is given:

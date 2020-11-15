@@ -1,0 +1,19 @@
+version: "3.3"
+services:
+    web:
+        image: "trafex/alpine-nginx-php7:1.8.0"
+        ports:
+            - "80:8080"
+        volumes:
+            - ./chat:/var/www/html
+    db:
+        image: "yobasystems/alpine-mariadb:10.4.15"
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_DATABASE=chat
+            - MYSQL_USER=chat
+            - MYSQL_PASSWORD=chat
+            - MYSQL_ROOT_PASSWORD=root
+            - MYSQL_CHARSET=utf8
+
