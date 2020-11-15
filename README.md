@@ -16,10 +16,11 @@ Requirements
 
 | *Server-Side*          | *Client-Side*                | 
 | ---------------------- | ---------------------------- |
-| PHP >= 5               | Enabled JavaScript           |
+| PHP >= 7*              | Enabled JavaScript           |
 | MySQL >= 4             | Enabled Cookies              |
 | Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
 
+* For PHP 5 support use a release older than `0.9`
 
 Features
 --------
