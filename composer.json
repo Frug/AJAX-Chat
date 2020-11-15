@@ -5,8 +5,7 @@
     "license": "Modified MIT License (MIT)",
     "autoload": {
         "psr-4": {
-            "AjaxChat\\": "src/AjaxChat",
-            "AjaxChat\\Database\\": "src/Database"
+            "AjaxChat\\": "src/AjaxChat"
         }
     },
     "authors": [

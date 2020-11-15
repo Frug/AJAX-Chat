@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'f302add50fb11cf7b541ac939c2e26ec47010818',
+    'reference' => '1bfeb402509ed6269215177a5cdf520169ecce10',
     'name' => 'frug/ajax-chat',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'f302add50fb11cf7b541ac939c2e26ec47010818',
+      'reference' => '1bfeb402509ed6269215177a5cdf520169ecce10',
     ),
     'symfony/polyfill-mbstring' => 
     array (

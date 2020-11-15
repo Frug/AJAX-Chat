@@ -17,7 +17,6 @@ class ComposerStaticInitc1bd0c76912989a4bfb2bf3c98845028
         ),
         'A' => 
         array (
-            'AjaxChat\\Database\\' => 18,
             'AjaxChat\\' => 9,
         ),
     );
@@ -26,10 +25,6 @@ class ComposerStaticInitc1bd0c76912989a4bfb2bf3c98845028
         'Symfony\\Polyfill\\Mbstring\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/polyfill-mbstring',
-        ),
-        'AjaxChat\\Database\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/src/Database',
         ),
         'AjaxChat\\' => 
         array (

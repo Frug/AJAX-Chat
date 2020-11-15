@@ -7,6 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'AjaxChat\\Database\\' => array($baseDir . '/src/Database'),
     'AjaxChat\\' => array($baseDir . '/src/AjaxChat'),
 );
