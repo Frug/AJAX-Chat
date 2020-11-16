@@ -1,5 +1,5 @@
 <?php
-namespace AjaxChat\PhpBB3;
+namespace AjaxChat\Integrations\PhpBB3;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -7,6 +7,8 @@ namespace AjaxChat\PhpBB3;
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
+use AjaxChat\CustomAJAXChat;
+use AjaxChat\Template;
 
 class CustomAJAXChatShoutBox extends CustomAJAXChat {
 
@@ -16,7 +18,7 @@ class CustomAJAXChatShoutBox extends CustomAJAXChat {
 	}
 
 	function getShoutBoxContent() {
-		$template = new AJAXChatTemplate($this, AJAX_CHAT_PATH.'lib/template/shoutbox.html');
+		$template = new AJAXChatTemplate($this, AJAX_CHAT_PATH.'src/template/shoutbox.html');
 		
 		// Return parsed template content:
 		return $template->getParsedContent();

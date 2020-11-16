@@ -16,7 +16,7 @@ class CustomAJAXChatShoutBox extends \AjaxChat\CustomAJAXChat {
 	}
 
 	function getShoutBoxContent() {
-		$template = new AJAXChatTemplate($this, AJAX_CHAT_PATH.'lib/template/shoutbox.html');
+		$template = new AJAXChatTemplate($this, AJAX_CHAT_PATH.'src/template/shoutbox.html');
 		
 		// Return parsed template content:
 		return $template->getParsedContent();

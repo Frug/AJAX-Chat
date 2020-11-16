@@ -1,5 +1,5 @@
 <?php
-namespace AjaxChat\PhpBB3;
+namespace AjaxChat\Integrations\PhpBB3;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -10,6 +10,8 @@ namespace AjaxChat\PhpBB3;
  * phpBB3 integration:
  * http://www.phpbb.com/
  */
+
+use AjaxChat\AJAXChat;
 
 class CustomAJAXChat extends AJAXChat {
 

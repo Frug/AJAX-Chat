@@ -1,5 +1,5 @@
 <?php
-namespace AjaxChat\PhpBB3;
+namespace AjaxChat\Integrations\PhpBB3;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -7,6 +7,7 @@ namespace AjaxChat\PhpBB3;
  * @license Modified MIT License
  * @link https://blueimp.net/ajax/
  */
+use AjaxChat\CustomAJAXChat;
 
 class CustomAJAXChatInterface extends CustomAJAXChat {
 
