@@ -1,7 +1,5 @@
-AJAX Chat Standalone
+Blueimp's AJAX Chat
 ====================
-
-This is the standalone version of Blueimp's AJAX Chat. If you are looking for a version to integrate with your forum, select a different branch.
 
 AJAX stands for "Asynchronous JavaScript and XML".
 The AJAX Chat clients (the user browsers) use JavaScript to query the web server for updates.
@@ -12,15 +10,13 @@ By using JavaScript the chat page can be updated without having to reload the wh
 Requirements
 ------------
 
-
-
 | *Server-Side*          | *Client-Side*                | 
 | ---------------------- | ---------------------------- |
 | PHP >= 7*              | Enabled JavaScript           |
 | MySQL >= 4             | Enabled Cookies              |
 | Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
 
-* For PHP 5 support use a release older than `0.9`
+\* For PHP 5 support use a release older than `0.9`
 
 Features
 --------
@@ -63,9 +59,6 @@ Features
 - Separation of layout and code
 - Well commented Source Code
 - Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
-- Tested successfully with Google Chrome, Firefox, Opera and Safari - built to work with all modern browsers :)
-
-
 
 Help
 ----
