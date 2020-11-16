@@ -1,5 +1,5 @@
 <?php
-namespace AjaxChat\Standalone;
+namespace AjaxChat\Integrations\Standalone;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan

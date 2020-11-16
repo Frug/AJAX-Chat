@@ -21,4 +21,4 @@ require(AJAX_CHAT_PATH.'src/custom.php');
 require(AJAX_CHAT_PATH.'vendor/autoload.php');
 
 // Initialize the chat:
-$ajaxChat = new \AjaxChat\Standalone\CustomAJAXChat();
+$ajaxChat = new \AjaxChat\Integrations\Standalone\CustomAJAXChat();

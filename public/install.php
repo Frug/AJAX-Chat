@@ -23,7 +23,7 @@ file_exists(AJAX_CHAT_PATH.'src/config.php') or die('Failed to load lib/config.p
 // Include custom libraries and initialization code:
 require(AJAX_CHAT_PATH.'src/custom.php');
 
-class CustomAJAXChatInstaller extends \AjaxChat\Standalone\CustomAJAXChatInterface {
+class CustomAJAXChatInstaller extends \AjaxChat\Integrations\Standalone\CustomAJAXChatInterface {
 
 	function &getDataBaseTableCreationQueries() {
 		$queries = array();

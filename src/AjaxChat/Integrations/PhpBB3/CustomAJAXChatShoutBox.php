@@ -1,5 +1,5 @@
 <?php
-namespace AjaxChat\Standalone;
+namespace AjaxChat\PhpBB3;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -8,7 +8,7 @@ namespace AjaxChat\Standalone;
  * @link https://blueimp.net/ajax/
  */
 
-class CustomAJAXChatShoutBox extends \AjaxChat\CustomAJAXChat {
+class CustomAJAXChatShoutBox extends CustomAJAXChat {
 
 	function initialize() {
 		// Initialize configuration settings:
@@ -20,6 +20,6 @@ class CustomAJAXChatShoutBox extends \AjaxChat\CustomAJAXChat {
 		
 		// Return parsed template content:
 		return $template->getParsedContent();
-	}
+	}	
 
 }
