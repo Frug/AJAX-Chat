@@ -9,7 +9,7 @@ services:
             - ./src:/var/www/src
             - ./vendor:/var/www/vendor
     db-hostname:
-        image: "yobasystems/alpine-mariadb:10.4.15"
+        image: "yobasystems/alpine-mariadb:10.6"
         ports:
             - "3306:3306"
         environment:
