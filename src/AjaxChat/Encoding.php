@@ -11,15 +11,7 @@ namespace AjaxChat;
 // Class to provide static encoding methods
 class Encoding {
 
-	// Helper function to store special chars as we cannot use static class members in PHP4:
-	public static function getSpecialChars() {
-		static $specialChars;
-		if(!$specialChars) {
-			// As &apos; is not supported by IE, we use &#39; as replacement for "'":
-			$specialChars = array('&'=>'&amp;', '<'=>'&lt;', '>'=>'&gt;', "'"=>'&#39;', '"'=>'&quot;');	
-		}
-		return $specialChars;
-	}
+	public static $specialChars = ['&'=>'&amp;', '<'=>'&lt;', '>'=>'&gt;', "'"=>'&#39;', '"'=>'&quot;'];	 
 
 	// Helper function to store Regular expression for NO-WS-CTL as we cannot use static class members in PHP4:
 	public static function getRegExp_NO_WS_CTL() {
@@ -52,7 +44,6 @@ class Encoding {
 			case 'UTF-8':
 				// Encode only special chars (&, <, >, ', ") as entities:
 				return Encoding::encodeSpecialChars($str);
-				break;
 			case 'ISO-8859-1':
 			case 'ISO-8859-15':
 				// Encode special chars and all extended characters above ISO-8859-1 charset as entities, then convert to content charset:
@@ -64,7 +55,6 @@ class Encoding {
 					0x22, 0x22, 0, 0xFFFF,	// "
 					0x100, 0x2FFFF, 0, 0xFFFF	// above ISO-8859-1
 				)), 'UTF-8', $contentCharset);
-				break;
 			default:
 				// Encode special chars and all characters above ASCII charset as entities, then convert to content charset:
 				return Encoding::convertEncoding(Encoding::encodeEntities($str, 'UTF-8', array(
@@ -79,11 +69,11 @@ class Encoding {
 	}
 
 	public static function encodeSpecialChars($str) {
-		return strtr($str, Encoding::getSpecialChars());
+		return strtr($str, self::$specialChars);
 	}
 
 	public static function decodeSpecialChars($str) {
-		return strtr($str, array_flip(Encoding::getSpecialChars()));
+		return strtr($str, array_flip(self::$specialChars));
 	}
 
 	public static function encodeEntities($str, $encoding='UTF-8', $convmap=null) {
