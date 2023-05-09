@@ -1,4 +1,5 @@
 <?php
+use AjaxChat\Loader;
 /*
  * @package AJAX_Chat
  * @author Sebastian Tschan
@@ -82,7 +83,8 @@ class CustomAJAXChatInstaller extends \AjaxChat\Integrations\Standalone\CustomAJ
 }
 
 // Initialize the chat installer:
-$ajaxChatInstaller = new CustomAJAXChatInstaller(AJAX_CHAT_PATH.'src/config.php');
+$config = Loader::readConfigFile(AJAX_CHAT_PATH.'src/config.php');
+$ajaxChatInstaller = new CustomAJAXChatInstaller($config);
 
 // Create the database tables:
 $ajaxChatInstaller->createDataBaseTables();
