@@ -12,14 +12,10 @@ class Loader {
             return new \AjaxChat\Integrations\Standalone\CustomAJAXChat($config);
         }
 
-        switch (strtolower($config['integration'])) {
-        case 'phpbb3':
-            return new \AjaxChat\Integrations\PhpBB3\CustomAJAXChat($config);
-        case 'standalone':
-        default:
-            return new \AjaxChat\Integrations\Standalone\CustomAJAXChat($config);
-        }
+        $integrationFolder = ucwords($config['integration']);
+        $fullClassName = "\\AjaxChat\\Integrations\\{$integrationFolder}\\CustomAJAXChat";
 
+        return new $fullClassName($config);
     }
 
     /**
