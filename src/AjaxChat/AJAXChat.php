@@ -3291,7 +3291,7 @@ class AJAXChat {
 	// Override:
 	// Store the channels the current user has access to
 	// Make sure channel names don't contain any whitespace
-	function &getChannels() {
+	public function getChannels() {
 		if($this->_channels === null) {
 			$this->_channels = $this->getAllChannels();
 		}
@@ -3301,7 +3301,7 @@ class AJAXChat {
 	// Override:
 	// Store all existing channels
 	// Make sure channel names don't contain any whitespace
-	function &getAllChannels() {
+	public function getAllChannels() {
 		if($this->_allChannels === null) {
 			$this->_allChannels = array();
 			

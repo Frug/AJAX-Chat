@@ -37,7 +37,7 @@ class CustomAJAXChat extends \AjaxChat\AJAXChat {
 
 	// Store the channels the current user has access to
 	// Make sure channel names don't contain any whitespace
-	function getChannels() {
+	public function getChannels() {
 		if($this->_channels !== null) {
 			return $this->_channels;
 		}
