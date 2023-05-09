@@ -1,12 +1,5 @@
 <?php
 namespace AjaxChat\Integrations\Standalone;
-/*
- * @package AJAX_Chat
- * @author Sebastian Tschan
- * @copyright (c) Sebastian Tschan
- * @license Modified MIT License
- * @link https://blueimp.net/ajax/
- */
 
 class CustomAJAXChat extends \AjaxChat\AJAXChat {
 
@@ -44,40 +37,43 @@ class CustomAJAXChat extends \AjaxChat\AJAXChat {
 
 	// Store the channels the current user has access to
 	// Make sure channel names don't contain any whitespace
-	function &getChannels() {
-		if($this->_channels === null) {
-			$this->_channels = array();
+	function getChannels() {
+		if($this->_channels !== null) {
+			return $this->_channels;
+		}
+
+		$this->_channels = [];
 			
-			$customUsers = $this->getCustomUsers();
-			
-			// Get the channels, the user has access to:
-			if($this->getUserRole() == AJAX_CHAT_GUEST) {
-				$validChannels = $customUsers[0]['channels'];
-			} else {
-				$validChannels = $customUsers[$this->getUserID()]['channels'];
+		$customUsers = $this->getCustomUsers();
+		
+		// Get the channels, the user has access to:
+		if($this->getUserRole() == AJAX_CHAT_GUEST) {
+			$validChannels = $customUsers[0]['channels'];
+		} else {
+			$validChannels = $customUsers[$this->getUserID()]['channels'];
+		}
+
+		// Add the valid channels to the channel list (the defaultChannelID is always valid):
+		foreach($this->getAllChannels() as $key=>$value) {
+			if($value == $this->getConfig('defaultChannelID')) {
+				$this->_channels[$key] = $value;
+				continue;
 			}
-			
-			// Add the valid channels to the channel list (the defaultChannelID is always valid):
-			foreach($this->getAllChannels() as $key=>$value) {
-				if ($value == $this->getConfig('defaultChannelID')) {
-					$this->_channels[$key] = $value;
-					continue;
-				}
-				// Check if we have to limit the available channels:
-				if($this->getConfig('limitChannelList') && !in_array($value, $this->getConfig('limitChannelList'))) {
-					continue;
-				}
-				if(in_array($value, $validChannels)) {
-					$this->_channels[$key] = $value;
-				}
+			// Check if we have to limit the available channels:
+			if($this->getConfig('limitChannelList') && !in_array($value, $this->getConfig('limitChannelList'))) {
+				continue;
+			}
+			if(in_array($value, $validChannels)) {
+				$this->_channels[$key] = $value;
 			}
 		}
+		
 		return $this->_channels;
 	}
 
 	// Store all existing channels
 	// Make sure channel names don't contain any whitespace
-	function &getAllChannels() {
+	function getAllChannels() {
 		if($this->_allChannels === null) {
 			// Get all existing channels:
 			$customChannels = $this->getCustomChannels();
@@ -106,17 +102,17 @@ class CustomAJAXChat extends \AjaxChat\AJAXChat {
 		return $this->_allChannels;
 	}
 
-	function &getCustomUsers() {
+	public function getCustomUsers() {
 		// List containing the registered chat users:
-		$users = null;
+		$users = [];
 		require(AJAX_CHAT_PATH.'src/data/users.php');
 		return $users;
 	}
 	
-	function getCustomChannels() {
+	public function getCustomChannels() {
 		// List containing the custom channels:
-		$channels = null;
-		require(AJAX_CHAT_PATH.'src/data/channels.php');
+		$channel_data = file_get_contents(AJAX_CHAT_PATH.'src/data/channels.json');
+		$channels = (array)json_decode($channel_data);	
 		// Channel array structure should be:
 		// ChannelName => ChannelID
 		return array_flip($channels);

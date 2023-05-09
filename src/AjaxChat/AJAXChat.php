@@ -34,7 +34,7 @@ class AJAXChat {
 		$this->initialize($config);
 	}
 
-	function initialize(array $config) {
+	public function initialize(array $config) {
 		// Initialize configuration settings:
 		$this->_config = $config;
 
@@ -53,9 +53,9 @@ class AJAXChat {
 		// Handle the browser request and send the response content:
 		$this->handleRequest();
 	}
-	
+
 	function initRequestVars() {
-		$this->_requestVars = array();
+		$this->_requestVars = [];
 		$this->_requestVars['ajax']			= isset($_REQUEST['ajax'])			? true							: false;
 		$this->_requestVars['userID']		= isset($_REQUEST['userID'])		? (int)$_REQUEST['userID']		: null;
 		$this->_requestVars['userName']		= isset($_REQUEST['userName'])		? $_REQUEST['userName']			: null;

@@ -23,7 +23,16 @@ file_exists(AJAX_CHAT_PATH.'src/config.php') or die('Failed to load lib/config.p
 // Include custom libraries and initialization code:
 require(AJAX_CHAT_PATH.'src/custom.php');
 
-class CustomAJAXChatInstaller extends \AjaxChat\Integrations\Standalone\CustomAJAXChatInterface {
+class CustomAJAXChatInstaller extends \AjaxChat\Integrations\Standalone\CustomAJAXChat {
+
+	// Override the default initialize method to skip user session handling. We only want
+	// a valid DB connection.
+	public function initialize(array $config)
+	{
+		$this->_config = $config;
+
+		$this->initDataBaseConnection();
+	}
 
 	function &getDataBaseTableCreationQueries() {
 		$queries = array();
@@ -73,7 +82,7 @@ class CustomAJAXChatInstaller extends \AjaxChat\Integrations\Standalone\CustomAJ
 }
 
 // Initialize the chat installer:
-$ajaxChatInstaller = new CustomAJAXChatInstaller();
+$ajaxChatInstaller = new CustomAJAXChatInstaller(AJAX_CHAT_PATH.'src/config.php');
 
 // Create the database tables:
 $ajaxChatInstaller->createDataBaseTables();
