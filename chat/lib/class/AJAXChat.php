@@ -51,7 +51,7 @@ class AJAXChat {
 	function initConfig() {
 		$config = null;
 		if (!include(AJAX_CHAT_PATH.'lib/config.php')) {
-			echo('<strong>Error:</strong> Could not find a config.php file in "'.AJAX_CHAT_PATH.'"lib/". Check to make sure the file exists.');
+			echo('<strong>Error:</strong> Could not find a config.php file in "'.AJAX_CHAT_PATH.'lib/". Check to make sure the file exists.');
 			die();
 		}
 		$this->_config = &$config;
