@@ -77,9 +77,9 @@ $config['sessionCookieLifeTime'] = 365;
 // The path of the cookies, '/' allows to read the cookies from all directories:
 $config['sessionCookiePath'] = '/';
 // The domain of the cookies, defaults to the hostname of the server if set to null:
-$config['sessionCookieDomain'] = null;
+$config['sessionCookieDomain'] = "";
 // If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
-$config['sessionCookieSecure'] = null;
+$config['sessionCookieSecure'] = false;
 
 // Default channelName used together with the defaultChannelID if no channel with this ID exists:
 $config['defaultChannelName'] = 'Public';
