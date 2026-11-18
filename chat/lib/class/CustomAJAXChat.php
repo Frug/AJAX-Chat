@@ -25,7 +25,7 @@ class CustomAJAXChat extends AJAXChat {
 			$password = $this->convertEncoding($password, $this->getConfig('contentEncoding'), $this->getConfig('sourceEncoding'));
 
 			foreach($customUsers as $key=>$value) {
-				if(($value['userName'] == $userName) && ($value['password'] == $password)) {
+				if($key !== 0 && ($value['userName'] === $userName) && $this->verifyPassword($password, $value['password'])) {
 					$userData = array();
 					$userData['userID'] = $key;
 					$userData['userName'] = $this->trimUserName($value['userName']);
@@ -39,6 +39,20 @@ class CustomAJAXChat extends AJAXChat {
 			// Guest users:
 			return $this->getGuestUser();
 		}
+	}
+
+	// Passwords in lib/data/users.php can be stored as hashes created with password_hash()
+	// (e.g. php -r "echo password_hash('secret', PASSWORD_DEFAULT);"), plain text still works for old setups:
+	function verifyPassword($password, $storedPassword) {
+		if(!is_string($password) || !is_string($storedPassword) || $storedPassword === '') {
+			return false;
+		}
+		$info = password_get_info($storedPassword);
+		if(!empty($info['algo'])) {
+			return password_verify($password, $storedPassword);
+		}
+		// Timing-safe comparison for plain text passwords:
+		return hash_equals($storedPassword, $password);
 	}
 
 	// Store the channels the current user has access to

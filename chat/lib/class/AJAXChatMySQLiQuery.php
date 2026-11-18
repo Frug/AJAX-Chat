@@ -48,7 +48,7 @@ class AJAXChatMySQLiQuery {
 
 	// Returns the content:
 	function fetch() {
-		if($this->error()) {
+		if($this->error() || !($this->_result instanceof mysqli_result)) {
 			return null;
 		} else {
 			return $this->_result->fetch_assoc();
@@ -57,7 +57,7 @@ class AJAXChatMySQLiQuery {
 
 	// Returns the number of rows (SELECT or SHOW):
 	function numRows() {
-		if($this->error()) {
+		if($this->error() || !($this->_result instanceof mysqli_result)) {
 			return null;
 		} else {
 			return $this->_result->num_rows;
@@ -75,7 +75,10 @@ class AJAXChatMySQLiQuery {
 
 	// Frees the memory:
 	function free() {
-		$this->_result->free();
+		// Only SELECT, SHOW, DESCRIBE or EXPLAIN queries return a result object:
+		if($this->_result instanceof mysqli_result) {
+			$this->_result->free();
+		}
 	}
 	
 }

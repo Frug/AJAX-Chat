@@ -29,8 +29,12 @@ $config['dbConnection']['user'] = 'root';
 $config['dbConnection']['pass'] = '';
 // Database name:
 $config['dbConnection']['name'] = 'chat';
-// Database type:
-$config['dbConnection']['type'] = null;
+// Database port (null uses the default port 3306):
+$config['dbConnection']['port'] = null;
+// Database connection charset (utf8mb4 is required for emoji):
+$config['dbConnection']['charset'] = 'utf8mb4';
+// Database type (only 'mysqli' is supported, the old mysql extension does not exist in PHP 7+):
+$config['dbConnection']['type'] = 'mysqli';
 // Database link:
 $config['dbConnection']['link'] = null;
 
@@ -78,8 +82,12 @@ $config['sessionCookieLifeTime'] = 365;
 $config['sessionCookiePath'] = '/';
 // The domain of the cookies, defaults to the hostname of the server if set to null:
 $config['sessionCookieDomain'] = "";
-// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections:
-$config['sessionCookieSecure'] = false;
+// If enabled, cookies must be sent over secure (SSL/TLS encrypted) connections - null detects HTTPS automatically:
+$config['sessionCookieSecure'] = null;
+// SameSite attribute of the cookies ('Lax', 'Strict' or 'None' - 'None' requires HTTPS):
+$config['sessionCookieSameSite'] = 'Lax';
+// Clickjacking protection: 'SAMEORIGIN' allows iframes on the same site only, 'DENY' forbids all frames, null sends no header:
+$config['frameOptions'] = 'SAMEORIGIN';
 
 // Default channelName used together with the defaultChannelID if no channel with this ID exists:
 $config['defaultChannelName'] = 'Public';
@@ -197,14 +205,3 @@ $config['logsPurgeTimeDiff'] = 365;
 $config['logsUserAccess'] = false;
 // Defines a list of channels (e.g. array(0, 1)) to limit the logs access for registered users, includes all channels the user has access to if set to null:
 $config['logsUserAccessChannelList'] = null;
-
-// Defines if the socket server is enabled:
-$config['socketServerEnabled'] = false;
-// Defines the hostname of the socket server used to connect from client side (the server hostname is used if set to null):
-$config['socketServerHost'] = null;
-// Defines the IP of the socket server used to connect from server side to broadcast update messages:
-$config['socketServerIP'] = '127.0.0.1';
-// Defines the port of the socket server:
-$config['socketServerPort'] = 1935;
-// This ID can be used to distinguish between different chat installations using the same socket server:
-$config['socketServerChatID'] = 0;

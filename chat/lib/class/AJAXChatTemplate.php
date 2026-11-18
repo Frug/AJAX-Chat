@@ -97,7 +97,10 @@ class AJAXChatTemplate {
 			case 'COOKIE_DOMAIN':
 				return $this->ajaxChat->getConfig('sessionCookieDomain');
 			case 'COOKIE_SECURE':
-				return $this->ajaxChat->getConfig('sessionCookieSecure');
+				return $this->ajaxChat->isCookieSecure() ? 1 : '';
+
+			case 'COOKIE_SAME_SITE':
+				return $this->ajaxChat->getCookieSameSite();
 				
 			case 'CHAT_BOT_NAME':
 				return rawurlencode($this->ajaxChat->getConfig('chatBotName'));
@@ -123,26 +126,6 @@ class AJAXChatTemplate {
 					return 1;
 				else
 					return 0;
-
-			case 'SOCKET_SERVER_ENABLED':
-				if($this->ajaxChat->getConfig('socketServerEnabled'))
-					return 1;
-				else
-					return 0;
-
-			case 'SOCKET_SERVER_HOST':
-				if($this->ajaxChat->getConfig('socketServerHost')) {
-					$socketServerHost = $this->ajaxChat->getConfig('socketServerHost');
-				} else {
-					$socketServerHost = (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']);
-				}
-				return rawurlencode($socketServerHost);
-
-			case 'SOCKET_SERVER_PORT':
-				return $this->ajaxChat->getConfig('socketServerPort');
-
-			case 'SOCKET_SERVER_CHAT_ID':
-				return $this->ajaxChat->getConfig('socketServerChatID');
 
 			case 'STYLE_SHEETS':
 				return $this->getStyleSheetLinkTags();
@@ -174,8 +157,8 @@ class AJAXChatTemplate {
 					return 'write_forbidden';
 				else
 					return 'write_allowed';
-                        case 'TOKEN':
-                                return session_id();
+			case 'TOKEN':
+				return $this->ajaxChat->getToken();
 			
 			default:
 				return $this->ajaxChat->replaceCustomTemplateTags($tagData[1], (isset($tagData[2]) ? $tagData[2] : null));

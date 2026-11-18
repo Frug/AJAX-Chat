@@ -14,11 +14,14 @@ Requirements
 
 
 
-| *Server-Side*          | *Client-Side*                | 
-| ---------------------- | ---------------------------- |
-| PHP >= 5               | Enabled JavaScript           |
-| MySQL >= 4             | Enabled Cookies              |
-| Ruby >= 1.8 (optional) | Flash Plugin >= 9 (optional) |
+| *Server-Side*                          | *Client-Side*      |
+| -------------------------------------- | ------------------ |
+| PHP >= 7.3 (tested up to 8.5)          | Enabled JavaScript |
+| MySQL >= 5.5.3 or MariaDB (utf8mb4)    | Enabled Cookies    |
+
+Upgrading an existing installation: copy the new files (keep your `lib/config.php` and `lib/data/*.php`),
+then open `install.php` once. It converts the existing tables to InnoDB/utf8mb4 without deleting messages.
+Delete `install.php` afterwards. Users who are logged in during the upgrade have to reload the chat page once (new CSRF token).
 
 
 Features
@@ -34,7 +37,7 @@ Features
 - Emoticons/Smilies
 - Easy way to add custom emoticons
 - BBCode support
-- Optional Flash based sound support
+- HTML5 sound support
 - Optional visual update information (changing window title)
 - Clickable Hyperlinks
 - Splitting of long words to preserve chat layout
@@ -55,13 +58,13 @@ Features
 - Realtime monitoring and logs viewer
 - Support for unicode (UTF-8) and non-unicode content types
 - Bandwidth saving update calls (only updated data is sent)
-- Optional support to push updates over a Flash based socket connection (increased performance and responsiveness)
 - Survives connection timeouts
 - Easy integration into existing authentication systems
 - Sample phpBB3, MyBB, PunBB, SMF and vBulletin integrations available
 - Separation of layout and code
 - Well commented Source Code
-- Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Session stealing and other attacks
+- Developed with Security as integral part - built to prevent Code injections, SQL injections, Cross-site scripting (XSS), Cross-site request forgery (CSRF), Session stealing and other attacks
+- Full emoji support (utf8mb4)
 - Tested successfully with Google Chrome, Firefox, Opera and Safari - built to work with all modern browsers :)
 
 

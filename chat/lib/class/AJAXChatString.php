@@ -11,6 +11,7 @@
 class AJAXChatString {
 
 	public static function subString($str, $start=0, $length=null, $encoding='UTF-8') {
+		$str = (string)$str;
 		if($length === null) {
 			$length = AJAXChatString::stringLength($str);
 		}		
@@ -24,6 +25,7 @@ class AJAXChatString {
 	}
 	
 	public static function stringLength($str, $encoding='UTF-8') {
+		$str = (string)$str;
 		if(function_exists('mb_strlen')) {
 			return mb_strlen($str, $encoding);
 		} else if(function_exists('iconv_strlen')) {

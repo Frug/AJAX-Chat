@@ -1,2 +1,5 @@
 /chat/lib/config.php
 /nbproject/*
+# Database dumps never belong in the repository (they contain IP addresses and user names):
+*.sql
+!/chat/chat.sql

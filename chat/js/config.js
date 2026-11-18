@@ -42,8 +42,6 @@ var ajaxChatConfig = {
 		emoticonsContainer: 'emoticonsContainer',
 		// The ID of the color codes container:
 		colorCodesContainer: 'colorCodesContainer',
-		// The ID of the flash interface container:
-		flashInterfaceContainer: 'flashInterfaceContainer',
         // The ID of the status icon:
         statusIcon: 'statusIconContainer'
 	},
@@ -85,8 +83,6 @@ var ajaxChatConfig = {
 
 		// Defines if sounds are played:
 		audio: true,
-		// Defines the audio backend:
-		audioBackend: -1,
 		// Defines the sound volume (0.0 = mute, 1.0 = max):
 		audioVolume: 1.0,
 
@@ -244,15 +240,6 @@ var ajaxChatConfig = {
 	showChannelMessages: true,
 	// Max messageText length:
 	messageTextMaxLength: 1040,
-	// Defines if the socket server is enabled:
-	socketServerEnabled: false,
-	// Defines the hostname of the socket server used to connect from client side:
-	socketServerHost: 'localhost',
-	// Defines the port of the socket server:
-	socketServerPort: 1935,
-	// This ID can be used to distinguish between different chat installations using the same socket server:
-	socketServerChatID: 0,
-
 	// Debug allows console logging or alerts on caught errors - false/0 = no debug, true/1/2 = console log, 2 = alerts
 	debug: false
 };

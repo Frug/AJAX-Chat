@@ -82,7 +82,7 @@ class AJAXChat {
 		$this->_requestVars['getInfos']		= isset($_REQUEST['getInfos'])		? $_REQUEST['getInfos']			: null;
 		$this->_requestVars['lang']			= isset($_REQUEST['lang'])			? $_REQUEST['lang']				: null;
 		$this->_requestVars['delete']		= isset($_REQUEST['delete'])		? (int)$_REQUEST['delete']		: null;
-		$this->_requestVars['token']		= isset($_REQUEST['token'])			? $_REQUEST['token']			: null;
+		$this->_requestVars['token']		= isset($_POST['token'])			? $_POST['token']				: null;
 		
 		// Initialize custom request variables:
 		$this->initCustomRequestVars();
@@ -98,20 +98,28 @@ class AJAXChat {
 			// Connect to the database server:
 			$this->db->connect($this->_config['dbConnection']);
 			if($this->db->error()) {
-				echo $this->db->getError();
-				die();
+				$this->handleDataBaseError($this->db->getError());
 			}
 			// Select the database:
 			$this->db->select($this->_config['dbConnection']['name']);
 			if($this->db->error()) {
-				echo $this->db->getError();
-				die();
+				$this->handleDataBaseError($this->db->getError());
 			}
 		}
 		// Unset the dbConnection array for safety purposes:
 		unset($this->_config['dbConnection']);			
 	}
 	
+	function handleDataBaseError($errorReport) {
+		// Log the details for the administrator, but never expose them (SQL, host, error codes) to the client:
+		error_log('AJAX Chat database error: '.str_replace("\n", ' | ', trim($errorReport)));
+		if(!headers_sent()) {
+			http_response_code(500);
+		}
+		echo 'AJAX Chat: database error. Details have been written to the server error log.';
+		die();
+	}
+
 	function getDataBaseTable($table) {
 		return ($this->db->getName() ? '`'.$this->db->getName().'`.'.$this->getConfig('dbTableNames',$table) : $this->getConfig('dbTableNames',$table));
 	}
@@ -128,7 +136,7 @@ class AJAXChat {
 			}
 
 			// Logout if we receive a logout request, the chat has been closed or the userID could not be revalidated:
-			if($this->getRequestVar('logout') && $this->getRequestVar('token') == session_id() || !$this->isChatOpen() || !$this->revalidateUserID()) {
+			if($this->getRequestVar('logout') && $this->isValidToken() || !$this->isChatOpen() || !$this->revalidateUserID()) {
 				$this->logout();
 				return;
 			}
@@ -163,34 +171,6 @@ class AJAXChat {
 	}
 
 	function initLogsViewSession() {
-		if($this->getConfig('socketServerEnabled')) {
-			if(!$this->getSessionVar('logsViewSocketAuthenticated')) {
-				$this->updateLogsViewSocketAuthentication();
-				$this->setSessionVar('logsViewSocketAuthenticated', true);
-			}
-		}
-	}
-
-	function updateLogsViewSocketAuthentication() {
-		if($this->getUserRole() != AJAX_CHAT_ADMIN) {
-			$channels = array();
-			foreach($this->getChannels() as $channel) {
-				if($this->getConfig('logsUserAccessChannelList') && !in_array($channel, $this->getConfig('logsUserAccessChannelList'))) {
-					continue;
-				}
-				array_push($channels, $channel);
-			}
-			array_push($channels, $this->getPrivateMessageID());
-			array_push($channels, $this->getPrivateChannelID());
-		} else {
-			// The channelID "ALL" authenticates for all channels:
-			$channels = array('ALL');
-		}
-		$this->updateSocketAuthentication(
-			$this->getUserID(),
-			$this->getSocketRegistrationID(),
-			$channels
-		);
 	}
 
 	function initChatViewSession() {
@@ -244,6 +224,12 @@ class AJAXChat {
 
 	function handleRequest() {
 		if($this->getRequestVar('ajax')) {
+			// State-changing requests (new messages, deletions) require a valid CSRF token:
+			if(($this->getRequestVar('text') !== null || $this->getRequestVar('delete') !== null) && !$this->isValidToken()) {
+				$this->_requestVars['text'] = null;
+				$this->_requestVars['delete'] = null;
+				$this->addInfoMessage('InvalidToken');
+			}
 			if($this->isLoggedIn()) {
 				// Parse info requests (for current userName, etc.):
 				$this->parseInfoRequests();
@@ -294,16 +280,13 @@ class AJAXChat {
 			case 'channelName':
 				$this->addInfoMessage($this->getChannelName(), 'channelName');
 				break;
-			case 'socketRegistrationID':
-				$this->addInfoMessage($this->getSocketRegistrationID(), 'socketRegistrationID');
-				break;
 			default:
 				$this->parseCustomInfoRequest($infoRequest);
 		}
 	}
 
 	function sendXHTMLContent() {
-		$httpHeader = new AJAXChatHTTPHeader($this->getConfig('contentEncoding'), $this->getConfig('contentType'));
+		$httpHeader = new AJAXChatHTTPHeader($this->getConfig('contentEncoding'), $this->getConfig('contentType'), true, $this->getFrameOptions());
 
 		$template = new AJAXChatTemplate($this, $this->getTemplateFileName(), $httpHeader->getContentType());
 
@@ -416,12 +399,8 @@ class AJAXChat {
 		// IP Security check variable:
 		$this->setSessionIP($_SERVER['REMOTE_ADDR']);
 
-		// The client authenticates to the socket server using a socketRegistrationID:
-		if($this->getConfig('socketServerEnabled')) {
-			$this->setSocketRegistrationID(
-				md5(uniqid(rand(), true))
-			);
-		}
+		// New CSRF token for the new login:
+		$this->regenerateToken();
 
 		// Add userID, userName and userRole to info messages:
 		$this->addInfoMessage($this->getUserID(), 'userID');
@@ -494,10 +473,6 @@ class AJAXChat {
 	}
 	
 	function logout($type=null) {
-		// Update the socket server authentication for the user:
-		if($this->getConfig('socketServerEnabled')) {
-			$this->updateSocketAuthentication($this->getUserID());
-		}
 		if($this->isUserOnline()) {
 			$this->chatViewLogout($type);
 		}	
@@ -593,8 +568,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$this->resetOnlineUsersData();
@@ -611,8 +585,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$this->removeUserFromOnlineUsersData();
@@ -634,8 +607,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$this->resetOnlineUsersData();
@@ -1372,8 +1344,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$row = $result->fetch();
@@ -1419,8 +1390,7 @@ class AJAXChat {
 			
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				$this->handleDataBaseError($result->getError());
 			}
 			
 			if($result->affectedRows() == 1) {
@@ -1480,7 +1450,7 @@ class AJAXChat {
 	}
 	
 	function insertCustomMessage($userID, $userName, $userRole, $channelID, $text, $ip=null, $mode=0) {
-		// The $mode parameter is used for socket updates:
+		// The $mode parameter is kept for backwards compatibility (it was used by the removed socket server):
 		// 0 = normal messages
 		// 1 = channel messages (e.g. login/logout, channel enter/leave, kick)
 		// 2 = messages with online user updates (nick)
@@ -1511,101 +1481,10 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
-		}
-		
-		if($this->getConfig('socketServerEnabled')) {
-			$this->sendSocketMessage(
-				$this->getSocketBroadcastMessage(
-					$this->db->getLastInsertedID(),
-					time(),
-					$userID,
-					$userName,
-					$userRole,
-					$channelID,
-					$text,
-					$mode
-				)
-			);	
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 
-	function getSocketBroadcastMessage(
-		$messageID,
-		$timeStamp,
-		$userID,
-		$userName,
-		$userRole,
-		$channelID,
-		$text,
-		$mode	
-		) {
-		// The $mode parameter:
-		// 0 = normal messages
-		// 1 = channel messages (e.g. login/logout, channel enter/leave, kick)
-		// 2 = messages with online user updates (nick)
-
-		// Get the message XML content:
-		$xml = '<root chatID="'.$this->getConfig('socketServerChatID').'" channelID="'.$channelID.'" mode="'.$mode.'">';
-		if($mode) {
-			// Add the list of online users if the user list has been updated ($mode > 0):
-			$xml .= $this->getChatViewOnlineUsersXML(array($channelID));
-		}
-		if($mode != 1 || $this->getConfig('showChannelMessages')) {
-			$xml .= '<messages>';
-			$xml .= $this->getChatViewMessageXML(
-				$messageID,
-				$timeStamp,
-				$userID,
-				$userName,
-				$userRole,
-				$channelID,
-				$text
-			);
-			$xml .= '</messages>';	
-		}
-		$xml .= '</root>';
-		return $xml;
-	}
-
-	function sendSocketMessage($message) {
-		// Open a TCP socket connection to the socket server:
-		if($socket = @socket_create(AF_INET, SOCK_STREAM, SOL_TCP)) {
-			if(@socket_connect($socket,	$this->getConfig('socketServerIP'),	$this->getConfig('socketServerPort'))) {
-				// Append a null-byte to the string as EOL (End Of Line) character
-				// which is required by Flash XML socket communication:
-				$message .= "\0";
-				@socket_write(
-					$socket,
-					$message,
-					strlen($message) // Using strlen to count the bytes instead of the number of UTF-8 characters
-				);
-			}
-			@socket_close($socket);
-		}		
-	}
-
-	function updateSocketAuthentication($userID, $socketRegistrationID=null, $channels=null) {
-		// If no $socketRegistrationID or no $channels are given the authentication is removed for the given user:
-		$authentication = '<authenticate chatID="'.$this->getConfig('socketServerChatID').'" userID="'.$userID.'" regID="'.$socketRegistrationID.'">';
-		if($channels) {
-			foreach($channels as $channelID) {
-				$authentication .= '<channel id="'.$channelID.'"/>';
-			}
-		}
-		$authentication .= '</authenticate>';
-		$this->sendSocketMessage($authentication);
-	}
-
-	function setSocketRegistrationID($value) {
-		$this->setSessionVar('SocketRegistrationID', $value);
-	}
-	
-	function getSocketRegistrationID() {
-		return $this->getSessionVar('SocketRegistrationID');
-	}
-	
 	function rollDice($sides) {
 		return mt_rand(1, $sides);
 	}
@@ -1636,15 +1515,9 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 
-		// Update the socket server authentication for the kicked user:
-		if($this->getConfig('socketServerEnabled')) {
-			$this->updateSocketAuthentication($userID);
-		}
-		
 		$this->removeUserFromOnlineUsersData($userID);
 	}
 
@@ -1666,8 +1539,7 @@ class AJAXChat {
 			
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				$this->handleDataBaseError($result->getError());
 			}
 			
 			while($row = $result->fetch()) {
@@ -1740,8 +1612,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 	
@@ -1756,8 +1627,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 	
@@ -1772,8 +1642,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 	
@@ -1794,8 +1663,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$this->resetOnlineUsersData();
@@ -1816,8 +1684,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		if($result->numRows() > 0) {
@@ -1827,11 +1694,6 @@ class AJAXChat {
 					$condition .= ' OR ';
 				// Add userID to condition for removal:
 				$condition .= 'userID='.$this->db->makeSafe($row['userID']);
-
-				// Update the socket server authentication for the kicked user:
-				if($this->getConfig('socketServerEnabled')) {
-					$this->updateSocketAuthentication($row['userID']);
-				}
 
 				$this->removeUserFromOnlineUsersData($row['userID']);
 				
@@ -1857,8 +1719,7 @@ class AJAXChat {
 			
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				$this->handleDataBaseError($result->getError());
 			}
 		}
 	}
@@ -1880,7 +1741,7 @@ class AJAXChat {
 	}
 	
 	function sendXMLMessages() {		
-		$httpHeader = new AJAXChatHTTPHeader('UTF-8', 'text/xml');
+		$httpHeader = new AJAXChatHTTPHeader('UTF-8', 'text/xml', true, $this->getFrameOptions());
 
 		// Send HTTP header:
 		$httpHeader->send();
@@ -2028,8 +1889,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$messages = '';
@@ -2103,8 +1963,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 		
 		$messages = '';
@@ -2270,8 +2129,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 
 		$xml = '<messages>';
@@ -2317,8 +2175,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 	
@@ -2387,8 +2244,7 @@ class AJAXChat {
 			
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				$this->handleDataBaseError($result->getError());
 			}
 			
 			while($row = $result->fetch()) {
@@ -2458,13 +2314,12 @@ class AJAXChat {
 			// Set the session name:
 			session_name($this->getConfig('sessionName'));
 
-			// Set session cookie parameters:
-			session_set_cookie_params(
-				0, // The session is destroyed on logout anyway, so no use to set this
-				$this->getConfig('sessionCookiePath'),
-				$this->getConfig('sessionCookieDomain'),
-				$this->getConfig('sessionCookieSecure')
-			);
+			// Only accept session IDs created by the server (prevents session fixation):
+			ini_set('session.use_strict_mode', '1');
+			ini_set('session.use_only_cookies', '1');
+
+			// Set session cookie parameters (lifetime 0: the session is destroyed on logout anyway):
+			session_set_cookie_params($this->getCookieOptions(0, true, true));
 
 			// Start the session:
 			session_start();
@@ -2484,10 +2339,7 @@ class AJAXChat {
 				setcookie(
 					session_name(),
 					'',
-					time()-42000,
-					$this->getConfig('sessionCookiePath'),
-					$this->getConfig('sessionCookieDomain'),
-					$this->getConfig('sessionCookieSecure')
+					$this->getCookieOptions(time()-42000, true)
 				);
 			}
 			
@@ -2501,6 +2353,35 @@ class AJAXChat {
 				}
 			}
 		}
+	}
+
+	function getToken() {
+		// CSRF token, independent from the session ID (the session ID must never be exposed to JavaScript):
+		$token = $this->getSessionVar('Token');
+		if(!$token) {
+			$token = $this->regenerateToken();
+		}
+		return $token;
+	}
+
+	function regenerateToken() {
+		$token = bin2hex(random_bytes(32));
+		$this->setSessionVar('Token', $token);
+		return $token;
+	}
+
+	function isValidToken() {
+		$sessionToken = $this->getSessionVar('Token');
+		if(!$sessionToken) {
+			return false;
+		}
+		// The JavaScript client sends the token as custom header, integrations may send it as request parameter:
+		if(isset($_SERVER['HTTP_X_AJAX_CHAT_TOKEN'])) {
+			$token = $_SERVER['HTTP_X_AJAX_CHAT_TOKEN'];
+		} else {
+			$token = $this->getRequestVar('token');
+		}
+		return is_string($token) && hash_equals($sessionToken, $token);
 	}
 
 	function regenerateSessionID() {
@@ -2563,8 +2444,7 @@ class AJAXChat {
 			
 			// Stop if an error occurs:
 			if($result->error()) {
-				echo $result->getError();
-				die();
+				$this->handleDataBaseError($result->getError());
 			}
 			
 			while($row = $result->fetch()) {
@@ -2587,8 +2467,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 
@@ -2613,8 +2492,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 
@@ -2633,8 +2511,7 @@ class AJAXChat {
 		
 		// Stop if an error occurs:
 		if($result->error()) {
-			echo $result->getError();
-			die();
+			$this->handleDataBaseError($result->getError());
 		}
 	}
 	
@@ -2683,19 +2560,6 @@ class AJAXChat {
 		// Save the channel enter timestamp:
 		$this->setChannelEnterTimeStamp(time());
 		
-		// Update the channel authentication for the socket server:
-		if($this->getConfig('socketServerEnabled')) {
-			$this->updateSocketAuthentication(
-				$this->getUserID(),
-				$this->getSocketRegistrationID(),
-				array($channel,$this->getPrivateMessageID())
-			);
-		}
-
-		// Reset the logs view socket authentication session var:		
-		if($this->getSessionVar('logsViewSocketAuthenticated')) {
-			$this->setSessionVar('logsViewSocketAuthenticated', false);
-		}
 	}
 
 	function isLoggedIn() {
@@ -2771,11 +2635,45 @@ class AJAXChat {
 		setcookie(
 			$this->getConfig('sessionName').'_lang',
 			$this->getLangCode(),
-			time()+60*60*24*$this->getConfig('sessionCookieLifeTime'),
-			$this->getConfig('sessionCookiePath'),
-			$this->getConfig('sessionCookieDomain'),
-			$this->getConfig('sessionCookieSecure')
+			$this->getCookieOptions(time()+60*60*24*$this->getConfig('sessionCookieLifeTime'), false)
 		);
+	}
+
+	function getFrameOptions() {
+		// Missing setting (old config files) means 'SAMEORIGIN':
+		$frameOptions = $this->getConfig('frameOptions');
+		return ($frameOptions === null && !array_key_exists('frameOptions', $this->_config)) ? 'SAMEORIGIN' : $frameOptions;
+	}
+
+	function isCookieSecure() {
+		// true/false force the setting, null (default) detects HTTPS automatically:
+		$secure = $this->getConfig('sessionCookieSecure');
+		if($secure !== null) {
+			return (bool)$secure;
+		}
+		return (!empty($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off')
+			|| (isset($_SERVER['SERVER_PORT']) && (int)$_SERVER['SERVER_PORT'] === 443)
+			|| (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && strtolower($_SERVER['HTTP_X_FORWARDED_PROTO']) === 'https');
+	}
+
+	function getCookieSameSite() {
+		$sameSite = $this->getConfig('sessionCookieSameSite');
+		return in_array($sameSite, array('Strict', 'Lax', 'None'), true) ? $sameSite : 'Lax';
+	}
+
+	function getCookieOptions($expires, $httpOnly, $forSessionParams=false) {
+		$options = array(
+			'path' => $this->getConfig('sessionCookiePath') ? $this->getConfig('sessionCookiePath') : '/',
+			'secure' => $this->isCookieSecure(),
+			'httponly' => (bool)$httpOnly,
+			'samesite' => $this->getCookieSameSite()
+		);
+		// session_set_cookie_params() uses "lifetime", setcookie() uses "expires":
+		$options[$forSessionParams ? 'lifetime' : 'expires'] = $expires;
+		if($this->getConfig('sessionCookieDomain')) {
+			$options['domain'] = $this->getConfig('sessionCookieDomain');
+		}
+		return $options;
 	}
 
 	function removeUnsafeCharacters($str) {
@@ -2892,10 +2790,11 @@ class AJAXChat {
 	}
 	
 	function getConfig($key, $subkey=null) {
+		// Missing settings (e.g. new options not yet in an old config.php) return null instead of a PHP warning:
 		if($subkey)
-			return $this->_config[$key][$subkey];
+			return isset($this->_config[$key][$subkey]) ? $this->_config[$key][$subkey] : null;
 		else
-			return $this->_config[$key];
+			return isset($this->_config[$key]) ? $this->_config[$key] : null;
 	}
 
 	function setConfig($key, $subkey, $value) {
