@@ -8,6 +8,10 @@
  */
 
 // List containing the registered chat users:
+// Passwords can (and should) be stored as hashes created with password_hash(), e.g.:
+//   php -r "echo password_hash('your-password', PASSWORD_DEFAULT), PHP_EOL;"
+// Plain text passwords still work for backwards compatibility.
+// Change or remove the sample users below before going live!
 $users = array();
 
 // Default guest user (don't delete this one):

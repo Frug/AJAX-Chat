@@ -882,3 +882,37 @@ Bugfixes:
 
 Misc:
 - Database userID and channel fields changed to unsigned int.
+
+
+Unreleased - PHP 8 modernization
+-------------------------------
+Bugfixes:
+- PHP 8.1+: mysqli throws exceptions by default, an emoji (or any 4-byte UTF-8 character) in a message caused a fatal error - fixed.
+- Emoji and other 4-byte UTF-8 characters are now stored correctly (utf8mb4 connection charset and tables).
+- install.php dropped all chat tables (and every message) each time it was opened - it is now non-destructive and idempotent.
+- Removed PHP 8.x deprecation warnings (utf8_encode/utf8_decode, null passed to string functions, preg_replace /e fallback).
+- Missing options in older config.php files no longer cause "Undefined array key" warnings.
+- MySQLiQuery::free() no longer fails on queries without a result set.
+- JavaScript: initializeHTML5Sounds() leaked the global variables "mp3" and "format" - fixed; play() promise rejections (autoplay policy) are now caught.
+
+Security:
+- Real CSRF token (random_bytes, stored in the session) instead of the session ID: the session ID is no longer exposed to JavaScript.
+- The token is sent as X-AJAX-Chat-Token header with every AJAX request and is required for new messages, message deletion and logout.
+- Session cookie is HttpOnly, all cookies use SameSite (default Lax) and the Secure flag is detected automatically on HTTPS.
+- session.use_strict_mode enabled (prevents session fixation).
+- Database errors are written to the server error log instead of being printed to the client (SQL queries and server details were exposed).
+- Security headers: X-Content-Type-Options, Referrer-Policy, X-Frame-Options/CSP frame-ancestors (configurable with $config['frameOptions']).
+- Passwords in lib/data/users.php can be stored as password_hash() hashes; plain text comparison is now timing-safe.
+- lib/.htaccess works with Apache 2.4 (Require all denied) and 2.2.
+
+Removed:
+- Flash support (FABridge, Flash sounds, "audio backend" setting): Flash Player does not exist anymore. Sounds use HTML5 audio only.
+- Flash/Ruby socket server and all socketServer* settings.
+- The old mysql_* database driver (removed from PHP 7). Only mysqli is supported.
+
+Misc:
+- New config options: dbConnection port and charset, sessionCookieSameSite, frameOptions; sessionCookieSecure defaults to null (auto).
+- Tables use InnoDB and utf8mb4_bin. Running install.php on an existing installation converts old MyISAM/utf8 tables without losing data.
+- install.php uses the table names configured in lib/config.php.
+- AJAX_CHAT_PATH is defined with __DIR__, so index.php also works when included from another script.
+- Tested with PHP 8.3 + MariaDB 10.11 and PHP 8.5 + MySQL 5.7 (shared hosting, upgrade of an existing installation with old tables).

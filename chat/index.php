@@ -11,8 +11,8 @@
 // Suppress errors:
 ini_set('display_errors', 0);
 
-// Path to the chat directory:
-define('AJAX_CHAT_PATH', dirname($_SERVER['SCRIPT_FILENAME']).'/');
+// Path to the chat directory (__DIR__ also works when this file is included from another script):
+define('AJAX_CHAT_PATH', __DIR__.'/');
 
 // Include custom libraries and initialization code:
 require(AJAX_CHAT_PATH.'lib/custom.php');

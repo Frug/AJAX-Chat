@@ -12,7 +12,6 @@
 	<script src="js/custom.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
-	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
 			ajaxChat.view = {
@@ -149,12 +148,6 @@
 				document.getElementById('maxWordLengthSetting').value = ajaxChat.getSetting('maxWordLength');
 				document.getElementById('dateFormatSetting').value = ajaxChat.getSetting('dateFormat');
 				document.getElementById('persistFontColorSetting').checked = ajaxChat.getSetting('persistFontColor');
-				for(var i=0; i<document.getElementById('audioBackendSetting').options.length; i++) {
-					if(document.getElementById('audioBackendSetting').options[i].value == ajaxChat.getSetting('audioBackend')) {
-						document.getElementById('audioBackendSetting').options[i].selected = true;
-						break;
-					}
-				}
 				for(var i=0; i<document.getElementById('audioVolumeSetting').options.length; i++) {
 					if(document.getElementById('audioVolumeSetting').options[i].value == ajaxChat.getSetting('audioVolume')) {
 						document.getElementById('audioVolumeSetting').options[i].selected = true;
@@ -180,6 +173,7 @@
 			ajaxChatConfig.cookiePath = '[COOKIE_PATH/]';
 			ajaxChatConfig.cookieDomain = '[COOKIE_DOMAIN/]';
 			ajaxChatConfig.cookieSecure = '[COOKIE_SECURE/]';
+			ajaxChatConfig.cookieSameSite = '[COOKIE_SAME_SITE/]';
 			ajaxChatConfig.chatBotName = decodeURIComponent('[CHAT_BOT_NAME/]');
 			ajaxChatConfig.chatBotID = '[CHAT_BOT_ID/]';
 			ajaxChatConfig.allowUserMessageDelete = parseInt('[ALLOW_USER_MESSAGE_DELETE/]');
@@ -188,10 +182,6 @@
 			ajaxChatConfig.privateMessageDiff = parseInt('[PRIVATE_MESSAGE_DIFF/]');
 			ajaxChatConfig.showChannelMessages = parseInt('[SHOW_CHANNEL_MESSAGES/]');
 			ajaxChatConfig.messageTextMaxLength = parseInt('[MESSAGE_TEXT_MAX_LENGTH/]');
-			ajaxChatConfig.socketServerEnabled = parseInt('[SOCKET_SERVER_ENABLED/]');
-			ajaxChatConfig.socketServerHost = decodeURIComponent('[SOCKET_SERVER_HOST/]');
-			ajaxChatConfig.socketServerPort = parseInt('[SOCKET_SERVER_PORT/]');
-			ajaxChatConfig.socketServerChatID = parseInt('[SOCKET_SERVER_CHAT_ID/]');
 		
 			ajaxChat.init(ajaxChatConfig, ajaxChatLang, true, true, true, initialize);
 		// ]]>
@@ -362,16 +352,6 @@
 						<dd><input type="checkbox" id="persistFontColorSetting" onclick="ajaxChat.setPersistFontColor(this.checked);"/></dd>
 					</dl>
 					<dl>
-						<dt><label for="audioBackendSetting">[LANG]settingsAudioSupport[/LANG]</label></dt>
-						<dd>
-							<select id="audioBackendSetting" onchange="ajaxChat.setAudioBackend(this.options[this.selectedIndex].value);">
-								<option value="-1">Auto</option>
-								<option value="1">Flash</option>
-								<option value="0">HTML5</option>
-							</select>
-						</dd>
-					</dl>
-					<dl>
 						<dt><label for="audioVolumeSetting">[LANG]settingsAudioVolume[/LANG]</label></dt>
 						<dd>
 							<select class="left" id="audioVolumeSetting" onchange="ajaxChat.setAudioVolume(this.options[this.selectedIndex].value);">
@@ -470,6 +450,5 @@
 		//-->
 		<div id="copyright"><a href="https://blueimp.net/ajax/">AJAX Chat</a> &copy; <a href="https://blueimp.net">blueimp.net</a></div>
 	</div>
-	<div id="flashInterfaceContainer"></div>
 </body>
 </html>

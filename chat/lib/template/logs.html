@@ -10,7 +10,6 @@
 	<script src="js/logs.js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/lang/[LANG_CODE/].js" type="text/javascript" charset="UTF-8"></script>
 	<script src="js/config.js" type="text/javascript" charset="UTF-8"></script>
-	<script src="js/FABridge.js" type="text/javascript" charset="UTF-8"></script>
 	<script type="text/javascript">
 		// <![CDATA[
 			function toggleContainer(containerID, hideContainerIDs) {
@@ -65,6 +64,7 @@
 			ajaxChatConfig.cookiePath = '[COOKIE_PATH/]';
 			ajaxChatConfig.cookieDomain = '[COOKIE_DOMAIN/]';
 			ajaxChatConfig.cookieSecure = '[COOKIE_SECURE/]';
+			ajaxChatConfig.cookieSameSite = '[COOKIE_SAME_SITE/]';
 			ajaxChatConfig.chatBotName = decodeURIComponent('[CHAT_BOT_NAME/]');
 			ajaxChatConfig.chatBotID = '[CHAT_BOT_ID/]';
 			ajaxChatConfig.allowUserMessageDelete = parseInt('[ALLOW_USER_MESSAGE_DELETE/]');
@@ -73,11 +73,8 @@
 			ajaxChatConfig.privateMessageDiff = parseInt('[PRIVATE_MESSAGE_DIFF/]');
 			ajaxChatConfig.showChannelMessages = true;
 			ajaxChatConfig.messageTextMaxLength = parseInt('[MESSAGE_TEXT_MAX_LENGTH/]');
-			ajaxChatConfig.socketServerEnabled = parseInt('[SOCKET_SERVER_ENABLED/]');
-			ajaxChatConfig.socketServerHost = decodeURIComponent('[SOCKET_SERVER_HOST/]');
-			ajaxChatConfig.socketServerPort = parseInt('[SOCKET_SERVER_PORT/]');
-			ajaxChatConfig.socketServerChatID = parseInt('[SOCKET_SERVER_CHAT_ID/]');
 
+			ajaxChatConfig.token = '[TOKEN/]';
 			ajaxChatConfig.ajaxURL += '&view=logs';
 
 			ajaxChatConfig.domIDs['yearSelection'] = 'yearSelection';
@@ -258,6 +255,5 @@
 		//-->
 		<div id="copyright"><a href="https://blueimp.net/ajax/">AJAX Chat</a> &copy; <a href="https://blueimp.net">blueimp.net</a></div>
 	</div>
-	<div id="flashInterfaceContainer"></div>
 </body>
 </html>
